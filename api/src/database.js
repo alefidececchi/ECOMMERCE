@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { connect } = require("mongoose");
+const User = require("./models/User.js");
 const { MONGO_URI } = process.env;
 
 const dbConnection = async () => {
@@ -11,4 +12,4 @@ const dbConnection = async () => {
   }
 };
 
-module.exports = dbConnection
+module.exports = dbConnection;
