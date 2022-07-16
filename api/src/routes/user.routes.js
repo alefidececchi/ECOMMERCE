@@ -1,9 +1,9 @@
 const express = require("express");
-const UserRouter = require("./user.routes.js");
 
 const router = express.Router();
 
-// (ROUTES)
-router.get("/", UserRouter);
+router.get("/", (req, res) => {
+  res.status(200).json({ message: "Working" });
+});
 
 module.exports = router;
