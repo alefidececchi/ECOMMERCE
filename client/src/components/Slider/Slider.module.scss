@@ -1,0 +1,18 @@
+@import '../../assets/sass/variables.scss';
+
+.Container {
+    padding: 30px;
+    background: lightgrey;
+  }
+
+  .slick-slide img {
+    margin: auto;
+  }
+  .img1{
+    height: auto;
+     width:100% ;
+
+    // @media only screen and (min-width: 600px){
+    //     background-img: url("./tablet.jpeg")
+    //  }
+  }
