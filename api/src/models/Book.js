@@ -10,6 +10,11 @@ const bookSchema = new Schema(
       type: String,
       required: true,
     },
+    genres: [
+      {
+        type: Schema.Types.String,
+      },
+    ],
     description: {
       type: String,
       required: true,
