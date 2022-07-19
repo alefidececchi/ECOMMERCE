@@ -1,19 +1,1 @@
 # (END POINTS)
-
-#(BOOKS ROUTES)
-
-###
-GET http://localhost:3000/books/ HTTP/1.1
-
-###
-POST http://localhost:3000/books/ HTTP/1.1
-Content-Type: application/json
-
-{
-    "name":"book test",
-    "image":"image test",
-    "description":"description test",
-    "price": 0,
-    "used": false,
-    "released":"00-00-00"
-}
