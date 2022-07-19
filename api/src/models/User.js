@@ -17,7 +17,7 @@ const userSchema = new Schema(
       require: true,
     },
     admin: {
-      types: Boolena,
+      types: Boolean,
       default: false,
     },
     image: {
@@ -31,12 +31,6 @@ const userSchema = new Schema(
       type: String,
     },
     selling_books: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Book",
-      },
-    ],
-    purchased_books: [
       {
         type: Schema.Types.ObjectId,
         ref: "Book",
