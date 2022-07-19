@@ -4,7 +4,50 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
+      required: true,
+      trim: true,
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    admin: {
+      types: Boolean,
+      default:false,
+    },
+    image: {
+      type: String,
+      default: "default_image",
+    },
+    description: {
+      type: String,
+    },
+    country: {
+      type: String
+    },
+    selling_books: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Book",
+      },
+    ],
+    purchased_books: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Book",
+      }
+    ],
+    wish_list: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Book",
+      },
+    ],
   },
   {
     timestamps: true,
