@@ -21,4 +21,6 @@ const userSchema = new Schema(
   }
 );
 
+
 module.exports = model("Admin", userSchema);
+

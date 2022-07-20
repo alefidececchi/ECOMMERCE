@@ -28,7 +28,7 @@ const userSchema = new Schema(
       type: String,
     },
     country: {
-      type: String
+      type: String,
     },
     selling_books: [
       {

@@ -32,6 +32,7 @@ const bookSchema = new Schema(
       required: true,
     },
     released: {
+
       type: String,
       required: true
     },
@@ -43,6 +44,7 @@ const bookSchema = new Schema(
     },
     book_type: {
       type:String
+
     },
     sellers: [
       {
@@ -57,4 +59,6 @@ const bookSchema = new Schema(
   }
 );
 
+
 module.exports = model("Book", bookSchema);
+
