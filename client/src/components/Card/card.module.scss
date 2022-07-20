@@ -1,3 +1,46 @@
-@import '../../assets/sass/functions.scss';
-@import '../../assets/sass/mixins.scss';
-@import '../../assets/sass/variables.scss';
+
+
+// body {
+//   padding: 0;
+//   margin: 0;
+//   // font-size: 12.5px;
+//   text-decoration: none;
+//   color: #333333;
+//   font-family: 'Quicksand', sans-serif;
+// }
+.containerCard{
+  
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // justify-content: space-around;
+    align-items: flex-start;
+    /* flex-direction: column; */
+    // padding:0px 0px;
+    /* background-color:#C1E5F4; */
+    height: 267px;
+    width: 216px;
+    margin:10px 0px;
+
+
+    h3 {
+        font-weight: bolder;
+        font-size: 1rem;
+        margin-bottom: 5px;
+        // color: $blanco;
+        // text-shadow: 1px 1px 5px $negro;
+      }
+     h4{
+       font-weight: lighter;
+       margin-top: 0px;
+        font-size: 0.875rem;
+      }
+      img {
+       
+        border-radius: 10px;
+      
+      }
+
+}
+

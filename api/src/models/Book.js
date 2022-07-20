@@ -32,17 +32,19 @@ const bookSchema = new Schema(
       required: true,
     },
     released: {
-    type: String,
-    required: true
+
+      type: String,
+      required: true
     },
     pageCount: {
-    type: Number
+      type:Number
     },
     language: {
-    type: String
+      type:String
     },
-   book_type: {
-    type: String
+    book_type: {
+      type:String
+
     },
     sellers: [
       {
@@ -57,4 +59,6 @@ const bookSchema = new Schema(
   }
 );
 
+
 module.exports = model("Book", bookSchema);
+
