@@ -5,6 +5,7 @@ import NavBar from './components/NavBar/navBar.jsx';
 import Shopping from './components/Shopping/shopping.jsx';
 import User from './components/User/user.jsx';
 import WishList from './components/WishList/wishList.jsx';
+import AddBook from './components/BookForm/addBook';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="home" element={< Home />} />
         <Route path='shopping' element={< Shopping />} />
         <Route path='user' element={< User />} />
+        <Route path='user/newBook' element={< AddBook />} />
         <Route path='wish' element={< WishList />} />
       </Route>
      </Routes>
