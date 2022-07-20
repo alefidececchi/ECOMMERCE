@@ -1,0 +1,122 @@
+@import '../../assets/sass/functions.scss';
+@import '../../assets/sass/mixins.scss';
+@import '../../assets/sass/variables.scss';
+
+header {
+  width: 100vw;
+  background-color: $gris1;
+  margin-top: toRem(20);
+  display: flex;
+  flex-direction: column;
+  @include tablet() {
+    align-items: center;
+  }
+
+  form {
+    padding: toRem(30);
+    display: flex;
+    justify-content: center;
+  }
+
+  .filtersContainer {
+    padding-bottom: toRem(30);
+    width: 100vw;
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      @include tabletMax() {
+        width: 30%;
+      }
+      @include tablet() {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      li {
+        color: $gris3;
+        padding: toRem(10) toRem(15);
+        font-size: toRem(16);
+        ul {
+          display: none;
+        }
+        &:hover {
+          cursor: pointer;
+          color: $primario;
+          border-radius: toRem(10);
+          ul {
+            margin-top: toRem(0.5);
+            width: 100px;
+            border-radius: toRem(5);
+            background-color: $gris2;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+
+            li {
+              margin: toRem(10);
+              width: 100%;
+              &:hover {
+                cursor: pointer;
+              }
+
+              button {
+                border: none;
+                font-size: toRem(13);
+                background-color: $gris2;
+                color: $gris4;
+
+                &:hover {
+                  color: $negro
+                }
+              }
+            }
+          }
+        }
+        @include tablet() {
+          padding: 0 toRem(15);
+        }
+      }
+    }
+  }
+
+  .toFilter {
+    // background-color: red;
+    padding-bottom: toRem(20);
+
+    span {
+      padding: toRem(5) toRem(5) toRem(5) toRem(5);
+      color: $primario;
+      border: 2px solid $primario;
+      border-radius: toRem(10);
+      margin: 0 toRem(5);
+      font-size: toRem(14);
+    }
+    
+    button {
+      padding: toRem(5) toRem(10);
+      border-radius: toRem(10);
+      margin: 0 toRem(5);
+      background-color: $primario;
+      border: 2px solid $primario;
+      color: $gris1;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $secundario;
+        border: 2px solid $secundario;
+      }
+    }
+  }
+}
+
+/* body {
+    padding: 0;
+    margin: 0;
+    // font-size: 12.5px;
+    text-decoration: none;
+    color: #333333;
+    font-family: 'Quicksand', sans-serif;
+} /*
+

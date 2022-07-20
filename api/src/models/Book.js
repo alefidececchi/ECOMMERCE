@@ -10,6 +10,11 @@ const bookSchema = new Schema(
       type: String,
       required: true,
     },
+    genres: [
+      {
+        type: Schema.Types.String,
+      },
+    ],
     description: {
       type: String,
       required: true,
@@ -26,6 +31,21 @@ const bookSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    released: {
+
+      type: String,
+      required: true
+    },
+    pageCount: {
+      type:Number
+    },
+    language: {
+      type:String
+    },
+    book_type: {
+      type:String
+
+    },
     sellers: [
       {
         type: Schema.Types.ObjectId,
@@ -39,4 +59,6 @@ const bookSchema = new Schema(
   }
 );
 
+
 module.exports = model("Book", bookSchema);
+
