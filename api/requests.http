@@ -38,11 +38,38 @@ DELETE http://localhost:3000/books/:idBook  HTTP/1.1
 
 ####################################################
 
-#(BOOKS ROUTES)
+#(USERS ROUTES)
 
 ###
-GET http://localhost:3000/users/ HTTP/1.1
+GET http://localhost:3000/users/ 
+    Content-Type: application/json
+    RETORNA TODOS LOS USUARIOS 
+
+###
+GET http://localhost:3000/users/:idUser
+    Content-Type: application/json
+    RETORNA EL USUARIO
+
+##
+PUT http://localhost:3000/users/:idUser 
+    Content-Type: application/json
+    RETORNA MENSAJE DE ACTUALIZACION
+    {status: 'Usuario actualizado.'}
+
+##
+POST http://localhost:3000/users/register
+    Content-Type: application/json
+    RETORNA MENSAJE DE CREACION
+    { status: 'usuario registrado y guardado en la base de datos.' }
 
 
-// USER: 62d79b20507e3f9e6a53b05e
-// BOOK: 62d71ff86fc15b86cd177cf3
+##
+PUT http://localhost:3000/users/:idUser/:idBook 
+    Content-Type: application/json
+    RETORNA EL USUARIO CON LOS LIBROS AGREGADOS
+
+##
+DELETE http://localhost:3000/users/:idUser
+       Content-Type: application/json
+       { status: 'Usuario eliminado' }
+
