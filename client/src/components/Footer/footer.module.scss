@@ -1,0 +1,49 @@
+
+.Footer{
+
+  background-color: #F7F7F7;
+
+
+  .Legal{
+      display: flex;
+      align-items: center;
+      justify-content:center;
+
+  }
+.Logos{
+    margin:  10px;
+}
+
+@media only screen and (min-width: 768px){
+    .Legal{
+     
+    
+    h4{
+        margin: 1rem 2rem 2rem 2rem;
+    }
+
+    a{
+         margin:1rem 2rem 2rem 2rem; 
+    }
+  
+    } 
+    }
+
+
+@media only screen and (max-width: 768px){
+      .Legal{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+   
+    
+      } 
+      }
+.LastLine{
+    margin: 0;
+    padding: 2rem;
+    }
+    
+}
+
+

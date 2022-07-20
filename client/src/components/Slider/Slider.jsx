@@ -52,20 +52,20 @@ export default class Responsive extends Component {
             <div className={s.Container}>
                 <Slider {...settings}>
                     <div >
-                        <img className={s.img1}  src={window.screen.width < 400? require("./phone.jpeg"):window.screen.width < 600 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} />
+                        <img className={s.img1}  src={window.screen.width < 400? require("./phone.jpeg"):window.screen.width >400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
 
                     </div>
 
                     <div>
-                        <img className={s.img1}  src={window.screen.width < 400? require("./phone.jpeg"):window.screen.width < 600 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} />
+                        <img className={s.img1} src={window.screen.width < 400? require("./phone.jpeg"):window.screen.width >400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")}alt="book slider"/>
                         {/* <img src="https://image.shutterstock.com/image-vector/promo-sale-banner-library-bookshop-260nw-1790872166.jpg" width="100%" height="300" alt="" /> */}
                     </div>
                     <div>
-                        <img className={s.img1} src={window.screen.width < 400? require("./phone.jpeg"):window.screen.width < 600 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")}/>
+                        <img className={s.img1} src={window.screen.width < 400? require("./phone.jpeg"):window.screen.width >400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider"/>
                         {/* <img src="https://image.shutterstock.com/image-vector/promo-sale-banner-library-bookshop-260nw-1790872166.jpg" width="100%" height="300" alt="" /> */}
                     </div>
                     <div>
-                        <img className={s.img1}  src={window.screen.width < 400? require("./phone.jpeg"):window.screen.width < 600 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} />
+                        <img className={s.img1} src={window.screen.width < 400? require("./phone.jpeg"):window.screen.width >400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider"/>
                         {/* <img src="https://image.shutterstock.com/image-vector/promo-sale-banner-library-bookshop-260nw-1790872166.jpg" width="100%" height="300" alt="" /> */}
                     </div>
 

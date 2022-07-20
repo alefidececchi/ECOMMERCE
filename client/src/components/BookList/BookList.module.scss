@@ -8,11 +8,96 @@ body {
 }
 
 
+.Pagination{
+  
+  ul {
+    display: flex;
+    justify-content: center;
+    // flex-wrap: wrap;
+    list-style: none;
+
+    li {
+     
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    
+
+    span {
+      border-radius: 10px;
+      font-weight: bold;
+      border: 1px solid ;
+
+      &:hover {
+        
+        cursor: pointer;
+      }
+    }
+
+    button {
+      // width: toRem(30);
+      // height: toRem(30);
+      font-weight: bold;
+      
+      border: 1px solid ;
+      border-radius: 10px;
+
+      &:hover {
+        
+        cursor: pointer;
+      }
+    }
+
+  }
+  }
+}
+@media only screen and (min-width: 768px){
+  .Pagination{
+    font-size: 14px;
+   
+     li{
+      height: 18px;
+      width: 70px;
+        padding: 10px;
+      }
+       
+   span{
+    padding: 10px;
+     }
+     button {
+       font-size: 14px;
+       padding: 10px;
+       height: 18px;
+       width: 20px;
+     }
+
+  } 
+  }
+
+
+@media only screen and (max-width: 768px){
+    .Pagination{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+ 
+  
+    } 
+    }
+
 
 .BookList{
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-     gap: 1.375rem;
-      margin: 3.5rem ;
+    // display: grid;
+    // grid-template-columns: repeat(5,1fr);
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+// align-content:space-around;
+
+    
+    //  gap: 1.375rem;
+       margin: 1rem 1rem 0rem 1rem ;
     //  padding: 3rem;
+    
 }
