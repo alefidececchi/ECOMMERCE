@@ -1,7 +1,6 @@
 const express = require("express");
 const UserRouter = require("./user.routes.js");
-
-const BooksRouter= require("./books.routes.js");
+const BookRouter= require("./book.routes.js");
 
 const router = express.Router();
 

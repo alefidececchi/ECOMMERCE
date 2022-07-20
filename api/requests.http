@@ -34,3 +34,15 @@ PUT http://localhost:3000/books/:idBook/:idUser HTTP/1.1
 
 ###
 DELETE http://localhost:3000/books/:idBook  HTTP/1.1
+
+
+####################################################
+
+#(BOOKS ROUTES)
+
+###
+GET http://localhost:3000/users/ HTTP/1.1
+
+
+// USER: 62d79b20507e3f9e6a53b05e
+// BOOK: 62d71ff86fc15b86cd177cf3
