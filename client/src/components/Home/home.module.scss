@@ -1,3 +1,10 @@
-@import '../../assets/sass/functions.scss';
-@import '../../assets/sass/mixins.scss';
-@import '../../assets/sass/variables.scss';
+
+body {
+    padding: 0;
+    margin: 0;
+    // font-size: 12.5px;
+    text-decoration: none;
+    color: #333333;
+    font-family: 'Quicksand', sans-serif;
+  }
+

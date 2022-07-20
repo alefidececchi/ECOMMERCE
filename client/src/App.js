@@ -6,7 +6,6 @@ import Shopping from './components/Shopping/shopping.jsx';
 import User from './components/User/user.jsx';
 import WishList from './components/WishList/wishList.jsx';
 
-
 function App() {
   return (
     <div className="App">
