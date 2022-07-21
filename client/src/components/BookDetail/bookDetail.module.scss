@@ -1,0 +1,68 @@
+@import "../../assets/sass/functions.scss";
+@import "../../assets/sass/mixins.scss";
+@import "../../assets/sass/variables.scss";
+
+.BookDetail {
+    background-color: #ffffff;
+    width: 384px;
+    height: auto;
+
+    border-radius: 0px 0px 10px 10px;
+    padding: 0;
+    position: absolute;
+    top: 500px;
+    right: 10px;
+
+    .Close {
+        position: absolute;
+        color: #c7c7c7;
+        border: #c7c7c7;
+        background-color: #ffffff;
+        border-radius: 30px;
+        width: 40px;
+        height: 40px;
+
+        margin: 10px;
+    }
+
+    h3 {
+        font-weight: bold;
+        margin: 0px;
+    }
+    h4 {
+        margin: 0px 0px 20px 0px;
+    }
+
+    img {
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    .info {
+        margin: 1.5rem;
+        button {
+            color: #ffffff;
+            border: #b881ff;
+            background-color: #b881ff;
+            border-radius: 10px;
+            width: 316px;
+            height: 59px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            h3 {
+                margin: 10px;
+            }
+        }
+    }
+}
+@media only screen and (min-width: 768px) {
+    .BookDetail {
+        position: absolute;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .BookDetail {
+        position: absolute;
+        top: auto;
+    }
+}

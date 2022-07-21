@@ -7,18 +7,21 @@ const routes = require("./routes/index.routes.js");
 const app = express();
 
 
-const users = [
-  {id: 1, name: 'Franco', email: 'Franco@mail.com', password: '1234'},
-  {id: 2, name: 'Toni', email: 'Toni@mail.com', password: '1234'}
-]
-console.log(users.map((e)=>e));
+// const users = [
+//   {id: 1, name: 'Franco', email: 'Franco@mail.com', password: '1234'},
+//   {id: 2, name: 'Toni', email: 'Toni@mail.com', password: '1234'}
+// ]
+// console.log(users.map((e)=>e));
+
 // (MIDDLEWARES)
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use((req, res, next) => {
-  console.log(req.cookies);
+
+  //console.log(req.cookies);
+
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Credentials", true);
   res.header(
@@ -29,6 +32,8 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.use('/', routes);
 
 const isAuthenticated = (req,res,next)=> {
   let {userID} = req.cookies;
@@ -135,6 +140,7 @@ app.post('/register', (req,res) => {
   if (user || (!name || !password || !email)){
     res.redirect('/register');
   } else {
+    // reemplazamos el push por algo que nos permita insertarlo en la base de datos de usuarios.
     users.push({
       id: users.length +1,
       email,
