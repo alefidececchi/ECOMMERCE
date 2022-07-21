@@ -13,3 +13,26 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+
+  
+
+  .core {
+    display: flex;
+    flex-direction: column;
+    @include tablet() {
+      margin-top: toRem(71);
+    }
+    @include tabletMax() {
+      margin-top: toRem(250);
+    }
+
+    .slider {
+      z-index: -1;
+    }
+  }
+ 
+}

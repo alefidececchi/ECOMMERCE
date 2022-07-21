@@ -2,13 +2,13 @@
 @import '../../assets/sass/mixins.scss';
 @import '../../assets/sass/variables.scss';
 
-<<<<<<< HEAD
-=======
 .container{
     width: 100vw;
     background-color: $gris1;
     border-bottom: 1px solid $gris2;
     display: flex;
+    position: fixed;
+    // margin-top: 0;
     
     ul {
         width: 100vw;
@@ -48,4 +48,3 @@
         }
     }
 }
->>>>>>> US-Front5.2

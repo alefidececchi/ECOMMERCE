@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import style from './user.module.scss'
 import {BsCameraFill} from "react-icons/bs";
 import { useState } from 'react';

@@ -21,9 +21,12 @@ export const data = [
 
 const Home = () => {
   return (
-    <div>
-      <NavBar />
+    <div className={s.mainContainer}>
+      <NavBar/>
+      <div className={s.core}>
+      <div className={s.slider}>
       <Slider />
+      </div>
       <Header />
 
       {data.map((loader, index) => (
@@ -41,6 +44,8 @@ const Home = () => {
       <BookList />
       <Footer />
     </div>
+    </div>
+    
   );
 };
 

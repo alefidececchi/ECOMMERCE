@@ -1,6 +1,6 @@
 import React from "react";
-import style from "./navBar.module.scss";
 import { Link, Outlet } from "react-router-dom";
+import style from "./navBar.module.scss";
 import { BsFillCartFill, BsFillPersonLinesFill } from "react-icons/bs";
 
 const NavBar = () => {
@@ -9,7 +9,7 @@ const NavBar = () => {
       <section>
         <Outlet />
       </section>
-      <nav>
+      <nav className={style.container}>
         <ul>
           <li>
             <Link to={"/"}>libritos.com</Link>
