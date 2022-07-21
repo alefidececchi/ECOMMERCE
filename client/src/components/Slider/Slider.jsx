@@ -27,7 +27,7 @@ export default class Responsive extends Component {
                     }
                 },
                 {
-                    breakpoint: 600,
+                    breakpoint: 768,
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
@@ -46,8 +46,8 @@ export default class Responsive extends Component {
 
 
         };
-        console.log(window.screen.width)
-        console.log(settings.responsive[1].breakpoint)
+        // console.log(window.screen.width)
+        // console.log(settings.responsive[1].breakpoint)
         return (
             <div className={s.Container}>
                 <Slider {...settings}>

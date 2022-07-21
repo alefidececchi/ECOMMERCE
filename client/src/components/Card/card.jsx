@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import s from "./card.module.scss"
-
+import BookDetail from '../BookDetail/bookDetail';
 
 
 const Card = () => {
+
+    // esto es para deplegar el detlle de la tarjeta 
+    const [toggle, setToggle] = useState(false);
+
+    const handleToggle = () => {
+        setToggle(!toggle);
+    }
+
 
     const [cart, setCart] = useState([]);
 
@@ -16,9 +24,9 @@ const Card = () => {
     return (
 
 
-        <div className={s.containerCard}>
+        <div className={s.containerCard} >
 
-            <img src="https://img.freepik.com/free-psd/book-cover-mockup_125540-572.jpg?w=2000" alt="book" width="216px" height="216px" />
+            <img onClick={handleToggle} src="https://img.freepik.com/free-psd/book-cover-mockup_125540-572.jpg?w=2000" alt="book" width="216px" height="216px" />
             <div className={s.cart} >
                 <div className={s.info}>
                     <h3>$ 25.00</h3>
@@ -29,6 +37,11 @@ const Card = () => {
 
                 </figure>
             </div>
+
+
+            {toggle && <BookDetail />}
+            {/* hasta aca */}
+
         </div>
 
 

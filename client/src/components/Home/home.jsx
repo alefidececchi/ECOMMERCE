@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./home.module.scss"
 import Slider from "../Slider/Slider.jsx"
-
+import NavBar from "../NavBar/navBar"
 import BookList from "../BookList/BookList";
 import Footer from "../Footer/footer";
 import "react-loader-spinner"
@@ -26,6 +26,7 @@ const Home = () => {
 
     return (
         <div>
+            <NavBar/>
             <Slider />
 
             <header>
