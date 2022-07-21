@@ -1,4 +1,6 @@
-
+@import '../../assets/sass/functions.scss';
+@import '../../assets/sass/mixins.scss';
+@import '../../assets/sass/variables.scss';
 .containerCard{
   
     display: flex;
@@ -56,3 +58,4 @@
     }
 
 }
+
