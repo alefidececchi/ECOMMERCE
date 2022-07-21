@@ -24,7 +24,7 @@ const Pagination = ({booksPerPage, books, changePage, currentPage}) => {
   return (
     <div>
       <ul>
-      <li><span onClick={handlePrevious}>Previous</span></li>
+      <li><span onClick={handlePrevious}>Prev</span></li>
         { pages && 
           pages.map(page => 
           (page === currentPage 

@@ -24,7 +24,7 @@ body {
     
 
     span {
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: bold;
       border: 1px solid ;
 
@@ -40,7 +40,7 @@ body {
       font-weight: bold;
       
       border: 1px solid ;
-      border-radius: 10px;
+      border-radius: 8px;
 
       &:hover {
         
@@ -56,19 +56,20 @@ body {
     font-size: 14px;
    
      li{
-      height: 18px;
-      width: 70px;
-        padding: 10px;
+     
+        padding: 8px;
       }
        
    span{
-    padding: 10px;
+    height: 18px;
+    width: 40px;
+    padding: 5px;
      }
      button {
        font-size: 14px;
-       padding: 10px;
-       height: 18px;
-       width: 20px;
+       padding:5px 5px 5px 5px;
+       height: 30px;
+       width: 25px;
      }
 
   } 
@@ -76,13 +77,27 @@ body {
 
 
 @media only screen and (max-width: 768px){
-    .Pagination{
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
- 
-  
-    } 
+  .Pagination{
+    font-size: 14px;
+   
+     li{
+     
+        padding: 8px;
+      }
+       
+   span{
+    height: 18px;
+    width: 40px;
+    padding: 5px;
+     }
+     button {
+       font-size: 14px;
+       padding:5px 5px 5px 5px;
+       height: 30px;
+       width: 25px;
+     }
+
+  } 
     }
 
 
