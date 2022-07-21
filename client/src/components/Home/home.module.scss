@@ -1,17 +1,15 @@
-@import '../../assets/sass/functions.scss';
-@import '../../assets/sass/mixins.scss';
-@import '../../assets/sass/variables.scss';
+@import "../../assets/sass/functions.scss";
+@import "../../assets/sass/mixins.scss";
+@import "../../assets/sass/variables.scss";
 
 body {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    color: #797979;
-    font-family: 'Quicksand', sans-serif;
-  }
-.loading{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: #797979;
+  font-family: "Quicksand", sans-serif;
+}
+.loading {
   display: flex;
   justify-content: center;
-  
 }
-

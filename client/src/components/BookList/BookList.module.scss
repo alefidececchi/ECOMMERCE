@@ -1,121 +1,88 @@
-// body {
-//   padding: 0;
-//   margin: 0;
-//   // font-size: 12.5px;
-//   text-decoration: none;
-//   color: #333333;
-//   font-family: 'Quicksand', sans-serif;
-// }
-
-
-.Pagination{
- 
+.Pagination {
   ul {
     display: flex;
     justify-content: center;
     // flex-wrap: wrap;
     list-style: none;
-    
+
     margin-top: 10px;
 
     li {
-     
       display: flex;
       flex-direction: column;
       justify-content: center;
-       
 
-    span {
-      
-      border-radius: 8px;
-      font-weight: bold;
-      border: 1px solid ;
+      span {
+        border-radius: 8px;
+        font-weight: bold;
+        border: 1px solid;
 
-      &:hover {
-        
-        cursor: pointer;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      button {
+        font-weight: bold;
+        border: 1px solid;
+        border-radius: 8px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
-
-    button {
-      // width: toRem(30);
-      // height: toRem(30);
-      font-weight: bold;
-      
-      border: 1px solid ;
-      border-radius: 8px;
-
-      &:hover {
-        
-        cursor: pointer;
-      }
-    }
-
-  }
   }
 }
-@media only screen and (min-width: 768px){
-  .Pagination{
+@media only screen and (min-width: 768px) {
+  .Pagination {
     font-size: 14px;
-   
-     li{
-     
-        padding: 8px;
-      }
-       
-   span{
-    height: 30px;
-    width: 50px;
-    padding:5px 5px 15px 5px;
-     }
-     button {
-       font-size: 14px;
-       padding:5px 5px 5px 5px;
-       height: 30px;
-       width: 25px;
-     }
 
-  } 
-  }
-
-
-@media only screen and (max-width: 768px){
-  .Pagination{
-    font-size: 14px;
-   
-     li{
-     
-        padding: 8px;
-      }
-       
-   span{
-    height: 30px;
-    width: 50px;
-    padding:5px 5px 15px 5px;
-     }
-     button {
-       font-size: 14px;
-       padding:5px 5px 5px 5px;
-       height: 30px;
-       width: 25px;
-     }
-
-  } 
+    li {
+      padding: 8px;
     }
 
+    span {
+      height: 30px;
+      width: 50px;
+      padding: 5px 5px 15px 5px;
+    }
+    button {
+      font-size: 14px;
+      padding: 5px 5px 5px 5px;
+      height: 30px;
+      width: 25px;
+    }
+  }
+}
 
-.BookList{
-    // display: grid;
-    // grid-template-columns: repeat(5,1fr);
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: center;
-// align-content:space-around;
+@media only screen and (max-width: 768px) {
+  .Pagination {
+    font-size: 14px;
 
-    
-    //  gap: 1.375rem;
-       margin: 1rem 1rem 0rem 1rem ;
-    //  padding: 3rem;
-    
+    li {
+      padding: 8px;
+    }
+
+    span {
+      height: 30px;
+      width: 50px;
+      padding: 5px 5px 15px 5px;
+    }
+    button {
+      font-size: 14px;
+      padding: 5px 5px 5px 5px;
+      height: 30px;
+      width: 25px;
+    }
+  }
+}
+
+.BookList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 1rem 1rem 0rem 1rem;
 }

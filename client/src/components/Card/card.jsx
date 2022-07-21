@@ -40,7 +40,7 @@ const Card = () => {
 
 
             {toggle && <BookDetail />}
-            {/* hasta aca */}
+          
 
         </div>
 

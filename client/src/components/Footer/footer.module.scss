@@ -1,60 +1,49 @@
+.Footer {
+    background-color: #f7f7f7;
 
-.Footer{
-
-  background-color: #F7F7F7;
-
-  .Legal{
-      display: flex;
-      align-items: center;
-      justify-content:center;
-
-  }
-  .LogosContainer{
-      display: flex;
-      justify-content: center;
-  }
-.Logos{
-    margin:  10px;
-}
-
-@media only screen and (min-width: 768px){
-    .Legal{
-     
-    
-    h4{
-        margin: 1rem 2rem 2rem 2rem;
-    }
-
-    a{
-         margin:1rem 2rem 2rem 2rem; 
-    }
-  
-    } 
-    }
-
-
-@media only screen and (max-width: 768px){
-      .Legal{
+    .Legal {
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        h4{
-            margin: 0.5rem 0.5rem 0.5rem 0.5rem;
-        }
-    
-        a{
-             margin:0.5rem 0rem 0.5rem 0rem; 
-        }
-    
-      } 
-      }
-.LastLine{
-    margin: 0;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
+        justify-content: center;
     }
-    
+    .LogosContainer {
+        display: flex;
+        justify-content: center;
+    }
+    .Logos {
+        margin: 10px;
+    }
+
+    @media only screen and (min-width: 768px) {
+        .Legal {
+            h4 {
+                margin: 1rem 2rem 2rem 2rem;
+            }
+
+            a {
+                margin: 1rem 2rem 2rem 2rem;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .Legal {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            h4 {
+                margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+            }
+
+            a {
+                margin: 0.5rem 0rem 0.5rem 0rem;
+            }
+        }
+    }
+    .LastLine {
+        margin: 0;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+    }
 }
-
-

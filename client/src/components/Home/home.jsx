@@ -26,7 +26,7 @@ const Home = () => {
 
     return (
         <div>
-            <NavBar/>
+            <NavBar />
             <Slider />
 
             <header>
@@ -55,7 +55,7 @@ const Home = () => {
                 </div>)}
 
             <BookList />
-            <Footer/>
+            <Footer />
         </div>
     );
 };

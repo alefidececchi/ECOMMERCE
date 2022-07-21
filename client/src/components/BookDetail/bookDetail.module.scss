@@ -6,7 +6,7 @@
     background-color: #ffffff;
     width: 384px;
     height: auto;
-    // border: 1px solid #979797 ;
+
     border-radius: 0px 0px 10px 10px;
     padding: 0;
     position: absolute;
@@ -57,15 +57,12 @@
 }
 @media only screen and (min-width: 768px) {
     .BookDetail {
-       
         position: absolute;
-       
     }
 }
 @media only screen and (max-width: 768px) {
     .BookDetail {
         position: absolute;
-        top:auto
-       
+        top: auto;
     }
 }
