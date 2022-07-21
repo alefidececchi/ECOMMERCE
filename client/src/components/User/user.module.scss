@@ -2,7 +2,11 @@
 @import '../../assets/sass/mixins.scss';
 @import '../../assets/sass/variables.scss';
 
-.maincontainer{
+.mainContainer{
+    background: #1b033b;
+}
+
+.containerProfile{
     position: absolute;
     width: 450px;
     margin: auto;
@@ -61,11 +65,21 @@
     padding: 10px 20px;
     box-sizing: border-box;
     margin-left: 55%;
-    margin-top: 15%;
+    margin-top: 10%;
     border: 1px solid #B881FF;
     border-radius: 10px;
     align-items: center;
     font-family: 'Franklin Gothic Medium';
+    div{
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+    }
+    img{
+        justify-content: center;
+        object-fit: cover;
+        width: 25%;
+    }
 }
 
 .userPhoto{
