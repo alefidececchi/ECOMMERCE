@@ -23,6 +23,15 @@ const getBookById = async (req, res) => {
   }
 };
 
+const getGenresBook = (req, res) => {
+  const genres = ["autobiography", "fantasy", "fiction", "history", "horror", "science", "terror", "thriller"]
+  try {
+    return res.status(400).json({ genres })
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+}
+
 const postBook = async (req, res) => {
   const book = req.body;
   console.log(book);
@@ -72,6 +81,7 @@ const deleteBook = async (req, res) => {
 
 module.exports = {
   getBooks,
+  getGenresBook,
   postBook,
   getBookById,
   putBook,
