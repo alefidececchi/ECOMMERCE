@@ -12,12 +12,12 @@ const NavBar = () => {
       <nav  className={style.container}>
         <ul>
           <li>
-            <Link to={'/home'} >
+            <Link to={'/'} >
               libritos.com
             </Link>
           </li>
           <li>
-            <Link to={'/home'}>
+            <Link to={'/'}>
               Home
             </Link>
           </li>
