@@ -8,6 +8,7 @@ header {
   margin-top: toRem(20);
   display: flex;
   flex-direction: column;
+  align-items: center;
   @include tablet() {
     align-items: center;
   }
@@ -28,6 +29,7 @@ header {
       flex-direction: column;
       @include tabletMax() {
         width: 30%;
+        margin: 0 auto;
       }
       @include tablet() {
         flex-direction: row;
@@ -82,8 +84,11 @@ header {
   }
 
   .toFilter {
-    // background-color: red;
     padding-bottom: toRem(20);
+    @include tabletMax() {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
     span {
       padding: toRem(5) toRem(5) toRem(5) toRem(5);
@@ -92,6 +97,10 @@ header {
       border-radius: toRem(10);
       margin: 0 toRem(5);
       font-size: toRem(14);
+      @include tabletMax() {
+      margin: toRem(5) toRem(5);
+
+      }
     }
     
     button {
