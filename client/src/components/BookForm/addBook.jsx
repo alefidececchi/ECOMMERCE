@@ -8,9 +8,9 @@ function AddBook(){
     const [send, setSend] = useState(false);
 
     return (
-        <div>
+        <div className={style.formulario}>
             <section>
-                <Formik
+                <Formik 
                     initialValues={{
                         bookName:"", 
                         image:"", 
@@ -19,7 +19,8 @@ function AddBook(){
                         published:'', 
                         genre:'',
                         language:'',
-                        state:''
+                        state:'',
+                        description:''
                     }}
                     validate={(values) =>{
                         let errors ={};
@@ -87,7 +88,7 @@ function AddBook(){
                     }}
                 >
                     {( {errors} )=>(
-                        <Form className={style.formulario}> 
+                        <Form > 
                         <h2>Post new book</h2>
                         <div>
                             <label htmlFor="name">Book Name: </label>

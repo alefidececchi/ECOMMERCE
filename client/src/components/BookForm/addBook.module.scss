@@ -3,18 +3,17 @@
 @import '../../assets/sass/variables.scss';
 
 .formulario {
-	display: grid;
-
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	position: absolute;
-	margin-left: 39%;
-	margin-right: 39%;
-	min-width: 15em;
-	margin-top: 5%;
-	width: 35em;
+	margin:  8em 40em auto;
+	width: 35%;
+	padding: 0.3125em;
+	
 	
 	background: #fff;
 	border-radius: 0.3125em;
-	padding: 5px;
 	box-sizing: border-box;
 	box-shadow: rgba(0, 0, 0, 1) 0px 1px 4px;
 	border: 1px solid #B881FF;
@@ -54,8 +53,8 @@
 	
 	input,
 	textarea {
-	font-family: 'Open Sans', sans-serif;
-	width: 70%;
+	
+	width: 100%;
 	
 	border-radius: 5px;
 	border: 2px solid #e2e2e2;
@@ -63,24 +62,33 @@
 	padding: 0.625em;
 	margin-bottom: 0.3125em;
 	color: #1f1f1f;
-}
+	}
 
 	input:focus {
 	outline: none;
 	border: 2px solid #0085FF;
-}
+	}
+	input[type="radio"] {
+		width: auto;
+	}
+
+	// @include media ('<=phone'){
+	// 	position: absolute;
+	// 	margin:  2px 1px auto;
+	// 	width: 5%;
+
+	// }
+
+
+	
+	@media (max-width: 576){ //medidas paceluco
+		position: absolute;
+		margin:  2px 1px auto;
+		width: 5%;
+	}
+	
 
 }
-
-
-
-// .error {
-// 	color: #e92b2d;
-// 	font-weight: 600px;
-// 	font-size: 12px;
-// }
-
-
 
 
 
@@ -91,26 +99,6 @@
 	color: #02a802;
 }
 
-.formulario input[type="radio"] {
-	width: auto;
-}
 
 
-@media (max-width: 1200px){
-
-}
-
-@media (max-width: 992){
-	
-}
-
-
-@media (max-width: 768){
-	
-}
-
-
-@media (max-width: 576){
-	
-}
 

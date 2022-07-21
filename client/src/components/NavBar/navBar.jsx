@@ -1,50 +1,49 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import style from './navBar.module.scss'
-import cart from '../../assets/imgs/cart.png'
-import user from '../../assets/imgs/user.png'
+import { BsFillCartFill, BsFillPersonLinesFill } from 'react-icons/bs';
 
 const NavBar = () => {
   return (
-    <div className={style.container}>
-      <section>
+    <div >
+      <section> 
         <Outlet />
       </section>
       <nav  className={style.container}>
         <ul>
-          <li className={style.nombre}>
-            <Link to={'/home'} className={style.titulo}>
-              NOMBRE DE LA PAGINA
+          <li>
+            <Link to={'/home'} >
+              libritos.com
             </Link>
           </li>
-          <li className={style.all}>
-            <Link to={'/user'}className={style.linkAll}>
-              All
+          <li>
+            <Link to={'/home'}>
+              Home
             </Link>
           </li>
-          <li className={style.today}>
-              <Link to={'/wish'} className={style.items}>
+          <li>
+              <Link to={'/wish'} >
                 Today's Deals
               </Link>
           </li>
           <li className={style.giftCard}>
-              <Link to={'/wish'} className={style.items}>
+              <Link to={'/wish'} >
                 Gift Card
               </Link>
           </li>
-          <li className={style.cart}>
-            <Link to={'/shopping'}>
-              <img src={cart} alt='cart' className={style.images}/>
-            </Link>
-          </li>
-          <li className={style.user} >
-            <Link to={'/user'}>
-              <img src={user} alt='cart' className={style.images}/>
-            </Link>
-          </li>
-          <li className={style.wishList}>
-            <Link to={'/wish'} className={style.items}>
+          <li >
+            <Link to={'/wish'} >
               WishList
+            </Link>
+          </li>
+          <li>
+            <Link to={'/shopping'}>
+              <BsFillCartFill className={style.icon}/>
+            </Link>
+          </li>
+          <li>
+            <Link to={'/user'}>
+              <BsFillPersonLinesFill className={style.icon}/>
             </Link>
           </li>
         </ul>

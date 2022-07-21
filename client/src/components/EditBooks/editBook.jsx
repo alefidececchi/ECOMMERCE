@@ -23,7 +23,7 @@ function EditBook({editOff}){
                             bookName:"", 
                             image:"", 
                             price:'', 
-                            amount:'',
+                            amount:'', //cambiar a stock
                             published:'', 
                             genre:'',
                             language:'',
