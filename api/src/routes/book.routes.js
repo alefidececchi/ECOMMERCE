@@ -3,11 +3,15 @@ const {
   getBooks,
   postBook,
   getBookById,
+  getGenresBook,
   putBook,
   deleteBook,
 } = require("../controllers/book.controller.js");
 
 const router = express.Router();
+
+//(GET) - books/genres
+router.get("/genres", getGenresBook)
 
 //(GET)-/books/:id
 router.get("/:id", getBookById);
