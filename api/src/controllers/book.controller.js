@@ -2,11 +2,42 @@ const Book = require("../models/Book.js");
 const User = require("../models/User.js");
 
 const getBooks = async (req, res) => {
-  try {
-    const books = await Book.find();
-    return res.status(200).json({ books: books });
-  } catch (error) {
-    return res.status(500).json({ error: error });
+  const { name } = req.query;
+  //sort is an string (true / false)
+  const { sort } = req.query;
+  const { limit, page } = req.query;
+  if (sort === "true") {
+    try {
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort("name")
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort("name");
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else {
+    try {
+      // const books = await Book.find();
+
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page);
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
   }
 };
 
@@ -24,13 +55,22 @@ const getBookById = async (req, res) => {
 };
 
 const getGenresBook = (req, res) => {
-  const genres = ["autobiography", "fantasy", "fiction", "history", "horror", "science", "terror", "thriller"]
+  const genres = [
+    "autobiography",
+    "fantasy",
+    "fiction",
+    "history",
+    "horror",
+    "science",
+    "terror",
+    "thriller",
+  ];
   try {
-    return res.status(400).json({ genres })
+    return res.status(400).json({ genres });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
-}
+};
 
 const postBook = async (req, res) => {
   const book = req.body;
