@@ -1,3 +1,20 @@
 @import '../../assets/sass/functions.scss';
 @import '../../assets/sass/mixins.scss';
 @import '../../assets/sass/variables.scss';
+
+.boton{
+    cursor: pointer;
+    background-color: #b881ff;
+    border-radius: 5px;
+    border: transparent;
+    padding: 18px;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: #fff4ff;
+    height: 50%;
+    font-size: 1.2rem;
+}
+
+.boton:hover{
+    background-color: black;
+}
