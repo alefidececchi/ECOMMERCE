@@ -35,7 +35,7 @@ const BookList = ({ books }) => {
                     // <Link to={"/home/" + elm.id}>  
                     return <Card />
 
-
+                    // return <Card name={book.name} key={book.name}/>
                     // </Link>
 
                 })}

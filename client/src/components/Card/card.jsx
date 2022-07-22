@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import s from "./card.module.scss"
 import BookDetail from '../BookDetail/bookDetail';
 
-
+// const Card = ({name}) => {
 const Card = () => {
 
     // esto es para deplegar el detlle de la tarjeta 
@@ -30,6 +30,7 @@ const Card = () => {
             <div className={s.cart} >
                 <div className={s.info}>
                     <h3>$ 25.00</h3>
+                    {/* <h3>{name}</h3> */}
                     <h4 >the book volume 1</h4>
                 </div>
                 <figure onClick={handleClick} className={s.info2}>

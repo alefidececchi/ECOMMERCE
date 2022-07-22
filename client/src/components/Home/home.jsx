@@ -28,18 +28,17 @@ export const data = [
 const Home = () => {
 
 
-
-  // const [pokemons, setPokemons] = useState([]);
+  // const pokemons = useSelector((state) => state.pokemons);
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   const fetchPokemons = async () => {
   //     const pokemonsRes = await getPokemon();
-  //     setPokemons(pokemonsRes);
+  //     dispatch(setPokemons(pokemonsRes));
   //   };
 
   //   fetchPokemons();
   // }, []);
-
 
 
   return (
@@ -67,6 +66,7 @@ const Home = () => {
                 < BallTriangle stroke="white" fill="white" />
             </div> */}
         <BookList />
+        {/* <BookList books={books} /> */}
         <Footer />
       </div >
     </div >
