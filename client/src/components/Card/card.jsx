@@ -35,7 +35,7 @@ const Card = ({ name, price, image }) => {
                     <h4 >{name}</h4>
                 </div>
                 <figure onClick={handleClick} className={s.info2}>
-                    <i class="fas fa-cart-plus fa-lg"></i>
+                    <button><i class="fas fa-cart-plus fa-lg"></i></button>
 
                 </figure>
             </div>
