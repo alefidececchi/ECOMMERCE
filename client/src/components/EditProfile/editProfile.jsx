@@ -53,7 +53,7 @@ function EditProfile({editProdileOff}){
                             name="name"
                             />
                             <ErrorMessage name="name" component={()=>(
-                                <div>{errors.name}</div>
+                                <div  className={style.error}>{errors.name}</div>
                             )} />
                         </div>
                         <div>
@@ -65,13 +65,14 @@ function EditProfile({editProdileOff}){
                             name="email"
                             />
                             <ErrorMessage name="email" component={()=>(
-                                <div>{errors.email}</div>
+                                <div className={style.error}>{errors.email}</div>
                             )} />
                         </div>
                         <div>
-                            <button type="submit">  Save </button>
+                            <button type="submit" className={style.buttonSave}>  Save </button>
+                            <button onClick={() => editProdileOff()} className={style.buttonCancel}>  Cancel </button>
                             {send && <p>Product added succecsfully</p>}
-                            <button onClick={() => editProdileOff()}>  Cancel </button>
+                            
                         </div>  
 
                     </Form>

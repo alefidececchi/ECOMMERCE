@@ -11,38 +11,36 @@ function EditBook({editOff}){
     
     let navigate  = useNavigate()
 
-
-
-
     return(
         <div>
  
-                    <section>
+                    <div className={style.mainContainer}>
                     <Formik
                         initialValues={{
-                            bookName:"", 
+                            name:"", 
                             image:"", 
                             price:'', 
-                            amount:'', //cambiar a stock
-                            published:'', 
+                            stock:'',
+                            released:'', 
                             genre:'',
                             language:'',
-                            state:''
+                            used:false,
+                            description:''
                         }}
                         validate={(values) =>{
                             let errors ={};
                             //validacion nombre del libro   
-                            if(!values.bookName){
-                                errors.bookName = 'Please write the book name'
-                            }else if(values.bookName.length < 4 || values.bookName.length > 20){
-                                errors.bookName = 'Book name must have between 4 or 20 characters'
+                            if(!values.name){
+                                errors.name = 'Please write the book name'
+                            }else if(values.name.length < 4 || values.name.length > 20){
+                                errors.name = 'Book name must have between 4 or 20 characters'
                             }
 
                             //validacion año publicacion
-                            if(!values.published){
-                                errors.published = 'Please write the published year of the book'
-                            }else if(values.published < 0){
-                                errors.published = 'The year must be possitive'
+                            if(!values.released){
+                                errors.released = 'Please write the released year of the book'
+                            }else if(values.released < 0){
+                                errors.released = 'The year must be possitive'
                             }
                         
                             //validacion genero
@@ -76,18 +74,29 @@ function EditBook({editOff}){
                             }
 
                             //validacion cantidad 
-                            if(!values.amount){
-                                errors.amount = 'Please write the book amount for selling'
-                            }else if(values.amount < 0){
-                                errors.amount = 'The amount must be possitive'
+                            if(!values.stock){
+                                errors.stock = 'Please write the book stock for selling'
+                            }else if(values.stock < 0){
+                                errors.stock = 'The stock must be possitive'
                             }
                             //validacion estado
-                            if(!values.state){
-                                errors.state = 'Please select the book state'
+                            if(!values.used){
+                                errors.used = 'Please select the book state'
                             }
+                            //validacion description
+                            if(!values.description){
+                                errors.description = 'Please write a  description of the book'
+                            }else if(values.description.length > 250){
+                                errors.description = 'Description must have 250 characters'
+                        }
                             return errors;
                         }}
                         onSubmit={(values, {resetForm})=>{
+                            if(values.used === 'true'){
+                                values.used = true
+                            }else if(values.used === 'false'){
+                                values.used = false
+                            }
                             resetForm();
                             setSend(true)
                             setTimeout(() => setSend(false), 3000)
@@ -95,7 +104,7 @@ function EditBook({editOff}){
                         }}
                     >
                         {( {errors} )=>(
-                            <Form> 
+                            <Form className={style.form}> 
                             <h2>Post new book</h2>
                             <div>
                                 <label htmlFor="name">Book Name: </label>
@@ -103,22 +112,22 @@ function EditBook({editOff}){
                                 type='text'
                                 id="name"
                                 placeholder="Type a name..."
-                                name="bookName"
+                                name="name"
                                 />
-                                <ErrorMessage name="bookName" component={()=>(
-                                    <div>{errors.bookName}</div>
+                                <ErrorMessage name="name" component={()=>(
+                                    <div className={style.error}>{errors.name}</div>
                                 )} />
                             </div>
                             <div>
-                                <label htmlFor="name">Published Year: </label>
+                                <label htmlFor="name">Released Year: </label>
                                 <Field
                                 type='number'
-                                id="published"
+                                id="released"
                                 placeholder="1996"
-                                name="published"
+                                name="released"
                                 />
-                                <ErrorMessage name="published" component={()=>(
-                                    <div>{errors.published}</div>
+                                <ErrorMessage name="released" component={()=>(
+                                    <div className={style.error}>{errors.released}</div>
                                 )} />
                             </div>
                             <div>
@@ -130,7 +139,7 @@ function EditBook({editOff}){
                                 name="genre"
                                 />
                                 <ErrorMessage name="genre" component={()=>(
-                                    <div>{errors.genre}</div>
+                                    <div className={style.error}>{errors.genre}</div>
                                 )} />
                             </div>
                             <div>
@@ -142,7 +151,7 @@ function EditBook({editOff}){
                                     name="image"
                                 />
                                 <ErrorMessage name="image" component={()=>(
-                                    <div >{errors.image}</div>
+                                    <div className={style.error}>{errors.image}</div>
                                 )} />
                             </div>
                             <div>
@@ -154,7 +163,7 @@ function EditBook({editOff}){
                                     name="price"
                                 />
                                 <ErrorMessage name="price" component={()=>(
-                                    <div>{errors.price}</div>
+                                    <div className={style.error}>{errors.price}</div>
                                 )} />
                             </div>
                             <div>
@@ -163,10 +172,10 @@ function EditBook({editOff}){
                                     type="number"
                                     id="amt"
                                     placeholder="15"
-                                    name="amount"
+                                    name="stock"
                                 />
-                                <ErrorMessage name="amount" component={()=>(
-                                    <div>{errors.amount}</div>
+                                <ErrorMessage name="stock" component={()=>(
+                                    <div className={style.error}>{errors.stock}</div>
                                 )} />
                 
                             </div>
@@ -178,32 +187,43 @@ function EditBook({editOff}){
                                     <option value='Spanish'> Spanish </option>    
                                 </Field>                
                                 <ErrorMessage name="language" component={()=>(
-                                    <div>{errors.language}</div>
+                                    <div className={style.error}>{errors.language}</div>
+                                )} />
+                            </div>
+                            <div className={style.state} >
+                                <label>Secondhand </label>
+                                <label className={style.yesNo}>
+                                    <Field  type='radio' name="used" value='true'className={style.circle} /> Yes
+                                </label>
+                                <label className={style.yesNo}>
+                                    <Field  type='radio' name="used" value='false' className={style.circle} /> No
+                                </label>
+                                <ErrorMessage name="used" component={()=>(
+                                    <div className={style.error}>{errors.used}</div>
                                 )} />
                             </div>
                             <div>
-                                <label>State </label>
-                                <label>
-                                    <Field  type='radio' name="state" value='New'/> New
-                                </label>
-                                <label>
-                                    <Field  type='radio' name="state" value='Old'/> Secondhand
-                                </label>
-                                <ErrorMessage name="state" component={()=>(
-                                    <div>{errors.state}</div>
-                                )} />
-                            </div>
+                            <label htmlFor="amt">Description: </label>
+                            <Field
+                                as='textarea'
+                                id="amt"
+                                placeholder=""
+                                name="description"
+                            />
+                            <ErrorMessage name="description" component={()=>(
+                                <div className={style.error}>{errors.description}</div>
+                            )} />
+            
+                        </div>
                             <div>
-                                <button type="submit">  Create </button>
+                                <button type="submit" className={style.buttonSave}>  Save </button>
+                                <button onClick={() => editOff()} className={style.buttonCancel}>  Cancel </button>
                                 {send && <p>Product added succecsfully</p>}
                             </div>  
                         </Form>
                         )}
                     </Formik>
-                    <div>
-                        <button onClick={() => editOff()}>  Cancel </button>
-                    </div>  
-                </section>
+                </div>
         </div>
     )
 }
