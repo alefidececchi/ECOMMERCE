@@ -14,6 +14,7 @@ const bookSchema = new Schema(
     genres: [
       {
         type: Schema.Types.String,
+        required: true
       },
     ],
     description: {
@@ -45,7 +46,6 @@ const bookSchema = new Schema(
     },
     book_type: {
       type:String
-
     },
     sellers: [
       {
@@ -53,6 +53,20 @@ const bookSchema = new Schema(
         ref: "User",
       },
     ],
+    autor: [
+      {
+        type: Schema.Types.String,
+        required: true
+      }
+    ],
+    stock: {
+      type: Number,
+      required: true
+    },
+    deleted: {
+      type: Boolean,
+      default: false,
+    }
   },
   {
     timestamps: true,
