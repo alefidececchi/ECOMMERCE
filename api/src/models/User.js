@@ -16,6 +16,10 @@ const userSchema = new Schema(
       type: String,
       require: true,
     },
+    resetLink: {
+      type: String,
+      default: ""
+    },
     admin: {
       types: Boolean,
       default:false,
