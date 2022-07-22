@@ -2,8 +2,10 @@ import React, { useReducer, useState, useEffect } from 'react';
 import { TYPES } from '../../Redux/shoppingSlice/shopping.types';
 import shoppingSlice, { initialState, ADD_TO_CART, REMOVE_ALL_FROM_CART, REMOVE_ONE_FROM_CART, CLEAR_CART } from '../../Redux/shoppingSlice/shoping.slice'
 import CartItem from './CartItem';
-import ProductItem from './productItem';
+import ProductItem from './ProductItem';
 import styles from './shopping.module.scss'
+import NavBar from '../NavBar/navBar';
+import Footer from '../Footer/footer';
 
 const Shopping = () => {
   const [state, dispatch] = useReducer(shoppingSlice, initialState)
@@ -16,10 +18,11 @@ const Shopping = () => {
     items+=item.quantity;
     price+= item.quantity * item.price
   })
-    console.log(items)
+    
   
 
   useEffect(() =>{
+    console.log(cart)
     setTotalItems(items)
     setTotalPrice(price)
   }, [cart])
@@ -45,14 +48,20 @@ const Shopping = () => {
 
   return (
     <div>
-      <h2>Shopping cart</h2>
+    <NavBar />
+    <br />
+    <br />
+    <br />
+    <br />
+      
       <h3>Products</h3>
       <article className='box'>
       {products.map((product) => <ProductItem key={product.id} data={product} addToCart={addToCart}/>)}
       </article>
-      <h3>Cart</h3>
+      
       <article className='box'>
-        <button onClick={clearCart}>Clear cart</button>
+        
+        <h2 className={styles.title}>Your shopping cart</h2>
         <br />
         <div>
         {
@@ -60,9 +69,13 @@ const Shopping = () => {
         }
         </div>
       </article>
-      <h1>Total items: {totalItems}</h1>
-      <h1>Total: {totalPrice}$</h1>
+      <h1 className={styles.total}>Total items: {totalItems}</h1>
+      <h1 className={styles.total}>Total: {totalPrice}$</h1>
       <button className={styles.boton}>Proceed to Checkout</button>
+      <div className={styles.clearfix}></div>
+      
+      <button onClick={clearCart} className={styles.limpiar}>Clear cart</button>
+      <Footer />
     </div>
   );
 }
