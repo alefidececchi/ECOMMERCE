@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+
 const bookSchema = new Schema(
   {
     name: {
@@ -13,6 +14,7 @@ const bookSchema = new Schema(
     genres: [
       {
         type: Schema.Types.String,
+        required: true
       },
     ],
     description: {
@@ -32,17 +34,18 @@ const bookSchema = new Schema(
       required: true,
     },
     released: {
-    type: String,
-    required: true
+
+      type: String,
+      required: true
     },
     pageCount: {
-    type: Number
+      type:Number
     },
     language: {
-    type: String
+      type:String
     },
-   book_type: {
-    type: String
+    book_type: {
+      type:String
     },
     sellers: [
       {
@@ -50,6 +53,20 @@ const bookSchema = new Schema(
         ref: "User",
       },
     ],
+    autor: [
+      {
+        type: Schema.Types.String,
+        required: true
+      }
+    ],
+    stock: {
+      type: Number,
+      required: true
+    },
+    deleted: {
+      type: Boolean,
+      default: false,
+    }
   },
   {
     timestamps: true,
@@ -57,4 +74,6 @@ const bookSchema = new Schema(
   }
 );
 
+
 module.exports = model("Book", bookSchema);
+

@@ -1,11 +1,11 @@
 import './App.css';
+
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home/home.jsx';
 import NavBar from './components/NavBar/navBar.jsx';
 import Shopping from './components/Shopping/shopping.jsx';
 import User from './components/User/user.jsx';
 import WishList from './components/WishList/wishList.jsx';
-
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
       </Route>
      </Routes>
     </div>
-  );
+  ); 
 }
 
 export default App;
