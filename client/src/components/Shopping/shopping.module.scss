@@ -1,3 +1,48 @@
 @import '../../assets/sass/functions.scss';
 @import '../../assets/sass/mixins.scss';
 @import '../../assets/sass/variables.scss';
+
+.boton{
+    display: block;
+    cursor: pointer;
+    background-color: #b881ff;
+    border-radius: 5px;
+    border: transparent;
+    padding: 18px;
+    margin: 0px auto;
+    color: #fff4ff;
+    height: 50%;
+    font-size: 1.2rem;
+
+}
+
+.boton:hover{
+    background-color: black;
+}
+
+.clearfix{
+    clear: both;
+}
+
+.total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 30px;
+}
+
+.limpiar{
+    margin-left: 10%;
+    font-size: 22px;
+}
+
+.limpiar:hover{
+    background-color: black;
+    color: white;
+}
