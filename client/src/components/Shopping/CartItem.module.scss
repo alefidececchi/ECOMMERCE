@@ -1,0 +1,62 @@
+@import '../../assets/sass/functions.scss';
+@import '../../assets/sass/mixins.scss';
+@import '../../assets/sass/variables.scss';
+
+.box{
+    margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 50%;
+  float: left;
+  margin-left: 5%;
+  background: linear-gradient(#d3dee0, #f2f2f2);
+}
+
+.cartItem__image {
+    height: 250px;
+    width: 250px;
+    object-fit: contain;
+    border-radius: 10px;
+    float: left;
+  }
+  
+  .cartItem__details {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .details__title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    overflow: hidden;
+  }
+
+  .details__desc {
+    font-size: 1rem;
+  }
+
+  .details__price {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+.boton{
+    cursor: pointer;
+    background-color: #b881ff;
+    border-radius: 5px;
+    border: transparent;
+    padding: 18px;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: #fff4ff;
+    height: 50%;
+    font-size: 1.2rem;
+}
+
+.boton:hover{
+    background-color: black;
+}
