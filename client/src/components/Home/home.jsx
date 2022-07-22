@@ -5,7 +5,6 @@ import Header from "../Header/header";
 import Slider from "../Slider/Slider.jsx";
 import NavBar from "../NavBar/navBar";
 import BookList from "../BookList/BookList";
-import SearchBar from "../SearchBar/searchBar";
 import Footer from "../Footer/footer";
 import "react-loader-spinner";
 import { BallTriangle } from "react-loader-spinner";
@@ -29,7 +28,7 @@ const Home = () => {
           <Slider />
         </div>
         <Header />
-        <SearchBar />
+        
 
         {data.map((loader, index) => (
           <div className={s.loading} data-tip={loader.name}>

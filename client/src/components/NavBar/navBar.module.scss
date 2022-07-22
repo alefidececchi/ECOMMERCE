@@ -1,15 +1,15 @@
-@import '../../assets/sass/functions.scss';
-@import '../../assets/sass/mixins.scss';
-@import '../../assets/sass/variables.scss';
+@import "../../assets/sass/functions.scss";
+@import "../../assets/sass/mixins.scss";
+@import "../../assets/sass/variables.scss";
 
-.container{
+.container {
     width: 100vw;
     background-color: $gris1;
     border-bottom: 1px solid $gris2;
     display: flex;
     position: fixed;
     // margin-top: 0;
-    
+
     ul {
         width: 100vw;
         display: flex;
@@ -17,6 +17,7 @@
         align-items: center;
         margin: toRem(20) toRem(20);
         list-style: none;
+
         @include tablet() {
             display: flex;
             flex-direction: row;
@@ -25,17 +26,17 @@
 
         li {
             margin: toRem(5);
+
             a {
                 text-decoration: none;
                 font-size: toRem(16);
                 color: $gris3;
                 padding: toRem(5) toRem(5);
-
+                border: toRem(2) solid #ffffff;
                 &:hover {
                     border: toRem(2) solid $secundario;
                     color: $secundario;
                     border-radius: toRem(10);
-
                 }
             }
 
