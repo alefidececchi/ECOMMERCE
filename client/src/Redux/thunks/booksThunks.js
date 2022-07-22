@@ -7,17 +7,18 @@ import {
 
 
 const fetchAllBooks = () => (dispatch) => {
-    // axios
-    //     .get("/videogames")
-    //     .then((response) => {
-    //         dispatch(getVideogames(response.data));
-    //     })
-    //     .catch((error) => console.log(error));
+    axios
+        .get("http://localhost:3001/books")
+        .then((response) => {
+            dispatch(getBooks(response.data));
+        })
+        .catch((error) => console.log(error));
 };
+
 const fetchBookByName = (name) => (dispatch) => {
     // axios
-    //   .get(`/videogames/name?name=${name}`)
-    //   .then((response) => dispatch(searchVideogame(response.data)))
+    //   .get(`/books/name?name=${name}`)
+    //   .then((response) => dispatch(searchBook(response.data)))
     //   .catch((error) => console.log(error));
   };
 
