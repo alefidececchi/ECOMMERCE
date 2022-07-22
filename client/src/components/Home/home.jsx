@@ -8,6 +8,12 @@ import BookList from "../BookList/BookList";
 import Footer from "../Footer/footer";
 import "react-loader-spinner";
 import { BallTriangle } from "react-loader-spinner";
+import {
+  fetchAllBooks,
+} from "../../Redux/thunks/booksThunks";
+
+
+
 
 export const data = [
   {
@@ -20,6 +26,22 @@ export const data = [
 ];
 
 const Home = () => {
+
+
+
+  // const [pokemons, setPokemons] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchPokemons = async () => {
+  //     const pokemonsRes = await getPokemon();
+  //     setPokemons(pokemonsRes);
+  //   };
+
+  //   fetchPokemons();
+  // }, []);
+
+
+
   return (
     <div className={s.mainContainer}>
       <NavBar />
