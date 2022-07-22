@@ -7,34 +7,53 @@ import EditBook from '../EditBooks/editBook';
 import userLogo from '../../assets/imgs/user.png'
 import portada from '../../assets/imgs/hp.jpg'
 import EditProfile from '../EditProfile/editProfile';
+import swal from 'sweetalert'
 
 const User = () => {
 
   const[image, setImage] = useState(userLogo)
   const[editMode, setEditMode] = useState(false)
   const[editProfile, setEditProfile] = useState(false)
-  //const[books, setBooks] = useState([{    bookName:"Harry Popote", image:"No disponible :V", price: 40.50, amount: 15, state:'Nuevesito prro'}])
+  let[books, setBooks] = useState([{    bookName:"Harry Popote", image:"No disponible :V", price: 40.50, amount: 15, state:'Nuevesito prro'}])
 
   //let books = false
-   let books = [{bookName:"Harry Popote",
-    image:"No disponible :V",
-    price: 40.50,
-    amount: 15,
-    state:'Nuevesito prro'},
-     {bookName:"Harry Popote 2",
-    image:"No disponible :V",
-    price: 40.50,
-    amount: 15,
-    state:'Nuevesito prro'}
-   ]
+  //  let books = [{bookName:"Harry Popote",
+  //   image:"No disponible :V",
+  //   price: 40.50,
+  //   amount: 15,
+  //   state:'Nuevesito prro'},
+  //    {bookName:"Harry Popote 2",
+  //   image:"No disponible :V",
+  //   price: 40.50,
+  //   amount: 15,
+  //   state:'Nuevesito prro'}
+  //  ]
 
 
 
-  function deleteBook(){
+  function deleteBook(del){
+    swal({
+      title:'Delete?',
+      text:'Do you want to delete your post?',
+      icon:'warning',
+      buttons:['No', 'Yes'] 
+    }).then(res => {
+      if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+        swal({text: 'Post  deleted successfully', icon: 'success'})
+        setBooks(books = [])
+      }
+    })
     console.log('Borrado')
     console.log(books)
     books = []
     console.log(books)
+    console.log(del)
+    
+    // axios.delete('http://localhost:3001/api/activities/delete/'+del)
+    // .then(()=>{
+    //     history.push('/countries')
+    // })
+    //}
 
   }
 
@@ -110,7 +129,7 @@ const User = () => {
                     </div>
                     <div>
                       <h1> {book.bookName}</h1>
-                      <h3> Price:$ {book.price} USD</h3>
+                      <h3> Price:${book.price} USD</h3>
                     </div>
                     <div>
                       <button className={style.button} onClick={editOn}>Edit</button>

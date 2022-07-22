@@ -1,15 +1,21 @@
 import { useState } from "react";
 import {Formik, Form,  Field, ErrorMessage} from 'formik'
 import style from './addBook.module.scss'
+import swal from 'sweetalert'
+//import axios from 'axios'
+import {useNavigate} from "react-router-dom";
 
 
 function AddBook(){
 
     const [send, setSend] = useState(false);
 
+    let navigate = useNavigate()   
+
+
     return (
         <div className={style.container}>
-<div className={style.formulario}>
+        <div className={style.formulario}>
             <section>
                 <Formik 
                     initialValues={{
@@ -94,9 +100,26 @@ function AddBook(){
                             values.used = false
                         }
                         resetForm();
-                        setSend(true)
-                        setTimeout(() => setSend(false), 3000)
+                        swal({
+                            title:'Congratulation',
+                            text:'Book published successfully',
+                            icon:'success',
+                            button:'OK'
+                          }).then(res => {
+                            if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                              navigate('/user')
+                            }
+                          })
+
+                        resetForm();
+                        // setSend(true)
+                        // setTimeout(() => setSend(false), 3000)
                         console.log(values)
+
+                        // axios.post('http://localhost:3001/api/activities/', values)
+                        // .then(()=>{
+                        //     navigate.push('/user')
+                        // })
                     }}
                 >
                     {( {errors} )=>(
@@ -106,12 +129,12 @@ function AddBook(){
                             <label htmlFor="name">Book Name: </label>
                             <Field
                             type='text'
-                            id="name"
+                            id="nameBook"
                             placeholder="Type a name..."
                             name="name"
                             />
                             <ErrorMessage name="name" component={()=>(
-                                <div className={style.error}>{errors.bookName}</div>
+                                <div className={style.error}>{errors.name}</div>
                             )} />
                         </div>
                         <div>
