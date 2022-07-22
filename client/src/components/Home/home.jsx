@@ -5,6 +5,7 @@ import Header from "../Header/header";
 import Slider from "../Slider/Slider.jsx";
 import NavBar from "../NavBar/navBar";
 import BookList from "../BookList/BookList";
+import SearchBar from "../SearchBar/searchBar";
 import Footer from "../Footer/footer";
 import "react-loader-spinner";
 import { BallTriangle } from "react-loader-spinner";
@@ -22,30 +23,33 @@ export const data = [
 const Home = () => {
   return (
     <div className={s.mainContainer}>
-      <NavBar/>
+      <NavBar />
       <div className={s.core}>
-      <div className={s.slider}>
-      <Slider />
-      </div>
-      <Header />
-
-      {data.map((loader, index) => (
-        <div className={s.loading} data-tip={loader.name}>
-          <loader.Component {...loader.props} />
+        <div className={s.slider}>
+          <Slider />
         </div>
-      ))}
+        <Header />
+        <SearchBar />
 
-      {BookList?.length === 0 && (
-        <div>
-          <BallTriangle />
-        </div>
-      )}
+        {data.map((loader, index) => (
+          <div className={s.loading} data-tip={loader.name}>
+            <loader.Component {...loader.props} />
+          </div>
+        ))}
 
-      <BookList />
-      <Footer />
-    </div>
-    </div>
-    
+        {BookList?.length === 0 && (
+          <div>
+            <BallTriangle />
+          </div>
+        )}
+        {/* <div className={s.loading}>
+                < BallTriangle stroke="white" fill="white" />
+            </div> */}
+        <BookList />
+        <Footer />
+      </div >
+    </div >
+
   );
 };
 
