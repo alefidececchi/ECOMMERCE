@@ -6,7 +6,7 @@
 GET http://localhost:3000/books?limit=(NUMBER)&page=(NUMBER) HTTP/1.1
 
 ###
-GET http://localhost:3000/books?name=(NAME)&sort=(true/false)&&limit=(NUMBER)&page=(NUMBER) HTTP/1.1
+GET http://localhost:3000/books?name=(NAME)&discount=(asc/desc)&price=(asc/desc)&released=(asc/desc)&sort=(asc/desc)&status=(false/true)&limit=5&page=0 HTTP/1.1
 
 ###
 GET http://localhost:3000/books/:idBook HTTP/1.1
@@ -25,18 +25,18 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/books/:idBook HTTP/1.1
+PUT http://localhost:3000/books/62d95f66dbd810b17e2d3026 HTTP/1.1
 Content-Type: application/json
 
 {
-    "description":"description test fixed"
+    "price": 37
 }
 
 ###
 PUT http://localhost:3000/books/:idBook/:idUser HTTP/1.1
 
 ###
-DELETE http://localhost:3000/books/:idBook  HTTP/1.1
+DELETE http://localhost:3000/books/  HTTP/1.1
 
 
 ####################################################
