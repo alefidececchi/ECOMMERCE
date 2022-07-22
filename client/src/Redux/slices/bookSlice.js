@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     books: [],
+    booksCopy: [],
 
 };
 
@@ -13,7 +14,7 @@ const bookSlice = createSlice({
     reducers: {
         getBooks(state, action) {
             state.books = action.payload;
-            // state.videogamesCopy = action.payload;
+            state.booksCopy = action.payload;
         },
     },
 });

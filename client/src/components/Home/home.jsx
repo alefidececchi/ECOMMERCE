@@ -7,7 +7,6 @@ import NavBar from "../NavBar/navBar";
 import BookList from "../BookList/BookList";
 import Footer from "../Footer/footer";
 import "react-loader-spinner";
-import { BallTriangle } from "react-loader-spinner";
 import {
   fetchAllBooks,
 } from "../../Redux/thunks/booksThunks";
@@ -15,30 +14,19 @@ import {
 
 
 
-export const data = [
-  {
-    Component: BallTriangle,
-    props: {
-      color: "#B881FF",
-    },
-    name: "Ball Triangle",
-  },
-];
 
 const Home = () => {
 
+  const dispatch = useDispatch();
+  const { books } = useSelector((state) => state.books);
 
-  // const pokemons = useSelector((state) => state.pokemons);
-  // const dispatch = useDispatch();
+  useEffect(() => {
+    if (books.length === 0) {
+      dispatch(fetchAllBooks());
+    }
+  }, [dispatch, books]);
 
-  // useEffect(() => {
-  //   const fetchPokemons = async () => {
-  //     const pokemonsRes = await getPokemon();
-  //     dispatch(setPokemons(pokemonsRes));
-  //   };
-
-  //   fetchPokemons();
-  // }, []);
+  // console.log(books.books)
 
 
   return (
@@ -49,24 +37,7 @@ const Home = () => {
           <Slider />
         </div>
         <Header />
-        
-
-        {data.map((loader, index) => (
-          <div className={s.loading} data-tip={loader.name}>
-            <loader.Component {...loader.props} />
-          </div>
-        ))}
-
-        {BookList?.length === 0 && (
-          <div>
-            <BallTriangle />
-          </div>
-        )}
-        {/* <div className={s.loading}>
-                < BallTriangle stroke="white" fill="white" />
-            </div> */}
-        <BookList />
-        {/* <BookList books={books} /> */}
+        <BookList books={books.books} />
         <Footer />
       </div >
     </div >
