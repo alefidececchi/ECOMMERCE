@@ -145,13 +145,15 @@ const User = () => {
                     <h2>Books for sale?</h2>
                   </div>
                 </div>
+
             }
-          </div>
-          
             <Link to={'/user/newBook'}>
               <button className={style.button2}>Sell</button>
             </Link>
-          
+          </div>
+            {/* <Link to={'/user/newBook'}>
+              <button className={style.button2}>Sell</button>
+            </Link> */}
         </div>
       </div>
     </div>
