@@ -2,7 +2,9 @@
 import axios from "axios";
 import {
     getBooks,
-    
+    searchBook,
+    getDetail,
+
 } from "../slices/bookSlice";
 
 
@@ -16,14 +18,20 @@ const fetchAllBooks = () => (dispatch) => {
 };
 
 const fetchBookByName = (name) => (dispatch) => {
-    // axios
-    //   .get(`/books/name?name=${name}`)
-    //   .then((response) => dispatch(searchBook(response.data)))
-    //   .catch((error) => console.log(error));
+    axios
+        .get(`http://localhost:3001/books?name=${name}`)
+        .then((response) => dispatch(searchBook(response.data)))
+        .catch((error) => console.log(error));
+};
+const fetchBooksDetail = (id) => (dispatch) => {
+    axios
+      .get(`http://localhost:3001/books/${id}`)
+      .then((response) => dispatch(getDetail(response.data.book)))
+      .catch((error) => console.log(error));
   };
-
 export {
     fetchAllBooks,
     fetchBookByName,
+    fetchBooksDetail,
 
 };

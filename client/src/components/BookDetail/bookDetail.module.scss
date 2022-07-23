@@ -2,16 +2,42 @@
 @import "../../assets/sass/mixins.scss";
 @import "../../assets/sass/variables.scss";
 
+.shadow{
+    width: 100%;
+    height: 100%;
+   background-color: #201b2861;
+
+    //  padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+.loading {
+    background-color: #ffffff;
+     border-radius: 100px;
+     padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+   
+}
 .BookDetail {
     background-color: #ffffff;
     width: 384px;
     height: auto;
 
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
     padding: 0;
-    position: absolute;
-    top: 500px;
-    right: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    // right: 10px;
 
     .Close {
         position: absolute;
@@ -34,7 +60,7 @@
     }
 
     img {
-        border-radius: 0px 0px 10px 10px;
+        border-radius: 10px 10px 10px 10px;
     }
 
     .info {
@@ -57,12 +83,13 @@
 }
 @media only screen and (min-width: 768px) {
     .BookDetail {
-        position: absolute;
+        position: fixed;
     }
 }
 @media only screen and (max-width: 768px) {
     .BookDetail {
-        position: absolute;
-        top: auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
     }
 }

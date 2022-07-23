@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import s from "./card.module.scss"
 import BookDetail from '../BookDetail/bookDetail';
 
-const Card = ({ name, price, image }) => {
+const Card = ({ name, price, image ,id}) => {
 
 
     // esto es para deplegar el detlle de la tarjeta 
@@ -44,7 +44,7 @@ const Card = ({ name, price, image }) => {
             </div>
 
 
-            {toggle && <BookDetail />}
+            {toggle && <BookDetail id={id} />}
 
 
         </div>
