@@ -2,21 +2,53 @@
 @import '../../assets/sass/mixins.scss';
 @import '../../assets/sass/variables.scss';
 
+.container{
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .formulario {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: absolute;
-	margin:  8em 40em auto;
 	width: 35%;
+	//margin: 50em auto;
+	
+	// margin:  8em 40em auto;
+	top: 2em;
 	padding: 0.3125em;
 	
+	position: absolute;
+    // width: 35%;
+    // margin: 8em auto;
+    // padding: 60px 0;
+    max-width: 75em;
+    
 	
 	background: #fff;
 	border-radius: 0.3125em;
 	box-sizing: border-box;
 	box-shadow: rgba(0, 0, 0, 1) 0px 1px 4px;
 	border: 1px solid #B881FF;
+
+
+	  @include tabletMax() {
+		margin-top: toRem(250);
+		width: 75%;
+	  }
+	  @include tablet() {
+		margin-top: toRem(70);
+		width: 75%;
+		font-size: 2em;
+	  }
+	  @include desktop() {
+		margin-top: toRem(70);
+		width: 50%;
+		font-size: 2em;
+	  }
 
 	.error {
 		color: #e92b2d;
@@ -51,11 +83,11 @@
 		background: #B881FF;
 	}
 	
-	input,
-	textarea {
+	input,textarea {
 	
+		
 	width: 100%;
-	
+	resize: none;
 	border-radius: 5px;
 	border: 2px solid #e2e2e2;
 	font-size: 18px;
@@ -66,7 +98,7 @@
 
 	input:focus {
 	outline: none;
-	border: 2px solid #0085FF;
+	border: 2px solid #B881FF;
 	}
 	input[type="radio"] {
 		width: auto;
@@ -79,7 +111,9 @@
 
 	// }
 
-
+	.select{
+		width: 100%;
+	}
 	
 	@media (max-width: 576){ //medidas paceluco
 		position: absolute;
@@ -89,7 +123,18 @@
 	
 
 }
+// .form{
+//     display: flex;
+//     flex-direction: column;
+// 	align-items: center;
+// 	justify-content: center;
 
+	
+
+
+
+
+// }
 
 
 .formulario .exito {

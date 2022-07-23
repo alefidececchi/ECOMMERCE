@@ -27,7 +27,10 @@ const bookSlice = createSlice({
             state.booksDetail = {};
         },
     },
+
 });
+
+
 
 export const {
     getBooks, searchBook, getDetail, clearDetail,
