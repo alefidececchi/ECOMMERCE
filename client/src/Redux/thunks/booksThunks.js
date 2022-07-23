@@ -10,7 +10,7 @@ const fetchAllBooks = () => (dispatch) => {
     axios
         .get("http://localhost:3001/books")
         .then((response) => {
-            dispatch(getBooks(response.data));
+            dispatch(getBooks(response.data.books));
         })
         .catch((error) => console.log(error));
 };

@@ -43,7 +43,7 @@ header {
           border-radius: toRem(10);
           ul {
             margin-top: toRem(0.5);
-            width: 100px;
+            width: toRem(150);
             border-radius: toRem(5);
             background-color: $gris2;
             position: absolute;

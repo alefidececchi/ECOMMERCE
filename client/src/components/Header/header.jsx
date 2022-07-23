@@ -1,26 +1,43 @@
-import React, { useState } from 'react';
-import s from './header.module.scss'
 import SearchBar from "../SearchBar/searchBar";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGenres, fetchFilteredBooks } from "../../Redux/thunks/filterThunks";
+import { resetFilters } from "../../Redux/slices/bookSlice";
+import s from './header.module.scss'
 
 const Header = () => {
+  const dispatch = useDispatch();
   const initialState = {}
-
   const [filters, setFilters] = useState(initialState);
+  const { genres } = useSelector(state => state.books);
 
   let filterValues = Object.values(filters);
+  let filterKeys = Object.keys(filters);
 
   const handleOnClick = (e) => {
     setFilters({
       ...filters,
       [e.target.name]: e.target.value,
     })
-    console.log(filterValues.length)
+    console.log(e.target.value)
   }
 
   const handleReset = () => {
     setFilters({});
-    console.log('sirvo');
+    dispatch(resetFilters());
   }
+
+  const handleFilters = () => {
+    // e.preventDefault()
+    dispatch(fetchFilteredBooks(filters))
+  }
+
+  useEffect(() => {
+    if(genres.length === 0) {
+      dispatch(fetchGenres())
+    }
+  }, [dispatch]);
+
 
   return (
     <div>
@@ -30,50 +47,45 @@ const Header = () => {
         <div className={s.filtersContainer}>
           <ul>
 
-            <li>Category
+            <li>Genres
               <ul>
-                <li><button name='category' value='Action' onClick={handleOnClick}>Action</button></li>
-                <li><button name='category' value='Adventure' onClick={handleOnClick}>Adventure</button></li>
-                <li><button name='category' value='Classics' onClick={handleOnClick}>Classics</button></li>
-                <li><button name='category' value='Mystery' onClick={handleOnClick}>Mystery</button></li>
-                <li><button name='category' value='Fantasy' onClick={handleOnClick}>Fantasy</button></li>
-                <li><button name='category' value='Horror' onClick={handleOnClick}>Horror</button></li>
+                {genres.map(genre => <li><button name='genre' value={genre} onClick={handleOnClick}>{genre}</button></li>)}
               </ul>
             </li>
             {/* {filters.category ? <span>{filters.category}</span>: null} */}
 
             <li>Status
               <ul>
-                <li><button name='status' value='New' onClick={handleOnClick}>New</button></li>
-                <li><button name='status' value='Secondhand' onClick={handleOnClick}>Secondhand</button></li>
+                <li><button name='status' value='false' onClick={handleOnClick}>New</button></li>
+                <li><button name='status' value='true' onClick={handleOnClick}>Secondhand</button></li>
               </ul>
             </li>
 
-            <li>Year
+            <li>Released
               <ul>
-                <li><button name='year' value='Latest' onClick={handleOnClick}>Latest</button></li>
-                <li><button name='year' value='Oldest' onClick={handleOnClick}>Oldest</button></li>
+                <li><button name='released' value='desc' onClick={handleOnClick}>Latest</button></li>
+                <li><button name='released' value='asc' onClick={handleOnClick}>Oldest</button></li>
               </ul>
             </li>
 
             <li>Order
               <ul>
-                <li><button name='order' value='AZ' onClick={handleOnClick}>A-Z</button></li>
-                <li><button name='order' value='ZA' onClick={handleOnClick}>Z-A</button></li>
+                <li><button name='sort' value='asc' onClick={handleOnClick}>A-Z</button></li>
+                <li><button name='sort' value='desc' onClick={handleOnClick}>Z-A</button></li>
               </ul>
             </li>
 
             <li>Price
               <ul>
-                <li><button name='price' value='Cheap' onClick={handleOnClick}>Cheap</button></li>
-                <li><button name='price' value='Expensive' onClick={handleOnClick}>Expensive</button></li>
+                <li><button name='price' value='asc' onClick={handleOnClick}>Lowest to Highest</button></li>
+                <li><button name='price' value='desc' onClick={handleOnClick}>Highest to Lowest</button></li>
               </ul>
             </li>
 
             <li>Language
               <ul>
-                <li><button name='language' value='Spanish' onClick={handleOnClick}>Spanish</button></li>
-                <li><button name='language' value='English' onClick={handleOnClick}>English</button></li>
+                <li><button name='language' value='es' onClick={handleOnClick}>Spanish</button></li>
+                <li><button name='language' value='en' onClick={handleOnClick}>English</button></li>
               </ul>
             </li>
 
@@ -87,8 +99,8 @@ const Header = () => {
 
             <li>Offers
               <ul>
-                <li><button name='offers' value='Yes' onClick={handleOnClick}>Yes</button></li>
-                <li><button name='offers' value='No' onClick={handleOnClick}>No</button></li>
+                <li><button name='discount' value='asc' onClick={handleOnClick}>Yes</button></li>
+                <li><button name='discount' value='desc' onClick={handleOnClick}>No</button></li>
               </ul>
             </li>
           </ul>
@@ -98,7 +110,7 @@ const Header = () => {
         <div className={s.toFilter}>
           {filterValues.length ? filterValues.map(filter => <span>{filter}</span>) : null}
           {filterValues.length ? <button onClick={handleReset}>Reset</button> : null}
-          {filterValues.length ? <button>Filter</button> : null}
+          {filterValues.length ? <button onClick={handleFilters}>Filter</button> : null}
         </div>
       </header>
     </div>
