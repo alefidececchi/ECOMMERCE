@@ -32,7 +32,7 @@ const getBooks = async (req, res) => {
   const { limit, page } = req.query;
 
   try {
-    let books = await Book.find();
+    let books = await Book.find({ deleted: false });
     if (sort) books = sortNames({ books, sort });
     if (price) books = sortPrices({ books, price });
     if (released) books = sortReleased({ books, released });
@@ -119,7 +119,7 @@ const putBook = async (req, res) => {
 const deleteBook = async (req, res) => {
   const { id } = req.params;
   try {
-    const bookDeleted = await Book.deleteOne({ _id: id });
+    const bookDeleted = await Book.findByIdAndUpdate(id, { "deleted": true });
     return res.status(201).json({ bookDeleted: bookDeleted });
   } catch (error) {
     return res.status(500).json({ error: error });

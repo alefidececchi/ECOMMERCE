@@ -34,7 +34,6 @@ const bookSchema = new Schema(
       required: true,
     },
     released: {
-
       type: String,
       required: true
     },
@@ -53,12 +52,10 @@ const bookSchema = new Schema(
         ref: "User",
       },
     ],
-    autor: [
-      {
-        type: Schema.Types.String,
-        required: true
-      }
-    ],
+    authors: {
+      type: Array,
+      default: undefined
+    },
     stock: {
       type: Number,
       required: true
