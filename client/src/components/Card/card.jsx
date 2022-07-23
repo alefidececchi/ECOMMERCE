@@ -26,6 +26,9 @@ const Card = ({ name, price, image }) => {
 
 
         <div className={s.containerCard} >
+            <button className={s.fav}  >
+                <i class="fas fa-heart"></i>
+            </button>
 
             <img onClick={handleToggle} src={image} alt="book" width="216px" height="216px" />
             <div className={s.cart} >

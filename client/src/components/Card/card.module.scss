@@ -12,6 +12,17 @@
   height: 267px;
   width: 216px;
   margin: 10px 15px;
+  .fav {
+    position: absolute;
+    color: #c7c7c7;
+    border: #c7c7c7;
+    background-color: #ffffff;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+   
+  }
 
   h3 {
     font-weight: bolder;
@@ -44,5 +55,12 @@
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
+
+    button {
+      border: none;
+      background-color: transparent;
+      color: #797979;
+      font-size: medium;
+    }
   }
 }
