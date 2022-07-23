@@ -34,7 +34,7 @@ const Card = ({ name, price, image ,id}) => {
             <div className={s.cart} >
                 <div className={s.info}>
 
-                    <h3>{price}</h3>
+                    <h3>$ {price}</h3>
                     <h4 >{name}</h4>
                 </div>
                 <figure onClick={handleClick} className={s.info2}>
