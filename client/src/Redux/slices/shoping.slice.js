@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import shoppingTypes from './shopping.types'
 import shining from '../../assets/shining.jpg'
 
 export const initialState = {

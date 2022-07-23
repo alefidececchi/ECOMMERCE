@@ -1,6 +1,5 @@
 import React, { useReducer, useState, useEffect } from 'react';
-import { TYPES } from '../../Redux/shoppingSlice/shopping.types';
-import shoppingSlice, { initialState, ADD_TO_CART, REMOVE_ALL_FROM_CART, REMOVE_ONE_FROM_CART, CLEAR_CART } from '../../Redux/shoppingSlice/shoping.slice'
+import shoppingSlice, { initialState, ADD_TO_CART, REMOVE_ALL_FROM_CART, REMOVE_ONE_FROM_CART, CLEAR_CART } from '../../Redux/slices/shoping.slice.js'
 import CartItem from './CartItem';
 import ProductItem from './ProductItem';
 import styles from './shopping.module.scss'
