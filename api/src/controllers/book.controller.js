@@ -1,5 +1,16 @@
 const Book = require("../models/Book.js");
 const User = require("../models/User.js");
+const {
+  paginate,
+  sortNames,
+  sortPrices,
+  sortReleased,
+  sortDiscount,
+  getByStatus,
+  getByLanguage,
+  getByName,
+  getByGenre,
+} = require("../lib/book.controller.helper.js");
 
 const getBooks = async (req, res) => {
   const { name } = req.query;
@@ -15,176 +26,25 @@ const getBooks = async (req, res) => {
   const { status } = req.query;
   //language is a string (language(en, es, fr, ...))
   const { language } = req.query;
+  //genre is a string (genre(fictino, horror, history, ...))
+  const { genre } = req.query;
+
   const { limit, page } = req.query;
 
-  if (sort === "asc") {
-    try {
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", name: 1 })
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", name: 1 });
+  try {
+    let books = await Book.find();
+    if (sort) books = sortNames({ books, sort });
+    if (price) books = sortPrices({ books, price });
+    if (released) books = sortReleased({ books, released });
+    if (discount) books = sortDiscount({ books, discount });
+    if (status) books = getByStatus({ books, status });
+    if (language) books = getByLanguage({ books, language });
+    if (name) books = getByName({ books, name });
+    if (genre) books = getByGenre({ books, genre });
 
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (sort === "desc") {
-    try {
-      // const books = await Book.find();
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "desc", name: -1 })
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "desc", name: -1 });
-
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (released === "desc") {
-    try {
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", released: 1 })
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", released: 1 });
-
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (released === "asc") {
-    try {
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", released: -1 })
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", released: -1 });
-
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (price === "desc") {
-    try {
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", price: 1 })
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", price: 1 });
-
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (price === "asc") {
-    try {
-      // const books = await Book.find();
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "desc", price: -1 })
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "desc", price: -1 });
-
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (discount === "desc") {
-    try {
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", discount: 1 })
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "asc", discount: 1 });
-
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (discount === "asc") {
-    try {
-      // const books = await Book.find();
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "desc", discount: -1 })
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page)
-            .sort({ field: "desc", discount: -1 });
-
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (status === "true") {
-    try {
-      const books = await Book.find({ used: true });
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (status === "false") {
-    try {
-      const books = await Book.find({ used: false });
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else if (language) {
-    try {
-      const books = await Book.find({ language: language });
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  } else {
-    try {
-      // const books = await Book.find();
-
-      const books = name
-        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
-            .limit(limit)
-            .skip(limit * page)
-        : await Book.find()
-            .limit(limit)
-            .skip(limit * page);
-
-      return res.status(200).json({ books: books });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
+    return res.status(200).json(paginate({ limit, page, books }));
+  } catch (error) {
+    return res.status(500).json({ error: error });
   }
 };
 
