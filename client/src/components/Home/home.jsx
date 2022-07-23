@@ -7,45 +7,41 @@ import NavBar from "../NavBar/navBar";
 import BookList from "../BookList/BookList";
 import Footer from "../Footer/footer";
 import "react-loader-spinner";
-import { BallTriangle } from "react-loader-spinner";
+import {
+  fetchAllBooks,
+} from "../../Redux/thunks/booksThunks";
 
-export const data = [
-  {
-    Component: BallTriangle,
-    props: {
-      color: "#B881FF",
-    },
-    name: "Ball Triangle",
-  },
-];
+
+
+
 
 const Home = () => {
+
+  const dispatch = useDispatch();
+  const { books } = useSelector((state) => state.books);
+
+  useEffect(() => {
+    if (books.length === 0) {
+      dispatch(fetchAllBooks());
+    }
+  }, [dispatch, books]);
+
+  // console.log(books.books)
+
+
   return (
     <div className={s.mainContainer}>
-      <NavBar/>
+      <NavBar />
       <div className={s.core}>
-      <div className={s.slider}>
-      <Slider />
-      </div>
-      <Header />
-
-      {data.map((loader, index) => (
-        <div className={s.loading} data-tip={loader.name}>
-          <loader.Component {...loader.props} />
+        <div className={s.slider}>
+          <Slider />
         </div>
-      ))}
+        <Header />
+        <BookList books={books.books} />
+        <Footer />
+      </div >
+    </div >
 
-      {BookList?.length === 0 && (
-        <div>
-          <BallTriangle />
-        </div>
-      )}
-
-      <BookList />
-      <Footer />
-    </div>
-    </div>
-    
   );
 };
 

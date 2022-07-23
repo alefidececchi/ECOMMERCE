@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import s from './header.module.scss'
+import SearchBar from "../SearchBar/searchBar";
 
 const Header = () => {
   const initialState = {}
@@ -17,17 +18,14 @@ const Header = () => {
   }
 
   const handleReset = () => {
-    setFilters({ });
+    setFilters({});
     console.log('sirvo');
   }
 
   return (
     <div>
       <header>
-        <form>
-          <input type="search"/>
-          <input type="submit" value="Search"/>
-        </form>
+        <SearchBar />
 
         <div className={s.filtersContainer}>
           <ul>
@@ -98,9 +96,9 @@ const Header = () => {
         </div>
 
         <div className={s.toFilter}>
-          {filterValues.length ? filterValues.map(filter => <span>{filter}</span>): null}
-          {filterValues.length ? <button onClick={handleReset}>Reset</button>: null}
-          {filterValues.length ? <button>Filter</button>: null}
+          {filterValues.length ? filterValues.map(filter => <span>{filter}</span>) : null}
+          {filterValues.length ? <button onClick={handleReset}>Reset</button> : null}
+          {filterValues.length ? <button>Filter</button> : null}
         </div>
       </header>
     </div>

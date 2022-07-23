@@ -2,11 +2,189 @@ const Book = require("../models/Book.js");
 const User = require("../models/User.js");
 
 const getBooks = async (req, res) => {
-  try {
-    const books = await Book.find();
-    return res.status(200).json({ books: books });
-  } catch (error) {
-    return res.status(500).json({ error: error });
+  const { name } = req.query;
+  //sort is a string (asc / desc)
+  const { sort } = req.query;
+  //released is a string (asc / desc)
+  const { released } = req.query;
+  //released is a string (asc / desc)
+  const { price } = req.query;
+  //discount is a string (asc/desc)
+  const { discount } = req.query;
+  //status is a string (true/false)
+  const { status } = req.query;
+  //language is a string (language(en, es, fr, ...))
+  const { language } = req.query;
+  const { limit, page } = req.query;
+
+  if (sort === "asc") {
+    try {
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", name: 1 })
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", name: 1 });
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (sort === "desc") {
+    try {
+      // const books = await Book.find();
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "desc", name: -1 })
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "desc", name: -1 });
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (released === "desc") {
+    try {
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", released: 1 })
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", released: 1 });
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (released === "asc") {
+    try {
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", released: -1 })
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", released: -1 });
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (price === "desc") {
+    try {
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", price: 1 })
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", price: 1 });
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (price === "asc") {
+    try {
+      // const books = await Book.find();
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "desc", price: -1 })
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "desc", price: -1 });
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (discount === "desc") {
+    try {
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", discount: 1 })
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "asc", discount: 1 });
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (discount === "asc") {
+    try {
+      // const books = await Book.find();
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "desc", discount: -1 })
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page)
+            .sort({ field: "desc", discount: -1 });
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (status === "true") {
+    try {
+      const books = await Book.find({ used: true });
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (status === "false") {
+    try {
+      const books = await Book.find({ used: false });
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else if (language) {
+    try {
+      const books = await Book.find({ language: language });
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else {
+    try {
+      // const books = await Book.find();
+
+      const books = name
+        ? await Book.find({ name: { $regex: "^" + name, $options: "i" } })
+            .limit(limit)
+            .skip(limit * page)
+        : await Book.find()
+            .limit(limit)
+            .skip(limit * page);
+
+      return res.status(200).json({ books: books });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
   }
 };
 
@@ -18,6 +196,24 @@ const getBookById = async (req, res) => {
       "-_id -__v -selling_books -wish_list"
     );
     return res.status(200).json({ book: book });
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+};
+
+const getGenresBook = (req, res) => {
+  const genres = [
+    "autobiography",
+    "fantasy",
+    "fiction",
+    "history",
+    "horror",
+    "science",
+    "terror",
+    "thriller",
+  ];
+  try {
+    return res.status(400).json({ genres });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -72,6 +268,7 @@ const deleteBook = async (req, res) => {
 
 module.exports = {
   getBooks,
+  getGenresBook,
   postBook,
   getBookById,
   putBook,
