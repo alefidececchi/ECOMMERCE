@@ -1,16 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {Formik, Form,  Field, ErrorMessage} from 'formik'
 import style from './addBook.module.scss'
 import swal from 'sweetalert'
-//import axios from 'axios'
+import axios from 'axios'
 import {useNavigate} from "react-router-dom";
+import {
+    fetchBooksGenres, fetchAllBooks
+  } from "../../Redux/thunks/booksThunks";
 
 
 function AddBook(){
 
     const [send, setSend] = useState(false);
+    const {genres}  = useSelector((state) => state.genres);
+    const dispatcher = useDispatch()
 
     let navigate = useNavigate()   
+
+
+    useEffect(() => {
+        if (genres.length === 0) {
+            dispatcher(fetchBooksGenres());
+        }
+        console.log(genres)
+
+      }, [dispatcher, genres]);
 
 
     return (
@@ -34,7 +49,7 @@ function AddBook(){
                         //validacion nombre del libro   
                         if(!values.name){
                             errors.name = 'Please write the book name'
-                        }else if(values.name.length < 4 || values.name.length > 20){
+                        }else if(values.name.length < 4 || values.name.length > 40){
                             errors.name = 'Book name must have between 4 or 20 characters'
                         }
 
@@ -47,7 +62,9 @@ function AddBook(){
                       
                         //validacion genero
                         if(!values.genre){
-                            errors.genre = 'Please write the genre of the book'
+                            errors.genre = 'Please select the genre of the book'
+                        }else if(values.genre === 'Genre'){
+                            errors.genre = 'Please select the genre of the book'
                         }
 
                         //validacion language
@@ -100,6 +117,7 @@ function AddBook(){
                             values.used = false
                         }
                         resetForm();
+                        axios.post('http://localhost:3001/books/', values)
                         swal({
                             title:'Congratulation',
                             text:'Book published successfully',
@@ -107,6 +125,7 @@ function AddBook(){
                             button:'OK'
                           }).then(res => {
                             if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                              dispatcher(fetchAllBooks());
                               navigate('/user')
                             }
                           })
@@ -116,10 +135,8 @@ function AddBook(){
                         // setTimeout(() => setSend(false), 3000)
                         console.log(values)
 
-                        // axios.post('http://localhost:3001/api/activities/', values)
-                        // .then(()=>{
-                        //     navigate.push('/user')
-                        // })
+                        
+         
                     }}
                 >
                     {( {errors} )=>(
@@ -151,12 +168,16 @@ function AddBook(){
                         </div>
                         <div>
                             <label htmlFor="name">Genre: </label>
-                            <Field
-                            type='text'
-                            id="genre"
-                            placeholder="Terror..."
-                            name="genre"
-                            />
+                            <Field id="genre"  name="genre" as='select' className={style.select}>
+                            <option value='Genre' selected> Genre </option>  
+                            {
+                                genres.map(genre=>{
+                                    return (
+                                        <option value={genre}>{genre}</option>
+                                        )
+                                    })
+                                }
+                             </Field>    
                             <ErrorMessage name="genre" component={()=>(
                                 <div className={style.error}>{errors.genre}</div>
                             )} />
@@ -369,3 +390,17 @@ onSubmit={(values, {resetForm})=>{
 </form>
 )}
 </Formik> */}
+
+
+
+{/* <select onChange={saveCountry} name="Pais" className={inputs}>
+<option selected disabled value=" ">Select Country</option>
+    {
+
+        countries.map(c=>{
+            return (
+                <option value={c.Nombre}>{c.Nombre}</option>
+                )
+            })
+    }
+</select> */}

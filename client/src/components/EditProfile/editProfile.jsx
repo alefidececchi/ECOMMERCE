@@ -14,18 +14,32 @@ function EditProfile({editProdileOff}){
                 <Formik
                     initialValues={{
                         name:"", 
-                        email:"", 
+                        email:"",
+                        password:"",
+                        password2:"" 
                     }}
                     validate={(values) =>{
                         let errors ={};
-                        //validacion nombre del libro   
+                        //validacion nombre    
                         if(!values.name){
                             errors.name = 'Please write your name'
-                        }else if(values.name.length < 4 || values.name.length > 20){
+                        }else if(values.name.length < 4 || values.name.length > 40){
                             errors.name = 'Name must have between 4 or 20 characters'
                         }
+                        //validacion nombre del password   
+                        if(!values.password ){
+                            errors.password = 'Please write your password'
+                        }else if(values.password.length ===  0){
+                            errors.password = 'Please write your password'
+                        }
+                        //validacion nombre del password2   
+                        if(!values.password2){
+                            errors.password2 = 'Please write your password'
+                        }else if(values.password2 !== values.password){
+                            errors.password2 = 'Passwords do not match'
+                        }
 
-                        //validacion año publicacion
+                        //validacion correo
                         if(!values.email){
                             errors.email = 'Please write the e-mail address'
                         }else if(!/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}/.test(values.email)){
@@ -36,13 +50,12 @@ function EditProfile({editProdileOff}){
                     }}
                     onSubmit={(values, {resetForm})=>{
                         resetForm();
-                        setSend(true)
-                        setTimeout(() => setSend(false), 3000)
+
                         console.log(values)
                     }}
                 >
                     {( {errors} )=>(
-                        <Form className={style.form}> 
+                    <Form className={style.form}> 
                         <h2>Personal Information</h2>
                         <div>
                             <label htmlFor="name">Full Name: </label>
@@ -69,9 +82,33 @@ function EditProfile({editProdileOff}){
                             )} />
                         </div>
                         <div>
+                            <label htmlFor="name">Password: </label>
+                            <Field
+                            type='password'
+                            id="pass"
+                            placeholder="Type new password"
+                            name="password"
+                            />
+                            <ErrorMessage name="password" component={()=>(
+                                <div  className={style.error}>{errors.password}</div>
+                            )} />
+                        </div>
+                        <div>
+                            <label htmlFor="name">Repeat Password: </label>
+                            <Field
+                            type='password'
+                            id="pass2"
+                            placeholder="Type new password again"
+                            name="password2"
+                            />
+                            <ErrorMessage name="password2" component={()=>(
+                                <div  className={style.error}>{errors.password2}</div>
+                            )} />
+                        </div>
+                        <div>
                             <button type="submit" className={style.buttonSave}>  Save </button>
                             <button onClick={() => editProdileOff()} className={style.buttonCancel}>  Cancel </button>
-                            {send && <p>Product added succecsfully</p>}
+                            {send && <p>Information updated succecsfully</p>}
                             
                         </div>  
 

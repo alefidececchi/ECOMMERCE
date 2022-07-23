@@ -14,7 +14,7 @@ const User = () => {
   const[image, setImage] = useState(userLogo)
   const[editMode, setEditMode] = useState(false)
   const[editProfile, setEditProfile] = useState(false)
-  let[books, setBooks] = useState([{    bookName:"Harry Popote", image:"No disponible :V", price: 40.50, amount: 15, state:'Nuevesito prro'}])
+  let[books, setBooks] = useState([{    bookName:"Harry Popote", image:"No disponible :V", price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:"No disponible :V", price: 40.50, amount: 10, state:'Nuevesito prro'}])
 
   //let books = false
   //  let books = [{bookName:"Harry Popote",
@@ -29,9 +29,10 @@ const User = () => {
   //   state:'Nuevesito prro'}
   //  ]
 
-
-
   function deleteBook(del){
+    console.log(del)
+    let filtrado = books.filter(b => b.bookName !== del.bookName)
+    console.log(filtrado)
     swal({
       title:'Delete?',
       text:'Do you want to delete your post?',
@@ -39,15 +40,13 @@ const User = () => {
       buttons:['No', 'Yes'] 
     }).then(res => {
       if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-        swal({text: 'Post  deleted successfully', icon: 'success'})
-        setBooks(books = [])
+        if(filtrado){
+          setBooks(books = filtrado)
+          swal({text: 'Post  deleted successfully', icon: 'success'})
+        }
       }
     })
-    console.log('Borrado')
-    console.log(books)
-    books = []
-    console.log(books)
-    console.log(del)
+
     
     // axios.delete('http://localhost:3001/api/activities/delete/'+del)
     // .then(()=>{
@@ -108,6 +107,9 @@ const User = () => {
                     <h4>E-mail: correo@correo.com</h4>
                   </div>
                   <div>
+                    <h4>Pasword: xxxxxxx</h4>
+                  </div>
+                  <div>
                     <button onClick={editProfileOn} className={style.button1}>Edit</button>
                   </div>
                 </div>
@@ -135,7 +137,7 @@ const User = () => {
                       <button className={style.button} onClick={editOn}>Edit</button>
                     </div>
                     <div>
-                      <button className={style.button} onClick={deleteBook}>Delete</button>
+                      <button className={style.button} onClick={()=>deleteBook(book)}>Delete</button>
                     </div>
                   </div>
 
@@ -147,9 +149,12 @@ const User = () => {
                 </div>
 
             }
-            <Link to={'/user/newBook'}>
-              <button className={style.button2}>Sell</button>
-            </Link>
+            <div className={style.info}>
+              <Link to={'/user/newBook'}>
+                <button className={style.button2}>Sell</button>
+              </Link>
+            </div>
+ 
           </div>
             {/* <Link to={'/user/newBook'}>
               <button className={style.button2}>Sell</button>
