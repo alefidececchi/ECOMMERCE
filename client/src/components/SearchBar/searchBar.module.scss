@@ -7,10 +7,8 @@
     justify-content: center;
     font-family: "Quicksand", sans-serif;
     margin-top: 1rem;
-    
-        padding: toRem(30);
-       
-      
+
+    padding: toRem(30);
 
     .button {
         font-size: 10px;
@@ -27,6 +25,26 @@
         border-bottom-left-radius: 0px;
         transition-duration: 0.5s;
         height: 42px;
+    }
+    .close {
+        font-size: medium;
+        font-weight: bolder;
+        background-color: #f7f7f7;
+        border: 2px solid #c7c7c7;
+        color: #c7c7c7;
+        cursor: pointer;
+        text-align: center;
+        border-left: transparent;
+        border-right: transparent;
+        border-radius: 0;
+        transition-duration: 0.5s;
+        height: 42px;
+    }
+    .close:hover {
+        
+        color: #797979;
+      
+       
     }
 
     .button:hover {
