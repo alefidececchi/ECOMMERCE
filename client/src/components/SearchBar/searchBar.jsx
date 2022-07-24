@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import {
     fetchBookByName,
+    fetchAllBooks,
 } from "../../Redux/thunks/booksThunks";
 import s from "./searchBar.module.scss"
 
@@ -25,13 +26,16 @@ export default function SearchBar() {
             dispatch(fetchBookByName(name))
         }//reset()
     }
-    // function reset() {
-    //     setName("");
-    // }
+    function reset() {
+        setName("");
+        dispatch(fetchAllBooks())
+    }
+
 
     return (
         <div className={s.bar}>
             <input className={s.input} name="name" value={name} placeholder=" Book Name..." onChange={(e) => handleInput(e)} />
+            <button className={s.close} onClick={(e) => reset(e)} >X</button>
             <button className={s.button} type="submit" onClick={(e) => handleSubmit(e)}><i class="fas fa-search fa-2x"></i></button>
 
         </div>
