@@ -41,7 +41,7 @@ const BookDetail = (props) => {
     const handleClick = () => {
         setCart(["hola me agregaron al estado cart"]);
     }
-    console.log(cart)
+    
 
 
 

@@ -39,7 +39,7 @@ function AddBook(){
                         price:'', 
                         stock:'',
                         released:'', 
-                        genre:'',
+                        genres:'',
                         language:'',
                         used:false,
                         description:''
@@ -61,10 +61,10 @@ function AddBook(){
                         }
                       
                         //validacion genero
-                        if(!values.genre){
-                            errors.genre = 'Please select the genre of the book'
-                        }else if(values.genre === 'Genre'){
-                            errors.genre = 'Please select the genre of the book'
+                        if(!values.genres){
+                            errors.genres = 'Please select the genre of the book'
+                        }else if(values.genres === 'Genre'){
+                            errors.genres = 'Please select the genre of the book'
                         }
 
                         //validacion language
@@ -111,6 +111,7 @@ function AddBook(){
                         return errors;
                     }}
                     onSubmit={(values, {resetForm})=>{
+                        console.log(values)
                         if(values.used === 'true'){
                             values.used = true
                         }else if(values.used === 'false'){
@@ -168,7 +169,7 @@ function AddBook(){
                         </div>
                         <div>
                             <label htmlFor="name">Genre: </label>
-                            <Field id="genre"  name="genre" as='select' className={style.select}>
+                            <Field id="genres"  name="genres" as='select' className={style.select}>
                             <option value='Genre' selected> Genre </option>  
                             {
                                 genres.map(genre=>{
@@ -178,8 +179,8 @@ function AddBook(){
                                     })
                                 }
                              </Field>    
-                            <ErrorMessage name="genre" component={()=>(
-                                <div className={style.error}>{errors.genre}</div>
+                            <ErrorMessage name="genres" component={()=>(
+                                <div className={style.error}>{errors.genres}</div>
                             )} />
                         </div>
                         <div>
@@ -223,8 +224,8 @@ function AddBook(){
                             <label htmlFor="name">Language: </label>
                             <Field id="language"  name="language" as='select' className={style.select}>
                                 <option value='Language' selected> Language </option>
-                                <option value='English'> English </option>
-                                <option value='Spanish'> Spanish </option>    
+                                <option value='en'> English </option>
+                                <option value='es'> Spanish </option>    
                             </Field>                
                             <ErrorMessage name="language" component={()=>(
                                 <div className={style.error}>{errors.language}</div>

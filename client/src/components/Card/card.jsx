@@ -19,7 +19,7 @@ const Card = ({ name, price, image ,id}) => {
         setCart(["hola me agregaron al estado cart"]);
     }
 
-    console.log(cart)
+    
     // console.log(name)
 
     return (
