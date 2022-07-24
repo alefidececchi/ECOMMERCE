@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import s from "./card.module.scss"
 import BookDetail from '../BookDetail/bookDetail';
 
-const Card = ({ name, price, image }) => {
+const Card = ({ name, price, image ,id}) => {
 
 
     // esto es para deplegar el detlle de la tarjeta 
@@ -34,7 +34,7 @@ const Card = ({ name, price, image }) => {
             <div className={s.cart} >
                 <div className={s.info}>
 
-                    <h3>{price}</h3>
+                    <h3>$ {price}</h3>
                     <h4 >{name}</h4>
                 </div>
                 <figure onClick={handleClick} className={s.info2}>
@@ -44,7 +44,7 @@ const Card = ({ name, price, image }) => {
             </div>
 
 
-            {toggle && <BookDetail />}
+            {toggle && <BookDetail id={id} />}
 
 
         </div>

@@ -9,19 +9,20 @@
 
   align-items: flex-start;
 
-  height: 267px;
+  height: 300px;
   width: 216px;
   margin: 10px 15px;
   .fav {
-    position: absolute;
+    position: relative;
+     left: 175px;
+     top: 40px;
     color: #c7c7c7;
     border: #c7c7c7;
     background-color: #ffffff;
     border-radius: 30px;
     width: 30px;
     height: 30px;
-    margin: 10px;
-   
+    // margin: 10px;
   }
 
   h3 {
@@ -48,7 +49,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin: 1rem;
+    margin-right: 1rem;
     button {
       background-color: transparent;
       border: none;

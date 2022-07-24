@@ -2,34 +2,29 @@ import SearchBar from "../SearchBar/searchBar";
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenres, fetchFilteredBooks } from "../../Redux/thunks/filterThunks";
-import { resetFilters } from "../../Redux/slices/bookSlice";
+import { resetFilters, saveFilterObject, resetObjectFilter } from "../../Redux/slices/bookSlice";
 import s from './header.module.scss'
 
 const Header = () => {
   const dispatch = useDispatch();
-  const initialState = {}
-  const [filters, setFilters] = useState(initialState);
   const { genres } = useSelector(state => state.books);
+  const { filterObject } = useSelector(state => state.books);
 
-  let filterValues = Object.values(filters);
-  let filterKeys = Object.keys(filters);
+  let filterValues = Object.values(filterObject);
 
   const handleOnClick = (e) => {
-    setFilters({
-      ...filters,
-      [e.target.name]: e.target.value,
-    })
-    console.log(e.target.value)
+    
+    dispatch(saveFilterObject({key: e.target.name, value: e.target.value}))
+   
   }
 
   const handleReset = () => {
-    setFilters({});
+    dispatch(resetObjectFilter());
     dispatch(resetFilters());
   }
 
   const handleFilters = () => {
-    // e.preventDefault()
-    dispatch(fetchFilteredBooks(filters))
+    dispatch(fetchFilteredBooks(filterObject))
   }
 
   useEffect(() => {
@@ -37,6 +32,8 @@ const Header = () => {
       dispatch(fetchGenres())
     }
   }, [dispatch]);
+
+  
 
 
   return (
@@ -52,33 +49,32 @@ const Header = () => {
                 {genres.map(genre => <li><button name='genre' value={genre} onClick={handleOnClick}>{genre}</button></li>)}
               </ul>
             </li>
-            {/* {filters.category ? <span>{filters.category}</span>: null} */}
 
             <li>Status
               <ul>
-                <li><button name='status' value='false' onClick={handleOnClick}>New</button></li>
-                <li><button name='status' value='true' onClick={handleOnClick}>Secondhand</button></li>
+                <li><button name='status' value='new' onClick={handleOnClick}>New</button></li>
+                <li><button name='status' value='secondhand' onClick={handleOnClick}>Secondhand</button></li>
               </ul>
             </li>
 
             <li>Released
               <ul>
-                <li><button name='released' value='desc' onClick={handleOnClick}>Latest</button></li>
-                <li><button name='released' value='asc' onClick={handleOnClick}>Oldest</button></li>
+                <li><button name='released' value='latest' onClick={handleOnClick}>Latest</button></li>
+                <li><button name='released' value='oldest' onClick={handleOnClick}>Oldest</button></li>
               </ul>
             </li>
 
             <li>Order
               <ul>
-                <li><button name='sort' value='asc' onClick={handleOnClick}>A-Z</button></li>
-                <li><button name='sort' value='desc' onClick={handleOnClick}>Z-A</button></li>
+                <li><button name='sort' value='AZ' onClick={handleOnClick}>A-Z</button></li>
+                <li><button name='sort' value='ZA' onClick={handleOnClick}>Z-A</button></li>
               </ul>
             </li>
 
             <li>Price
               <ul>
-                <li><button name='price' value='asc' onClick={handleOnClick}>Lowest to Highest</button></li>
-                <li><button name='price' value='desc' onClick={handleOnClick}>Highest to Lowest</button></li>
+                <li><button name='price' value='lowest to highest' onClick={handleOnClick}>Lowest to Highest</button></li>
+                <li><button name='price' value='highest to lowest' onClick={handleOnClick}>Highest to Lowest</button></li>
               </ul>
             </li>
 

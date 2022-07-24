@@ -11,8 +11,9 @@ const fetchGenres = () => (dispatch) => {
 
 const fetchFilteredBooks = (filters) => (dispatch) => {
   axios
+    // .get('http://localhost:3001/books?genre=autobiography')
     .get(
-      `http://localhost:3001/books?genre=${filters.genre}&status=${filters.status}&released=${filters.released}&sort=${filters.sort}&price=${filters.price}&language=${filters.language}`
+      `http://localhost:3001/books?genre=${filters.genre ? filters.genre : ''}&status=${filters.status}&released=${filters.released ? filters.released : ''}&sort=${filters.sort ? filters.sort : ''}&price=${filters.price ? filters.price : ''}&language=${filters.language ? filters.language : ''}`
     )
     .then((response) => dispatch(getFilters(response.data.books)))
     .catch((error) => console.log(error));

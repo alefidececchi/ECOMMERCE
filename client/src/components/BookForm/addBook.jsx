@@ -1,46 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {Formik, Form,  Field, ErrorMessage} from 'formik'
 import style from './addBook.module.scss'
+import swal from 'sweetalert'
+import axios from 'axios'
+import {useNavigate} from "react-router-dom";
+import {
+    fetchBooksGenres, fetchAllBooks
+  } from "../../Redux/thunks/booksThunks";
 
 
 function AddBook(){
 
     const [send, setSend] = useState(false);
+    const {genres}  = useSelector((state) => state.genres);
+    const dispatcher = useDispatch()
+
+    let navigate = useNavigate()   
+
+
+    useEffect(() => {
+        if (genres.length === 0) {
+            dispatcher(fetchBooksGenres());
+        }
+        console.log(genres)
+
+      }, [dispatcher, genres]);
+
 
     return (
+        <div className={style.container}>
         <div className={style.formulario}>
             <section>
                 <Formik 
                     initialValues={{
-                        bookName:"", 
+                        name:"", 
                         image:"", 
                         price:'', 
-                        amount:'',
-                        published:'', 
+                        stock:'',
+                        released:'', 
                         genre:'',
                         language:'',
-                        state:'',
+                        used:false,
                         description:''
                     }}
                     validate={(values) =>{
                         let errors ={};
                         //validacion nombre del libro   
-                        if(!values.bookName){
-                            errors.bookName = 'Please write the book name'
-                        }else if(values.bookName.length < 4 || values.bookName.length > 20){
-                            errors.bookName = 'Book name must have between 4 or 20 characters'
+                        if(!values.name){
+                            errors.name = 'Please write the book name'
+                        }else if(values.name.length < 4 || values.name.length > 40){
+                            errors.name = 'Book name must have between 4 or 20 characters'
                         }
 
                         //validacion año publicacion
-                        if(!values.published){
-                            errors.published = 'Please write the published year of the book'
-                        }else if(values.published < 0){
-                            errors.published = 'The year must be possitive'
+                        if(!values.released){
+                            errors.released = 'Please write the released year of the book'
+                        }else if(values.released < 0){
+                            errors.released = 'The year must be possitive'
                         }
                       
                         //validacion genero
                         if(!values.genre){
-                            errors.genre = 'Please write the genre of the book'
+                            errors.genre = 'Please select the genre of the book'
+                        }else if(values.genre === 'Genre'){
+                            errors.genre = 'Please select the genre of the book'
                         }
 
                         //validacion language
@@ -69,59 +93,91 @@ function AddBook(){
                         }
 
                         //validacion cantidad 
-                        if(!values.amount){
-                            errors.amount = 'Please write the book amount for selling'
-                        }else if(values.amount < 0){
-                            errors.amount = 'The amount must be possitive'
+                        if(!values.stock){
+                            errors.stock = 'Please write the book stock for selling'
+                        }else if(values.stock < 0){
+                            errors.stock = 'The stock must be possitive'
                         }
                         //validacion estado
-                        if(!values.state){
-                            errors.state = 'Please select the book state'
+                        if(!values.used){
+                            errors.used = 'Please select the book state'
+                        }
+                        //validacion description
+                        if(!values.description){
+                            errors.description = 'Please write a  description of the book'
+                        }else if(values.description.length > 350){
+                            errors.description = 'Description must have 250 characters'
                         }
                         return errors;
                     }}
                     onSubmit={(values, {resetForm})=>{
+                        if(values.used === 'true'){
+                            values.used = true
+                        }else if(values.used === 'false'){
+                            values.used = false
+                        }
                         resetForm();
-                        setSend(true)
-                        setTimeout(() => setSend(false), 3000)
+                        axios.post('http://localhost:3001/books/', values)
+                        swal({
+                            title:'Congratulation',
+                            text:'Book published successfully',
+                            icon:'success',
+                            button:'OK'
+                          }).then(res => {
+                            if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                              dispatcher(fetchAllBooks());
+                              navigate('/user')
+                            }
+                          })
+
+                        resetForm();
+                        // setSend(true)
+                        // setTimeout(() => setSend(false), 3000)
                         console.log(values)
+
+                        
+         
                     }}
                 >
                     {( {errors} )=>(
-                        <Form > 
+                        <Form className={style.form}> 
                         <h2>Post new book</h2>
                         <div>
                             <label htmlFor="name">Book Name: </label>
                             <Field
                             type='text'
-                            id="name"
+                            id="nameBook"
                             placeholder="Type a name..."
-                            name="bookName"
+                            name="name"
                             />
-                            <ErrorMessage name="bookName" component={()=>(
-                                <div className={style.error}>{errors.bookName}</div>
+                            <ErrorMessage name="name" component={()=>(
+                                <div className={style.error}>{errors.name}</div>
                             )} />
                         </div>
                         <div>
-                            <label htmlFor="name">Published Year: </label>
+                            <label htmlFor="name">Released Year: </label>
                             <Field
                             type='number'
-                            id="published"
+                            id="released"
                             placeholder="1996"
-                            name="published"
+                            name="released"
                             />
-                            <ErrorMessage name="published" component={()=>(
-                                <div className={style.error}>{errors.published}</div>
+                            <ErrorMessage name="released" component={()=>(
+                                <div className={style.error}>{errors.released}</div>
                             )} />
                         </div>
                         <div>
                             <label htmlFor="name">Genre: </label>
-                            <Field
-                            type='text'
-                            id="genre"
-                            placeholder="Terror..."
-                            name="genre"
-                            />
+                            <Field id="genre"  name="genre" as='select' className={style.select}>
+                            <option value='Genre' selected> Genre </option>  
+                            {
+                                genres.map(genre=>{
+                                    return (
+                                        <option value={genre}>{genre}</option>
+                                        )
+                                    })
+                                }
+                             </Field>    
                             <ErrorMessage name="genre" component={()=>(
                                 <div className={style.error}>{errors.genre}</div>
                             )} />
@@ -156,16 +212,16 @@ function AddBook(){
                                 type="number"
                                 id="amt"
                                 placeholder="15"
-                                name="amount"
+                                name="stock"
                             />
-                            <ErrorMessage name="amount" component={()=>(
-                                <div className={style.error}>{errors.amount}</div>
+                            <ErrorMessage name="stock" component={()=>(
+                                <div className={style.error}>{errors.stock}</div>
                             )} />
             
                         </div>
                         <div>
                             <label htmlFor="name">Language: </label>
-                            <Field id="language"  name="language" as='select'>
+                            <Field id="language"  name="language" as='select' className={style.select}>
                                 <option value='Language' selected> Language </option>
                                 <option value='English'> English </option>
                                 <option value='Spanish'> Spanish </option>    
@@ -175,16 +231,29 @@ function AddBook(){
                             )} />
                         </div>
                         <div>
-                            <label>State </label>
+                            <label>Secondhand </label>
                             <label>
-                                <Field  type='radio' name="state" value='New'/> New
+                                <Field  type='radio' name="used" value='true'/> Yes
                             </label>
                             <label>
-                                <Field  type='radio' name="state" value='Old'/> Secondhand
+                                <Field  type='radio' name="used" value='false'/> No
                             </label>
-                            <ErrorMessage name="state" component={()=>(
-                                <div className={style.error}>{errors.state}</div>
+                            <ErrorMessage name="used" component={()=>(
+                                <div className={style.error}>{errors.used}</div>
                             )} />
+                        </div>
+                        <div>
+                            <label htmlFor="amt">Description: </label>
+                            <Field
+                                as='textarea'
+                                id="amt"
+                                placeholder=""
+                                name="description"
+                            />
+                            <ErrorMessage name="description" component={()=>(
+                                <div className={style.error}>{errors.description}</div>
+                            )} />
+            
                         </div>
                         <div>
                             <button type="submit">  Create </button>
@@ -195,6 +264,8 @@ function AddBook(){
                 </Formik>
             </section>
         </div>
+        </div>
+        
     )
 }
 
@@ -319,3 +390,17 @@ onSubmit={(values, {resetForm})=>{
 </form>
 )}
 </Formik> */}
+
+
+
+{/* <select onChange={saveCountry} name="Pais" className={inputs}>
+<option selected disabled value=" ">Select Country</option>
+    {
+
+        countries.map(c=>{
+            return (
+                <option value={c.Nombre}>{c.Nombre}</option>
+                )
+            })
+    }
+</select> */}
