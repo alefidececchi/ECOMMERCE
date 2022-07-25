@@ -22,8 +22,10 @@ const Card = ({ name, price, image ,id, book}) => {
         setCart(["hola me agregaron al estado cart"]);
     }
 
-    // console.log(cart)
-    // console.log(name)
+
+    
+
+   
     
 
     const handleAddToCart = (book) =>{

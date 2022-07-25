@@ -6,7 +6,7 @@ import { useState } from 'react';
 import EditBook from '../EditBooks/editBook';
 import userLogo from '../../assets/imgs/user.png'
 import portada from '../../assets/imgs/hp.jpg'
-import portada2 from '../../assets/imgs/hp.jpg'
+import portada2 from '../../assets/imgs/LOTR.jpg'
 import EditProfile from '../EditProfile/editProfile';
 import swal from 'sweetalert'
 
@@ -15,7 +15,7 @@ const User = () => {
   const[image, setImage] = useState(userLogo)
   const[editMode, setEditMode] = useState(false)
   const[editProfile, setEditProfile] = useState(false)
-  let[books, setBooks] = useState([{    bookName:"Harry Popote", image:"No disponible :V", price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"Harry popote 2", image:"No disponible :V", price: 40.50, amount: 10, state:'Nuevesito prro'}])
+  let[books, setBooks] = useState([{    bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
 
   //let books = false
   //  let books = [{bookName:"Harry Popote",
@@ -128,7 +128,7 @@ const User = () => {
               books.map((book , i) =>
                   <div key={i} className={style.containerBooks}>
                     <div>
-                      <img src={portada} alt='bookImage'></img>
+                      <img src={book.image} alt='bookImage'></img>
                     </div>
                     <div>
                       <h1> {book.bookName}</h1>

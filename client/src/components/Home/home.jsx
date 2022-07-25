@@ -38,10 +38,10 @@ const Home = () => {
           <Slider />
         </div>
         <Header />
-        <BookList books={books.books} />
+        <BookList books={books} />
         <Footer />
-      </div >
-    </div >
+      </div>
+    </div>
 
   );
 };

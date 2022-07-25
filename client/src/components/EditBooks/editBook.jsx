@@ -2,14 +2,27 @@ import { useState } from "react";
 import {Formik, Form,  Field, ErrorMessage} from 'formik'
 import {useNavigate} from "react-router-dom";
 import style from './editBook.module.scss'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllBooks, fetchBooksGenres } from "../../Redux/thunks/booksThunks";
 
 
 function EditBook({editOff}){
 
     const [send, setSend] = useState(false);
     const[editMode, setEditMode] = useState(true)
-    
+
     let navigate  = useNavigate()
+    const {genres}  = useSelector((state) => state.genres);
+    const dispatcher = useDispatch()
+    useEffect(() => {
+        if (genres.length === 0) {
+            dispatcher(fetchBooksGenres());
+        }
+        console.log(genres)
+
+      }, [dispatcher, genres]);
+
 
     return(
         <div>
@@ -22,7 +35,7 @@ function EditBook({editOff}){
                             price:'', 
                             stock:'',
                             released:'', 
-                            genre:'',
+                            genres:'',
                             language:'',
                             used:false,
                             description:''
@@ -44,8 +57,10 @@ function EditBook({editOff}){
                             }
                         
                             //validacion genero
-                            if(!values.genre){
-                                errors.genre = 'Please write the genre of the book'
+                            if(!values.genres){
+                                errors.genres = 'Please select the genre of the book'
+                            }else if(values.genres === 'Genre'){
+                                errors.genres = 'Please select the genre of the book'
                             }
 
                             //validacion language
@@ -131,16 +146,20 @@ function EditBook({editOff}){
                                 )} />
                             </div>
                             <div>
-                                <label htmlFor="name">Genre: </label>
-                                <Field
-                                type='text'
-                                id="genre"
-                                placeholder="Terror..."
-                                name="genre"
-                                />
-                                <ErrorMessage name="genre" component={()=>(
-                                    <div className={style.error}>{errors.genre}</div>
-                                )} />
+                            <label htmlFor="name">Genre: </label>
+                            <Field id="genres"  name="genres" as='select' className={style.select}>
+                            <option value='Genre' selected> Genre </option>  
+                            {
+                                genres.map(genre=>{
+                                    return (
+                                        <option value={genre}>{genre}</option>
+                                        )
+                                    })
+                                }
+                             </Field>    
+                            <ErrorMessage name="genres" component={()=>(
+                                <div className={style.error}>{errors.genres}</div>
+                            )} />
                             </div>
                             <div>
                                 <label htmlFor="img">Image: </label>
