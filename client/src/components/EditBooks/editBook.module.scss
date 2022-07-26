@@ -1,0 +1,65 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+    
+
+    border: 1px solid #B881FF;
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    input{
+        border-radius: 5px;
+        border: 2px solid #e2e2e2;
+        width: 100%;
+
+        position: relative;
+        
+    }
+    textarea{
+        resize: none;
+    }
+
+    input:focus {
+        outline: none;
+        border: 2px solid #B881FF;
+        }
+
+    label{
+        position: relative;
+        
+    }
+    .buttonSave{
+        position: relative;
+        left: 5em;
+
+    }
+    .buttonCancel{
+        position: relative;
+        left: 8em;
+    }
+    .state{
+        display: inline-flex;
+        .yesNo{
+            position: relative;
+            left: 1em
+        }
+        .circle{
+            position: relative;
+            right: 0.8em;
+        }
+    }
+
+    .error{
+        position: relative;
+        left: 1em;
+        color: #e92b2d;
+		font-weight: 600px;
+		font-size: 12px;
+    }
+}

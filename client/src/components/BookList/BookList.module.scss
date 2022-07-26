@@ -1,0 +1,91 @@
+.Pagination {
+  ul {
+    display: flex;
+    justify-content: center;
+    // flex-wrap: wrap;
+    list-style: none;
+
+    margin-top: 10px;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      span {
+        border-radius: 8px;
+        font-weight: bold;
+        border: 1px solid;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      button {
+        background-color:transparent;
+        color: #797979;
+        border: none;
+        font-weight: bold;
+        border: 1px solid #797979;
+        border-radius: 8px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 768px) {
+  .Pagination {
+    font-size: 14px;
+
+    li {
+      padding: 8px;
+    }
+
+    span {
+      height: 30px;
+      width: 50px;
+      padding: 5px 5px 15px 5px;
+    }
+    button {
+      font-size: 14px;
+      padding: 5px 5px 5px 5px;
+      height: 30px;
+      width: 25px;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .Pagination {
+    font-size: 14px;
+
+    li {
+      padding: 8px;
+    }
+
+    span {
+      height: 30px;
+      width: 50px;
+      padding: 5px 5px 15px 5px;
+    }
+    button {
+      font-size: 14px;
+      padding: 5px 5px 5px 5px;
+      height: 30px;
+      width: 25px;
+    }
+  }
+}
+
+.BookList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 1rem 1rem 0rem 1rem;
+}

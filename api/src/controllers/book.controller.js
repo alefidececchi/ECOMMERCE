@@ -42,7 +42,8 @@ const getBooks = async (req, res) => {
     if (name) books = getByName({ books, name });
     if (genre) books = getByGenre({ books, genre });
 
-    return res.status(200).json(paginate({ limit, page, books }));
+    // return res.status(200).json(paginate({ limit, page, books }));
+    return res.status(200).json({ books });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -73,7 +74,7 @@ const getGenresBook = (req, res) => {
     "thriller",
   ];
   try {
-    return res.status(400).json({ genres });
+    return res.status(200).json({ genres });
   } catch (error) {
     return res.status(500).json({ error: error });
   }

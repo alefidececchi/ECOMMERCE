@@ -1,5 +1,7 @@
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React from "react";
+import { Link, Outlet } from "react-router-dom";
+import style from "./navBar.module.scss";
+import { BsFillCartFill, BsFillPersonLinesFill } from "react-icons/bs";
 
 const NavBar = () => {
   return (
@@ -7,32 +9,37 @@ const NavBar = () => {
       <section>
         <Outlet />
       </section>
-      <nav>
+      <nav className={style.container}>
         <ul>
           <li>
-            <Link to={'/home'}>
-              Home
+            <Link to={"/"}>libritos.com</Link>
+          </li>
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
+          <li>
+            <Link to={"/wish"}>Today's Deals</Link>
+          </li>
+          <li>
+            <Link to={"/wish"}>Gift Card</Link>
+          </li>
+          <li>
+            <Link to={"/wish"}>WishList</Link>
+          </li>
+          <li>
+            <Link to={"/shopping"}>
+              <BsFillCartFill className={style.icon} />
             </Link>
           </li>
-            <li>
-              <Link to={'/shopping'}>
-                Cart
-              </Link>
-            </li>
-            <li>
-              <Link to={'/user'}>
-                User
-              </Link>
-            </li>
-            <li>
-              <Link to={'/wish'}>
-                WishList
-              </Link>
-            </li>
+          <li>
+            <Link to={"/user"}>
+              <BsFillPersonLinesFill className={style.icon} />
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>
   );
-}
+};
 
 export default NavBar;

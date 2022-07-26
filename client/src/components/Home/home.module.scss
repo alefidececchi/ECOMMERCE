@@ -1,6 +1,38 @@
-@import '../../assets/sass/functions.scss';
-@import '../../assets/sass/mixins.scss';
-@import '../../assets/sass/variables.scss';
+@import "../../assets/sass/functions.scss";
+@import "../../assets/sass/mixins.scss";
+@import "../../assets/sass/variables.scss";
 
+body {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: #797979;
+  font-family: "Quicksand", sans-serif;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+}
 
+.mainContainer {
+  display: flex;
+  flex-direction: column;
 
+  
+
+  .core {
+    display: flex;
+    flex-direction: column;
+    @include tablet() {
+      margin-top: toRem(71);
+    }
+    @include tabletMax() {
+      margin-top: toRem(250);
+    }
+
+    // .slider {
+    //   z-index: -1;
+    // }
+  }
+ 
+}
