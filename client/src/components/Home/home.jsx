@@ -8,7 +8,7 @@ import BookList from "../BookList/BookList";
 import Footer from "../Footer/footer";
 import "react-loader-spinner";
 import {
-  fetchAllBooks,
+  fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
 
 
@@ -21,13 +21,14 @@ const Home = () => {
   const { books } = useSelector((state) => state.books);
   const { filterEmpty } = useSelector((state) => state.books);
 
+
   useEffect(() => {
     if (books.length === 0 && !filterEmpty) {
       dispatch(fetchAllBooks());
     }
   }, [dispatch, books]);
 
-  // console.log(books.books)
+  
 
 
   return (

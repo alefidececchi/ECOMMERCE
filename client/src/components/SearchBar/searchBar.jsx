@@ -12,7 +12,7 @@ export default function SearchBar() {
 
     const dispatch = useDispatch()
     const [name, setName] = useState("")
-    console.log(name)
+    
     function handleInput(e) {
         e.preventDefault()
         setName(e.target.value)//value de imput toma value de state

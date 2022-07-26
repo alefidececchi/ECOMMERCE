@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import booksReducer from "../slices/bookSlice";
-import shoppingCartReducer from '../slices/shoping.slice';
+import shoppingCartReducer, { getTotals } from '../slices/shoping.slice';
 import genreReducer from '../slices/genreSlice';
 
 
@@ -11,6 +11,6 @@ const store = configureStore({
     genres: genreReducer,
   }
 })
-
+store.dispatch(getTotals())
 
 export default store;
