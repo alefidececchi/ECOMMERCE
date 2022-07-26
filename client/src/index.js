@@ -6,9 +6,9 @@ import App from "./App";
 import store from "./Redux/store/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import dotenv from 'dotenv';
 import axios from "axios";
-dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
