@@ -7,6 +7,7 @@ import Shopping from './components/Shopping/shopping.jsx';
 import User from './components/User/user.jsx';
 import WishList from './components/WishList/wishList.jsx';
 import AddBook from './components/BookForm/addBook.jsx'
+import Register from "./components/Register/register"
 import { ToastContainer } from 'react-toastify'
 
 
@@ -14,19 +15,22 @@ import { ToastContainer } from 'react-toastify'
 function App() {
   return (
     <div className="App">
-    <ToastContainer />
-     <Routes>
-     
-      <Route path='/' element={< NavBar />}>
-        <Route path="/" element={< Home />} />
-        <Route path='shopping' element={< Shopping />} />
-        <Route path='user' element={< User />} />
-        <Route path='user/newBook' element={< AddBook />} />
-        <Route path='wish' element={< WishList />} />
-      </Route>
-     </Routes>
+      <ToastContainer />
+      <Routes>
+
+        <Route path='/' element={< NavBar />}>
+          <Route path="/" element={< Home />} />
+          <Route path='shopping' element={< Shopping />} />
+          <Route path='user' element={< User />} />
+          <Route path='user/newBook' element={< AddBook />} />
+          <Route path='wish' element={< WishList />} />
+
+        </Route>
+
+        <Route path='register' element={< Register />} />
+      </Routes>
     </div>
-  ); 
+  );
 }
 
 export default App;
