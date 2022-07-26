@@ -8,10 +8,9 @@ import userLogo from '../../assets/imgs/user.png'
 import portada from '../../assets/imgs/hp.jpg'
 import portada2 from '../../assets/imgs/hp.jpg'
 import EditProfile from '../EditProfile/editProfile';
-import swal from 'sweetalert'
+import swal from 'sweetalert';
 
 const User = () => {
-
   const[image, setImage] = useState(userLogo)
   const[editMode, setEditMode] = useState(false)
   const[editProfile, setEditProfile] = useState(false)

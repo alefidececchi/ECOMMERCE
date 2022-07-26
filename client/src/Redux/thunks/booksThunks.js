@@ -23,7 +23,7 @@ const fetchAllBooks = () => (dispatch) => {
 const fetchBookByName = (name) => (dispatch) => {
     axios
         .get(`http://localhost:3001/books?name=${name}`)
-        .then((response) => dispatch(searchBook(response.data)))
+        .then((response) => dispatch(searchBook(response.data.books)))
         .catch((error) => console.log(error));
 };
 const fetchBooksDetail = (id) => (dispatch) => {
@@ -37,8 +37,7 @@ const fetchBooksDetail = (id) => (dispatch) => {
     axios
         .get("http://localhost:3001/books/genres")
         .then((response) => {
-            
-            dispatch(getGenres(response.data));
+            dispatch(getGenres(response.data.genres));
         })
         .catch((error) => console.log(error));
     };

@@ -4,7 +4,8 @@ const initialState = {
   booksCopy: [],
   booksDetail: {},
   genres: [],
-  filterObject: {}
+  filterObject: {},
+  filterEmpty: false
 };
 
 const bookSlice = createSlice({
@@ -28,13 +29,21 @@ const bookSlice = createSlice({
       state.genres = action.payload;
     },
     getFilters(state, action) {
-      state.books = action.payload;
+      if(action.payload.length === 0) {
+        state.filterEmpty = true;
+        state.books = action.payload;
+      } else {
+        state.filterEmpty = false;
+        state.books = action.payload;
+      }
     },
     saveFilterObject(state, action) {
       state.filterObject[action.payload.key] = action.payload.value; 
     },
     resetFilters(state, action) {
       state.books = state.booksCopy;
+      state.filterEmpty = false;
+      state.filterObject = {}
     },
     resetObjectFilter(state,action) {
       state.filterObject = {};
