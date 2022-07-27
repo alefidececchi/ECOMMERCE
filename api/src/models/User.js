@@ -52,6 +52,10 @@ const userSchema = new Schema(
         ref: "Book",
       },
     ],
+    log_Google: {
+      type:Boolean,
+      default:false
+    }
   },
   {
     timestamps: true,
