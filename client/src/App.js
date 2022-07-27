@@ -8,11 +8,16 @@ import User from './components/User/user.jsx';
 import WishList from './components/WishList/wishList.jsx';
 import AddBook from './components/BookForm/addBook.jsx'
 import Register from "./components/Register/register"
+import Login from './components/Register/login';
+import Activate from "./components/Register/activate"
+import Forgot from "./components/Register/forgot"
+import Reset from "./components/Register/reset"
 import { ToastContainer } from 'react-toastify'
 
 
 
 function App() {
+  
   return (
     <div className="App">
       <ToastContainer />
@@ -28,6 +33,11 @@ function App() {
         </Route>
 
         <Route path='register' element={< Register />} />
+        <Route path='activate-account' element={< Activate />} />
+        <Route path='activate-account/:token' element={< Activate/>} />
+        <Route path='login' element={< Login />} />
+        <Route path='forgot-password' element={< Forgot />} />
+        <Route path='reset' element={< Reset />} />
       </Routes>
     </div>
   );

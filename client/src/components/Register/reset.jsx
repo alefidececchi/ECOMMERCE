@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import s from './register.module.scss'
+import s from './activate.module.scss'
 import swal from 'sweetalert'
 import axios from 'axios'
-import jwt_decode from "jwt-decode"
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link } from "react-router-dom";
 import {
     fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
@@ -13,60 +12,7 @@ import {
 
 
 
-const Register = () => {
-
-    // var google=""
-
-    const [user, setUser] = useState({});
-    //  console.log(user)
-
-    function handleCallbackResponse(response) {
-        // console.log("Encoded JWT ID token: " + response.credential);
-        var userObject = jwt_decode(response.credential);
-        // console.log(userObject);
-        setUser(userObject);
-        document.getElementById("signInDiv").hidden = true;
-    }
-
-    function handleSignOut(event) {
-        setUser({});
-        document.getElementById("signInDiv").hidden = false;
-    }
-
-
-    useEffect(() => {
-        google.accounts.id.initialize({
-            client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
-            callback: handleCallbackResponse
-        });
-
-        google.accounts.id.renderButton(
-            document.getElementById('signInDiv'),
-            { theme: "outline", size: "large" }
-        );
-
-        google.accounts.id.prompt();
-        
-
-    }, []);
-    // If we have no user: sign in button
-    // If we have a user: show the log out button
-
-
-
-    useEffect(() => {
-        axios({
-            method: 'post',
-            url: 'http://localhost:3001/users/registerGoogle',
-            data: {
-                email: user.email,
-                password: user.sub,
-            },
-        });
-    }, [ ])
-
-
-
+const Reset = () => {
 
     const [send, setSend] = useState(false);
 
@@ -79,20 +25,6 @@ const Register = () => {
 
     return (
         <div className={s.container}>
-
-            <div id="signInDiv"></div>
-
-            {Object.keys(user).length != 0 &&
-                <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
-            }
-            {user &&
-                <div>
-                    <img src={user.picture}></img>
-                    <h3>{user.name}</h3>
-                </div>}
-
-
-
             <div className={s.formulario}>
                 <section>
                     <Formik
@@ -132,7 +64,7 @@ const Register = () => {
                             axios.post('http://localhost:3001/auth/register', values)
                             swal({
                                 title: 'Congratulation',
-                                text: 'Please check your inbox to activate your account',
+                                text: 'User created  successfully',
                                 icon: 'success',
                                 button: 'OK'
                             }).then(res => {
@@ -153,8 +85,10 @@ const Register = () => {
                     >
                         {({ errors }) => (
                             <Form className={s.form}>
-                                <h2>My account</h2>
-                                <div>
+                                <h2>Email has been sent!</h2>
+                                <h3>Please check your inbox for instructions on how to reset the password</h3>
+                                <h4>You have 20 minutes to complete the password change</h4>
+                                {/* <div>
                                     <label htmlFor="name">Name: </label>
                                     <Field
                                         type='text'
@@ -191,9 +125,19 @@ const Register = () => {
                                     <ErrorMessage name="password" component={() => (
                                         <div className={s.error}>{errors.password}</div>
                                     )} />
-                                </div>
+                                </div> */}
+
+
+
+
+                                <h3>o token</h3>
                                 <div>
-                                    <button type="submit">  Create </button>
+                                    <Link to={"/login" }>
+
+                                        <button type="submit">  login</button>
+
+                                    </Link>
+
                                     {send && <p>User added succecsfully</p>}
                                 </div>
                             </Form>
@@ -202,7 +146,9 @@ const Register = () => {
                 </section>
             </div>
         </div>
+
+
     );
 };
 
-export default Register;
+export default Reset;

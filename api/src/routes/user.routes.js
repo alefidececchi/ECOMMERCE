@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getUsers,
   getUserByID,
-  postUser,
+  postUserGoogle,
   putUser,
   putUserBook,
   deleteUser,
@@ -14,7 +14,7 @@ router.get("/", getUsers);
 
 router.get("/:idUser", getUserByID);
 
-router.post("/register", postUser);
+router.post("/registerGoogle", postUserGoogle);
 
 router.put("/:idUser", putUser);
 

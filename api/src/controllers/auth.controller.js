@@ -53,7 +53,7 @@ const activateAccount = (req, res) => {
             if (err) {
               console.log("Error in signup while account activation: ", err);
               return (
-                res.status(400), json({ error: "Error activating account" })
+                res.status(400).json({ error: "Error activating account" })
               );
             }
             res.json({
@@ -68,18 +68,41 @@ const activateAccount = (req, res) => {
   }
 };
 
+// const login = async (req, res) => {
+//     const {email, password} = req.body
+
+//     if (await User.findOne({email}) === null) return res.status(400).json({error: "Email no registrado"})
+
+//     const user = await User.findOne({email})
+//     const compare = await bcrypt.compare(password, user.password)
+//     console.log("🚀 ~ file: auth.controller.js ~ line 78 ~ login ~ compare", compare)
+
+//     if (!compare) return res.status(400).json({error: "Contraseña invalida"})
+
+//     res.status(200).json({auth: "Usuario logueado", user})
+// }
 const login = async (req, res) => {
-    const {email, password} = req.body
+  const {email, password} = req.body
 
-    if (await User.findOne({email}) === null) return res.status(400).json({error: "Email no registrado"})
+  if (await User.findOne({email}) === null) return res.status(400).json({error: "Email no registrado"})
 
-    const user = await User.findOne({email})
-    const compare = await bcrypt.compare(password, user.password)
-    console.log("🚀 ~ file: auth.controller.js ~ line 78 ~ login ~ compare", compare)
+  const user = await User.findOne({email});
+  console.log(user);
+  console.log(user.log_Google)
+  if (user.log_Google===true) {
+    if (password==user.password){
+      return res.status(200).json({auth:"Usuario logueado mediante Google Login",user});
+    } else {
+      return res.status(400).json({auth:"Contraseña incorrecta",user})
+    }
+  } else {
+      const compare = await bcrypt.compare(password, user.password)
+      console.log("🚀 ~ file: auth.controller.js ~ line 78 ~ login ~ compare", compare)
 
-    if (!compare) return res.status(400).json({error: "Contraseña invalida"})
+      if (!compare) return res.status(400).json({error: "Contraseña invalida"})
 
-    res.status(200).json({auth: "Usuario logueado", user})
+      res.status(200).json({auth: "Usuario logueado tradicionalmente", user})
+  }
 }
 
 const forgotPassword = async (req, res) => {
