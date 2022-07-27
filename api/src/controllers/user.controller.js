@@ -67,16 +67,26 @@ const putUser = async (req, res) => {
 
 const putUserBook = async (req, res) => {
   const { idBook, idUser } = req.params;
-  const sellingBooksUpdate = await User.findByIdAndUpdate(idUser, {
+await User.findByIdAndUpdate(idUser, {
     $push: { selling_books: idBook },
   });
 
   res.status(200).json({
-    status: sellingBooksUpdate,
+    status: "Libro agregado a selling books"
   });
   // en POSTMAN PUT:
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
+
+const putUserWishList = async(req, res) => {
+  const {idBook, idUser} = req.params
+ await User.findByIdAndUpdate(idUser, {
+    $push: {wish_list: idBook}
+  })
+  res.status(200).json({
+    status: "Libro agregado a wish list"
+  })
+}
 
 const deleteUser = async (req, res) => {
   const { idUser } = req.params;
@@ -95,4 +105,5 @@ module.exports = {
   putUser,
   putUserBook,
   deleteUser,
+  putUserWishList
 };
