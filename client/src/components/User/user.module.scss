@@ -3,44 +3,60 @@
 @import '../../assets/sass/variables.scss';
 
 .container{
-    margin: 0 auto;
-    max-width: 1200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+   
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    //max-width: 1200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+   
+}
+
+.containerSide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    padding: 3.52em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    flex-direction: column; 
+    flex-wrap: wrap;
+    grid-gap: 2em; 
+    box-sizing: border-box;
+  
 }
 
 .containerProfile{
 
     display: flex;
 	align-items: center;
-	justify-content: center;
-	width: 25%;
-	top: 2em;
-	padding: 0.3125em;
-	position: absolute;
-    max-width: 75em;
+	justify-content: space-between;
+    
     flex-direction: column; 
     flex-wrap: wrap;
-
-	// margin:   auto;
-	// min-width: 25em;
-	// width: 25%;
-	// padding: 1em;
-	grid-gap: 1.25em; 
+	grid-gap: 2em; 
     box-sizing: border-box;
-    // margin:  6em auto;
-    // margin-left: 40%;
-    
-    // max-width:100%;
-
-
     border: 1px solid #B881FF;
     border-radius: 10px;
 
 
     @include tabletMax() {
-		margin-top: toRem(250);
+		margin-top: toRem(430);
 		width: 90%;
         .containerBooks{
             width: 90%;
@@ -116,11 +132,11 @@
             }
         }
 	  }
-    div{
-        margin-left: 5px;
-        margin-right: 5px;
-        margin-bottom: 20px;
-    }
+    // div{
+    //     margin-left: 5px;
+    //     margin-right: 5px;
+    //     margin-bottom: 20px;
+    // }
 
     .userPhoto{ 
         // width: 25%;
@@ -181,10 +197,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
-    top: -40px; 
+        div{
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 20px;
+    }
+
+    
+    
     button{
-        width: 5em;
+        position: relative;
+        margin-top: 50px;
+        width: 100%;
         padding: 5px;
         box-sizing: border-box;
         background: $secundario;
@@ -193,61 +217,63 @@
         border-radius: 10px;
         cursor: pointer;
     } 
-}
-
-.books{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.containerBooks{
-    background-color: #B881FF;
-    width: 100%;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    justify-content: baseline;
-    border: 1px solid #B881FF;
-    border-radius: 10px;
-
-
-
-    img{
-        margin-top: 5px;
-        justify-content: center;
-        object-fit: cover;
-        width: 60px;
-    }
-    h1{
-        color: $gris4;
-        font-size: 20px;
-    }
-    h3{
-        color: $gris4;
-        font-size: 15px;
+    .emailandpass{
+        display: flex;
+        flex-direction: row;
     }
 
-    button{
-        padding: 5px;
-        box-sizing: border-box;
-        background:$secundario;
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
-        border-radius: 10px;
-        cursor: pointer;
+    .name{
+        border: 1px solid #B881FF;
+        width: 100%;
+        text-align: center;
     }
+
 }
 
-button{
-    padding: 5px;
-    box-sizing: border-box;
-    background: $secundario;
-    border: 1px solid #B881FF;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
-    border-radius: 10px;
-    cursor: pointer;
-}
+// .books{
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// }
+
+// .containerBooks{
+//     background-color: #B881FF;
+//     margin: 5px;
+//     align-items: center;
+//     display: flex;
+//     flex-direction: row;
+//     flex-grow: 1;
+//     padding: 10px;
+//     justify-content: baseline;
+//     border: 1px solid #B881FF;
+//     border-radius: 10px;
+
+
+
+//     img{
+//         margin-top: 5px;
+//         justify-content: center;
+//         object-fit: cover;
+//         width: 60px;
+//     }
+//     h1{
+//         color: $gris4;
+//         font-size: 20px;
+//     }
+//     h3{
+//         color: $gris4;
+//         font-size: 15px;
+//     }
+
+//     button{
+//         padding: 5px;
+//         box-sizing: border-box;
+//         background:$secundario;
+//         box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+//         border-radius: 10px;
+//         cursor: pointer;
+//     }
+// }
 
 
 
