@@ -53,7 +53,7 @@ const activateAccount = (req, res) => {
             if (err) {
               console.log("Error in signup while account activation: ", err);
               return (
-                res.status(400), json({ error: "Error activating account" })
+                res.status(400).json({ error: "Error activating account" })
               );
             }
             res.json({
