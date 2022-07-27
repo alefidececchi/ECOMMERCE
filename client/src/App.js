@@ -7,6 +7,7 @@ import Shopping from './components/Shopping/shopping.jsx';
 import User from './components/User/user.jsx';
 import WishList from './components/WishList/wishList.jsx';
 import AddBook from './components/BookForm/addBook.jsx'
+import Register from "./components/Register/register"
 import { ToastContainer } from 'react-toastify'
 import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
@@ -67,7 +68,7 @@ function App() {
       </Route>
      </Routes>
     </div>
-  ); 
+  );
 }
 
 export default App;
