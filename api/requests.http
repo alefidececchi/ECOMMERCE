@@ -6,7 +6,7 @@
 GET http://localhost:3001/books?limit=(NUMBER)&page=(NUMBER) HTTP/1.1
 
 ###
-GET http://localhost:3001/books?name=(NAME)&discount=(asc/desc)&price=(asc/desc)&released=(asc/desc)&sort=(asc/desc)&genre=(GENRE)&status=(false/true)&limit=(NUMBER)&page=(1...) HTTP/1.1
+GET http://localhost:3001/books?name=(NAME)&discount=(asc/desc)&price=(asc/desc)&released=(asc/desc)&sort=(asc/desc)&genre=(GENRE)&status=(false/true)&author=(AUTHOR NAME)&limit=(NUMBER)&page=(1...) HTTP/1.1
 
 ###
 GET http://localhost:3001/books/:idBook HTTP/1.1
