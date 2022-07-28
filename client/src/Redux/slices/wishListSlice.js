@@ -34,11 +34,14 @@ const wishListSlice = createSlice({
           });
       }
       console.log(action.payload._id);
+    },
+    removeBook(state, action) {
+      state.wishList = state.wishList.filter(book => book._id !== action.payload)
     }
   }
 
 })
 
-export const {getWishList} = wishListSlice.actions;
+export const {getWishList, removeBook} = wishListSlice.actions;
 
 export default wishListSlice.reducer;
