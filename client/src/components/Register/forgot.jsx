@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import s from './forgot.module.scss'
 import swal from 'sweetalert'
 import axios from 'axios'
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
     fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
@@ -25,6 +25,9 @@ const Forgot = () => {
 
     return (
         <div className={s.container}>
+
+
+            
             <div className={s.formulario}>
                 <section>
                     <Formik
@@ -51,16 +54,16 @@ const Forgot = () => {
                             console.log(values)
 
                             resetForm();
-                            axios.post('http://localhost:3001/auth/register', values)
+                            axios.post('http://localhost:3001/auth/forgot-password', values)
                             swal({
-                                title: 'Congratulation',
-                                text: 'User created  successfully',
+                                title: '',
+                                text: 'Please check your inbox ',
                                 icon: 'success',
                                 button: 'OK'
                             }).then(res => {
                                 if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                                     dispatcher(fetchAllBooks());
-                                    navigate('/activate-account')
+                                    navigate('/reset')
                                 }
                             })
 
@@ -73,10 +76,13 @@ const Forgot = () => {
 
                         }}
                     >
+                        
                         {({ errors }) => (
                             <Form className={s.form}>
-                                <h2>Password recovery</h2>
-                                <h4>Inform the email address used to create your account</h4>
+
+                                <h3>Password recovery</h3>
+                                <h4>Inform the email address used</h4>
+                                <h4>   to create your account</h4>
 
                                 <div>
                                     <label htmlFor="email">Email address: </label>
@@ -100,12 +106,15 @@ const Forgot = () => {
                                     <button type="submit">  Submit </button>
                                     {send && <p>User added succecsfully</p>}
 
-                                    <Link to={"/register"}>
 
-                                        <button > Back to log in </button>
-
-                                    </Link>
                                 </div>
+
+                                <Link to={"/login"}>
+
+                                    <a > Back to log in </a>
+
+                                </Link>
+
                             </Form>
                         )}
                     </Formik>

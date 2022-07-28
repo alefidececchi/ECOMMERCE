@@ -42,8 +42,9 @@ const Activate = (props) => {
 
     return (
         <div className={s.container}>
-            <h2>Email has been sent!</h2>
-            <h4>Please check your inbox to activate your account</h4>
+            <h3>Email has been sent!</h3>
+            <h4>Please check your inbox to activate your</h4>
+            <h4>  account</h4>
             <Link to={"/login"}>
 
                 <button type="submit">Login</button>

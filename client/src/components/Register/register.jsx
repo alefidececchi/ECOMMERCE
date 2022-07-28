@@ -15,7 +15,8 @@ import {
 
 const Register = () => {
 
-    // var google=""
+    //  var google=""
+    const google = window.google;
 
     const [user, setUser] = useState({});
     //  console.log(user)
@@ -25,6 +26,15 @@ const Register = () => {
         var userObject = jwt_decode(response.credential);
         // console.log(userObject);
         setUser(userObject);
+        axios({
+            method: 'post',
+            url: 'http://localhost:3001/users/registerGoogle',
+            data: {
+                email: userObject.email,
+                password: userObject.sub,
+            },
+        });
+
         document.getElementById("signInDiv").hidden = true;
     }
 
@@ -46,7 +56,7 @@ const Register = () => {
         );
 
         google.accounts.id.prompt();
-        
+
 
     }, []);
     // If we have no user: sign in button
@@ -54,16 +64,16 @@ const Register = () => {
 
 
 
-    useEffect(() => {
-        axios({
-            method: 'post',
-            url: 'http://localhost:3001/users/registerGoogle',
-            data: {
-                email: user.email,
-                password: user.sub,
-            },
-        });
-    }, [ ])
+    // useEffect(() => {
+    //     axios({
+    //         method: 'post',
+    //         url: 'http://localhost:3001/users/registerGoogle',
+    //         data: {
+    //             email: user.email,
+    //             password: user.sub,
+    //         },
+    //     });
+    // }, [ ])
 
 
 
@@ -80,16 +90,6 @@ const Register = () => {
     return (
         <div className={s.container}>
 
-            <div id="signInDiv"></div>
-
-            {Object.keys(user).length != 0 &&
-                <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
-            }
-            {user &&
-                <div>
-                    <img src={user.picture}></img>
-                    <h3>{user.name}</h3>
-                </div>}
 
 
 
@@ -153,9 +153,9 @@ const Register = () => {
                     >
                         {({ errors }) => (
                             <Form className={s.form}>
-                                <h2>My account</h2>
+                                <h3>My account</h3>
                                 <div>
-                                    <label htmlFor="name">Name: </label>
+                                    <label htmlFor="name">Name </label>
                                     <Field
                                         type='text'
                                         id="nameBook"
@@ -168,7 +168,7 @@ const Register = () => {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email">Email address: </label>
+                                    <label htmlFor="email">Email address </label>
                                     <Field
                                         type='text'
                                         id="email"
@@ -181,7 +181,7 @@ const Register = () => {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="password">Password: </label>
+                                    <label htmlFor="password">Password </label>
                                     <Field
                                         type='password'
                                         id="password"
@@ -196,11 +196,35 @@ const Register = () => {
                                     <button type="submit">  Create </button>
                                     {send && <p>User added succecsfully</p>}
                                 </div>
+
+
+
+
+                                <div className={s.google} id="signInDiv"></div>
+
+                                {Object.keys(user).length != 0 &&
+                                    <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+                                }
+                                {user &&
+                                    <div>
+                                        <img src={user.picture}></img>
+                                        <h3>{user.name}</h3>
+                                    </div>}
+
+
                             </Form>
                         )}
                     </Formik>
                 </section>
             </div>
+
+
+
+
+
+
+
+
         </div>
     );
 };

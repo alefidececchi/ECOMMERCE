@@ -29,26 +29,14 @@ const Reset = () => {
                 <section>
                     <Formik
                         initialValues={{
-                            name: "",
-                            email: "",
+                            
                             password: "",
 
 
                         }}
                         validate={(values) => {
                             let errors = {};
-                            //validacion username 
-                            if (!values.name) {
-                                errors.name = 'Please write a Username'
-                            } else if (values.name.length < 4 || values.name.length > 40) {
-                                errors.name = 'Username must have between 4 or 20 characters'
-                            }
-                            //validacion email 
-                            if (!values.email) {
-                                errors.email = 'Please write your Email'
-                            } else if (values.email.length < 4 || values.email.length > 40) {
-                                errors.email = 'Must be a valid email'
-                            }
+                        
                             //validacion password
                             if (!values.password) {
                                 errors.password = 'Please write your password'
@@ -88,31 +76,7 @@ const Reset = () => {
                                 <h2>Email has been sent!</h2>
                                 <h3>Please check your inbox for instructions on how to reset the password</h3>
                                 <h4>You have 20 minutes to complete the password change</h4>
-                                {/* <div>
-                                    <label htmlFor="name">Name: </label>
-                                    <Field
-                                        type='text'
-                                        id="nameBook"
-                                        placeholder="Type a name..."
-                                        name="name"
-                                    />
-                                    <ErrorMessage name="name" component={() => (
-                                        <div className={s.error}>{errors.name}</div>
-                                    )} />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="email">Email address: </label>
-                                    <Field
-                                        type='text'
-                                        id="email"
-                                        placeholder="user@user.com"
-                                        name="email"
-                                    />
-                                    <ErrorMessage name="email" component={() => (
-                                        <div className={s.error}>{errors.email}</div>
-                                    )} />
-                                </div>
+                               
 
                                 <div>
                                     <label htmlFor="password">Password: </label>
@@ -125,7 +89,7 @@ const Reset = () => {
                                     <ErrorMessage name="password" component={() => (
                                         <div className={s.error}>{errors.password}</div>
                                     )} />
-                                </div> */}
+                                </div>
 
 
 

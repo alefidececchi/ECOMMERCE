@@ -172,9 +172,7 @@ const Login = () => {
                     >
                         {({ errors }) => (
                             <Form className={s.form}>
-                                <h2>My account</h2>
-
-
+                                
                                 <div>
                                     <label htmlFor="email">Email address: </label>
                                     <Field
@@ -210,11 +208,11 @@ const Login = () => {
                                     {send && <p>User added succecsfully</p>}
 
                                     <Link to={"/forgot-password"}>
-                                        <button >  Forgot my password </button>
+                                        <a >  Forgot my password </a>
                                     </Link>
                                     <Link to={"/register"}>
 
-                                        <button >  Sign up </button>
+                                        <button  className={s.button2}>  Sign up </button>
 
                                     </Link>
                                 </div>
