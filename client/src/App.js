@@ -37,6 +37,7 @@ function App() {
         <Route path='activate-account/:token' element={< Activate/>} />
         <Route path='login' element={< Login />} />
         <Route path='forgot-password' element={< Forgot />} />
+        <Route path='reset-password' element={< Activate />} />
         <Route path='reset-password/:token' element={< Reset />} />
       </Routes>
     </div>
