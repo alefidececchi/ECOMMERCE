@@ -22,16 +22,14 @@
 }
 
 .containerPur{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     
-    flex-direction: column; 
-    flex-wrap: wrap;
-    grid-gap: 2em; 
-    box-sizing: border-box;
-    border: 1px solid #B881FF;
-    border-radius: 10px;
+    width: 600px;
+    height: 100vh;
+    padding-left: 10px;
+    //margin: 0 auto;
+    padding-top: 150px;
+    font-size: 40px;
+    
 }
 
 .containerSide{
@@ -51,3 +49,302 @@
     box-sizing: border-box;
   
 }
+.producto{
+    width: 150px;
+}
+.vacio{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 20px;
+    div{
+        margin-top: 80px;
+    }
+    button{
+        width: 80px;
+        padding: 5px;
+        box-sizing: border-box;
+        background:$secundario;
+        box-shadow: 0px 0px 4px rgba(156, 4, 187, 0.849);
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}
+
+.table{
+    background-color: rgba(149, 53, 187, 0.153);
+    width: 100%;
+    border-collapse: collapse;
+    td,
+    th{
+        padding: 40px;
+    }
+    &_cap{
+        letter-spacing: 5px;
+    }
+    &_head{
+        width: 100%;
+        border-bottom: 1px solid $secundario;
+    }
+    &_heading{
+        color:$gris4;
+        font-size: 20px;
+        letter-spacing: 5px;
+        text-align: left
+    }
+    &_row{
+        height: 65px;
+    }
+    &_cell{
+        font-size: 20px;
+        letter-spacing: 3px;
+        border-bottom: 1px solid $secundario;
+        color: $gris4;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .containerPur{
+        margin-top: toRem(50);
+        margin-left: toRem(50);
+        
+        .producto{
+            width: 100px;
+
+        }
+        .table{
+            width: 5em;
+            font-size: 30px;
+            td,
+            th{
+                padding: 35px;
+            }
+            &_cap{
+                text-align: right;
+                letter-spacing: 0px;
+            }
+            &_head{
+                
+                border-bottom: 1px solid $secundario;
+            }
+            &_heading{
+                color:$gris4;
+                font-size: 12px;
+                letter-spacing: 5px;
+                text-align: left
+            }
+            &_row{
+                height: 65px;
+            }
+            &_cell{
+                font-size: 16px;
+                letter-spacing: 3px;
+                border-bottom: 1px solid $secundario;
+                color: $gris4;
+                width: 100%;
+            }
+        }
+            
+      
+    }
+    .containerSide{
+        margin-top: toRem(-10);
+        position: absolute;
+        top: 0;
+        
+        
+        //padding: 3.52em;
+    
+    }   
+       
+      
+
+  }
+
+@media only screen and (max-width: 768px) {
+    .containerPur{
+        margin-top: toRem(150);
+        margin-left: toRem(-100);
+        width: 5em;
+        .producto{
+            width: 100px;
+
+        }
+        .table{
+            width: 5em;
+            font-size: 30px;
+            td,
+            th{
+                padding: 15px;
+            }
+            &_cap{
+                text-align: right;
+                letter-spacing: 0px;
+            }
+            &_head{
+                
+                border-bottom: 1px solid $secundario;
+            }
+            &_heading{
+                color:$gris4;
+                font-size: 12px;
+                letter-spacing: 5px;
+                text-align: left
+            }
+            &_row{
+                height: 65px;
+            }
+            &_cell{
+                font-size: 16px;
+                letter-spacing: 3px;
+                border-bottom: 1px solid $secundario;
+                color: $gris4;
+                width: 100%;
+            }
+        }
+            
+      
+    }
+
+  }
+
+@media only screen and (max-width: 550px) {
+    .containerPur{
+        margin-top: toRem(150);
+        margin-left: toRem(10);
+        width: 5em;
+        .producto{
+            width: 100px;
+
+        }
+        .table{
+            width: 5em;
+            font-size: 30px;
+            td,
+            th{
+                padding: 5px;
+            }
+            &_cap{
+                text-align: right;
+                letter-spacing: 0px;
+            }
+            &_head{
+                
+                border-bottom: 1px solid $secundario;
+            }
+            &_heading{
+                color:$gris4;
+                font-size: 12px;
+                letter-spacing: 5px;
+                text-align: left
+            }
+            &_row{
+                height: 65px;
+            }
+            &_cell{
+                font-size: 16px;
+                letter-spacing: 3px;
+                border-bottom: 1px solid $secundario;
+                color: $gris4;
+                width: 100%;
+            }
+        }
+            
+      
+    }
+
+  }
+  @media only screen and (max-width: 420px) {
+    .containerPur{
+        margin-top: toRem(150);
+        margin-left: toRem(50);
+        width: 5em;
+        .producto{
+            width: 100px;
+
+        }
+        .table{
+            width: 5em;
+            font-size: 30px;
+            td,
+            th{
+                padding: 0px;
+            }
+            &_cap{
+                text-align: right;
+                letter-spacing: 0px;
+            }
+            &_head{
+                
+                border-bottom: 1px solid $secundario;
+            }
+            &_heading{
+                color:$gris4;
+                font-size: 12px;
+                letter-spacing: 5px;
+                text-align: left
+            }
+            &_row{
+                height: 65px;
+            }
+            &_cell{
+                font-size: 16px;
+                letter-spacing: 3px;
+                border-bottom: 1px solid $secundario;
+                color: $gris4;
+                width: 100%;
+            }
+        }
+            
+      
+    }
+
+  }
+
+  @media only screen and (max-width: 320px) {
+    .containerPur{
+        margin-top: toRem(310);
+        margin-left: toRem(-60);
+        width: 5em;
+        .producto{
+            width: 100px;
+
+        }
+        .table{
+            width: 5em;
+            font-size: 30px;
+            td,
+            th{
+                padding: 3px;
+            }
+            &_cap{
+                text-align: right;
+                letter-spacing: 0px;
+            }
+            &_head{
+                
+                border-bottom: 1px solid $secundario;
+            }
+            &_heading{
+                color:$gris4;
+                font-size: 12px;
+                letter-spacing: 5px;
+                text-align: left
+            }
+            &_row{
+                height: 65px;
+            }
+            &_cell{
+                font-size: 16px;
+                letter-spacing: 3px;
+                border-bottom: 1px solid $secundario;
+                color: $gris4;
+                width: 100%;
+            }
+        }
+            
+      
+    }
+
+  }

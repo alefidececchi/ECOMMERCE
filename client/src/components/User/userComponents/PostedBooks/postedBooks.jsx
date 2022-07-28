@@ -13,7 +13,7 @@ function PostedBooks(){
 
     const[editMode, setEditMode] = useState(false)
     let[books, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
-    
+    //let books  = []
     function deleteBook(del){
         console.log(del)
         let filtrado = books.filter(b => b.bookName !== del.bookName)
@@ -51,15 +51,21 @@ function PostedBooks(){
                     <EditBook editOff={editOff}/>
                   </div>
                 ):
-                books.length > 0 ?
+               <div>
+                {books.length > 0 ?
                 books.map((book , i) =>
+                
                     <div key={i} className={s.books}>
+                      
                       <div className={s.imagen}>
                         <img src={book.image} alt='bookImage'></img>
                       </div>
                       <div  className={s.text}>
                         <h1> {book.bookName}</h1>
                         <h3> Price:${book.price} USD</h3>
+                      </div>
+                      <div  className={s.text}>
+                        <h1> Stock: {book.amount}</h1>
                       </div>
                       <div className={s.botones}>
                         <button  onClick={editOn} className={s.button}>Edit</button>  {/* <button className={style.button} onClick={editOn}>Edit</button> */}
@@ -76,8 +82,8 @@ function PostedBooks(){
                     <div >
                       <h2>Books for sale?</h2>
                     </div>
-                  </div>
-
+                  </div>}
+                </div>
               }
               <div className={s.btncentro}> {/* <div className={style.info}> */}
               
@@ -97,3 +103,4 @@ function PostedBooks(){
     //}
 }
 export default PostedBooks;
+
