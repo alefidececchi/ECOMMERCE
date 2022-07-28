@@ -6,6 +6,7 @@ const {
   putUser,
   putUserBook,
   deleteUser,
+  putUserWishList
 } = require("../controllers/user.controller.js");
 
 const router = express.Router();
@@ -19,6 +20,8 @@ router.post("/register", postUser);
 router.put("/:idUser", putUser);
 
 router.put("/:idUser/:idBook", putUserBook);
+
+router.pus("/add/:idUser/:idBook", putUserWishList)
 
 router.delete("/:idUser", deleteUser);
 
