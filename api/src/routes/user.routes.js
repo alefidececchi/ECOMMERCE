@@ -21,7 +21,7 @@ router.put("/:idUser", putUser);
 
 router.put("/:idUser/:idBook", putUserBook);
 
-router.pus("/add/:idUser/:idBook", putUserWishList)
+router.put("/add/:idUser/:idBook", putUserWishList)
 
 router.delete("/:idUser", deleteUser);
 
