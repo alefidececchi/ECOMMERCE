@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import s from './activate.module.scss'
 import swal from 'sweetalert'
 import axios from 'axios'
-import { useNavigate ,Link } from "react-router-dom";
+import { useNavigate ,Link,useParams } from "react-router-dom";
 import {
     fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
@@ -12,7 +12,7 @@ import {
 
 
 
-const Reset = () => {
+const Reset = (props) => {
 
     const [send, setSend] = useState(false);
 
@@ -20,8 +20,27 @@ const Reset = () => {
 
     let navigate = useNavigate()
 
-    console.log(send)
-    console.log(Field)
+    // console.log(send)
+    // console.log(Field)
+
+const { token } = useParams()
+
+
+// useEffect(() => {
+   
+//     axios({
+//         method: 'put',
+//         url: 'http://localhost:3001/auth/forgot-password',
+//         data: {
+//            resetLink: token
+//         },
+//     });
+// }, [])
+
+// console.log(token)
+
+
+
 
     return (
         <div className={s.container}>
@@ -30,18 +49,18 @@ const Reset = () => {
                     <Formik
                         initialValues={{
                             
-                            password: "",
-
+                            newPass: "",
+                            resetLink:token
 
                         }}
                         validate={(values) => {
                             let errors = {};
                         
                             //validacion password
-                            if (!values.password) {
-                                errors.password = 'Please write your password'
-                            } else if (values.password.length < 4 || values.password.length > 40) {
-                                errors.password = 'Password must have between 4 or 20 characters'
+                            if (!values.newPass) {
+                                errors.newPass = 'Please write your password'
+                            } else if (values.newPass.length < 4 || values.newPass.length > 40) {
+                                errors.newPass = 'Password must have between 4 or 20 characters'
                             }
                             return errors;
                         }}
@@ -49,16 +68,16 @@ const Reset = () => {
                             console.log(values)
 
                             resetForm();
-                            axios.post('http://localhost:3001/auth/register', values)
+                            axios.put('http://localhost:3001/auth/reset-password', values)
                             swal({
                                 title: 'Congratulation',
-                                text: 'User created  successfully',
+                                text: 'cmbiaste tu contraseña',
                                 icon: 'success',
                                 button: 'OK'
                             }).then(res => {
                                 if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                                     dispatcher(fetchAllBooks());
-                                    navigate('/activate-account')
+                                    navigate('/login')
                                 }
                             })
 
@@ -79,22 +98,26 @@ const Reset = () => {
                                
 
                                 <div>
-                                    <label htmlFor="password">Password: </label>
+                                    <label htmlFor="newPass">Password: </label>
                                     <Field
                                         type='password'
                                         id="password"
                                         placeholder="********"
-                                        name="password"
+                                        name="newPass"
                                     />
-                                    <ErrorMessage name="password" component={() => (
-                                        <div className={s.error}>{errors.password}</div>
+                                    <ErrorMessage name="newPass" component={() => (
+                                        <div className={s.error}>{errors.newPass}</div>
                                     )} />
+                                </div>
+
+                                <div>
+                                    <button type="submit">  Create </button>
+                                    {send && <p>User added succecsfully</p>}
                                 </div>
 
 
 
-
-                                <h3>o token</h3>
+{/*                                 
                                 <div>
                                     <Link to={"/login" }>
 
@@ -103,7 +126,7 @@ const Reset = () => {
                                     </Link>
 
                                     {send && <p>User added succecsfully</p>}
-                                </div>
+                                </div> */}
                             </Form>
                         )}
                     </Formik>

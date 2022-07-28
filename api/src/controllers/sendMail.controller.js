@@ -40,7 +40,7 @@ const sendMailForgot = (token, email) => {
     from: "samirjose675@gmail.com",
     to: `${email}`,
     subject: "Enviado desde libritos.com",
-    text: `Please click on given link to reset your password: ${process.env.CLIENT_URL}/resetpassword/${token}`,
+    text: `Please click on given link to reset your password: ${process.env.CLIENT_URL}/reset-password/${token}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

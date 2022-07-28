@@ -54,7 +54,7 @@ const Forgot = () => {
                             console.log(values)
 
                             resetForm();
-                            axios.post('http://localhost:3001/auth/forgot-password', values)
+                            axios.put('http://localhost:3001/auth/forgot-password', values)
                             swal({
                                 title: '',
                                 text: 'Please check your inbox ',
@@ -63,7 +63,7 @@ const Forgot = () => {
                             }).then(res => {
                                 if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                                     dispatcher(fetchAllBooks());
-                                    navigate('/reset')
+                                    navigate('/reset-password')
                                 }
                             })
 
