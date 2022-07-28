@@ -22,7 +22,7 @@ const userSchema = new Schema(
     },
     admin: {
       types: Boolean,
-      default:false,
+      default: false,
     },
     image: {
       type: String,
@@ -52,10 +52,13 @@ const userSchema = new Schema(
         ref: "Book",
       },
     ],
-    log_Google: {
-      type:Boolean,
-      default:false
-    }
+    log_Google:
+    {
+      type: Boolean,
+      default: false,
+    },
+
+
   },
   {
     timestamps: true,

@@ -1,18 +1,82 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import s from './register.module.scss'
 import swal from 'sweetalert'
 import axios from 'axios'
+import jwt_decode from "jwt-decode"
 import { useNavigate } from "react-router-dom";
 import {
-    fetchBooksGenres, fetchAllBooks
+    fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
 
 
 
 
 const Register = () => {
+
+    //  var google=""
+    const google = window.google;
+
+    const [user, setUser] = useState({});
+    //  console.log(user)
+
+    function handleCallbackResponse(response) {
+        // console.log("Encoded JWT ID token: " + response.credential);
+        var userObject = jwt_decode(response.credential);
+        // console.log(userObject);
+        setUser(userObject);
+        axios({
+            method: 'post',
+            url: 'http://localhost:3001/users/registerGoogle',
+            data: {
+                email: userObject.email,
+                password: userObject.sub,
+            },
+        });
+
+        document.getElementById("signInDiv").hidden = true;
+    }
+
+    function handleSignOut(event) {
+        setUser({});
+        document.getElementById("signInDiv").hidden = false;
+    }
+
+
+    useEffect(() => {
+        google.accounts.id.initialize({
+            client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
+            callback: handleCallbackResponse
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById('signInDiv'),
+            { theme: "outline", size: "large" }
+        );
+
+        google.accounts.id.prompt();
+
+
+    }, []);
+    // If we have no user: sign in button
+    // If we have a user: show the log out button
+
+
+
+    // useEffect(() => {
+    //     axios({
+    //         method: 'post',
+    //         url: 'http://localhost:3001/users/registerGoogle',
+    //         data: {
+    //             email: user.email,
+    //             password: user.sub,
+    //         },
+    //     });
+    // }, [ ])
+
+
+
 
     const [send, setSend] = useState(false);
 
@@ -25,6 +89,10 @@ const Register = () => {
 
     return (
         <div className={s.container}>
+
+
+
+
             <div className={s.formulario}>
                 <section>
                     <Formik
@@ -64,13 +132,13 @@ const Register = () => {
                             axios.post('http://localhost:3001/auth/register', values)
                             swal({
                                 title: 'Congratulation',
-                                text: 'User created  successfully',
+                                text: 'Please check your inbox to activate your account',
                                 icon: 'success',
                                 button: 'OK'
                             }).then(res => {
                                 if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                                     dispatcher(fetchAllBooks());
-                                    navigate('/user')
+                                    navigate('/activate-account')
                                 }
                             })
 
@@ -85,9 +153,9 @@ const Register = () => {
                     >
                         {({ errors }) => (
                             <Form className={s.form}>
-                                <h2>My account</h2>
+                                <h3>My account</h3>
                                 <div>
-                                    <label htmlFor="name">Name: </label>
+                                    <label htmlFor="name">Name </label>
                                     <Field
                                         type='text'
                                         id="nameBook"
@@ -100,7 +168,7 @@ const Register = () => {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email">Email address: </label>
+                                    <label htmlFor="email">Email address </label>
                                     <Field
                                         type='text'
                                         id="email"
@@ -113,7 +181,7 @@ const Register = () => {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="password">Password: </label>
+                                    <label htmlFor="password">Password </label>
                                     <Field
                                         type='password'
                                         id="password"
@@ -124,23 +192,40 @@ const Register = () => {
                                         <div className={s.error}>{errors.password}</div>
                                     )} />
                                 </div>
-
-
-
-
-
                                 <div>
                                     <button type="submit">  Create </button>
                                     {send && <p>User added succecsfully</p>}
                                 </div>
+
+
+
+
+                                <div className={s.google} id="signInDiv"></div>
+
+                                {Object.keys(user).length != 0 &&
+                                    <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+                                }
+                                {user &&
+                                    <div>
+                                        <img src={user.picture}></img>
+                                        <h3>{user.name}</h3>
+                                    </div>}
+
+
                             </Form>
                         )}
                     </Formik>
                 </section>
             </div>
+
+
+
+
+
+
+
+
         </div>
-
-
     );
 };
 

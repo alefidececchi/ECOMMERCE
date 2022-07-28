@@ -8,12 +8,17 @@ import User from './components/User/user.jsx';
 import WishList from './components/WishList/wishList.jsx';
 import AddBook from './components/BookForm/addBook.jsx'
 import Register from "./components/Register/register"
+import Login from './components/Register/login';
+import Activate from "./components/Register/activate"
+import Forgot from "./components/Register/forgot"
+import Reset from "./components/Register/reset"
 import { ToastContainer } from 'react-toastify'
 import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
 
 
 function App() {
+<<<<<<< HEAD
   const [user,setUser]= useState({});
 
   function handleCallbackResponse(response){
@@ -67,6 +72,30 @@ function App() {
         <Route path='wish' element={< WishList />} />
       </Route>
      </Routes>
+=======
+  
+  return (
+    <div className="App">
+      <ToastContainer />
+      <Routes>
+
+        <Route path='/' element={< NavBar />}>
+          <Route path="/" element={< Home />} />
+          <Route path='shopping' element={< Shopping />} />
+          <Route path='user' element={< User />} />
+          <Route path='user/newBook' element={< AddBook />} />
+          <Route path='wish' element={< WishList />} />
+
+        </Route>
+
+        <Route path='register' element={< Register />} />
+        <Route path='activate-account' element={< Activate />} />
+        <Route path='activate-account/:token' element={< Activate/>} />
+        <Route path='login' element={< Login />} />
+        <Route path='forgot-password' element={< Forgot />} />
+        <Route path='reset-password/:token' element={< Reset />} />
+      </Routes>
+>>>>>>> us-FRONTlog
     </div>
   );
 }

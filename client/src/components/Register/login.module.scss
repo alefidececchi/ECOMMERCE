@@ -89,7 +89,7 @@
     }
     button:hover {
         transition-duration: 0.5s;
-        border: 1px solid #b881ff;
+        border:1px solid #b881ff;
         background: #ffffff;
         color: #b881ff;
     }
@@ -116,11 +116,14 @@
     input[type="radio"] {
         width: auto;
     }
-    .google {
-        width: 339px;
-        margin-top: 2rem;
+    a{
         display: flex;
+        // align-items: center;
+        font-size: 14px;
         justify-content: center;
+        margin-top: 1rem;
+        font-weight: bolder;
+        color:#b881ff;
     }
     // @include media ('<=phone'){
     // 	position: absolute;
@@ -138,6 +141,28 @@
     // 	margin:  2px 1px auto;
     // 	width: 5%;
     // }
+
+    .button2 {
+        padding: 0.3125em;
+        // box-sizing: border-box;
+        width: 339px;
+        height: 59px;
+        background-color: #ffffff;
+        border:1px solid #b881ff;
+        // box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+        color: #b881ff;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 10px;
+        margin-top: 1.5rem;
+        transition-duration: 0.5s;
+    }
+    .button2:hover {
+        transition-duration: 0.5s;
+        // border: #b881ff;
+        background: #b881ff;
+        color: #ffffff;
+    }
 }
 // .form{
 //     display: flex;
