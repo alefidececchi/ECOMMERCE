@@ -1,4 +1,5 @@
 const User = require("../models/User.js");
+const Book = require("../models/Book.js");
 
 const getUsers = async (req, res) => {
   try {
@@ -101,12 +102,27 @@ const putUserBook = async (req, res) => {
     $push: { selling_books: idBook },
   });
 
+  const bookUpdated = await Book.findByIdAndUpdate(idBook, {
+    $push: { sellers: idUser }
+  })
+
   res.status(200).json({
     status: sellingBooksUpdate,
+    statusBook: bookUpdated
   });
   // en POSTMAN PUT:
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
+
+const putUserWishList = async (req, res) => {
+  const { idBook, idUser } = req.params
+  await User.findByIdAndUpdate(idUser, {
+    $push: { wish_list: idBook }
+  })
+  res.status(200).json({
+    status: "Libro agregado a wish list"
+  })
+}
 
 const deleteUser = async (req, res) => {
   const { idUser } = req.params;
@@ -125,4 +141,5 @@ module.exports = {
   putUser,
   putUserBook,
   deleteUser,
+  putUserWishList
 };

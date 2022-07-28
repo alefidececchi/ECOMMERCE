@@ -73,11 +73,13 @@ const activateAccount = (req, res) => {
 
 //     if (await User.findOne({email}) === null) return res.status(400).json({error: "Email no registrado"})
 
+
 //     const user = await User.findOne({email})
 //     const compare = await bcrypt.compare(password, user.password)
 //     console.log("🚀 ~ file: auth.controller.js ~ line 78 ~ login ~ compare", compare)
 
 //     if (!compare) return res.status(400).json({error: "Contraseña invalida"})
+
 
 //     res.status(200).json({auth: "Usuario logueado", user})
 // }
@@ -101,8 +103,14 @@ const login = async (req, res) => {
 
       if (!compare) return res.status(400).json({error: "Contraseña invalida"})
 
-      res.status(200).json({auth: "Usuario logueado tradicionalmente", user})
+
+const token = jwt.sign({id: user._id, name: user.name, email: user.email, admin: user.admin},process.env.JWT_ACC_ACTIVATE)
+
+    res.status(200).json({auth: "Usuario logueado", token})
+
+
   }
+
 }
 
 const forgotPassword = async (req, res) => {
