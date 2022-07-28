@@ -114,7 +114,11 @@ const putBook = async (req, res) => {
         { $push: { sellers: idUser } },
         { new: true, useFindAndModify: false }
       );
-      return res.status(201).json({ bookUpdated: bookUpdated });
+      const userUpdated = await User.findByIdAndUpdate(
+        idUser,
+        { $push: { selling_books: idBook } },
+        { new: true, useFindAndModify: false })
+      return res.status(201).json({ bookUpdated: bookUpdated, userUpdated: userUpdated });
     } catch (error) {
       return res.status(500).json({ error: error });
     }
