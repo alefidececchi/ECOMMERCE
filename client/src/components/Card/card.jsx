@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import s from "./card.module.scss"
 import BookDetail from '../BookDetail/bookDetail';
+import { addToCart } from "../../Redux/slices/shoping.slice";
 
-const Card = ({ name, price, image ,id}) => {
+const Card = ({ name, price, image ,id, book}) => {
 
+    const dispatch = useDispatch()
 
     // esto es para deplegar el detlle de la tarjeta 
     const [toggle, setToggle] = useState(false);
@@ -19,9 +22,17 @@ const Card = ({ name, price, image ,id}) => {
         setCart(["hola me agregaron al estado cart"]);
     }
 
-    
-    // console.log(name)
 
+    
+
+   
+    
+
+    const handleAddToCart = (book) =>{
+    
+        dispatch(addToCart(book))
+      }
+        
     return (
 
 
@@ -37,7 +48,7 @@ const Card = ({ name, price, image ,id}) => {
                     <h3>$ {price}</h3>
                     <h4 >{name}</h4>
                 </div>
-                <figure onClick={handleClick} className={s.info2}>
+                <figure onClick={() => handleAddToCart(book)} className={s.info2}>
                     <button><i class="fas fa-cart-plus fa-lg"></i></button>
 
                 </figure>

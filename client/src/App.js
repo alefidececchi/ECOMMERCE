@@ -7,7 +7,7 @@ import Shopping from './components/Shopping/shopping.jsx';
 import User from './components/User/user.jsx';
 import WishList from './components/WishList/wishList.jsx';
 import AddBook from './components/BookForm/addBook.jsx'
-import { ToastContainer } from 'react-toastify'
+
 import PostedBooks from './components/User/userComponents/PostedBooks/postedBooks';
 //import SideBar from './components/User/sideBar';
 import MyGiftCards from './components/User/userComponents/MyGiftCards/myGiftCards';
@@ -15,9 +15,17 @@ import MyWishList from './components/User/userComponents/MyWishList/myWishList';
 import Purchases from './components/User/userComponents/Purchases/purchases';
 import Discounts from './components/User/userComponents/Discount/discounts';
 import Payment from './components/User/userComponents/Payment/payment';
+import Register from "./components/Register/register"
+import Login from './components/Register/login';
+import Activate from "./components/Register/activate"
+import Forgot from "./components/Register/forgot"
+import Reset from "./components/Register/reset"
+import { ToastContainer } from 'react-toastify'
+
 
 
 function App() {
+  
   return (
     <div className="App">
     <ToastContainer />
@@ -35,9 +43,16 @@ function App() {
         <Route path='user/newBook' element={< AddBook />} />
         <Route path='wish' element={< WishList />} />
       </Route>
+        <Route path='register' element={< Register />} />
+        <Route path='activate-account' element={< Activate />} />
+        <Route path='activate-account/:token' element={< Activate/>} />
+        <Route path='login' element={< Login />} />
+        <Route path='forgot-password' element={< Forgot />} />
+        <Route path='reset-password/:token' element={< Reset />} />
      </Routes>
+    
     </div>
-  ); 
+  );
 }
 
 export default App;

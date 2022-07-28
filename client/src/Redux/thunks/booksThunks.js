@@ -11,6 +11,8 @@ import {
 } from "../slices/genreSlice";
 
 
+
+
 const fetchAllBooks = () => (dispatch) => {
     axios
         .get("http://localhost:3001/books")
@@ -43,10 +45,12 @@ const fetchBooksDetail = (id) => (dispatch) => {
         .catch((error) => console.log(error));
     };
 
+    
+
 export {
     fetchAllBooks,
     fetchBookByName,
     fetchBooksDetail,
-    fetchBooksGenres,
+    fetchBooksGenres
 }
 
