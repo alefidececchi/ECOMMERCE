@@ -1,5 +1,6 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
+const bcrypt = require("bcrypt")
 
 const getUsers = async (req, res) => {
   try {
@@ -54,7 +55,7 @@ const putUser = async (req, res) => {
   const actuCliente = {
     name: name,
     email: email,
-    password: password,
+    password: await bcrypt.hash(password, 10),
     admin: admin,
     image: image,
     description: description,
