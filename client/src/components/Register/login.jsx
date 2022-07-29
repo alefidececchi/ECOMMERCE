@@ -14,7 +14,9 @@ import {
     fetchAllUsers
 } from "../../Redux/thunks/usersThunks";
 
-
+import {
+    fetchToken
+} from "../../Redux/thunks/tokenThunks";
 
 const Login = () => {
 
@@ -54,6 +56,10 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.users);
+
+    const { token } = useSelector((state) => state.token);
+
+     console.log(token)
 
 
     useEffect(() => {
@@ -124,24 +130,26 @@ const Login = () => {
 
                             try {
 
-                                const data = await axios.post('http://localhost:3001/auth/login', values)
+                                // const data = await axios.post('http://localhost:3001/auth/login', values)
 
-                                console.log(data)
+                                dispatcher(fetchToken(values))
+                                // const token = data.data.token
+                                // console.log(token)
 
-                                if (data) {
-                                    return swal({
-                                        title: 'Congratulation',
-                                        text: 'estas logeado',
-                                        icon: 'success',
-                                        button: 'OK'
-                                    })
-                                        .then(res => {
-                                            if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-                                                dispatcher(fetchAllBooks());
-                                                navigate('/')
-                                            }
-                                        })
-                                }
+                                // if (data) {
+                                //     return swal({
+                                //         title: 'Congratulation',
+                                //         text: 'estas logeado',
+                                //         icon: 'success',
+                                //         button: 'OK'
+                                //     })
+                                //         .then(res => {
+                                //             if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                                //                 dispatcher(fetchAllBooks());
+                                //                 navigate('/')
+                                //             }
+                                //         })
+                                // }
                             } catch (err) {
                                 resetForm();
                                 return swal({
@@ -172,7 +180,7 @@ const Login = () => {
                     >
                         {({ errors }) => (
                             <Form className={s.form}>
-                                
+
                                 <div>
                                     <label htmlFor="email">Email address: </label>
                                     <Field
@@ -212,7 +220,7 @@ const Login = () => {
                                     </Link>
                                     <Link to={"/register"}>
 
-                                        <button  className={s.button2}>  Sign up </button>
+                                        <button className={s.button2}>  Sign up </button>
 
                                     </Link>
                                 </div>
