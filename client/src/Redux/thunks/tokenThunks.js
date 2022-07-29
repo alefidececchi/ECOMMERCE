@@ -8,9 +8,11 @@ import {
 const fetchToken = (values) => (dispatch) => {
 
     axios
+        // api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
         .post("http://localhost:3001/auth/login", values)
         .then((response) => {
-            console.log(response)
+
             dispatch(getToken(response.data.token));
 
         })

@@ -12,34 +12,43 @@ import Login from './components/Register/login';
 import Activate from "./components/Register/activate"
 import Forgot from "./components/Register/forgot"
 import Reset from "./components/Register/reset"
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 import { ToastContainer } from 'react-toastify'
+import ActivateAccount from './components/Register/activate-account';
+import ResetPassword from './components/Register/reset-password';
 
 
 
 function App() {
-  
+
   return (
     <div className="App">
       <ToastContainer />
+
       <Routes>
 
         <Route path='/' element={< NavBar />}>
           <Route path="/" element={< Home />} />
           <Route path='shopping' element={< Shopping />} />
-          <Route path='user' element={< User />} />
+          <Route path='/user' element={< ProtectedRoute><User /> </ProtectedRoute>} />
           <Route path='user/newBook' element={< AddBook />} />
           <Route path='wish' element={< WishList />} />
 
         </Route>
 
+
         <Route path='register' element={< Register />} />
-        <Route path='activate-account' element={< Activate />} />
-        <Route path='activate-account/:token' element={< Activate/>} />
+        <Route path='activate' element={< ActivateAccount />} />
+        <Route path='activate-account/:token' element={< Activate />} />
         <Route path='login' element={< Login />} />
         <Route path='forgot-password' element={< Forgot />} />
-        <Route path='reset-password' element={< Activate />} />
+        <Route path='reset' element={< ResetPassword />} />
         <Route path='reset-password/:token' element={< Reset />} />
+
       </Routes>
+
+
+
     </div>
   );
 }

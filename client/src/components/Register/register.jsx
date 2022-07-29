@@ -18,6 +18,23 @@ const Register = () => {
     //  var google=""
     const google = window.google;
 
+
+    useEffect(() => {
+        google.accounts.id.initialize({
+            client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
+            callback: handleCallbackResponse
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById('signInDiv'),
+            { theme: "outline", size: "large" }
+        );
+
+        google.accounts.id.prompt();
+
+
+    }, []);
+
     const [user, setUser] = useState({});
     //  console.log(user)
 
@@ -44,21 +61,7 @@ const Register = () => {
     }
 
 
-    useEffect(() => {
-        google.accounts.id.initialize({
-            client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
-            callback: handleCallbackResponse
-        });
-
-        google.accounts.id.renderButton(
-            document.getElementById('signInDiv'),
-            { theme: "outline", size: "large" }
-        );
-
-        google.accounts.id.prompt();
-
-
-    }, []);
+   
     // If we have no user: sign in button
     // If we have a user: show the log out button
 
@@ -138,7 +141,7 @@ const Register = () => {
                             }).then(res => {
                                 if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                                     dispatcher(fetchAllBooks());
-                                    navigate('/activate-account')
+                                    navigate('/activate')
                                 }
                             })
 
