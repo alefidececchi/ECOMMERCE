@@ -83,29 +83,30 @@ const activateAccount = (req, res) => {
 //     res.status(200).json({auth: "Usuario logueado", user})
 // }
 const login = async (req, res) => {
-  const {email, password} = req.body
+  const { email, password } = req.body
 
-  if (await User.findOne({email}) === null) return res.status(400).json({error: "Email no registrado"})
+  if (await User.findOne({ email }) === null) return res.status(400).json({ error: "Email no registrado" })
 
-  const user = await User.findOne({email});
-
+  const user = await User.findOne({ email });
   console.log(user);
   console.log(user.log_Google)
-  if (user.log_Google===true) {
-    if (password==user.password){
-      return res.status(200).json({auth:"Usuario logueado mediante Google Login",user});
+  if (user.log_Google === true) {
+    if (password == user.password) {
+      return res.status(200).json({ auth: "Usuario logueado mediante Google Login", user });
     } else {
-      return res.status(400).json({auth:"Contraseña incorrecta",user})
+      return res.status(400).json({ auth: "Contraseña incorrecta", user })
     }
   } else {
-      const compare = await bcrypt.compare(password, user.password)
-      console.log("🚀 ~ file: auth.controller.js ~ line 78 ~ login ~ compare", compare)
+    const compare = await bcrypt.compare(password, user.password)
+    console.log("🚀 ~ file: auth.controller.js ~ line 78 ~ login ~ compare", compare)
 
-      if (!compare) return res.status(400).json({error: "Contraseña invalida"})
-      const token = jwt.sign({id: user._id, name: user.name, email: user.email, admin: user.admin},process.env.JWT_ACC_ACTIVATE)
+    if (!compare) return res.status(400).json({ error: "Contraseña invalida" })
 
-      res.status(200).json({auth: "Usuario logueado", token})
-     
+
+    const token = jwt.sign({ id: user._id, name: user.name, email: user.email, admin: user.admin }, process.env.JWT_ACC_ACTIVATE)
+
+    res.status(200).json({ auth: "Usuario logueado", token, email: user.email })
+
   }
 
 }
@@ -145,7 +146,7 @@ const resetPassword = async (req, res) => {
         .status(400)
         .json({ error: "Incorrect token or it is expired" });
 
-    if (await User.findOne({resetLink}) === null) return res.status(400).json({error: "Incorrect token or it is expired"})
+    if (await User.findOne({ resetLink }) === null) return res.status(400).json({ error: "Incorrect token or it is expired" })
 
     await User.findOneAndUpdate(
       { resetLink },
@@ -153,11 +154,11 @@ const resetPassword = async (req, res) => {
         password: await bcrypt.hash(newPass, 10)
       }
     );
-    
-    await User.findOneAndUpdate({resetLink},
-        {
-            resetLink: ""
-        }
+
+    await User.findOneAndUpdate({ resetLink },
+      {
+        resetLink: ""
+      }
     )
 
     res.status(200).json({ auth: "Contraseña cambiada" });
