@@ -86,7 +86,7 @@ const getGenresBook = (req, res) => {
 
 const postBook = async (req, res) => {
   const book = req.body;
-  console.log(book);
+
   try {
     const bookAdded = await Book.create(book);
     // return res.status(201).json({ bookCreated: bookCreated });
@@ -117,8 +117,11 @@ const putBook = async (req, res) => {
       const userUpdated = await User.findByIdAndUpdate(
         idUser,
         { $push: { selling_books: idBook } },
-        { new: true, useFindAndModify: false })
-      return res.status(201).json({ bookUpdated: bookUpdated, userUpdated: userUpdated });
+        { new: true, useFindAndModify: false }
+      );
+      return res
+        .status(201)
+        .json({ bookUpdated: bookUpdated, userUpdated: userUpdated });
     } catch (error) {
       return res.status(500).json({ error: error });
     }
