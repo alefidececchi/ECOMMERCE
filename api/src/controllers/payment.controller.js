@@ -1,18 +1,32 @@
-const { STRIPE_API_KEY_SECRET } = process.env
-const stripe = require('stripe')(STRIPE_API_KEY_SECRET)
+const Stripe = require('stripe')
+const stripe = Stripe(STRIPE_API_KEY_SECRET)
 
 const payment = async (req, res) => {
 
-    const { id, amount } = req.body
+    
     try {
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount,
-            currency: 'usd',
-            payment_method: id,
-            confirm: true
-        })
-        console.log(paymentIntent)
-        res.json({ message: 'succesfull payment' })
+        const line_items = req.body.carItems.map(item => {
+            return {
+                price_data: {
+                    currency: "usd",
+                    product_data: {
+                        name: item.name,
+                        images: [item.image],
+                        metadata: {
+                            id: item._id
+                        }
+                    },
+                    unit_amount: item.price * 100
+                },
+                quantity: item.cartQuantity}})
+
+                const session = await stripe.checkout.sessions.create({
+                    line_items,
+                    mode: "payment",
+                    succes_url: `${process.env.CLIENT_URL}/checkout-success`,
+                    cancel_url: `${process.env.CLIENT_URL}/cart`,
+                })
+
     } catch (error) {
         // console.log(error)
         res.json({ error: error.raw.message })

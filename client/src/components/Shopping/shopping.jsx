@@ -5,6 +5,7 @@ import NavBar from '../NavBar/navBar';
 import styles from './shopping.module.scss'
 import Footer from '../Footer/footer';
 import { addToCart, clearCart, decreaseCart, getTotals, removeFromCart } from '../../Redux/slices/shoping.slice';
+import PayButton from './PayButton';
 
 const Shopping = () =>{
 
@@ -99,7 +100,7 @@ const Shopping = () =>{
                 <span className={styles.amount}>${cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <button>Check out</button>
+              <PayButton cartItems={cart.cartItems}/>
               <div className={styles.continueShopping}>
                 <Link to="/">
                 <svg
