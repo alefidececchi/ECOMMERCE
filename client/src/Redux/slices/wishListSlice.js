@@ -23,7 +23,6 @@ const wishListSlice = createSlice({
           draggable: true,
           progress: undefined,
           });
-          console.log(window.localStorage);
       } else {
         toast.info('The book is already on the wish list.', {
           position: "bottom-left",

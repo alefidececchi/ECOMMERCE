@@ -44,7 +44,7 @@ const WishList = () => {
       <h1>My Wishlist</h1>
         {wishListStorage.length ? (
           wishListStorage.map((book) => (
-            <figure>
+            <figure key={book._id}>
               <img src={book.image} />
               <h3>{book.name}</h3>
               <span>${book.price}</span>
