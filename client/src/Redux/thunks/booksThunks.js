@@ -4,7 +4,7 @@ import { getGenres } from "../slices/genreSlice";
 
 const fetchAllBooks = () => (dispatch) => {
   axios
-    .get("http://localhost:3001/books")
+    .get("/books")
     .then((response) => {
       dispatch(getBooks(response.data.books));
     })
@@ -13,20 +13,20 @@ const fetchAllBooks = () => (dispatch) => {
 
 const fetchBookByName = (name) => (dispatch) => {
   axios
-    .get(`http://localhost:3001/books?name=${name}`)
+    .get(`/books?name=${name}`)
     .then((response) => dispatch(searchBook(response.data.books)))
     .catch((error) => console.log(error));
 };
 const fetchBooksDetail = (id) => (dispatch) => {
   axios
-    .get(`http://localhost:3001/books/${id}`)
+    .get(`/books/${id}`)
     .then((response) => dispatch(getDetail(response.data.book)))
     .catch((error) => console.log(error));
 };
 
 const fetchBooksGenres = () => (dispatch) => {
   axios
-    .get("http://localhost:3001/books/genres")
+    .get("/books/genres")
     .then((response) => {
       dispatch(getGenres(response.data.genres));
     })
