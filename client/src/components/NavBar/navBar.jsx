@@ -21,7 +21,7 @@ const NavBar = () => {
             <Link to={"/wish"}>Today's Deals</Link>
           </li>
           <li>
-            <Link to={"/wish"}>Gift Card</Link>
+            <Link to={"/gift"}>Gift Card</Link>
           </li>
           <li>
             <Link to={"/wish"}>WishList</Link>

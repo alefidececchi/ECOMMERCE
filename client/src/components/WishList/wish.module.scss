@@ -12,6 +12,9 @@
   h1 {
     font-size: toRem(40);
     text-align: center;
+    @include tabletMax() {
+      margin-top: toRem(150);
+    }
   }
 
   .wishContainer {

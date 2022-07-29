@@ -13,6 +13,7 @@ const wishListSlice = createSlice({
       let id = state.wishList.find((book) => book._id === action.payload._id);
       if(!id) {
         state.wishList.push(action.payload);
+        window.localStorage.setItem('wishList', JSON.stringify(state.wishList))
         toast.success('Book added to wish list.', {
           position: "bottom-left",
           autoClose: 2000,
@@ -22,6 +23,7 @@ const wishListSlice = createSlice({
           draggable: true,
           progress: undefined,
           });
+          console.log(window.localStorage);
       } else {
         toast.info('The book is already on the wish list.', {
           position: "bottom-left",
@@ -33,15 +35,18 @@ const wishListSlice = createSlice({
           progress: undefined,
           });
       }
-      console.log(action.payload._id);
     },
     removeBook(state, action) {
       state.wishList = state.wishList.filter(book => book._id !== action.payload)
+      window.localStorage.setItem('wishList', JSON.stringify(state.wishList))
+    },
+    loadWishList(state,action) {
+      state.wishList = action.payload;
     }
   }
 
 })
 
-export const {getWishList, removeBook} = wishListSlice.actions;
+export const {getWishList, removeBook, loadWishList} = wishListSlice.actions;
 
 export default wishListSlice.reducer;

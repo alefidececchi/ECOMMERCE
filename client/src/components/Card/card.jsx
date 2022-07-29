@@ -29,6 +29,7 @@ const Card = ({ name, price, image, id, book }) => {
     dispatch(getWishList(book))
   }
 
+
   return (
     <div className={s.containerCard}>
       <button className={s.fav} onClick={() => handleWishList(book)}>
