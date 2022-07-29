@@ -11,6 +11,8 @@
     "bootstrap-icons": "^1.9.1",
     "dotenv": "^16.0.1",
     "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
+    "fs": "^0.0.1-security",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.1.5",

@@ -96,6 +96,10 @@ const getByGenre = ({ books, genre }) => {
   return books.filter((book) => book.genres.includes(genre));
 };
 
+const getByAuthor = ({ books, author }) => {
+  return books.filter((book) => book.authors?.includes(author.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))))
+};
+
 module.exports = {
   paginate,
   sortNames,
@@ -104,4 +108,5 @@ module.exports = {
   getByLanguage,
   getByName,
   getByGenre,
+  getByAuthor,
 };
