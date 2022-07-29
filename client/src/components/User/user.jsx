@@ -11,7 +11,6 @@ import swal from 'sweetalert'
 import SideBar from './sideBar';
 
 const User = () => {
-
   const[image, setImage] = useState(userLogo)
   
   const[editProfile, setEditProfile] = useState(false)

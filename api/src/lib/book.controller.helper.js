@@ -26,37 +26,28 @@ const sortNames = ({ books, sort }) => {
       return 0;
     });
   }
-  return books;
-};
-
-const sortPrices = ({ books, price }) => {
-  if (price === "lowest to highest") {
+  if (sort === "lowest to highest") {
     books = books.sort((a, b) => {
       if (a.price > b.price) return 1;
       if (a.price < b.price) return -1;
       return 0;
     });
   }
-  if (price === "highest to lowest") {
+  if (sort === "highest to lowest") {
     books = books.sort((a, b) => {
       if (a.price < b.price) return 1;
       if (a.price > b.price) return -1;
       return 0;
     });
   }
-
-  return books;
-};
-
-const sortReleased = ({ books, released }) => {
-  if (released === "oldest") {
+  if (sort === "oldest") {
     books = books.sort((a, b) => {
       if (a.released > b.released) return 1;
       if (a.released < b.released) return -1;
       return 0;
     });
   }
-  if (released === "latest") {
+  if (sort === "latest") {
     books = books.sort((a, b) => {
       if (a.released < b.released) return 1;
       if (a.released > b.released) return -1;
@@ -105,14 +96,17 @@ const getByGenre = ({ books, genre }) => {
   return books.filter((book) => book.genres.includes(genre));
 };
 
+const getByAuthor = ({ books, author }) => {
+  return books.filter((book) => book.authors?.includes(author.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))))
+};
+
 module.exports = {
   paginate,
   sortNames,
-  sortPrices,
-  sortReleased,
   sortDiscount,
   getByStatus,
   getByLanguage,
   getByName,
   getByGenre,
+  getByAuthor,
 };

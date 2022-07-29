@@ -79,6 +79,7 @@ const activateAccount = (req, res) => {
 
 //     if (!compare) return res.status(400).json({error: "Contraseña invalida"})
 
+
 //     res.status(200).json({auth: "Usuario logueado", user})
 // }
 const login = async (req, res) => {
@@ -87,6 +88,7 @@ const login = async (req, res) => {
   if (await User.findOne({email}) === null) return res.status(400).json({error: "Email no registrado"})
 
   const user = await User.findOne({email});
+
   console.log(user);
   console.log(user.log_Google)
   if (user.log_Google===true) {
@@ -100,9 +102,12 @@ const login = async (req, res) => {
       console.log("🚀 ~ file: auth.controller.js ~ line 78 ~ login ~ compare", compare)
 
       if (!compare) return res.status(400).json({error: "Contraseña invalida"})
+      const token = jwt.sign({id: user._id, name: user.name, email: user.email, admin: user.admin},process.env.JWT_ACC_ACTIVATE)
 
-      res.status(200).json({auth: "Usuario logueado tradicionalmente", user})
+      res.status(200).json({auth: "Usuario logueado", token})
+     
   }
+
 }
 
 const forgotPassword = async (req, res) => {

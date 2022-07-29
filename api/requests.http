@@ -3,10 +3,10 @@
 #(BOOKS ROUTES)
 
 ###
-GET http://localhost:3001/books?limit=(NUMBER)&page=(NUMBER) HTTP/1.1
+GET http://localhost:3001/books HTTP/1.1
 
 ###
-GET http://localhost:3001/books?name=(NAME)&discount=(asc/desc)&price=(asc/desc)&released=(asc/desc)&sort=(asc/desc)&genre=(GENRE)&status=(false/true)&limit=(NUMBER)&page=(1...) HTTP/1.1
+GET http://localhost:3001/books?name=(NAME)&discount=(asc/desc)&price=(asc/desc)&released=(asc/desc)&sort=(asc/desc)&genre=(GENRE)&status=(false/true)&author=(AUTHOR NAME)&limit=(NUMBER)&page=(1...) HTTP/1.1
 
 ###
 GET http://localhost:3001/books/:idBook HTTP/1.1
@@ -47,7 +47,7 @@ DELETE http://localhost:3001/books/  HTTP/1.1
 GET http://localhost:3001/users/ HTTP/1.1
 
 ###
-GET http://localhost:3001/users/:idUser HTTP/1.1
+GET http://localhost:3001/users/62e148ce473306d54513e9c0 HTTP/1.1
 
 ###
 PUT http://localhost:3001/users/:idUser HTTP/1.1
@@ -67,8 +67,14 @@ Content-Type: application/json
     "password":"password"
 }
 
+#selling
 ###
 PUT http://localhost:3001/users/:idUser/:idBook HTTP/1.1
+
+#wish list
+###
+###
+PUT http://localhost:3001/users/add/:idUser/:idBook HTTP/1.1
 
 
 ###

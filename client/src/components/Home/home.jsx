@@ -19,10 +19,11 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const { books } = useSelector((state) => state.books);
+  const { filterEmpty } = useSelector((state) => state.books);
 
 
   useEffect(() => {
-    if (books.length === 0) {
+    if (books.length === 0 && !filterEmpty) {
       dispatch(fetchAllBooks());
     }
   }, [dispatch, books]);
