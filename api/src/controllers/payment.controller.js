@@ -1,39 +1,99 @@
-const Stripe = require('stripe')
-const stripe = Stripe(STRIPE_API_KEY_SECRET)
+const express = require("express")
+const Stripe = require("stripe")
+require("dotenv").config()
+const stripe = Stripe(process.env.STRIPE_KEY)
 
-const payment = async (req, res) => {
+const router = express.Router()
+
 
     
-    try {
-        const line_items = req.body.carItems.map(item => {
-            return {
-                price_data: {
-                    currency: "usd",
-                    product_data: {
-                        name: item.name,
-                        images: [item.image],
-                        metadata: {
-                            id: item._id
-                        }
-                    },
-                    unit_amount: item.price * 100
+    const payment =  async (req, res) => {
+      const customer = await stripe.customers.create({
+        metadata: {
+          userId: req.body.userId
+        },
+      });
+    
+      const line_items = req.body.cartItems.map((item) => {
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: item.name,
+              images: [item.image],
+              description: item.desc,
+              metadata: {
+                id: item.id,
+              },
+            },
+            unit_amount: item.price * 100,
+          },
+          quantity: item.cartQuantity,
+        };
+      });
+    
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        shipping_address_collection: {
+          allowed_countries: ["US", "CA", "KE"],
+        },
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: {
+                amount: 0,
+                currency: "usd",
+              },
+              display_name: "Free shipping",
+              // Delivers between 5-7 business days
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day",
+                  value: 5,
                 },
-                quantity: item.cartQuantity}})
+                maximum: {
+                  unit: "business_day",
+                  value: 7,
+                },
+              },
+            },
+          },
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: {
+                amount: 1500,
+                currency: "usd",
+              },
+              display_name: "Next day air",
+              // Delivers in exactly 1 business day
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day",
+                  value: 1,
+                },
+                maximum: {
+                  unit: "business_day",
+                  value: 1,
+                },
+              },
+            },
+          },
+        ],
+        phone_number_collection: {
+          enabled: true,
+        },
+        line_items,
+        mode: "payment",
+        customer: customer.id,
+        success_url: `${process.env.CLIENT_URL}/checkout-success`,
+        cancel_url: `${process.env.CLIENT_URL}/shopping`,
+      });
 
-                const session = await stripe.checkout.sessions.create({
-                    line_items,
-                    mode: "payment",
-                    succes_url: `${process.env.CLIENT_URL}/checkout-success`,
-                    cancel_url: `${process.env.CLIENT_URL}/cart`,
-                })
-
-    } catch (error) {
-        // console.log(error)
-        res.json({ error: error.raw.message })
+        res.send({url: session.url});
     }
-    res.send('received')
-}
+                
+    
 
-module.exports = {
-    payment
-}
+module.exports = {payment};

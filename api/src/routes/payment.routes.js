@@ -3,7 +3,7 @@ const router = express.Router()
 
 const { payment } = require('../controllers/payment.controller.js')
 
-router.post('/', payment);
+router.post('/create-checkout-session', payment);
 
 
 module.exports = router

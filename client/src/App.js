@@ -21,7 +21,7 @@ function App() {
       <Route path='/' element={< NavBar />}>
         <Route path="/" element={< Home />} />
         <Route path='shopping' element={< Shopping />} />
-        <Route path='shopping/checkout-success' element={< CheckoutSuccess />}/>
+        <Route path='checkout-success' element={< CheckoutSuccess />}/>
         <Route path='user' element={< User />} />
         <Route path='user/newBook' element={< AddBook />} />
         <Route path='wish' element={< WishList />} />

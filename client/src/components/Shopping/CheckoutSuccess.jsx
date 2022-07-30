@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+
 import { clearCart, getTotals } from "../../Redux/slices/shoping.slice";
+import Footer from "../Footer/footer";
 
 const CheckoutSuccess = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,11 @@ const CheckoutSuccess = () => {
 
   return (
     
-      <h2>Checkout Successful</h2>
+      <div>
+        <h2>Checkout Successful</h2>
+
+        <Footer />
+      </div>
       
     
   );
