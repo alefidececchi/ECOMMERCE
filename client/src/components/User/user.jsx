@@ -22,7 +22,9 @@ const User = () => {
   const[image, setImage] = useState(userLogo)
   
   const[editProfile, setEditProfile] = useState(false)
+  const[reload, setReload] = useState(false)
   const { userById } = useSelector((state) => state.users);
+  
   const { email } = useSelector((state) => state.token);
   const dispatch = useDispatch()
   let correo = window.localStorage.email
@@ -31,17 +33,22 @@ const User = () => {
   let info = jwt_decode(window.localStorage.token);
   //console.log(info)
   let id = info.id
-  //console.log(userById)
+  console.log(window.localStorage.usuario)
+  let estado = userById
+  
+  
+  
+
 
   useEffect(() => {
+  
+      dispatch(fetchUserById(id));
+      setReload(false)
+      
     
-    if (!userById.name) {
-      //console.log('entro')
-        dispatch(fetchUserById(id));
-        
-    }
-   
-}, [dispatch, userById]);
+}, [reload]);
+
+
   
 
   function onInputchange(e){
@@ -61,6 +68,17 @@ const User = () => {
   const editProdileOff = () =>{
     setEditProfile(false)
   }
+
+  function reloading(){
+    
+    if (reload){
+
+        return setReload(false)
+    }else{
+      return setReload(true)
+    }
+}
+
 
 //  function userInfo(){
 //   console.log(correo)
@@ -102,7 +120,7 @@ const  changePassword = async () =>{
     <div className={style.container}>
       
       <div className={style.containerSide}>
-        <SideBar/>
+        <SideBar reloading ={reloading}/>
       </div>
 
       <div className={style.containerProfile}>
@@ -121,7 +139,10 @@ const  changePassword = async () =>{
                 
                   {editProfile?(
                       <div className={style.info}>
-                        <EditProfile editProdileOff={editProdileOff}/>
+                        <EditProfile 
+                        reloading ={reloading}
+                        editProdileOff={editProdileOff}
+                        />
                       </div>
                     ): 
                       // users.length > 0 ?

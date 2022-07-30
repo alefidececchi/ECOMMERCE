@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import SideBar from '../../sideBar';
 import s from './postedBooks.module.scss'
 import { useState } from 'react';
@@ -8,15 +9,80 @@ import portada2 from '../../../../assets/imgs/LOTR.jpg'
 import EditBook from '../../../EditBooks/editBook';
 import swal from 'sweetalert'
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import jwt_decode from "jwt-decode"
+
+import { useEffect } from 'react';
+import { fetchUserById } from '../../../../Redux/thunks/usersThunks';
+import { fetchAllBooks, fetchBooksById } from '../../../../Redux/thunks/booksThunks';
 
 function PostedBooks(){
 
+  //console.log(window.localStorage.usuario)
+   
     const[editMode, setEditMode] = useState(false)
-    let[books, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
+    const { userById } = useSelector((state) => state.users);
+    //const { books } = useSelector((state) => state.books);
+    const { bookById } = useSelector((state) => state.books);
+    const dispatch = useDispatch()
+    //let[book, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
+    const [book, setBooks] = useState([])
     //let books  = []
+
+    let info = jwt_decode(window.localStorage.token);
+    //console.log(userById.selling_books)
+    let id = info.id
+    //let[books, setBooks] = useState(selling)
+    //console.log(books)
+    let correo = window.localStorage.usuario
+    let vendiendo = window.localStorage.usuario.name
+    //console.log(prueba)
+    //console.log(prueba.selling_books)
+    console.log(book.selling_books)
+
+    const sellingStorage = JSON.parse(window.localStorage.getItem('usuario'));
+    //console.log(sellingStorage.selling_books[0])
+    
+    
+    useEffect( () => {
+        console.log('entro')
+          // sellingStorage.selling_books.map(b => {
+          //   dispatch(fetchBooksById(b))
+          //   setPrueba(prueba => [...prueba, bookById])
+          // })
+          
+          // dispatch(fetchUserById(id))
+          // dispatch(fetchAllBooks())
+
+          axios.get(`http://localhost:3001/users/${id}`)
+          .then((response)=>{
+            console.log(response)
+            setBooks(response.data.userrrs)
+          })       
+
+          
+          
+          //llenarState()
+      
+    }, []);
+    //console.log(prueba)
+  //   let selling = userById.selling_books
+  //   //console.log(selling)
+    
+  //   function llenarState (){
+  //     sellingStorage.selling_books.map((bookId) =>{
+  //       let guardado = books.find((b) => b._id === bookId)
+  //       console.log(guardado)
+  //       setPrueba(prueba => [...prueba, guardado])
+  //       console.log(prueba)
+       
+  // })
+  //   }
+
+
     function deleteBook(del){
         console.log(del)
-        let filtrado = books.filter(b => b.bookName !== del.bookName)
+        let filtrado = book.filter(b => b.bookName !== del.bookName)
         console.log(filtrado)
         swal({
           title:'Delete?',
@@ -26,7 +92,7 @@ function PostedBooks(){
         }).then(res => {
           if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
             if(filtrado){
-              setBooks(books = filtrado)
+              setBooks(book = filtrado)
               swal({text: 'Post  deleted successfully', icon: 'success'})
             }
           }
@@ -34,6 +100,8 @@ function PostedBooks(){
     }
 
     function editOn(){
+
+
         setEditMode(true)
       }
     const editOff = () =>{
@@ -52,8 +120,11 @@ function PostedBooks(){
                   </div>
                 ):
                <div>
-                {books.length > 0 ?
-                books.map((book , i) =>
+{/* country[0].activities.length > 0 ? 
+                    country[0].activities.map((c,i) => */}
+
+                {book.selling_books > 0 ?
+                book.selling_books.map((book , i) =>
                 
                     <div key={i} className={s.books}>
                       
@@ -104,3 +175,8 @@ function PostedBooks(){
 }
 export default PostedBooks;
 
+//tenemos el onjeto delos libros vendidos en una variable
+//mapear la variable de los libros
+//por cada libro se hace un dispatch y q traiga el libro buscandolo por id
+//esos libros q trae por ID deberia de guardarlos en un estado 
+//imprimer usando ese estado 

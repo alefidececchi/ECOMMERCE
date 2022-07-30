@@ -10,7 +10,7 @@ import {
     fetchUserById
   } from "../../Redux/thunks/usersThunks";
 
-function EditProfile({editProdileOff}){
+function EditProfile({editProdileOff, reloading}){
 
     const { userById } = useSelector((state) => state.users);
     const [send, setSend] = useState(false);
@@ -30,7 +30,7 @@ function EditProfile({editProdileOff}){
        
     }, [dispatch, userById]);
 
-
+   
 
 
    
@@ -83,6 +83,9 @@ function EditProfile({editProdileOff}){
                             buttons:['Cancel','Confirm']
                           }).then(res => {
                             if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                                editProdileOff()
+                                reloading()
+                                
                                 axios({
                                     method: 'put',
                                     url: `http://localhost:3001/users/${id}`,
@@ -92,8 +95,11 @@ function EditProfile({editProdileOff}){
                                         password: values.password
                         
                                     }
-                                }) 
-                                setUserInfo({name: values.name, email:values.email})
+                                })
+                                //dispatch(fetchUserById(id))
+
+                                
+                                //navigate("/user", { replace: true })
                                 
                             }
                           })

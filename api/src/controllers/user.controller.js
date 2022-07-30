@@ -1,8 +1,7 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
-const bcrypt = require("bcrypt")
-//62e407966fb27f09db0a9857
-//62e407966fb27f09db0a9857
+const bcrypt = require("bcrypt");
+
 const getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -83,21 +82,26 @@ const putUser = async (req, res) => {
   const { idUser } = req.params;
   const { name, email, password, admin, image, description, country } =
     req.body;
-    console.log(idUser)
-
-    console.log(name)
-    console.log(email)
-    console.log(password)
-  const actuCliente = {
-    name: name,
-    email: email,
-    password: await bcrypt.hash(password, 10),
-    admin: admin,
-    image: image,
-    description: description,
-    country: country,
-  };
-  await User.findByIdAndUpdate(idUser, actuCliente);
+  let actualCliente;
+  password
+    ? (actualCliente = {
+        name: name,
+        email: email,
+        password: await bcrypt.hash(password, 10),
+        admin: admin,
+        image: image,
+        description: description,
+        country: country,
+      })
+    : (actualCliente = {
+        name: name,
+        email: email,
+        admin: admin,
+        image: image,
+        description: description,
+        country: country,
+      });
+  await User.findByIdAndUpdate(idUser, actualCliente);
   res.status(200).json({
     status: "Usuario actualizado.",
   });
@@ -110,26 +114,26 @@ const putUserBook = async (req, res) => {
   });
 
   const bookUpdated = await Book.findByIdAndUpdate(idBook, {
-    $push: { sellers: idUser }
-  })
+    $push: { sellers: idUser },
+  });
 
   res.status(200).json({
     status: sellingBooksUpdate,
-    statusBook: bookUpdated
+    statusBook: bookUpdated,
   });
   // en POSTMAN PUT:
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
 
 const putUserWishList = async (req, res) => {
-  const { idBook, idUser } = req.params
+  const { idBook, idUser } = req.params;
   await User.findByIdAndUpdate(idUser, {
-    $push: { wish_list: idBook }
-  })
+    $push: { wish_list: idBook },
+  });
   res.status(200).json({
-    status: "Libro agregado a wish list"
-  })
-}
+    status: "Libro agregado a wish list",
+  });
+};
 
 const deleteUser = async (req, res) => {
   const { idUser } = req.params;
@@ -148,5 +152,5 @@ module.exports = {
   putUser,
   putUserBook,
   deleteUser,
-  putUserWishList
+  putUserWishList,
 };

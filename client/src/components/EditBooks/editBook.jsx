@@ -19,7 +19,7 @@ function EditBook({editOff}){
         if (genres.length === 0) {
             dispatcher(fetchBooksGenres());
         }
-        console.log(genres)
+        //console.log(genres)
 
       }, [dispatcher, genres]);
 

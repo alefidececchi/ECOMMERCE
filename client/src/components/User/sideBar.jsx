@@ -21,9 +21,9 @@ function SideBar(){
                     <Link to="/user/myGiftCards">My GiftCards</Link>
                 </li>
                 <li>
-                    <Link to="/user/sales">Sales</Link>
+                    <Link to="/user/sales" > Sales </Link>
                 </li>
-                <li>
+                <li> 
                     <Link to="/user/purchases">Purchases</Link>
                 </li>
                 <li>

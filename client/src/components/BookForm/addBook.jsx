@@ -8,16 +8,20 @@ import {useNavigate} from "react-router-dom";
 import {
     fetchBooksGenres, fetchAllBooks
   } from "../../Redux/thunks/booksThunks";
-
+import jwt_decode from "jwt-decode"
 
 function AddBook(){
 
     const [send, setSend] = useState(false);
     const {genres}  = useSelector((state) => state.genres);
+    
     const dispatcher = useDispatch()
 
-    let navigate = useNavigate()   
+    let navigate = useNavigate()  
 
+    let info = jwt_decode(window.localStorage.token); 
+    console.log(info)
+    let id = info.id
 
     useEffect(() => {
         if (genres.length === 0) {
@@ -35,6 +39,7 @@ function AddBook(){
                 <Formik 
                     initialValues={{
                         name:"", 
+                        author:"",
                         image:"", 
                         price:'', 
                         stock:'',
@@ -51,6 +56,13 @@ function AddBook(){
                             errors.name = 'Please write the book name'
                         }else if(values.name.length < 4 || values.name.length > 40){
                             errors.name = 'Book name must have between 4 or 20 characters'
+                        }
+
+                        //validacion nombre del author   
+                        if(!values.author){
+                            errors.author = 'Please write the author name'
+                        }else if(values.author.length < 4 || values.name.length > 40){
+                            errors.author = 'Author name must have between 4 or 20 characters'
                         }
 
                         //validacion año publicacion
@@ -118,7 +130,7 @@ function AddBook(){
                             values.used = false
                         }
                         resetForm();
-                        axios.post('http://localhost:3001/books/', values)
+                        axios.post(`http://localhost:3001/books/${id}`, values)
                         swal({
                             title:'Congratulation',
                             text:'Book published successfully',
@@ -153,6 +165,18 @@ function AddBook(){
                             />
                             <ErrorMessage name="name" component={()=>(
                                 <div className={style.error}>{errors.name}</div>
+                            )} />
+                        </div>
+                        <div>
+                            <label htmlFor="name">Author: </label>
+                            <Field
+                            type='text'
+                            id="author"
+                            placeholder="Type a name..."
+                            name="author"
+                            />
+                            <ErrorMessage name="author" component={()=>(
+                                <div className={style.error}>{errors.author}</div>
                             )} />
                         </div>
                         <div>
