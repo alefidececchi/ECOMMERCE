@@ -86,13 +86,35 @@ const getGenresBook = (req, res) => {
 
 const postBook = async (req, res) => {
   const book = req.body;
+  const { idUser } = req.params;
+  if (!idUser) {
+    try {
+      const bookAdded = await Book.create(book);
+      // return res.status(201).json({ bookCreated: bookCreated });
+      return res.status(201).json({ bookAdded: "book added" });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else {
+    try {
+      const bookAdded = await Book.create(book);
+      //realtionships
+      const bookRelation = await Book.findByIdAndUpdate(
+        bookAdded._id,
+        { $push: { sellers: idUser } },
+        { new: true, useFindAndModify: false }
+      );
 
-  try {
-    const bookAdded = await Book.create(book);
-    // return res.status(201).json({ bookCreated: bookCreated });
-    return res.status(201).json({ bookAdded: "book added" });
-  } catch (error) {
-    return res.status(500).json({ error: error });
+      const userUpdated = await User.findByIdAndUpdate(
+        idUser,
+        { $push: { selling_books: bookAdded._id } },
+        { new: true, useFindAndModify: false }
+      );
+
+      return res.status(201).json({ bookAdded: "book added and relationship" });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
   }
 };
 
@@ -129,12 +151,34 @@ const putBook = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const bookDeleted = await Book.findByIdAndUpdate(id, { deleted: true });
-    return res.status(201).json({ bookDeleted: bookDeleted });
-  } catch (error) {
-    return res.status(500).json({ error: error });
+  const { idBook } = req.params;
+  const { idUser } = req.params;
+  if (!idUser) {
+    try {
+      const bookDeleted = await Book.findByIdAndUpdate(idBook, {
+        deleted: true,
+      });
+      return res.status(201).json({ bookDeleted: bookDeleted });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  } else {
+    try {
+      const bookDeleteRelation = await Book.findByIdAndUpdate(idBook, {
+        $pull: {
+          sellers: idUser,
+        },
+      });
+
+      const userDeleteRlation = await User.findByIdAndUpdate(idUser, {
+        $pull: {
+          selling_books: idBook,
+        },
+      });
+      return res.status(201).json({ bookDeleted: "relationship deleted" });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
   }
 };
 
