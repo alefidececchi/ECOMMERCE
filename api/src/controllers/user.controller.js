@@ -1,6 +1,8 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
-
+const bcrypt = require("bcrypt")
+//62e407966fb27f09db0a9857
+//62e407966fb27f09db0a9857
 const getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -55,7 +57,7 @@ const postUserGoogle = async (req, res) => {
     const nuevoUsuario = new User({
       //user
       email:email,
-      password:password,
+      password: password,
       //admin:admin,
       //image:image,
       //description:description,
@@ -81,10 +83,15 @@ const putUser = async (req, res) => {
   const { idUser } = req.params;
   const { name, email, password, admin, image, description, country } =
     req.body;
+    console.log(idUser)
+
+    console.log(name)
+    console.log(email)
+    console.log(password)
   const actuCliente = {
     name: name,
     email: email,
-    password: password,
+    password: await bcrypt.hash(password, 10),
     admin: admin,
     image: image,
     description: description,

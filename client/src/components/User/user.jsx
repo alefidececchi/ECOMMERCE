@@ -7,37 +7,41 @@ import { useState } from 'react';
 import userLogo from '../../assets/imgs/user.png'
 
 import EditProfile from '../EditProfile/editProfile';
-import swal from 'sweetalert'
+import Swal from 'sweetalert2'
 import SideBar from './sideBar';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  fetchAllUsers
+  fetchUserById
 } from "../../Redux/thunks/usersThunks";
 import { useEffect } from 'react';
 import jwt_decode from "jwt-decode"
-
+import axios from 'axios';
 
 
 const User = () => {
   const[image, setImage] = useState(userLogo)
   
   const[editProfile, setEditProfile] = useState(false)
-  const { users } = useSelector((state) => state.users);
+  const { userById } = useSelector((state) => state.users);
   const { email } = useSelector((state) => state.token);
   const dispatch = useDispatch()
   let correo = window.localStorage.email
   let filtrado = []
   let otro
   let info = jwt_decode(window.localStorage.token);
-  
+  //console.log(info)
+  let id = info.id
+  //console.log(userById)
 
   useEffect(() => {
-    if (users.length === 0) {
-        dispatch(fetchAllUsers());
+    
+    if (!userById.name) {
+      //console.log('entro')
+        dispatch(fetchUserById(id));
         
     }
    
-}, [dispatch, users]);
+}, [dispatch, userById]);
   
 
   function onInputchange(e){
@@ -58,18 +62,41 @@ const User = () => {
     setEditProfile(false)
   }
 
- function userInfo(){
-  console.log(correo)
-  console.log(users)
-  console.log(typeof(correo))
-  if(users.length > 0){
-    otro = users.filter(u => console.log(`"${u.email}"`))
-    filtrado = users.filter(u => `"${u.email}"` === correo )
-    console.log(filtrado)
-    return filtrado
-  }
- }
+//  function userInfo(){
+//   console.log(correo)
+//   console.log(users)
+//   console.log(typeof(correo))
+//   if(users.length > 0){
+//     otro = users.filter(u => console.log(`"${u.email}"`))
+//     filtrado = users.filter(u => `"${u.email}"` === correo )
+//     console.log(filtrado)
+//     return filtrado
+//   }
+//  }
+const  changePassword = async () =>{
+  const { value: formValues } = await Swal.fire({
+      title: 'Change PassWord?',
+      html:
+        '<input type ="password" id="swal-input1" class="swal2-input">' +
+        '<input type ="password" id="swal-input2" class="swal2-input">',
+      focusConfirm: false,
+      preConfirm: () => {
+          if(document.getElementById('swal-input1').value !== document.getElementById('swal-input2').value){
+              return 'the password must be the same'
+          }else  if(document.getElementById('swal-input1').value.length === 0 || document.getElementById('swal-input2').value.length === 0 ){
+            return 'Please write the new password'
+          }else{
+              axios.put(`http://localhost:3001/users/${id}`,  {password: document.getElementById('swal-input1').value})
+              return 'Password changed successfully'
 
+          }
+      }
+    })
+    
+    if (formValues) {
+      Swal.fire(JSON.stringify(formValues))
+    }
+}
 
   return (
     <div className={style.container}>
@@ -105,14 +132,14 @@ const User = () => {
                         <h4>Name:</h4>
                       </div>
                       <div className={style.name}>
-                        <h4>{info.name}</h4>
+                        <h4>{userById.name}</h4>
                       </div>
                       
                         <div>
                           <h4>E-mail:</h4>
                         </div>
                         <div className={style.name}>
-                          <h4>{info.email}</h4>
+                          <h4>{userById.email}</h4>
                         </div>
                         {/* <div>
                           <h4>Pasword:</h4>
@@ -132,6 +159,9 @@ const User = () => {
                     
                       <div>
                         <button onClick={editProfileOn} >Edit</button>
+                      </div>
+                      <div>
+                          <button onClick={changePassword}>Change Password?</button>
                       </div>
                     </div>
                   }
