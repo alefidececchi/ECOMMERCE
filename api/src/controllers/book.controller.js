@@ -10,6 +10,7 @@ const {
   getByLanguage,
   getByName,
   getByGenre,
+  getByAuthor,
 } = require("../lib/book.controller.helper.js");
 
 const getBooks = async (req, res) => {
@@ -28,6 +29,8 @@ const getBooks = async (req, res) => {
   const { language } = req.query;
   //genre is a string (genre(fictino, horror, history, ...))
   const { genre } = req.query;
+  //author is a string (author(Edgar allan poe, Horacio quiroga, ...))
+  const { author } = req.query;
 
   const { limit, page } = req.query;
 
@@ -41,6 +44,7 @@ const getBooks = async (req, res) => {
     if (language) books = getByLanguage({ books, language });
     if (name) books = getByName({ books, name });
     if (genre) books = getByGenre({ books, genre });
+    if (author) books = getByAuthor({ books, author });
 
     // return res.status(200).json(paginate({ limit, page, books }));
     return res.status(200).json({ books });
@@ -110,7 +114,11 @@ const putBook = async (req, res) => {
         { $push: { sellers: idUser } },
         { new: true, useFindAndModify: false }
       );
-      return res.status(201).json({ bookUpdated: bookUpdated });
+      const userUpdated = await User.findByIdAndUpdate(
+        idUser,
+        { $push: { selling_books: idBook } },
+        { new: true, useFindAndModify: false })
+      return res.status(201).json({ bookUpdated: bookUpdated, userUpdated: userUpdated });
     } catch (error) {
       return res.status(500).json({ error: error });
     }
@@ -120,7 +128,7 @@ const putBook = async (req, res) => {
 const deleteBook = async (req, res) => {
   const { id } = req.params;
   try {
-    const bookDeleted = await Book.findByIdAndUpdate(id, { "deleted": true });
+    const bookDeleted = await Book.findByIdAndUpdate(id, { deleted: true });
     return res.status(201).json({ bookDeleted: bookDeleted });
   } catch (error) {
     return res.status(500).json({ error: error });

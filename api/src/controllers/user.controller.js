@@ -1,4 +1,6 @@
 const User = require("../models/User.js");
+const Book = require("../models/Book.js");
+const bcrypt = require("bcrypt");
 
 const getUsers = async (req, res) => {
   try {
@@ -80,16 +82,26 @@ const putUser = async (req, res) => {
   const { idUser } = req.params;
   const { name, email, password, admin, image, description, country } =
     req.body;
-  const actuCliente = {
-    name: name,
-    email: email,
-    password: password,
-    admin: admin,
-    image: image,
-    description: description,
-    country: country,
-  };
-  await User.findByIdAndUpdate(idUser, actuCliente);
+  let actualCliente;
+  password
+    ? (actualCliente = {
+        name: name,
+        email: email,
+        password: await bcrypt.hash(password, 10),
+        admin: admin,
+        image: image,
+        description: description,
+        country: country,
+      })
+    : (actualCliente = {
+        name: name,
+        email: email,
+        admin: admin,
+        image: image,
+        description: description,
+        country: country,
+      });
+  await User.findByIdAndUpdate(idUser, actualCliente);
   res.status(200).json({
     status: "Usuario actualizado.",
   });
@@ -101,11 +113,26 @@ const putUserBook = async (req, res) => {
     $push: { selling_books: idBook },
   });
 
+  const bookUpdated = await Book.findByIdAndUpdate(idBook, {
+    $push: { sellers: idUser },
+  });
+
   res.status(200).json({
     status: sellingBooksUpdate,
+    statusBook: bookUpdated,
   });
   // en POSTMAN PUT:
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
+};
+
+const putUserWishList = async (req, res) => {
+  const { idBook, idUser } = req.params;
+  await User.findByIdAndUpdate(idUser, {
+    $push: { wish_list: idBook },
+  });
+  res.status(200).json({
+    status: "Libro agregado a wish list",
+  });
 };
 
 const deleteUser = async (req, res) => {
@@ -125,4 +152,5 @@ module.exports = {
   putUser,
   putUserBook,
   deleteUser,
+  putUserWishList,
 };

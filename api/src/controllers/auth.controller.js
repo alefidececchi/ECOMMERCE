@@ -110,6 +110,11 @@ const login = async (req, res) => {
 
       res.status(200).json({auth: "Usuario logueado tradicionalmente", token, email:user.email})
   }
+
+    /*const token = jwt.sign({id: user._id, name: user.name, email: user.email, admin: user.admin},process.env.JWT_ACC_ACTIVATE)
+
+    res.status(200).json({auth: "Usuario logueado", token})*/
+
 }
 
 const forgotPassword = async (req, res) => {
