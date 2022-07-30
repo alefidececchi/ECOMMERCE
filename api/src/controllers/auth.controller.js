@@ -91,7 +91,14 @@ const login = async (req, res) => {
   console.log(user.log_Google)
   if (user.log_Google===true) {
     if (password==user.password){
-      return res.status(200).json({auth:"Usuario logueado mediante Google Login",user});
+      const token=jwt.sign({ _id: User._id }, process.env.RESET_PASSWORD_KEY, {
+        expiresIn: "20m",
+      });
+      await User.findOneAndUpdate(
+        {email},
+        {localStorageToken:token}
+      )
+      return res.status(200).json({auth:"Usuario logueado mediante Google Login",user,token});
     } else {
       return res.status(400).json({auth:"Contraseña incorrecta",user})
     }
@@ -101,7 +108,7 @@ const login = async (req, res) => {
 
       if (!compare) return res.status(400).json({error: "Contraseña invalida"})
 
-      res.status(200).json({auth: "Usuario logueado tradicionalmente", user})
+      res.status(200).json({auth: "Usuario logueado tradicionalmente", token, email:user.email})
   }
 }
 

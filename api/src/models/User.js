@@ -57,6 +57,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    localStorageToken:
+    {
+      type: String
+    }
 
 
   },
