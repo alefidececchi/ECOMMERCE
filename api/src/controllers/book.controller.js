@@ -58,7 +58,7 @@ const getBookById = async (req, res) => {
   try {
     const book = await Book.findById(id).populate(
       "sellers",
-      "-_id -__v -selling_books -wish_list"
+      "-_id -__v -selling_books -wish_list -purchased_books"
     );
     return res.status(200).json({ book: book });
   } catch (error) {
