@@ -52,6 +52,9 @@ PUT http://localhost:3001/books/:idBook/:idUser HTTP/1.1
 ###
 DELETE http://localhost:3001/books/62e43dd3c9421a759cdadc13 HTTP/1.1
 
+###
+DELETE http://localhost:3001/books/62e48a88203fd71143f254e6/62e404d95367a615176f5dcc HTTP/1.1
+
 
 ####################################################
 
