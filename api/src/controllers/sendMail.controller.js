@@ -14,7 +14,6 @@ const sendMailActivate = (token, email) => {
     to: `${email}`,
     subject: "Enviado desde libritos.com",
     text: `Haz click en el siguien link para activar su cuenta: ${process.env.CLIENT_URL}/activate-account/${token}`,
-    
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

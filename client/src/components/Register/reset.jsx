@@ -92,13 +92,14 @@ const { token } = useParams()
                     >
                         {({ errors }) => (
                             <Form className={s.form}>
-                                <h2>Email has been sent!</h2>
-                                <h3>Please check your inbox for instructions on how to reset the password</h3>
-                                <h4>You have 20 minutes to complete the password change</h4>
+                                <h3>Verified account!</h3>
+
+                                <h4>You have 20 minutes to complete the </h4>
+                                <h4> password change</h4>
                                
 
                                 <div>
-                                    <label htmlFor="newPass">Password: </label>
+                                    <label htmlFor="newPass">New password: </label>
                                     <Field
                                         type='password'
                                         id="password"
@@ -117,7 +118,7 @@ const { token } = useParams()
 
 
 
-{/*                                 
+                                {/*                                 
                                 <div>
                                     <Link to={"/login" }>
 

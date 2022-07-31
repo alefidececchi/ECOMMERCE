@@ -13,8 +13,6 @@ import Activate from "./components/Register/activate"
 import Forgot from "./components/Register/forgot"
 import Reset from "./components/Register/reset"
 import { ToastContainer } from 'react-toastify'
-import { useEffect, useState } from 'react';
-import jwt_decode from 'jwt-decode';
 
 
 function App() {

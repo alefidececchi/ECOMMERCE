@@ -6,13 +6,6 @@ const routes = require("./routes/index.routes.js");
 
 const app = express();
 
-
-// const users = [
-//   {id: 1, name: 'Franco', email: 'Franco@mail.com', password: '1234'},
-//   {id: 2, name: 'Toni', email: 'Toni@mail.com', password: '1234'}
-// ]
-// console.log(users.map((e)=>e));
-
 // (MIDDLEWARES)
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
