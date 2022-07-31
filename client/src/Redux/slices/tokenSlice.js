@@ -8,7 +8,7 @@ const tokenSlice = createSlice({
     reducers: {
         getToken(state, action) {
             // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            console.log(state, action)
+            // console.log(state, action)
 
             state = action.payload;
 

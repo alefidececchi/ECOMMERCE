@@ -25,6 +25,7 @@ const signUp = async (req, res) => {
       auth: "Email de verificacion enviado, por favor revise su bandeja",
     });
   } catch (err) {
+   
     res.status(400).json({ error: err });
   }
 };
@@ -93,7 +94,10 @@ const login = async (req, res) => {
   console.log(user.log_Google)
   if (user.log_Google === true) {
     if (password == user.password) {
-      return res.status(200).json({ auth: "Usuario logueado mediante Google Login", user });
+      const token = jwt.sign({ id: user._id, email: user.email, admin: user.admin }, process.env.JWT_ACC_ACTIVATE)
+      // console.log(token)
+      res.status(200).json({ auth: "Usuario logueado mediante Google Login", user, token });
+
     } else {
       return res.status(400).json({ auth: "Contraseña incorrecta", user })
     }

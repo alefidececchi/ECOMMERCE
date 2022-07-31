@@ -6,9 +6,10 @@ import {
 } from "../../Redux/thunks/booksThunks";
 import { clearDetail } from "../../Redux/slices/bookSlice"
 import { Link } from "react-router-dom"
+import { getWishList } from "../../Redux/slices/wishListSlice";
 import s from "./bookDetail.module.scss"
 
-const BookDetail = (props) => {
+const BookDetail = (props, { book }) => {
 
     const [loading, setLoading] = useState(true);
 
@@ -41,7 +42,10 @@ const BookDetail = (props) => {
     const handleClick = () => {
         setCart(["hola me agregaron al estado cart"]);
     }
-    
+
+    const handleWishList = (book) => {
+        dispatch(getWishList(book))
+    }
 
 
 
@@ -65,19 +69,31 @@ const BookDetail = (props) => {
                     ) :
                         <div className={s.BookDetail}>
 
-
+                            <button className={s.fav} onClick={() => handleWishList(book)}>
+                                <i class="fas fa-heart"></i>
+                            </button>
 
                             <div>
                                 <button className={s.Close} onClick={handleClose} >
                                     <i class="fas fa-times fa-lg"></i>
                                 </button>
-                                <img src={booksDetail.image} alt="book" width="384px" height="384px" />
+                                <img src={booksDetail.image} alt="book" width="400px" height="400px" />
                                 <div className={s.cart} >
                                     <div className={s.info}>
                                         <h3>$ {booksDetail.price}</h3>
 
                                         <h4 >{booksDetail.name}</h4>
-                                        <h4 >{booksDetail.description}</h4>
+                                        <div className={s.info2}>
+                                            <h4 >Publication date: {booksDetail.released}</h4>
+                                            <h4 >Author: {booksDetail.authors}</h4>
+                                        </div>
+                                        <div className={s.info2}>
+                                            <h4 >Language: {booksDetail.language}</h4>
+                                            <h4 >Genres: {booksDetail.genres}</h4>
+                                        </div>
+
+
+                                        <h5>{booksDetail.description}</h5>
 
                                         <figure onClick={handleClick} >
                                             <button>

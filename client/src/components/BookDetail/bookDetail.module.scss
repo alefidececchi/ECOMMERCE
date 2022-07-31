@@ -25,9 +25,9 @@
         z-index: 999;
     }
     .BookDetail {
-        margin-top: 40px;
+        margin-top: 90px;
         background-color: #ffffff;
-        width: 384px;
+        width: 400px;
         height: auto;
 
         border-radius: 10px 10px 10px 10px;
@@ -51,20 +51,41 @@
 
             margin: 10px;
         }
+        .fav {
+            font-size: medium;
+            position: absolute;
+            left: 350px;
+            top: 10px;
+            color: #c7c7c7;
+            border: #c7c7c7;
+            background-color: #ffffff;
+            border-radius: 30px;
+            width: 40px;
+            height: 40px;
+            // margin: 10px;
+        }
 
         h3 {
             font-weight: bold;
             margin: 0px;
+            color: #000000;
         }
         h4 {
             margin: 0px 0px 20px 0px;
         }
-
+        h5 {
+            margin: 10px 0px 20px 0px;
+        }
         img {
             border-radius: 10px 10px 10px 10px;
         }
 
         .info {
+            figure {
+                display: flex;
+                justify-content: center;
+            }
+
             margin: 1.5rem;
             button {
                 color: #ffffff;
@@ -78,6 +99,14 @@
                 align-items: center;
                 h3 {
                     margin: 10px;
+                    color: #ffffff;
+                }
+            }
+            .info2 {
+                display: flex;
+                
+                h4 {
+                    margin: 0px 25px 5px 0px;
                 }
             }
         }

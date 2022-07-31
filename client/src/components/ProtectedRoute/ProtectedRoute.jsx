@@ -4,8 +4,6 @@ import { Route, Navigate } from 'react-router-dom';
 
 
 
-
-
 function ProtectedRoute({ children }) {
 
 
@@ -22,24 +20,7 @@ function ProtectedRoute({ children }) {
 
 
 
-  // const intitialState = {
-  //     authenticated: false
-  //   };
-
-  // // if (isError || hasAccess === false)
-  // if (!token) {
-  //     return <Redirect to="/signin" />;
-  // }
-  // // if (hasAccess === true) 
-  // if (token) {
-  //     return (
-  //         <Route path={path} {...rest}>
-  //             {children}
-  //         </Route>
-  //     );
-  // }
-
-  // return <div>Loading</div>;
+ 
 }
 
 export default ProtectedRoute;
