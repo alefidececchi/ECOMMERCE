@@ -107,7 +107,7 @@ const postBook = async (req, res) => {
 
       const userUpdated = await User.findByIdAndUpdate(
         idUser,
-        { $push: { selling_books: [{ _id : bookAdded._id , name : bookAdded.name, image : bookAdded.image, price : bookAdded.price, stock : bookAdded.stock}] }},
+        { $push: { selling_books: bookAdded._id } },
         { new: true, useFindAndModify: false }
       );
 

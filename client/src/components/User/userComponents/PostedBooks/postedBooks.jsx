@@ -21,31 +21,32 @@ function PostedBooks(){
   //console.log(window.localStorage.usuario)
    
     const[editMode, setEditMode] = useState(false)
-    const { userById } = useSelector((state) => state.users);
-    //const { books } = useSelector((state) => state.books);
-    const { bookById } = useSelector((state) => state.books);
+
     const dispatch = useDispatch()
-    //let[book, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
-    const [book, setBooks] = useState([])
+
+    const [book, setBooks] = useState()
     //let books  = []
 
-    let info = jwt_decode(window.localStorage.token);
+    
     //console.log(userById.selling_books)
-    let id = info.id
+  
     //let[books, setBooks] = useState(selling)
-    //console.log(books)
+    //console.log(book)
     let correo = window.localStorage.usuario
     let vendiendo = window.localStorage.usuario.name
     //console.log(prueba)
     //console.log(prueba.selling_books)
-    console.log(book.selling_books)
-
+    //console.log(book.selling_books)
+    const[reload, setReload] = useState(false)
     const sellingStorage = JSON.parse(window.localStorage.getItem('usuario'));
     //console.log(sellingStorage.selling_books[0])
     
     
     useEffect( () => {
-        console.log('entro')
+        //console.log('entro')
+        let info = jwt_decode(window.localStorage.token);
+        //console.log(userById.selling_books)
+        let id = info.id
           // sellingStorage.selling_books.map(b => {
           //   dispatch(fetchBooksById(b))
           //   setPrueba(prueba => [...prueba, bookById])
@@ -53,18 +54,18 @@ function PostedBooks(){
           
           // dispatch(fetchUserById(id))
           // dispatch(fetchAllBooks())
-
+          setReload(false)
           axios.get(`http://localhost:3001/users/${id}`)
           .then((response)=>{
-            console.log(response)
+            //console.log(response)
             setBooks(response.data.userrrs)
           })       
-
+      
           
           
           //llenarState()
       
-    }, []);
+    }, [reload]);
     //console.log(prueba)
   //   let selling = userById.selling_books
   //   //console.log(selling)
@@ -82,7 +83,7 @@ function PostedBooks(){
 
     function deleteBook(del){
         console.log(del)
-        let filtrado = book.filter(b => b.bookName !== del.bookName)
+        let filtrado = book.selling_books.filter(b => b._id !== del)
         console.log(filtrado)
         swal({
           title:'Delete?',
@@ -92,13 +93,24 @@ function PostedBooks(){
         }).then(res => {
           if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
             if(filtrado){
-              setBooks(book = filtrado)
+              console.log('entro')
+              axios.delete(`http://localhost:3001/books/${del}`)
+              console.log('entro')
+              //setBooks(filtrado)
               swal({text: 'Post  deleted successfully', icon: 'success'})
             }
           }
         })
     }
-
+    function reloading(){
+    
+      if (reload){
+  
+          return setReload(false)
+      }else{
+        return setReload(true)
+      }
+  }
     function editOn(){
 
 
@@ -109,6 +121,9 @@ function PostedBooks(){
     }
     return(
         <div className={s.container}>
+          
+           {book ?
+           <>
             <div className={s.containerSide}>
             <SideBar/>
             </div>
@@ -116,14 +131,14 @@ function PostedBooks(){
               {
                 editMode?(
                   <div>
-                    <EditBook editOff={editOff}/>
+                    <EditBook editOff={editOff} estado={book} reloading ={reloading}/>
                   </div>
                 ):
                <div>
 {/* country[0].activities.length > 0 ? 
                     country[0].activities.map((c,i) => */}
 
-                {book.selling_books > 0 ?
+                {book.selling_books.length > 0 ?
                 book.selling_books.map((book , i) =>
                 
                     <div key={i} className={s.books}>
@@ -132,17 +147,17 @@ function PostedBooks(){
                         <img src={book.image} alt='bookImage'></img>
                       </div>
                       <div  className={s.text}>
-                        <h1> {book.bookName}</h1>
+                        <h1> {book.name}</h1>
                         <h3> Price:${book.price} USD</h3>
                       </div>
                       <div  className={s.text}>
-                        <h1> Stock: {book.amount}</h1>
+                        <h1> Stock: {book.stock}</h1>
                       </div>
                       <div className={s.botones}>
                         <button  onClick={editOn} className={s.button}>Edit</button>  {/* <button className={style.button} onClick={editOn}>Edit</button> */}
                        
                     
-                        <button onClick={()=>deleteBook(book)}  className={s.button}>Delete</button> {/* <button className={style.button} onClick={()=>deleteBook(book)}>Delete</button> */}
+                        <button onClick={()=>deleteBook(book._id)}  className={s.button}>Delete</button> {/* <button className={style.button} onClick={()=>deleteBook(book)}>Delete</button> */}
                         
                       </div>
                     </div>
@@ -165,6 +180,11 @@ function PostedBooks(){
               </div>
 
             </div>
+            </> :
+            <div>
+              loading
+            </div>
+            }
         </div>
     )
   // axios.delete('http://localhost:3001/api/activities/delete/'+del)
