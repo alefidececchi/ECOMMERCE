@@ -16,7 +16,10 @@ const getUsers = async (req, res) => {
 const getUserByID = async (req, res) => {
   const { idUser } = req.params;
   try {
-    const userrrsId = await User.findById(idUser);
+    const userrrsId = await User.findById(idUser).populate(
+      "selling_books",
+      "-_id -__v -sellers"
+    )
     return res.status(200).json({ userrrs: userrrsId });
   } catch (error) {
     return res.status(500).json({ error: error });

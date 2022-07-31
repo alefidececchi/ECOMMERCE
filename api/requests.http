@@ -3,13 +3,27 @@
 #(BOOKS ROUTES)
 
 ###
-GET http://localhost:3001/books HTTP/1.1
+GET http://localhost:3001/books?name=test HTTP/1.1
 
 ###
 GET http://localhost:3001/books?name=(NAME)&discount=(asc/desc)&price=(asc/desc)&released=(asc/desc)&sort=(asc/desc)&genre=(GENRE)&status=(false/true)&author=(AUTHOR NAME)&limit=(NUMBER)&page=(1...) HTTP/1.1
 
 ###
-GET http://localhost:3001/books/:idBook HTTP/1.1
+GET http://localhost:3001/books/62e46dda58daa83566bbac49 HTTP/1.1
+
+###
+POST http://localhost:3001/books/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"book test",
+    "image":"image test",
+    "description":"description test",
+    "price": 0,
+    "used": false,
+    "released":"00-00-00",
+    "stock":2
+}
 
 ###
 POST http://localhost:3001/books/ HTTP/1.1
@@ -25,7 +39,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3001/books/62d95f66dbd810b17e2d3026 HTTP/1.1
+PUT http://localhost:3001/books/62e43dd3c9421a759cdadc13 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -36,7 +50,10 @@ Content-Type: application/json
 PUT http://localhost:3001/books/:idBook/:idUser HTTP/1.1
 
 ###
-DELETE http://localhost:3001/books/  HTTP/1.1
+DELETE http://localhost:3001/books/62e43dd3c9421a759cdadc13 HTTP/1.1
+
+###
+DELETE http://localhost:3001/books/62e48a88203fd71143f254e6/62e404d95367a615176f5dcc HTTP/1.1
 
 
 ####################################################
