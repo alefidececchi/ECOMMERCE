@@ -1,6 +1,8 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
+const bcrypt = require("bcrypt");
 const { getByName } = require("../lib/user.controller.helper.js");
+
 
 const getUsers = async (req, res) => {
   const { name } = req.query;
@@ -56,16 +58,26 @@ const putUser = async (req, res) => {
   const { idUser } = req.params;
   const { name, email, password, admin, image, description, country } =
     req.body;
-  const actuCliente = {
-    name: name,
-    email: email,
-    password: password,
-    admin: admin,
-    image: image,
-    description: description,
-    country: country,
-  };
-  await User.findByIdAndUpdate(idUser, actuCliente);
+  let actualCliente;
+  password
+    ? (actualCliente = {
+        name: name,
+        email: email,
+        password: await bcrypt.hash(password, 10),
+        admin: admin,
+        image: image,
+        description: description,
+        country: country,
+      })
+    : (actualCliente = {
+        name: name,
+        email: email,
+        admin: admin,
+        image: image,
+        description: description,
+        country: country,
+      });
+  await User.findByIdAndUpdate(idUser, actualCliente);
   res.status(200).json({
     status: "Usuario actualizado.",
   });
