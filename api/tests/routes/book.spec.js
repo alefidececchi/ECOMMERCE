@@ -5,10 +5,9 @@ const Book = require("../../src/models/Book.js");
 const app = require("../../src/app.js");
 const { MONGO_URI } = process.env;
 
-const bookId = new mongoose.Types.ObjectId().toString();
+let bookId;
 
 const book = {
-  id: bookId,
   name: "testing name",
   image: "testing image",
   genres: ["testing genre"],
@@ -96,6 +95,18 @@ describe("books", () => {
     });
   });
 
+  describe("given a name get the book", () => {
+    it("should return 200 and the book", async () => {
+      const { body, statusCode } = await supertest(app).get(
+        `/books?name=${book.name}`
+      );
+
+      bookId = body.books[0]._id;
+
+      expect(statusCode).toBe(200);
+    });
+  });
+
   describe("put books route", () => {
     describe("given wrong book ID", () => {
       it("should return 500 and error", async () => {
@@ -135,15 +146,12 @@ describe("books", () => {
         );
 
         expect(statusCode).toBe(500);
-        expect(body.message).toBe(
-          'Cast to ObjectId failed for value "000" (type string) at path "_id" for model "Book"'
-        );
       });
     });
 
     describe("given a right ID", () => {
       it("should return 201 and message", async () => {
-        const { body, statusCode } = await supertest(app).delete(
+        const { body, statusCode } = await supertest(app).del(
           `/books/${bookId}`
         );
         expect(statusCode).toBe(201);

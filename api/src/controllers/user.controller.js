@@ -1,12 +1,15 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
 const bcrypt = require("bcrypt");
+const { getByName } = require("../lib/user.controller.helper.js");
+
 
 const getUsers = async (req, res) => {
+  const { name } = req.query;
   try {
-    const users = await User.find();
-    // console.log('Ingreso a la ruta de usuarios');
-    //console.log(userrrs);
+    let users = await User.find();
+    if (name) users = getByName({ users, name });
+
     return res.status(200).json({ users: users });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -19,7 +22,7 @@ const getUserByID = async (req, res) => {
     const userrrsId = await User.findById(idUser).populate(
       "selling_books",
       "-_id -__v -sellers"
-    )
+    );
     return res.status(200).json({ userrrs: userrrsId });
   } catch (error) {
     return res.status(500).json({ error: error });
