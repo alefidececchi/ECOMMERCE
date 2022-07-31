@@ -1,11 +1,13 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
+const { getByName } = require("../lib/user.controller.helper.js");
 
 const getUsers = async (req, res) => {
+  const { name } = req.query;
   try {
-    const users = await User.find();
-    // console.log('Ingreso a la ruta de usuarios');
-    //console.log(userrrs);
+    let users = await User.find();
+    if (name) users = getByName({ users, name });
+
     return res.status(200).json({ users: users });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -18,7 +20,7 @@ const getUserByID = async (req, res) => {
     const userrrsId = await User.findById(idUser).populate(
       "selling_books",
       "-_id -__v -sellers"
-    )
+    );
     return res.status(200).json({ userrrs: userrrsId });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -76,26 +78,26 @@ const putUserBook = async (req, res) => {
   });
 
   const bookUpdated = await Book.findByIdAndUpdate(idBook, {
-    $push: { sellers: idUser }
-  })
+    $push: { sellers: idUser },
+  });
 
   res.status(200).json({
     status: sellingBooksUpdate,
-    statusBook: bookUpdated
+    statusBook: bookUpdated,
   });
   // en POSTMAN PUT:
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
 
 const putUserWishList = async (req, res) => {
-  const { idBook, idUser } = req.params
+  const { idBook, idUser } = req.params;
   await User.findByIdAndUpdate(idUser, {
-    $push: { wish_list: idBook }
-  })
+    $push: { wish_list: idBook },
+  });
   res.status(200).json({
-    status: "Libro agregado a wish list"
-  })
-}
+    status: "Libro agregado a wish list",
+  });
+};
 
 const deleteUser = async (req, res) => {
   const { idUser } = req.params;
@@ -114,5 +116,5 @@ module.exports = {
   putUser,
   putUserBook,
   deleteUser,
-  putUserWishList
+  putUserWishList,
 };

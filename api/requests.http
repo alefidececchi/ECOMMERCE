@@ -9,7 +9,7 @@ GET http://localhost:3001/books?name=test HTTP/1.1
 GET http://localhost:3001/books?name=(NAME)&discount=(asc/desc)&price=(asc/desc)&released=(asc/desc)&sort=(asc/desc)&genre=(GENRE)&status=(false/true)&author=(AUTHOR NAME)&limit=(NUMBER)&page=(1...) HTTP/1.1
 
 ###
-GET http://localhost:3001/books/62e46dda58daa83566bbac49 HTTP/1.1
+GET http://localhost:3001/books/62dac8d5e96b6437a8785a6a HTTP/1.1
 
 ###
 POST http://localhost:3001/books/ HTTP/1.1
@@ -64,7 +64,7 @@ DELETE http://localhost:3001/books/62e48a88203fd71143f254e6/62e404d95367a615176f
 GET http://localhost:3001/users/ HTTP/1.1
 
 ###
-GET http://localhost:3001/users/62e148ce473306d54513e9c0 HTTP/1.1
+GET http://localhost:3001/users/62e1943f4c936e77f730513c HTTP/1.1
 
 ###
 PUT http://localhost:3001/users/:idUser HTTP/1.1
