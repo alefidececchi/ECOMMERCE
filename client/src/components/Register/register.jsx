@@ -18,13 +18,31 @@ const Register = () => {
     //  var google=""
     const google = window.google;
 
+
+    useEffect(() => {
+        google.accounts.id.initialize({
+            client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
+            callback: handleCallbackResponse
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById('signInDiv'),
+            { theme: "outline", size: "large" }
+        );
+
+        google.accounts.id.prompt();
+
+
+    }, []);
+
     const [user, setUser] = useState({});
     //  console.log(user)
 
     function handleCallbackResponse(response) {
-        // console.log("Encoded JWT ID token: " + response.credential);
+        //  console.log("Encoded JWT ID token: " + response.credential);
+         //token response.credential
         var userObject = jwt_decode(response.credential);
-        // console.log(userObject);
+        //  console.log(userObject);
         setUser(userObject);
         axios({
             method: 'post',
@@ -44,36 +62,10 @@ const Register = () => {
     }
 
 
-    useEffect(() => {
-        google.accounts.id.initialize({
-            client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
-            callback: handleCallbackResponse
-        });
-
-        google.accounts.id.renderButton(
-            document.getElementById('signInDiv'),
-            { theme: "outline", size: "large" }
-        );
-
-        google.accounts.id.prompt();
-
-
-    }, []);
+   
     // If we have no user: sign in button
     // If we have a user: show the log out button
 
-
-
-    // useEffect(() => {
-    //     axios({
-    //         method: 'post',
-    //         url: 'http://localhost:3001/users/registerGoogle',
-    //         data: {
-    //             email: user.email,
-    //             password: user.sub,
-    //         },
-    //     });
-    // }, [ ])
 
 
 
@@ -84,8 +76,8 @@ const Register = () => {
 
     let navigate = useNavigate()
 
-    console.log(send)
-    console.log(Field)
+    // console.log(send)
+    // console.log(Field)
 
     return (
         <div className={s.container}>
@@ -138,14 +130,14 @@ const Register = () => {
                             }).then(res => {
                                 if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                                     dispatcher(fetchAllBooks());
-                                    navigate('/activate-account')
+                                    navigate('/activate')
                                 }
                             })
 
                             resetForm();
                             // setSend(true)
                             // setTimeout(() => setSend(false), 3000)
-                            console.log(values)
+                            // console.log(values)
 
 
 
@@ -203,7 +195,8 @@ const Register = () => {
                                 <div className={s.google} id="signInDiv"></div>
 
                                 {Object.keys(user).length != 0 &&
-                                    <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+                                    // <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+                                    navigate('/')
                                 }
                                 {user &&
                                     <div>

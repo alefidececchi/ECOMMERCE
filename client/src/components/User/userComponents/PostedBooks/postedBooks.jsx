@@ -40,13 +40,14 @@ function PostedBooks(){
     const[reload, setReload] = useState(false)
     const sellingStorage = JSON.parse(window.localStorage.getItem('usuario'));
     //console.log(sellingStorage.selling_books[0])
-    
+    let info = jwt_decode(window.localStorage.token);
+    //console.log(userById.selling_books)
+    let id = info.id
+    let recargaprra = 1
     
     useEffect( () => {
         //console.log('entro')
-        let info = jwt_decode(window.localStorage.token);
-        //console.log(userById.selling_books)
-        let id = info.id
+   
           // sellingStorage.selling_books.map(b => {
           //   dispatch(fetchBooksById(b))
           //   setPrueba(prueba => [...prueba, bookById])
@@ -65,7 +66,7 @@ function PostedBooks(){
           
           //llenarState()
       
-    }, [reload]);
+    }, [reload,  recargaprra]);
     //console.log(prueba)
   //   let selling = userById.selling_books
   //   //console.log(selling)
@@ -82,6 +83,7 @@ function PostedBooks(){
 
 
     function deleteBook(del){
+    
         console.log(del)
         let filtrado = book.selling_books.filter(b => b._id !== del)
         console.log(filtrado)
@@ -94,13 +96,18 @@ function PostedBooks(){
           if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
             if(filtrado){
               console.log('entro')
+              axios.delete(`http://localhost:3001/books/${del}/${id}`)
               axios.delete(`http://localhost:3001/books/${del}`)
+              .then(reloading())
               console.log('entro')
+             
               //setBooks(filtrado)
               swal({text: 'Post  deleted successfully', icon: 'success'})
             }
           }
         })
+
+
     }
     function reloading(){
     

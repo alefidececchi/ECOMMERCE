@@ -1,10 +1,10 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import s from './activate.module.scss'
+import s from './reset.module.scss'
 import swal from 'sweetalert'
 import axios from 'axios'
-import { useNavigate ,Link,useParams } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import {
     fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
@@ -23,21 +23,21 @@ const Reset = (props) => {
     // console.log(send)
     // console.log(Field)
 
-const { token } = useParams()
+    const { token } = useParams()
 
 
-// useEffect(() => {
-   
-//     axios({
-//         method: 'put',
-//         url: 'http://localhost:3001/auth/forgot-password',
-//         data: {
-//            resetLink: token
-//         },
-//     });
-// }, [])
+    // useEffect(() => {
 
-// console.log(token)
+    //     axios({
+    //         method: 'put',
+    //         url: 'http://localhost:3001/auth/forgot-password',
+    //         data: {
+    //            resetLink: token
+    //         },
+    //     });
+    // }, [])
+
+    // console.log(token)
 
 
 
@@ -48,14 +48,14 @@ const { token } = useParams()
                 <section>
                     <Formik
                         initialValues={{
-                            
+
                             newPass: "",
-                            resetLink:token
+                            resetLink: token
 
                         }}
                         validate={(values) => {
                             let errors = {};
-                        
+
                             //validacion password
                             if (!values.newPass) {
                                 errors.newPass = 'Please write your password'
@@ -71,7 +71,7 @@ const { token } = useParams()
                             axios.put('http://localhost:3001/auth/reset-password', values)
                             swal({
                                 title: 'Congratulation',
-                                text: 'cmbiaste tu contraseña',
+                                text: 'Password changed successfully',
                                 icon: 'success',
                                 button: 'OK'
                             }).then(res => {
@@ -92,13 +92,14 @@ const { token } = useParams()
                     >
                         {({ errors }) => (
                             <Form className={s.form}>
-                                <h2>Email has been sent!</h2>
-                                <h3>Please check your inbox for instructions on how to reset the password</h3>
-                                <h4>You have 20 minutes to complete the password change</h4>
-                               
+                                <h3>Verified account!</h3>
+
+                                <h4>You have 20 minutes to complete the </h4>
+                                <h4>  password change</h4>
+
 
                                 <div>
-                                    <label htmlFor="newPass">Password: </label>
+                                    <label htmlFor="newPass">New password: </label>
                                     <Field
                                         type='password'
                                         id="password"
@@ -111,13 +112,13 @@ const { token } = useParams()
                                 </div>
 
                                 <div>
-                                    <button type="submit">  Create </button>
+                                    <button type="submit">Change</button>
                                     {send && <p>User added succecsfully</p>}
                                 </div>
 
 
 
-{/*                                 
+                                {/*                                 
                                 <div>
                                     <Link to={"/login" }>
 

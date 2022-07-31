@@ -1,7 +1,7 @@
 import React from 'react';
-
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import style from './user.module.scss'
-import {BsCameraFill} from "react-icons/bs";
+import { BsCameraFill } from "react-icons/bs";
 import { useState } from 'react';
 
 import userLogo from '../../assets/imgs/user.png'
@@ -16,6 +16,7 @@ import {
 import { useEffect } from 'react';
 import jwt_decode from "jwt-decode"
 import axios from 'axios';
+import Footer from '../Footer/footer';
 
 
 const User = () => {
@@ -36,7 +37,14 @@ const User = () => {
   console.log(window.localStorage.usuario)
   let estado = userById
   
-  
+  let navigate = useNavigate()
+  const handleClick = () => {
+    navigate("/")
+    window.location.reload()
+    localStorage.clear()
+    
+
+  }
   
 
 
@@ -49,15 +57,29 @@ const User = () => {
 }, [reload]);
 
 
-  
+  const onInputchange = (files) => {
+    // console.log(files.target.value)
+    // let url = URL.createObjectURL(e.target.files[0]);
+    // console.log(url)
+    // setImage(url)
 
-  function onInputchange(e){
-    console.log( e.target.value)
-
-
-    let url = URL.createObjectURL(e.target.files[0]);
-    console.log(url)
-    setImage(url)
+    const formData = new FormData()
+    formData.append("file", files[0])
+    formData.append("upload_preset", "u2eqih7r")
+    axios.post("https://api.cloudinary.com/v1_1/dbikbhgwc/image/upload", formData)
+    .then((response) => {
+      console.log(response)
+      console.log(response.data.url)
+      axios({
+        method: 'put',
+        url: `http://localhost:3001/users/${id}`,
+        data: {
+            image : response.data.url,
+        
+        }
+     })
+     .then(reloading())  
+    }) 
   }
 
   function editProfileOn(){
@@ -117,6 +139,8 @@ const  changePassword = async () =>{
 }
 
   return (
+
+    <div>
     <div className={style.container}>
       
       <div className={style.containerSide}>
@@ -128,10 +152,14 @@ const  changePassword = async () =>{
             <div>
               <h2>Account Details</h2>
             </div>
-            <img src={image} className={style.userPhoto} alt='userProfile'></img>
+            {
+              userById.image === "default_image" ?
+              <img src={image} className={style.userPhoto} alt={'imagen'} ></img>:
+              <img src={userById.image} className={style.userPhoto} alt={userLogo} ></img>
+            }
             <div className={style.addFile}>
                 <BsCameraFill className={style.icon}/>
-                <input type='file' name='userimage' onChange={onInputchange}/>
+                <input type='file' name='userimage' onChange={(event) =>  onInputchange(event.target.files)}/>
             </div>
             
 
@@ -178,12 +206,15 @@ const  changePassword = async () =>{
                         </div>
                       </div> */}
                     
-                      <div>
+                      <div className={style.btnedit}>
                         <button onClick={editProfileOn} >Edit</button>
                       </div>
-                      <div>
-                          <button onClick={changePassword}>Change Password?</button>
+                      <div >
+                          <button onClick={changePassword} className={style.botonpass}>Change Password?</button>
                       </div>
+                      <div className={style.info}>
+
+                    </div>
                     </div>
                   }
                 
@@ -196,9 +227,11 @@ const  changePassword = async () =>{
               </Link> */}
 
       </div>
-        
+      
+      
     </div>
-
+    {/* <Footer /> */}
+    </div>
   );
 }
 

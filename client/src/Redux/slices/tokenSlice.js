@@ -1,19 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
+// const initialState = {
 
-    token:[],   
-    email:[]
+//     token:[],   
+//     email:[]
 
 
-};
+// };
+const initialState =
+    localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null
 
 const tokenSlice = createSlice({
     name: "token",
     initialState,
     reducers: {
         getToken(state, action) {
-            state.token = action.payload;
-            localStorage.setItem("token", JSON.stringify(state.token))
+            // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // console.log(state, action)
+
+            state = action.payload;
+
+            localStorage.setItem("token", JSON.stringify(state))
         },
         getEmail(state, action) {
             state.email = action.payload;

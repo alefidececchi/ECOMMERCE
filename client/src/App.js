@@ -15,17 +15,23 @@ import MyWishList from './components/User/userComponents/MyWishList/myWishList';
 import Purchases from './components/User/userComponents/Purchases/purchases';
 import Discounts from './components/User/userComponents/Discount/discounts';
 import Payment from './components/User/userComponents/Payment/payment';
+
+import GiftCard from './components/GiftCard/giftCard';
 import Register from "./components/Register/register"
 import Login from './components/Register/login';
 import Activate from "./components/Register/activate"
 import Forgot from "./components/Register/forgot"
 import Reset from "./components/Register/reset"
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
+
+
+import ActivateAccount from './components/Register/activate-account';
+import ResetPassword from './components/Register/reset-password';
 import { ToastContainer } from 'react-toastify'
 
 
-
 function App() {
-  
+
   return (
     <div className="App">
     <ToastContainer />
@@ -33,6 +39,40 @@ function App() {
       <Route path='/' element={< NavBar />}>
         <Route path="/" element={< Home />} />
         <Route path='shopping' element={< Shopping />} />
+        <Route path='/user' element={< ProtectedRoute><User /> </ProtectedRoute>} />
+        
+        <Route path='/user/sales' element={< PostedBooks />}/>
+        <Route path='/user/myGiftCards' element={< MyGiftCards />}/> 
+        <Route path='/user/myWishList' element={< MyWishList />}/>
+        <Route path='/user/purchases' element={< Purchases />}/>
+        <Route path='/user/discounts' element={< Discounts />}/>
+        <Route path='/user/payment' element={< Payment />}/>
+        <Route path='user/newBook' element={< AddBook />} />
+        <Route path='wish' element={< WishList />} />
+        <Route path='gift' element={< GiftCard />} />
+      </Route>
+        <Route path='register' element={< Register />} />
+        <Route path='activate' element={< ActivateAccount />} />
+        <Route path='activate-account/:token' element={< Activate />} />
+        <Route path='login' element={< Login />} />
+        <Route path='forgot-password' element={< Forgot />} />
+        <Route path='reset' element={< ResetPassword />} />
+        <Route path='reset-password/:token' element={< Reset />} />
+     </Routes>
+
+    </div>
+  );
+}
+
+export default App;
+
+
+{/* <ToastContainer />
+     <Routes>
+      <Route path='/' element={< NavBar />}>
+        <Route path="/" element={< Home />} />
+        <Route path='shopping' element={< Shopping />} />
+        <Route path='/user' element={< ProtectedRoute><User /> </ProtectedRoute>} />
         <Route path='user' element={< User />}/>
         <Route path='/user/sales' element={< PostedBooks />}/>
         <Route path='/user/myGiftCards' element={< MyGiftCards />}/> 
@@ -42,18 +82,4 @@ function App() {
         <Route path='/user/payment' element={< Payment />}/>
         <Route path='user/newBook' element={< AddBook />} />
         <Route path='wish' element={< WishList />} />
-      </Route>
-        <Route path='register' element={< Register />} />
-        <Route path='activate-account' element={< Activate />} />
-        <Route path='activate-account/:token' element={< Activate/>} />
-        <Route path='login' element={< Login />} />
-        <Route path='forgot-password' element={< Forgot />} />
-        <Route path='reset-password' element={< Activate />} />
-        <Route path='reset-password/:token' element={< Reset />} />
-     </Routes>
-    
-    </div>
-  );
-}
-
-export default App;
+      </Route> */}

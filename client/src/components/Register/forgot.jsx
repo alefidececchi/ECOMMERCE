@@ -58,7 +58,7 @@ const Forgot = () => {
                             swal({
                                 title: '',
                                 text: 'Please check your inbox ',
-                                icon: 'success',
+                                icon: 'info',
                                 button: 'OK'
                             }).then(res => {
                                 if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda

@@ -1,8 +1,17 @@
 import s from './sideBar.module.scss'
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import{BsCardChecklist , BsFillGiftFill} from 'react-icons/bs'
 function SideBar(){
+
+    let navigate = useNavigate()
+    const handleClick = () => {
+      navigate("/")
+      window.location.reload()
+      localStorage.clear()
+      
+  
+    }
 
     return(
     <div className={s.main}>
@@ -32,6 +41,12 @@ function SideBar(){
                 <li>
                     <Link to="/user/payment">Payment</Link>
                 </li>
+                <li>
+                    <Link to={'/'} onClick={handleClick}>Logout</Link>
+                </li>
+                {/* <Link to={'/'}>
+                    <button   >logout</button>
+                </Link> */}
             </ul>
         </div>
     </div>
