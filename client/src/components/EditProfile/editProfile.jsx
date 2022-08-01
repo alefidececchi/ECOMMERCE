@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     fetchUserById
   } from "../../Redux/thunks/usersThunks";
+  import { BallTriangle } from "react-loader-spinner";
 
 function EditProfile({editProdileOff, reloading}){
 

@@ -12,7 +12,7 @@ import swal from "sweetalert";
 
 function EditBook({editOff, estado, reloading}){
 
-    console.log(estado.purchased_books)
+    console.log(estado.selling_books)
     const [send, setSend] = useState(false);
     const[editMode, setEditMode] = useState(true)
 
@@ -39,7 +39,6 @@ function EditBook({editOff, estado, reloading}){
                     <div className={style.mainContainer}>
                     <Formik
                         initialValues={{
-                            name:"",  
                             price:'', 
                             stock:'',
                         }}
@@ -67,10 +66,17 @@ function EditBook({editOff, estado, reloading}){
                         }}
                         onSubmit={(values, {resetForm})=>{
                             let filtrado = books.find(b => b.name === values.name)
-                            console.log(filtrado)
-                            reloading()
-                            editOff()
-                            axios.put(`http://localhost:3001/books/${filtrado._id}` , values)
+                            console.log(filtrado._id)
+                            
+                            axios({
+                                method: 'put',
+                                url: `http://localhost:3001/books/${filtrado._id}`,
+                                data: {
+                                    price : values.price,
+                                    stock: values.stock                   
+                                }
+                            })
+                            // axios.put(`http://localhost:3001/books/${filtrado._id}` , values)
                             swal({
                                 title:'Congratulation',
                                 text:'Book updated successfully',
@@ -78,12 +84,13 @@ function EditBook({editOff, estado, reloading}){
                                 button:'OK'
                               }).then(res => {
                                 if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-                                  
-                                  navigate('/user/sales')
+                                    
+                                    navigate('/user/sales')
                                 }
                               })
                             resetForm();
-
+                            reloading()
+                            editOff()
                             setSend(true)
                             
                             console.log(values)

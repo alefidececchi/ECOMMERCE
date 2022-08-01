@@ -18,80 +18,48 @@
     flex-direction: row;
    
 
-//     @include telefonoMax() {
-// 		margin-top: toRem(-50);
-// 		width: 100%;
-//         max-width: toRem(500);
-//         height: roRem(1);
-//         font-size: 15px;
-//         .container{
-            
-//             display: flex;
-//             justify-content: space-between;
-//             flex-direction: row;
-//             width: 100%;
-//             height: 32%
-//         }
-
-// 	  }
-//     @include tablet() {
-// 		margin-top: toRem(50);
-// 		width: 100%;
-//         max-width: toRem(500);
-//         height: roRem(1);
-//         font-size: 15px;
-//         .container{
-//             margin-top: toRem(-5000);
-//             display: flex;
-//             justify-content: space-between;
-//             flex-direction: row;
-//             width: 100%;
-//             height: 32%
-//         }
-
-// 	  }
-// 	  @include desktop() {
-// 		margin-top: toRem(-220);
-// 		width: 100%;
-//         .container{
-//             margin-top: toRem(-5000);
-//             max-width: 100em;
-//             width: 100%;
-  
-//         }
-		
-// 	  }
-	
-
-//       @include XLdesktop() {
-// 		margin-top: toRem(70);
-// 		width: 16%;
-//         .container{
-//             font-size: 20px;
-//             height: 100vh;
-//         }
-// 	  }
 }
 
 .container{
 
     
-    background-color: whitesmoke;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 1rem 2rem;
     height: 100vh ;
     display: flex;
     flex-direction: row;
     border-right: 1px solid gray;
+    
 
     ul{
+      font-size: 20px;
         list-style: none;
         padding: 1rem 2rem;
+        color: white;
         li{
-            margin-bottom: 1rem;
+          color: white;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid $secundario;
             a{
+              color: white;
                 text-decoration: none;
             }
         }
+    }
+    .icon{
+      width: 10px;
+    }
+    .lista{
+      display: flex;
+      flex-direction: row;
+    }
+    .userPhoto{
+      object-fit: cover;
+      width:50px;
+      height:50px;
+      border-radius:50px;
     }
 }
   
@@ -104,7 +72,18 @@
             border-bottom: 1px solid gray;
             display: flex;
             flex-direction: row;
-            
+            ul{
+              font-size: 12px;
+                list-style: none;
+                padding: 1rem 2rem;
+                li{
+                    margin-bottom: 0.7rem;
+                    border-bottom: 1px solid $secundario;
+                    a{
+                        text-decoration: none;
+                    }
+                }
+            }
             
           }
     }
@@ -118,7 +97,18 @@
             max-height: 300px;
             border-bottom: 1px solid gray;
             display: flex;
-            
+            ul{
+              font-size: 10px;
+                list-style: none;
+                padding: 1rem 2rem;
+                li{
+                    margin-bottom: 0.7rem;
+                    border-bottom: 1px solid $secundario;
+                    a{
+                        text-decoration: none;
+                    }
+                }
+            }
           }
     }
   }
@@ -130,7 +120,18 @@
             max-height: 250px;
             border-bottom: 1px solid gray;
             display: flex;
-            
+            ul{
+              font-size: 10px;
+                list-style: none;
+                padding: 1rem 2rem;
+                li{
+                    margin-bottom: 0.5rem;
+                    border-bottom: 1px solid $secundario;
+                    a{
+                        text-decoration: none;
+                    }
+                }
+            }
           }
     }
   }

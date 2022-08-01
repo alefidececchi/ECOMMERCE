@@ -15,6 +15,19 @@ import jwt_decode from "jwt-decode"
 import { useEffect } from 'react';
 import { fetchUserById } from '../../../../Redux/thunks/usersThunks';
 import { fetchAllBooks, fetchBooksById } from '../../../../Redux/thunks/booksThunks';
+import { BallTriangle } from "react-loader-spinner";
+
+
+
+export const data = [
+  {
+      Component: BallTriangle,
+      props: {
+          color: "#B881FF",
+      },
+      name: "Ball Triangle",
+  },
+];
 
 function PostedBooks(){
 
@@ -43,7 +56,7 @@ function PostedBooks(){
     let info = jwt_decode(window.localStorage.token);
     //console.log(userById.selling_books)
     let id = info.id
-    let recargaprra = 1
+    
     
     useEffect( () => {
         //console.log('entro')
@@ -66,20 +79,8 @@ function PostedBooks(){
           
           //llenarState()
       
-    }, [reload,  recargaprra]);
-    //console.log(prueba)
-  //   let selling = userById.selling_books
-  //   //console.log(selling)
-    
-  //   function llenarState (){
-  //     sellingStorage.selling_books.map((bookId) =>{
-  //       let guardado = books.find((b) => b._id === bookId)
-  //       console.log(guardado)
-  //       setPrueba(prueba => [...prueba, guardado])
-  //       console.log(prueba)
-       
-  // })
-  //   }
+    }, [reload]);
+
 
 
     function deleteBook(del){
@@ -128,12 +129,11 @@ function PostedBooks(){
     }
     return(
         <div className={s.container}>
-          
+            <div className={s.containerSide}>
+              <SideBar/>
+            </div>
            {book ?
            <>
-            <div className={s.containerSide}>
-            <SideBar/>
-            </div>
             <div className={s.containerBooks}> {/* <div className={style.containerBooks}> */}
               {
                 editMode?(
@@ -187,23 +187,20 @@ function PostedBooks(){
               </div>
 
             </div>
-            </> :
+            </> 
+            :
             <div>
-              loading
-            </div>
+            {data.map((loader, index) => (
+                <div className={s.loading} data-tip={loader.name}>
+                    <loader.Component {...loader.props} />
+                </div>
+            ))}
+
+        </div>
             }
         </div>
     )
-  // axios.delete('http://localhost:3001/api/activities/delete/'+del)
-    // .then(()=>{
-    //     history.push('/countries')
-    // })
-    //}
+
 }
 export default PostedBooks;
 
-//tenemos el onjeto delos libros vendidos en una variable
-//mapear la variable de los libros
-//por cada libro se hace un dispatch y q traiga el libro buscandolo por id
-//esos libros q trae por ID deberia de guardarlos en un estado 
-//imprimer usando ese estado 

@@ -17,7 +17,19 @@ import { useEffect } from 'react';
 import jwt_decode from "jwt-decode"
 import axios from 'axios';
 import Footer from '../Footer/footer';
+import { BallTriangle } from "react-loader-spinner";
 
+
+
+export const data = [
+  {
+      Component: BallTriangle,
+      props: {
+          color: "#B881FF",
+      },
+      name: "Ball Triangle",
+  },
+];
 
 const User = () => {
   const[image, setImage] = useState(userLogo)
@@ -141,21 +153,31 @@ const  changePassword = async () =>{
   return (
 
     <div>
+ 
     <div className={style.container}>
       
       <div className={style.containerSide}>
-        <SideBar reloading ={reloading}/>
+        <SideBar userById = {userById}/>
       </div>
-
+     
+      
       <div className={style.containerProfile}>
           
             <div>
               <h2>Account Details</h2>
             </div>
-            {
+            { userById.image? 
               userById.image === "default_image" ?
               <img src={image} className={style.userPhoto} alt={'imagen'} ></img>:
-              <img src={userById.image} className={style.userPhoto} alt={userLogo} ></img>
+              <img src={userById.image} className={style.userPhoto} alt={userLogo} ></img>      :
+              <div>
+              {data.map((loader, index) => (
+                  <div className={style.loading} data-tip={loader.name}>
+                      <loader.Component {...loader.props} />
+                  </div>
+              ))}
+        
+          </div>
             }
             <div className={style.addFile}>
                 <BsCameraFill className={style.icon}/>
@@ -225,10 +247,11 @@ const  changePassword = async () =>{
               {/* <Link to={'/user/newBook'}>
                 <button className={style.button2}>Sell</button>
               </Link> */}
-
+      
       </div>
-      
-      
+
+             
+
     </div>
     {/* <Footer /> */}
     </div>
