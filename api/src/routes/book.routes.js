@@ -7,17 +7,26 @@ const {
   putBook,
   deleteBook,
 } = require("../controllers/book.controller.js");
+const {verifyToken}=require("../middlewares/auth.middleware.js")
 
 const router = express.Router();
 
 //(GET) - books/genres
 router.get("/genres", getGenresBook);
 
+
+
+
+//(GET)-/books/
+router.get("/",getBooks);
+
+// router.get("/",[verifyToken],getBooks);
+
+
 //(GET)-/books/:id
 router.get("/:id", getBookById);
 
-//(GET)-/books/
-router.get("/", getBooks);
+
 
 //(POST)-/books/ (MODE API)
 router.post("/", postBook);

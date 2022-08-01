@@ -10,13 +10,13 @@ const Footer = () => {
             <div className={s.Legal}>
 
                 <h4>Legal</h4>
-                <Link className={s.Links} to={"/home/"}>
+                <Link className={s.Links} to={"/"}>
                     <a >Privacy</a>
                 </Link>
-                <Link className={s.Links} to={"/home/"}>
+                <Link className={s.Links} to={"/"}>
                     <a>Terms</a>
                 </Link>
-                <Link className={s.Links} to={"/home/"}>
+                <Link className={s.Links} to={"/"}>
                     <a>License</a>
                 </Link>
 
@@ -24,17 +24,17 @@ const Footer = () => {
             <div className={s.LogosContainer}>
 
 
-                <Link className={s.Logos} to={"/home/"}>
+                <Link className={s.Logos} to={"/"}>
                     <i class="fab fa-linkedin fa-2x"></i>
                 </Link>
 
-                <Link className={s.Logos} to={"/home/"}>
+                <Link className={s.Logos} to={"/"}>
                     <i class="fab fa-instagram fa-2x"></i>
                 </Link>
-                <Link className={s.Logos} to={"/home/"}>
+                <Link className={s.Logos} to={"/"}>
                     <i class="fab fa-facebook-square fa-2x"></i>
                 </Link>
-                <Link className={s.Logos} to={"/home/"}>
+                <Link className={s.Logos} to={"/"}>
                     <i class="fab fa-twitter fa-2x"></i>
                 </Link>
             </div>
