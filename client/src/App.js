@@ -24,10 +24,11 @@ import Forgot from "./components/Register/forgot"
 import Reset from "./components/Register/reset"
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 
+import { ToastContainer } from 'react-toastify'
 
 import ActivateAccount from './components/Register/activate-account';
 import ResetPassword from './components/Register/reset-password';
-import { ToastContainer } from 'react-toastify'
+
 import CheckoutSuccess from './components/Shopping/CheckoutSuccess';
 
 
@@ -63,7 +64,7 @@ function App() {
      </Routes>
 
     </div>
-  );
+  ); 
 }
 
 export default App;
