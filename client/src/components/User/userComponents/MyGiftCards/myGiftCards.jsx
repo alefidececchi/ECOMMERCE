@@ -58,7 +58,7 @@ function MyGiftCards(){
 
                 
             </div>
-            <Link to={'/wish'}>
+            <Link to={'/gift'}>
                 <button className={s.button}>GiftCards</button>
             </Link>
             </div>
