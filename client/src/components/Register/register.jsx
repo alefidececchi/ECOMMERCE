@@ -40,7 +40,8 @@ const Register = () => {
 
     function handleCallbackResponse(response) {
         //  console.log("Encoded JWT ID token: " + response.credential);
-         //token response.credential
+        //token response.credential
+        //  console.log(response)
         var userObject = jwt_decode(response.credential);
         //  console.log(userObject);
         setUser(userObject);
@@ -51,6 +52,10 @@ const Register = () => {
                 email: userObject.email,
                 password: userObject.sub,
             },
+        }).then((response) => {
+            console.log(response);
+        }, (error) => {
+            console.log(error);
         });
 
         document.getElementById("signInDiv").hidden = true;
@@ -62,7 +67,7 @@ const Register = () => {
     }
 
 
-   
+
     // If we have no user: sign in button
     // If we have a user: show the log out button
 
