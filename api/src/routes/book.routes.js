@@ -11,7 +11,7 @@ const {
 const router = express.Router();
 
 //(GET) - books/genres
-router.get("/genres", getGenresBook)
+router.get("/genres", getGenresBook);
 
 //(GET)-/books/:id
 router.get("/:id", getBookById);
@@ -19,8 +19,11 @@ router.get("/:id", getBookById);
 //(GET)-/books/
 router.get("/", getBooks);
 
-//(POST)-/books/
+//(POST)-/books/ (MODE API)
 router.post("/", postBook);
+
+//(POST)-/books/:idUser (CREATE AND RELATIONSHIP)
+router.post("/:idUser", postBook);
 
 //(PUT)-books/:id
 router.put("/:idBook/", putBook);
@@ -29,6 +32,9 @@ router.put("/:idBook/", putBook);
 router.put("/:idBook/:idUser", putBook);
 
 //(DELETE)-books/:id
-router.delete("/:id", deleteBook);
+router.delete("/:idBook", deleteBook);
+
+//(DELETE)-books/:id (DELETE RELATIONSHIPS)
+router.delete("/:idBook/:idUser", deleteBook);
 
 module.exports = router;

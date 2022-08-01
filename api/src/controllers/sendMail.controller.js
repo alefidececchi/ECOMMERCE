@@ -13,7 +13,7 @@ const sendMailActivate = (token, email) => {
     from: "samirjose675@gmail.com",
     to: `${email}`,
     subject: "Enviado desde libritos.com",
-    text: `Su token de activacion es el siguiente: ${token}`,
+    text: `Haz click en el siguien link para activar su cuenta: ${process.env.CLIENT_URL}/activate-account/${token}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -39,7 +39,7 @@ const sendMailForgot = (token, email) => {
     from: "samirjose675@gmail.com",
     to: `${email}`,
     subject: "Enviado desde libritos.com",
-    text: `Please click on given link to reset your password: ${process.env.CLIENT_URL}/resetpassword/${token}`,
+    text: `Please click on given link to reset your password: ${process.env.CLIENT_URL}/reset-password/${token}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
