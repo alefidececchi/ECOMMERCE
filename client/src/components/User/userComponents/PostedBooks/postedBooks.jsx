@@ -100,6 +100,7 @@ function PostedBooks(){
               axios.delete(`http://localhost:3001/books/${del}/${id}`)
               axios.delete(`http://localhost:3001/books/${del}`)
               .then(reloading())
+              dispatch(fetchAllBooks())
               console.log('entro')
              
               //setBooks(filtrado)
