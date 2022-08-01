@@ -1,22 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Formik, Form,  Field, ErrorMessage} from 'formik'
 import {useNavigate} from "react-router-dom";
 import style from './editProfile.module.scss'
+import jwt_decode from "jwt-decode"
+import swal from 'sweetalert'
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    fetchUserById
+  } from "../../Redux/thunks/usersThunks";
+  import { BallTriangle } from "react-loader-spinner";
 
+function EditProfile({editProdileOff, reloading}){
 
-function EditProfile({editProdileOff}){
-
+    const { userById } = useSelector((state) => state.users);
     const [send, setSend] = useState(false);
+    const[userInfo, setUserInfo] = useState({name: userById.name, email:userById.email})
+    let info = jwt_decode(window.localStorage.token);
+
+    let id = info.id
+    
+    const dispatch = useDispatch()
+    let navigate = useNavigate()  
+
+    useEffect(() => {
+        if (!userById.name) {
+            dispatch(fetchUserById(id));
+            
+        }
+       
+    }, [dispatch, userById]);
+
+   
+
+
    
     return(
         <div>
             <div className={style.mainContainer}>
                 <Formik
                     initialValues={{
-                        name:"", 
-                        email:"",
-                        password:"",
-                        password2:"" 
+                        name: userById.name, 
+                        email: userById.email,
+                        password: "12345"
+                        
                     }}
                     validate={(values) =>{
                         let errors ={};
@@ -26,18 +53,18 @@ function EditProfile({editProdileOff}){
                         }else if(values.name.length < 4 || values.name.length > 40){
                             errors.name = 'Name must have between 4 or 20 characters'
                         }
-                        //validacion nombre del password   
-                        if(!values.password ){
-                            errors.password = 'Please write your password'
-                        }else if(values.password.length ===  0){
-                            errors.password = 'Please write your password'
-                        }
-                        //validacion nombre del password2   
-                        if(!values.password2){
-                            errors.password2 = 'Please write your password'
-                        }else if(values.password2 !== values.password){
-                            errors.password2 = 'Passwords do not match'
-                        }
+                        // //validacion nombre del password   
+                        // if(!values.password ){
+                        //     errors.password = 'Please write your password'
+                        // }else if(values.password.length ===  0){
+                        //     errors.password = 'Please write your password'
+                        // }
+                        // //validacion nombre del password2   
+                        // if(!values.password2){
+                        //     errors.password2 = 'Please write your password'
+                        // }else if(values.password2 !== values.password){
+                        //     errors.password2 = 'Passwords do not match'
+                        // }
 
                         //validacion correo
                         if(!values.email){
@@ -49,9 +76,39 @@ function EditProfile({editProdileOff}){
                         return errors;
                     }}
                     onSubmit={(values, {resetForm})=>{
-                        resetForm();
-
                         console.log(values)
+                        
+                        swal({
+                            title:'Update Personal Info?',
+                            icon:"warning",
+                            buttons:['Cancel','Confirm']
+                          }).then(res => {
+                            if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                                editProdileOff()
+                                reloading()
+                                
+                                axios({
+                                    method: 'put',
+                                    url: `http://localhost:3001/users/${id}`,
+                                    data: {
+                                        name : values.name,
+                                        email : values.email,
+                                        password: values.password
+                        
+                                    }
+                                })
+                                //dispatch(fetchUserById(id))
+
+                                
+                                //navigate("/user", { replace: true })
+                                
+                            }
+                          })
+
+                        resetForm();
+                        setSend(true)
+                        
+                        
                     }}
                 >
                     {( {errors} )=>(
@@ -81,37 +138,13 @@ function EditProfile({editProdileOff}){
                                 <div className={style.error}>{errors.email}</div>
                             )} />
                         </div>
-                        <div>
-                            <label htmlFor="name">Password: </label>
-                            <Field
-                            type='password'
-                            id="pass"
-                            placeholder="Type new password"
-                            name="password"
-                            />
-                            <ErrorMessage name="password" component={()=>(
-                                <div  className={style.error}>{errors.password}</div>
-                            )} />
-                        </div>
-                        <div>
-                            <label htmlFor="name">Repeat Password: </label>
-                            <Field
-                            type='password'
-                            id="pass2"
-                            placeholder="Type new password again"
-                            name="password2"
-                            />
-                            <ErrorMessage name="password2" component={()=>(
-                                <div  className={style.error}>{errors.password2}</div>
-                            )} />
-                        </div>
+            
                         <div>
                             <button type="submit" className={style.buttonSave}>  Save </button>
-                            <button onClick={() => editProdileOff()} className={style.buttonCancel}>  Cancel </button>
+                            <button onClick={() => editProdileOff()} className={style.buttonCancel}>  Back </button>
                             {send && <p>Information updated succecsfully</p>}
                             
                         </div>  
-
                     </Form>
                     )}
                 </Formik> 
@@ -121,3 +154,5 @@ function EditProfile({editProdileOff}){
 }
 
 export default EditProfile;
+
+

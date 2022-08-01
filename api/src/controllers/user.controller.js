@@ -21,8 +21,8 @@ const getUserByID = async (req, res) => {
   try {
     const userrrsId = await User.findById(idUser).populate(
       "selling_books",
-      "-_id -__v -sellers"
-    );
+      "-__v -sellers"
+    )
     return res.status(200).json({ userrrs: userrrsId });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -38,7 +38,7 @@ const postUserGoogle = async (req, res) => {
     const nuevoUsuario = new User({
       //user
       email:email,
-      password:password,
+      password: password,
       //admin:admin,
       //image:image,
       //description:description,

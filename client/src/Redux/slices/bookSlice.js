@@ -6,6 +6,7 @@ const initialState = {
   genres: [],
   filterObject: {},
   filterEmpty: false,
+  bookById:[],
   searchEmpty: false,
 };
 
@@ -16,6 +17,10 @@ const bookSlice = createSlice({
     getBooks(state, action) {
       state.books = action.payload;
       state.booksCopy = action.payload;
+    },
+    getBookById(state, action) {
+      
+      state.bookById = action.payload;
     },
     searchBook(state, action) {
       if (action.payload.length === 0) {
@@ -75,6 +80,7 @@ export const {
   resetFilters,
   resetObjectFilter,
   saveFilterObject,
+  getBookById,
   resetSearch,
 } = bookSlice.actions;
 
