@@ -25,7 +25,7 @@ const bookSchema = new Schema(
       type: Number,
       required: true,
     },
-    discount: {
+    PriceWithDiscount: {
       type: Number,
       default: 0,
     },
