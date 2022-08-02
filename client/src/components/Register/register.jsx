@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import s from './register.module.scss'
 import swal from 'sweetalert'
 import axios from 'axios'
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import {
     fetchAllBooks
@@ -17,6 +17,23 @@ const Register = () => {
 
     //  var google=""
     // const google = window.google;
+
+
+    // useEffect(() => {
+    //     google.accounts.id.initialize({
+    //         client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
+    //         callback: handleCallbackResponse
+    //     });
+
+    //     google.accounts.id.renderButton(
+    //         document.getElementById('signInDiv'),
+    //         { theme: "outline", size: "large" }
+    //     );
+
+    //     google.accounts.id.prompt();
+
+
+    // }, []);
 
 
     // useEffect(() => {

@@ -56,7 +56,7 @@ const postUserGoogle = async (req, res) => {
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, admin, image, description, country } =
+  const { name, email, password, image, description, country } =
     req.body;
   let actualCliente;
   password
@@ -64,7 +64,6 @@ const putUser = async (req, res) => {
         name: name,
         email: email,
         password: await bcrypt.hash(password, 10),
-        admin: admin,
         image: image,
         description: description,
         country: country,
@@ -72,7 +71,6 @@ const putUser = async (req, res) => {
     : (actualCliente = {
         name: name,
         email: email,
-        admin: admin,
         image: image,
         description: description,
         country: country,
@@ -82,6 +80,17 @@ const putUser = async (req, res) => {
     status: "Usuario actualizado.",
   });
 };
+
+const becomeAdmin = async (req, res) => {
+  const {idUser} = req.body
+  try {
+    const user = await User.findById(idUser)
+    user.admin ? await user.updateOne({admin: false}) : await user.updateOne({admin: true})
+    res.status(200).json({status: "Usuario actualizado."})
+  } catch (error){
+    res.status(400).json({error: error})
+  }
+}
 
 const putUserBook = async (req, res) => {
   const { idBook, idUser } = req.params;
@@ -129,4 +138,5 @@ module.exports = {
   putUserBook,
   deleteUser,
   putUserWishList,
+  becomeAdmin
 };

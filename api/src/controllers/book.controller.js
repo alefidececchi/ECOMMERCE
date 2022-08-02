@@ -11,6 +11,7 @@ const {
   getByName,
   getByGenre,
   getByAuthor,
+  getByOffers
 } = require("../lib/book.controller.helper.js");
 
 const getBooks = async (req, res) => {
@@ -122,9 +123,11 @@ const putBook = async (req, res) => {
   const { idBook } = req.params;
   const { idUser } = req.params;
   const book = req.body;
+  // console.log(book)
   if (!idUser) {
     try {
       const bookUpdated = await Book.updateOne({ _id: idBook }, { $set: book });
+      // console.log(bookUpdated)
       return res.status(201).json({ bookUpdated: bookUpdated });
     } catch (error) {
       return res.status(500).json({ error: error });
@@ -182,6 +185,17 @@ const deleteBook = async (req, res) => {
   }
 };
 
+const getBooksinOffers =async (req,res)=>{
+  try {
+  let books = await Book.find({ deleted: false });
+  prueba= await getByOffers({books})
+  console.log(prueba)
+  return res.status(200).json({ prueba});
+  } catch(error) {
+    return res.status(500).json({ error: error });
+  }
+}
+
 module.exports = {
   getBooks,
   getGenresBook,
@@ -189,4 +203,5 @@ module.exports = {
   getBookById,
   putBook,
   deleteBook,
+  getBooksinOffers
 };
