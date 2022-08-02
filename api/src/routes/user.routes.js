@@ -6,7 +6,8 @@ const {
   putUser,
   putUserBook,
   deleteUser,
-  putUserWishList
+  putUserWishList,
+  becomeAdmin
 } = require("../controllers/user.controller.js");
 
 const router = express.Router();
@@ -16,6 +17,8 @@ router.get("/", getUsers);
 router.get("/:idUser", getUserByID);
 
 router.post("/registerGoogle", postUserGoogle);
+
+router.put("/admin", becomeAdmin)
 
 router.put("/:idUser", putUser);
 
