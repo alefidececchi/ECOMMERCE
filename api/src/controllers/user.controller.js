@@ -1,5 +1,8 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
+const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcrypt")
+
 
 const getUsers = async (req, res) => {
   try {
@@ -45,30 +48,26 @@ const getUserByID = async (req, res) => {
 //   } catch (error) {
 //     return res.status(500).json({ error: error });
 //   }
-// };
+
 
 
 const postUserGoogle = async (req, res) => {
+  const { email, password, image } = req.body;
   try {
-    //const user = req.body;
-    const {email,password}=req.body;
     const nuevoUsuario = new User({
-      //user
-      email:email,
-      password:password,
-      //admin:admin,
-      //image:image,
-      //description:description,
-      //country:country,
-      log_Google:true
-  });
+      email: email,
+      password: password,
+      image: image,
+
+      log_Google: true
+    });
+    const token = jwt.sign({ email, password, image }, process.env.JWT_ACC_ACTIVATE);
     await nuevoUsuario.save();
-    return res
-      .status(201)
-      .json({ status: "usuario registrado mediante Google y guardado en la base de datos." });
+
+    res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
   } catch (error) {
-     return res.status(500).json({ error: error });
-   
+    return res.status(500).json({ error: error });
+
   }
 };
 

@@ -16,55 +16,55 @@ import {
 const Register = () => {
 
     //  var google=""
-    const google = window.google;
+    // const google = window.google;
 
 
-    useEffect(() => {
-        google.accounts.id.initialize({
-            client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
-            callback: handleCallbackResponse
-        });
+    // useEffect(() => {
+    //     google.accounts.id.initialize({
+    //         client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
+    //         callback: handleCallbackResponse
+    //     });
 
-        google.accounts.id.renderButton(
-            document.getElementById('signInDiv'),
-            { theme: "outline", size: "large" }
-        );
+    //     google.accounts.id.renderButton(
+    //         document.getElementById('signInDiv'),
+    //         { theme: "outline", size: "large" }
+    //     );
 
-        google.accounts.id.prompt();
+    //     google.accounts.id.prompt();
 
 
-    }, []);
+    // }, []);
 
-    const [user, setUser] = useState({});
-    //  console.log(user)
+    // const [user, setUser] = useState({});
+    // //  console.log(user)
 
-    function handleCallbackResponse(response) {
-        //  console.log("Encoded JWT ID token: " + response.credential);
-        //token response.credential
-        //  console.log(response)
-        var userObject = jwt_decode(response.credential);
-        //  console.log(userObject);
-        setUser(userObject);
-        axios({
-            method: 'post',
-            url: 'http://localhost:3001/users/registerGoogle',
-            data: {
-                email: userObject.email,
-                password: userObject.sub,
-            },
-        }).then((response) => {
-            console.log(response);
-        }, (error) => {
-            console.log(error);
-        });
+    // function handleCallbackResponse(response) {
+    //     //  console.log("Encoded JWT ID token: " + response.credential);
+    //     //token response.credential
+    //     //  console.log(response)
+    //     var userObject = jwt_decode(response.credential);
+    //     //  console.log(userObject);
+    //     setUser(userObject);
+    //     axios({
+    //         method: 'post',
+    //         url: 'http://localhost:3001/users/registerGoogle',
+    //         data: {
+    //             email: userObject.email,
+    //             password: userObject.sub,
+    //         },
+    //     }).then((response) => {
+    //         console.log(response);
+    //     }, (error) => {
+    //         console.log(error);
+    //     });
 
-        document.getElementById("signInDiv").hidden = true;
-    }
+    //     document.getElementById("signInDiv").hidden = true;
+    // }
 
-    function handleSignOut(event) {
-        setUser({});
-        document.getElementById("signInDiv").hidden = false;
-    }
+    // function handleSignOut(event) {
+    //     setUser({});
+    //     document.getElementById("signInDiv").hidden = false;
+    // }
 
 
 
@@ -197,7 +197,7 @@ const Register = () => {
 
 
 
-                                <div className={s.google} id="signInDiv"></div>
+                                {/* <div className={s.google} id="signInDiv"></div>
 
                                 {Object.keys(user).length != 0 &&
                                     // <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
@@ -207,7 +207,7 @@ const Register = () => {
                                     <div>
                                         <img src={user.picture}></img>
                                         <h3>{user.name}</h3>
-                                    </div>}
+                                    </div>} */}
 
 
                             </Form>
