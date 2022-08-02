@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getBooks,
   postBook,
+  getBooksinOffers,
   getBookById,
   getGenresBook,
   putBook,
@@ -22,7 +23,8 @@ router.get("/",getBooks);
 
 // router.get("/",[verifyToken],getBooks);
 
-
+//(GET)- /books/offers
+router.get('/offers',getBooksinOffers);
 //(GET)-/books/:id
 router.get("/:id", getBookById);
 

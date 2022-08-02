@@ -63,6 +63,10 @@ const bookSchema = new Schema(
     deleted: {
       type: Boolean,
       default: false,
+    },
+    inOffer:{
+      type: Boolean,
+      default:false
     }
   },
   {
