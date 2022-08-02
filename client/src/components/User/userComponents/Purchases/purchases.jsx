@@ -7,11 +7,23 @@ import portada from '../../../../assets/imgs/hp.jpg'
 import portada2 from '../../../../assets/imgs/LOTR.jpg'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Review from './review';
 
 function Purchases(){
 
+    const[review, setReview] = useState(false)    
+    
+    function editOn(){
+        setReview(true)
+      }
+    const editOff = () =>{
+        setReview(false)
+    }
+
+
+
     let[books, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
-    //let books = []
+    
     const rederProducts = () =>(
 
         <tbody>
@@ -35,11 +47,16 @@ function Purchases(){
             <SideBar/>
             </div>
             
-            {
-                books.length>0?
-(                <div className={s.containerPur}>
+            {   review ?(
+                <div>
+                    <Review editOff={editOff}  />
+                </div>
+            ):
+
+                books.length>0?(                
+                <div className={s.containerPur}>
                 <table className={s.table}>
-                    <caption className={s.table_cap}>PURCHASES</caption>
+                    <caption className={s.table_cap}>PURCHASES<div><button onClick={editOn}>Reviews</button></div></caption>
                     <thead className={s.table_head}>
                         <tr className={s.table_row}>
                             <th className={s.table_heading} scope='col'>#</th>
@@ -50,6 +67,7 @@ function Purchases(){
                     </thead>
                     {rederProducts()}
                 </table>
+                
                 </div>):
                 <div className={s.vacio}>
                     <div>
