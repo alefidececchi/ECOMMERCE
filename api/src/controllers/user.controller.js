@@ -2,6 +2,8 @@ const User = require("../models/User.js");
 const Book = require("../models/Book.js");
 const bcrypt = require("bcrypt");
 const { getByName } = require("../lib/user.controller.helper.js");
+const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcrypt")
 
 
 const getUsers = async (req, res) => {
@@ -31,26 +33,45 @@ const getUserByID = async (req, res) => {
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
 
+// const postUser = async (req, res) => {
+//   try {
+//     const user = req.body;
+//     //const {name,email,password,admin,image,description,country}=req.body;
+//     const nuevoUsuario = new User(
+//       user
+//       /*name:name,
+//       email:email,
+//       password:password,
+//       admin:admin,
+//       image:image,
+//       description:description,
+//       country:country,*/
+//     );
+//     await nuevoUsuario.save();
+//     return res
+//       .status(201)
+//       .json({ status: "usuario registrado y guardado en la base de datos." });
+//   } catch (error) {
+//     return res.status(500).json({ error: error });
+//   }
+
 const postUserGoogle = async (req, res) => {
+  const { email, password, image } = req.body;
   try {
-    //const user = req.body;
-    const {email,password}=req.body;
     const nuevoUsuario = new User({
-      //user
-      email:email,
+      email: email,
       password: password,
-      //admin:admin,
-      //image:image,
-      //description:description,
-      //country:country,
-      log_Google:true
-  });
+      image: image,
+
+      log_Google: true
+    });
+    const token = jwt.sign({ email, password, image }, process.env.JWT_ACC_ACTIVATE);
     await nuevoUsuario.save();
-    return res
-      .status(201)
-      .json({ status: "usuario registrado mediante Google y guardado en la base de datos." });
+
+    res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
   } catch (error) {
-     return res.status(500).json({ status:"El usuario desde Google ya se registró en la base de datos." });
+    return res.status(500).json({ error: error });
+
   }
 };
 
@@ -61,22 +82,22 @@ const putUser = async (req, res) => {
   let actualCliente;
   password
     ? (actualCliente = {
-        name: name,
-        email: email,
-        password: await bcrypt.hash(password, 10),
-        admin: admin,
-        image: image,
-        description: description,
-        country: country,
-      })
+      name: name,
+      email: email,
+      password: await bcrypt.hash(password, 10),
+      admin: admin,
+      image: image,
+      description: description,
+      country: country,
+    })
     : (actualCliente = {
-        name: name,
-        email: email,
-        admin: admin,
-        image: image,
-        description: description,
-        country: country,
-      });
+      name: name,
+      email: email,
+      admin: admin,
+      image: image,
+      description: description,
+      country: country,
+    });
   await User.findByIdAndUpdate(idUser, actualCliente);
   res.status(200).json({
     status: "Usuario actualizado.",
