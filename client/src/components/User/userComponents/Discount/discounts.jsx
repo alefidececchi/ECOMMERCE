@@ -2,42 +2,93 @@ import React from 'react';
 import SideBar from '../../sideBar';
 import s from './discounts.module.scss'
 import ProductDis from './productDis';
-
+import jwt_decode from "jwt-decode"
 import portada from '../../../../assets/imgs/hp.jpg'
 import portada2 from '../../../../assets/imgs/LOTR.jpg'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { BallTriangle } from "react-loader-spinner";
+import { fetchAllBooks } from '../../../../Redux/thunks/booksThunks';
+import { useSelector } from 'react-redux';
+
+export const data = [
+    {
+        Component: BallTriangle,
+        props: {
+            color: "#B881FF",
+        },
+        name: "Ball Triangle",
+    },
+  ];
 
 function Discounts(){
 
-    let[books, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
-    //let books = []
+    let info = jwt_decode(window.localStorage.token);
+    //console.log(userById.selling_books)
+    let id = info.id
+    const { books } = useSelector((state) => state.books);
+  
+    const [prueba, setPrueba] = useState()
+    const[reload, setReload] = useState(false)
+    
+    function reloading(){
+    console.log('entro')
+        if (reload){
+    
+            return setReload(false)
+        }else{
+          return setReload(true)
+        }
+    }
+
     const rederProducts = () =>(
 
         <tbody>
-            {books.map((book, i) =>(
+            {prueba.selling_books.length > 0 &&
+            prueba.selling_books.map((book, i) =>(
                 <ProductDis 
                 key={i}
                 i = {i}
-                bookName={book.bookName}
+                bookName={book.name}
                 image={book.image}
                 price={book.price}
-
+                offer = {book.PriceWithDiscount}
+                estado = {books}
+                reload = {reloading}
                 />
             ))}
         </tbody>
 
     )
+    console.log(prueba)
+
+    useEffect( () => {
+
+          setReload(false)
+          axios.get(`http://localhost:3001/users/${id}`)
+          .then((response)=>{
+            
+            setPrueba(response.data.userrrs)
+          })       
+      
+          
+          
+          //llenarState()
+      
+    }, []);
 
     return(
         <div className={s.container}>
+            
             <div className={s.containerSide}>
             <SideBar/>
             </div>
-            
+            {prueba ?
+            <>
             {
-                books.length>0?
-(                <div className={s.containerPur}>
+                books.length>0?(                <div className={s.containerPur}>
                 <table className={s.table}>
                     <caption className={s.table_cap}>APPLY DISCOUNTS</caption>
                     <thead className={s.table_head}>
@@ -46,6 +97,7 @@ function Discounts(){
                             <th className={s.table_heading} scope='col'>Book</th>
                             <th className={s.table_heading} scope='col'>Name</th>
                             <th className={s.table_heading} scope='col'>Precio</th>
+                            <th className={s.table_heading} scope='col'>Offer Price</th>
                         </tr>
                     </thead>
                     {rederProducts()}
@@ -65,7 +117,17 @@ function Discounts(){
                     </div>
                 </div>
              }
-
+                
+                </>:
+                <div>
+                {data.map((loader, index) => (
+                    <div className={s.loading} data-tip={loader.name}>
+                        <loader.Component {...loader.props} />
+                    </div>
+                ))}
+    
+                </div> 
+            }
         </div>
     )
 }
