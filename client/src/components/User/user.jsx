@@ -32,8 +32,8 @@ export const data = [
 ];
 
 const User = () => {
+
   const[image, setImage] = useState(userLogo)
-  
   const[editProfile, setEditProfile] = useState(false)
   const[reload, setReload] = useState(false)
   const { userById } = useSelector((state) => state.users);
@@ -46,7 +46,7 @@ const User = () => {
   let info = jwt_decode(window.localStorage.token);
   //console.log(info)
   let id = info.id
-  console.log(window.localStorage.usuario)
+  console.log(id)
   let estado = userById
   
   let navigate = useNavigate()
@@ -58,8 +58,6 @@ const User = () => {
 
   }
   
-
-
   useEffect(() => {
   
       dispatch(fetchUserById(id));

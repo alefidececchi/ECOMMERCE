@@ -85,7 +85,7 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
                         <option value={'75'}>75%</option>
                         <option value={'cancel'}>Cancel Offer</option>
                     </select></td>
-                <td className={s.table_cell}>{disc}</td>   
+                <td className={s.table_cell}>${disc}</td>   
             </tr>
         
     )
