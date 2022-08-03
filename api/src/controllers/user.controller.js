@@ -56,17 +56,21 @@ const getUserByID = async (req, res) => {
 //   }
 
 const postUserGoogle = async (req, res) => {
-  const { email, password, image } = req.body;
+  const { email, password, image, name } = req.body;
   try {
     const nuevoUsuario = new User({
+
       email: email,
       password: password,
       image: image,
+      name: name,
 
       log_Google: true
     });
-    const token = jwt.sign({ email, password, image }, process.env.JWT_ACC_ACTIVATE);
     await nuevoUsuario.save();
+    const user = await User.findOne({ email });
+    const token = jwt.sign({ id: user._id, email, password, image, name }, process.env.JWT_ACC_ACTIVATE);
+
 
     res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
   } catch (error) {

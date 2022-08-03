@@ -34,7 +34,7 @@ const fetchTokenGoogle = (values) => (dispatch) => {
         .then((response) => {
             console.log(response)
             dispatch(getToken(response.data.token));
-            dispatch(getEmail(response.data.email));
+           
 
         })
         .catch((error) => console.log(error));
