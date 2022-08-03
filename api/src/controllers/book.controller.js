@@ -36,7 +36,7 @@ const getBooks = async (req, res) => {
   const { limit, page } = req.query;
 
   try {
-    let books = await Book.find({ deleted: false });
+    let books = await Book.find({stock:{$ne:0}},{ deleted: false });
     if (sort) books = sortNames({ books, sort });
     if (price) books = sortPrices({ books, price });
     if (released) books = sortReleased({ books, released });
