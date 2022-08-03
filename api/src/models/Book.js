@@ -25,7 +25,7 @@ const bookSchema = new Schema(
       type: Number,
       required: true,
     },
-    PriceWithDiscount: {
+    priceWithDiscount: {
       type: Number,
       default: 0,
     },
@@ -46,7 +46,7 @@ const bookSchema = new Schema(
     book_type: {
       type: String
     },
-    sellers: {
+    seller: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
