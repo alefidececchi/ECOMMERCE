@@ -38,19 +38,34 @@ const bookSchema = new Schema(
       required: true
     },
     pageCount: {
-      type:Number
+      type: Number
     },
     language: {
-      type:String
+      type: String
     },
     book_type: {
-      type:String
+      type: String
     },
-    sellers: [
+    sellers: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    reviews: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
+        id_user: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+          required: true
+        },
+        score: {
+          type: Number,
+          required: true
+        },
+        comment: {
+          type: String,
+          required: true
+        }
+      }
     ],
     authors: {
       type: Array,
@@ -64,9 +79,9 @@ const bookSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    inOffer:{
+    inOffer: {
       type: Boolean,
-      default:false
+      default: false
     }
   },
   {
