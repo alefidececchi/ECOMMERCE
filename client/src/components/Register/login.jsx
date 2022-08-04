@@ -15,43 +15,91 @@ import {
 } from "../../Redux/thunks/usersThunks";
 
 import {
-    fetchToken
+    fetchToken, fetchTokenGoogle,
 } from "../../Redux/thunks/tokenThunks";
 
 const Login = () => {
 
-    // const [user, setUser] = useState({});
-
-    // function handleCallbackResponse(response) {
-    //     console.log("Encoded JWT ID token: " + response.credential);
-    //     var userObject = jwt_decode(response.credential);
-    //     console.log(userObject);
-    //     setUser(userObject);
-    //     document.getElementById("signInDiv").hidden = true;
-    // }
-
-    // function handleSignOut(event) {
-    //     setUser({});
-    //     document.getElementById("signInDiv").hidden = false;
-    // }
+    const google = window.google;
 
 
+    useEffect(() => {
+        google.accounts.id.initialize({
+            client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
+            callback: handleCallbackResponse
+        });
 
-    // useEffect(() => {
-    //     google.accounts.id.initialize({
-    //         client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
-    //         callback: handleCallbackResponse
-    //     });
+        google.accounts.id.renderButton(
+            document.getElementById('signInDiv'),
+            { theme: "outline", size: "large" }
+        );
 
-    //     google.accounts.id.renderButton(
-    //         document.getElementById('signInDiv'),
-    //         { theme: "outline", size: "large" }
-    //     );
+        google.accounts.id.prompt();
 
-    //     google.accounts.id.prompt();
-    // }, []);
-    // // If we have no user: sign in button
-    // // If we have a user: show the log out button
+
+    }, []);
+
+    const [user, setUser] = useState({});
+    //  console.log(user)
+
+    function handleCallbackResponse(response) {
+        //  console.log("Encoded JWT ID token: " + response.credential);
+        //token response.credential
+        //  console.log(response)
+        var userObject = jwt_decode(response.credential);
+        // console.log(userObject);
+        setUser(userObject);
+        // axios({
+        //     method: 'post',
+        //     url: 'http://localhost:3001/users/registerGoogle',
+        //     data: {
+        //         email: userObject.email,
+        //         password: userObject.sub,
+        //     },
+
+        // }, 
+        // )
+        const datag = { email: userObject.email, password: userObject.sub, image: userObject.picture, name: userObject.name }
+        dispatcher(fetchTokenGoogle(datag))
+        if (datag) {
+            return swal({
+                title: 'Congratulation',
+                // text: 'estas logeado',
+                icon: 'success',
+                button: 'OK'
+            })
+                .then(res => {
+                    if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                        dispatcher(fetchAllBooks());
+                        navigate('/')
+                        window.location.reload()
+                    }
+                })
+        }
+
+
+
+        // .then(res => {
+        //     if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+        //         dispatcher(fetchAllBooks());
+        //         navigate('/')
+        //         window.location.reload()
+        //     }
+        // })
+        // .then((response) => {
+        //     // console.log(response);
+        // }, (error) => {
+        //     console.log(error);
+        // });
+
+
+        document.getElementById("signInDiv").hidden = true;
+    }
+
+    function handleSignOut(event) {
+        setUser({});
+        document.getElementById("signInDiv").hidden = false;
+    }
 
 
     const dispatch = useDispatch();
@@ -228,6 +276,26 @@ const Login = () => {
 
                                     </Link>
                                 </div>
+
+
+                                <div className={s.google} id="signInDiv"></div>
+
+
+                                {/* {Object.keys(user).length != 0 &&
+                                     <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+
+                                    // navigate('/')
+
+
+                                } */}
+                                {/* 
+                                {user &&
+                                    <div>
+                                        <img src={user.picture}></img>
+                                        <h3>{user.name}</h3>
+
+                                    </div>}  */}
+
                             </Form>
                         )}
                     </Formik>

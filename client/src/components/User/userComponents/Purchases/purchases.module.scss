@@ -104,6 +104,11 @@
         width: 100%;
     }
 }
+.review{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 @media only screen and (max-width: 1024px) {
     .containerPur{
         margin-top: toRem(50);
