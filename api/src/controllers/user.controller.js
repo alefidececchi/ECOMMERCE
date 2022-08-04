@@ -1,14 +1,16 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
 const bcrypt = require("bcrypt");
-const { getByName } = require("../lib/user.controller.helper.js");
+const { getByName, getByEmail } = require("../lib/user.controller.helper.js");
 
 
 const getUsers = async (req, res) => {
-  const { name } = req.query;
+  const { name, email } = req.query;
   try {
     let users = await User.find();
     if (name) users = getByName({ users, name });
+
+    else if (email) users = getByEmail({ users, email });
 
     return res.status(200).json({ users: users });
   } catch (error) {
