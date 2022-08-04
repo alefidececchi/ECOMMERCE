@@ -170,7 +170,7 @@ function Review({editOff, libros, reloading}){
                                 {
                                     libros.map((arreglo) => {
                                         return arreglo.map((book, i) =>(
-                                            <option value={book.name}>{book.name}</option>
+                                            <option key={i} value={book.name}>{book.name}</option>
                                         ))
                                     })                
                                 }

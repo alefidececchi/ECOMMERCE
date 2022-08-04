@@ -60,7 +60,7 @@ function Purchases(){
         
         
     }
-    console.log(libros)
+    //console.log(libros)
  
 
     let[bookss, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
