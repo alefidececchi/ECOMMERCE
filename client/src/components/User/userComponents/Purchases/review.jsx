@@ -32,7 +32,7 @@ function Review({editOff, estado, reloading}){
     const {genres}  = useSelector((state) => state.genres);
     const { books } = useSelector((state) => state.books);
     const dispatcher = useDispatch()
-
+    let[ejemplo, setEjemplo] = useState([{ bookName:"Harry Potter", image:'default', price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:'default', price: 40.50, amount: 10, state:'Nuevesito prro'}])
     let info = jwt_decode(window.localStorage.token); 
     let id = info.id
 
@@ -80,8 +80,8 @@ function Review({editOff, estado, reloading}){
                 <div>
                 <Formik
                         initialValues={{
-                            book:'',
-                            score:rating, 
+                            book:'pepito',
+                            score: rating, 
                             comment:'',
                         }}
                         validate={(values) =>{
@@ -93,16 +93,14 @@ function Review({editOff, estado, reloading}){
                                 errors.name = 'Please select the book name'
                             }
                             //validacion estrellas  
-                            if(!values.star === 0){
-                                errors.name = 'Please select the book name'
-                            }else if(values.name === 'BookName'){
-                                errors.name = 'Please select the book name'
+                            if(!values.star === null){
+                                errors.star = 'Please select the book name'
                             }
                             //validacion comentario                                
-                            if(!values.description){
-                                errors.description = 'Please write a  description of the book'
-                            }else if(values.description.length > 350){
-                                errors.description = 'Description must have 250 characters'
+                            if(!values.comment){
+                                errors.comment = 'Please write a  description of the book'
+                            }else if(values.comment.length > 350){
+                                errors.comment = 'Description must have 250 characters'
                             }            
                             return errors;
                         }}
@@ -119,17 +117,35 @@ function Review({editOff, estado, reloading}){
                             //     }
                             // })
                             // axios.put(`http://localhost:3001/books/${filtrado._id}` , values)
-                            swal({
-                                title:'Congratulation',
-                                text:'Book updated successfully',
-                                icon:'success',
-                                button:'OK'
-                              }).then(res => {
-                                if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-                                    
-                                    navigate('/user/sales')
-                                }
-                              })
+                            console.log(values.score=rating)
+                            console.log(values.score)
+                            if(values.score === null){
+                                swal({
+                                    title:'Fail',
+                                    text:'Select a score',
+                                    icon:'error',
+                                    button:'OK'
+                                  }).then(res => {
+                                    if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                                        
+                                        
+                                    }
+                                  })
+                            }else{
+                                swal({
+                                    title:'Congratulation',
+                                    text:'Book updated successfully',
+                                    icon:'success',
+                                    button:'OK'
+                                  }).then(res => {
+                                    if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                                        
+                                        navigate('/user/sales')
+                                    }
+                                  })
+                            }
+                            console.log(values)
+        
                             // resetForm();
                             // reloading()
                             // editOff()
@@ -150,14 +166,14 @@ function Review({editOff, estado, reloading}){
                                 name="name"
                                 >
                                 <option value='BookName' selected> Book Name </option>  
-                            {/* {      
-                                estado.selling_books.map(genre=>{
+                            {      
+                                ejemplo.map(genre=>{
                                     
                                     return (
-                                        <option value={genre.name}>{genre.name}</option>
+                                        <option value={genre.bookName}>{genre.bookName}</option>
                                         )
                                     })
-                                } */}
+                                }
                                 </Field>
 
                                 <ErrorMessage name="name" component={()=>(
@@ -165,15 +181,15 @@ function Review({editOff, estado, reloading}){
                                 )} />
                             </div>
                             <div>
-                            <label htmlFor="amt">Description: </label>
+                            <label htmlFor="amt">Comment: </label>
                             <Field
                                 as='textarea'
                                 id="amt"
                                 placeholder=""
-                                name="description"
+                                name="comment"
                             />
-                            <ErrorMessage name="description" component={()=>(
-                                <div className={style.error}>{errors.description}</div>
+                            <ErrorMessage name="comment" component={()=>(
+                                <div className={style.error}>{errors.comment}</div>
                             )} />
             
                         </div>

@@ -6,12 +6,14 @@ import styles from './shopping.module.scss'
 import Footer from '../Footer/footer';
 import { addToCart, clearCart, decreaseCart, getTotals, removeFromCart } from '../../Redux/slices/shoping.slice';
 import PayButton from './PayButton';
+import jwt_decode from "jwt-decode"
 
 const Shopping = () =>{
 
   const cart = useSelector((state) => state.shoppingCart)
   const dispatch = useDispatch()
-
+  let info = jwt_decode(window.localStorage.token);
+  
 
   useEffect(() =>{
     dispatch(getTotals())
@@ -100,7 +102,7 @@ const Shopping = () =>{
                 <span className={styles.amount}>${cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <PayButton cartItems={cart.cartItems}/>
+              <PayButton cartItems={cart.cartItems} userInfo={info} cartInfo={cart}/>
               <div className={styles.continueShopping}>
                 <Link to="/">
                 <svg

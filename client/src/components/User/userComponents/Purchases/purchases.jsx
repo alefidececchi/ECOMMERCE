@@ -2,16 +2,31 @@ import React from 'react';
 import SideBar from '../../sideBar';
 import s from './purchases.module.scss'
 import Product from './product';
-
+import jwt_decode from "jwt-decode"
 import portada from '../../../../assets/imgs/hp.jpg'
 import portada2 from '../../../../assets/imgs/LOTR.jpg'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Review from './review';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserById } from '../../../../Redux/thunks/usersThunks';
 
 function Purchases(){
 
+    const { bookById } = useSelector((state) => state.books);
     const[review, setReview] = useState(false)    
+    let info = jwt_decode(window.localStorage.token); 
+    let id = info.id
+    console.log(info)
+    const dispatch = useDispatch()
+    useEffect(() => {
+  
+        dispatch(fetchUserById(id));
+        //setReload(false)
+        
+      
+  }, []); 
     
     function editOn(){
         setReview(true)

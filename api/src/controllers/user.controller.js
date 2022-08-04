@@ -94,8 +94,11 @@ const becomeAdmin = async (req, res) => {
 
 const putUserBook = async (req, res) => {
   const { idBook, idUser } = req.params;
+
+  const BookPurch = await Book.findById(idBook);
+   
   const sellingBooksUpdate = await User.findByIdAndUpdate(idUser, {
-    $push: { selling_books: idBook },
+    $push: { purchased_books: BookPurch.id },
   });
 
   const bookUpdated = await Book.findByIdAndUpdate(idBook, {
@@ -106,6 +109,8 @@ const putUserBook = async (req, res) => {
     status: sellingBooksUpdate,
     statusBook: bookUpdated,
   });
+
+
   // en POSTMAN PUT:
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
