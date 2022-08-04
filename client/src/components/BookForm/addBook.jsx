@@ -39,7 +39,7 @@ function AddBook(){
                 <Formik 
                     initialValues={{
                         name:"", 
-                        author:"",
+                        authors:"",
                         image:"", 
                         price:'', 
                         stock:'',
@@ -59,10 +59,10 @@ function AddBook(){
                         }
 
                         //validacion nombre del author   
-                        if(!values.author){
-                            errors.author = 'Please write the author name'
-                        }else if(values.author.length < 4 || values.name.length > 40){
-                            errors.author = 'Author name must have between 4 or 20 characters'
+                        if(!values.authors){
+                            errors.authors = 'Please write the authors name'
+                        }else if(values.authors.length < 4 || values.name.length > 40){
+                            errors.authors = 'authors name must have between 4 or 20 characters'
                         }
 
                         //validacion año publicacion
@@ -168,15 +168,15 @@ function AddBook(){
                             )} />
                         </div>
                         <div>
-                            <label htmlFor="name">Author: </label>
+                            <label htmlFor="name">author: </label>
                             <Field
                             type='text'
-                            id="author"
+                            id="authors"
                             placeholder="Type a name..."
-                            name="author"
+                            name="authors"
                             />
-                            <ErrorMessage name="author" component={()=>(
-                                <div className={style.error}>{errors.author}</div>
+                            <ErrorMessage name="authors" component={()=>(
+                                <div className={style.error}>{errors.authors}</div>
                             )} />
                         </div>
                         <div>
