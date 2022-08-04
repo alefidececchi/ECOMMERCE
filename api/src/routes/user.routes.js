@@ -21,7 +21,7 @@ router.post("/registerGoogle", postUserGoogle);
 
 router.put("/admin", becomeAdmin)
 
-router.put('/purchasing-books/:idUser/:idBook',purchasedBooks);
+router.put('/purchasing-books/:idUser',purchasedBooks);
 
 router.put("/:idUser", putUser);
 
