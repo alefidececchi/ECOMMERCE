@@ -6,6 +6,7 @@ const {
   putUser,
   putUserBook,
   deleteUser,
+  purchasedBooks,
   putUserWishList,
   becomeAdmin
 } = require("../controllers/user.controller.js");
@@ -20,10 +21,11 @@ router.post("/registerGoogle", postUserGoogle);
 
 router.put("/admin", becomeAdmin)
 
+router.put('/purchasing-books/:idUser/:idBook',purchasedBooks);
+
 router.put("/:idUser", putUser);
 
 router.put("/:idUser/:idBook", putUserBook);
-
 
 router.put("/add/:idUser/:idBook", putUserWishList)
 

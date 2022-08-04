@@ -61,7 +61,7 @@ const userSchema = new Schema(
     },
     available_money: {
       type: Number,
-      default: 0,
+      default: 500,
     }
   },
   {
