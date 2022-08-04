@@ -98,11 +98,12 @@ const putUserBook = async (req, res) => {
   const BookPurch = await Book.findById(idBook);
    
   const sellingBooksUpdate = await User.findByIdAndUpdate(idUser, {
-    $push: { purchased_books: BookPurch.id },
+    // $push: { purchased_books: BookPurch.id },
+    $push: { purchased_books: BookPurch._id },
   });
 
   const bookUpdated = await Book.findByIdAndUpdate(idBook, {
-    $push: { sellers: idUser },
+    $push: { buyer: idUser },
   });
 
   res.status(200).json({
@@ -135,6 +136,64 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const purchasedBooks=async(req,res)=>{
+  const {idUser}=req.params;
+  const {cartQuantity}=req.body;
+
+  vair= await cartQuantity.map(e=>{
+    return {
+      idLibro:e._id,
+      cantidadLibro:e.cartQuantity,
+      gastoPorLibro:e.price
+    }});
+
+await vair.map(async (e)=>{
+    const usuar= await User.findById(idUser)
+    usuar.available_money?
+   await usuar.updateOne({$inc:{available_money:-(e.gastoPorLibro*e.cantidadLibro)}}):console.log('hola');
+    const lib= await Book.findById(e.idLibro)
+    lib.stock>0?
+   await lib.updateOne({$inc:{stock:-(e.cantidadLibro)}}):
+   console.log(`ya no hay stock de ${e.idLibro} para realizar la compra`);
+}
+)
+res.status(200).json({status:"todo bien"})
+
+
+  //for await of 
+    /*try {
+      const usuar= await User.findById(idUser)
+      usuar.available_money?
+     usuar.updateOne({$inc:{available_money:+e.gastoPorLibro}}):console.log('hola');
+      const lib= Book.findById(e.idLibro)
+      lib.stock>0?
+     lib.updateOne({$inc:{stock:-e.cantidadLibro}}):console.log('chau');
+      console.log('llegue hasta aqui')
+      res.status(200).json({status:"todo bien"})
+    
+    } catch (error){
+      res.status(400).json({error:error})
+    }*/
+
+
+
+
+  //const {gastoPorLibro,cantidadLibro} = req.body;
+  // el gastoPorLibro debe recibirse como numero negativo desde el Front
+  // si recibieramos una GIFT CARD, el gasto por Libro deberia recibirse en numero positivo
+  /*try {
+    const usuar= await User.findById(idUser)
+    usuar.available_money?
+    await usuar.updateOne({$inc:{available_money:+gastoPorLibro}}):console.log('hola');
+    const lib= await Book.findById(idBook)
+    lib.stock>0?
+    await lib.updateOne({$inc:{stock:-cantidadLibro}}):console.log('chau');
+    res.status(200).json({status:"todo bien"})
+  
+  } catch (error){
+    res.status(400).json({error:error})
+  }*/
+}
 module.exports = {
   getUsers,
   getUserByID,
@@ -143,5 +202,6 @@ module.exports = {
   putUserBook,
   deleteUser,
   putUserWishList,
-  becomeAdmin
+  becomeAdmin,
+  purchasedBooks
 };

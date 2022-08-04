@@ -10,19 +10,28 @@ import { Link } from 'react-router-dom';
 import Review from './review';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserById } from '../../../../Redux/thunks/usersThunks';
+import { fetchAllUsers, fetchUserById } from '../../../../Redux/thunks/usersThunks';
+import { fetchAllBooks } from '../../../../Redux/thunks/booksThunks';
 
 function Purchases(){
 
     const { bookById } = useSelector((state) => state.books);
     const[review, setReview] = useState(false)    
-    let info = jwt_decode(window.localStorage.token); 
-    let id = info.id
-    console.log(info)
+    const { userById } = useSelector((state) => state.users);
+    const { books } = useSelector((state) => state.books);
+    const[purchBooks, setPurchBooks] = useState(null)  
     const dispatch = useDispatch()
+
+    let info = jwt_decode(window.localStorage.token);
+    let id = info.id
+    //console.log(info)
+    
+    
     useEffect(() => {
   
         dispatch(fetchUserById(id));
+        dispatch(fetchAllBooks());
+        
         //setReload(false)
         
       
@@ -34,24 +43,49 @@ function Purchases(){
     const editOff = () =>{
         setReview(false)
     }
+    
+    let libros
 
+    if(userById.purchased_books){
+        let deletecopy = [...new Set(userById.purchased_books)]
+        //console.log(deletecopy)
+        
+        libros = deletecopy.map(libro => {
+            // console.log(libro)
+            // console.log('//////')
+            let filtrado = books.filter(b =>  b._id === libro)
+            //console.log(filtrado)
+            return filtrado
+        })
+        
+        
+    }
+    console.log(libros)
+ 
 
-
-    let[books, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
+    let[bookss, setBooks] = useState([{ bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
     
     const rederProducts = () =>(
 
         <tbody>
-            {books.map((book, i) =>(
-                <Product 
-                key={i}
-                i = {i}
-                bookName={book.bookName}
-                image={book.image}
-                price={book.price}
 
-                />
-            ))}
+            {
+               libros.map((arreglo) => {
+                    return arreglo.map((book, i) =>(
+
+                         <Product 
+                        key={i}
+                        i = {i}
+                        bookName={book.name}
+                        image={book.image}
+                        price={book.price}
+        
+                        />
+                    ))
+               }) 
+                
+                
+}
         </tbody>
 
     )
@@ -64,7 +98,7 @@ function Purchases(){
             
             {   review ?(
                 <div>
-                    <Review editOff={editOff}  />
+                    <Review editOff={editOff} libros ={libros} />
                 </div>
             ):
 

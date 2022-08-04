@@ -10,10 +10,13 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
 
     const user = useSelector((state) => state.auth)
     const[saldo, setSaldo] = useState(500)
+    
+
+
 
     const handleCheckout = () => {
 
-        if(saldo){
+        if(userInfo.available_money > cartInfo.cartTotalAmount){
             swal({
                 title:'Balance',
                 text:'Do you want to use your balance?',
@@ -23,22 +26,27 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
                 if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                     console.log(cartInfo)
                     console.log(cartItems)
-                    //console.log(cartInfo.cartTotalAmount)//obtener el precio deloslibrosen total
-                    //cartInfo.cartQuantity//  cantidad de  libros 
+                    console.log(userInfo.available_money)
+                    console.log(userInfo._id)
+                    axios({
+                        method: 'put',
+                        url: `http://localhost:3001/users/purchasing-books/${userInfo._id}`,
+                        data: {
+
+                            cartQuantity: cartItems
+                                                
+                        }
+                    })
                     cartItems.map(libro => {
                         console.log('//////////////////////////////')
-                        console.log(`http://localhost:3001/users/purchasing-books/${userInfo.id}`)
-                        console.log(libro.cartQuantity)
-                        console.log(libro.price)
-                        // axios({
-                        //     method: 'put',
-                        //     url: `http://localhost:3001/users/purchasing-books/${userInfo.id}`,
-                        //     data: {
-
-                        //            itemCarrito: cartItems
-                                                    
-                        //     }
-                        // })
+                        // console.log(`http://localhost:3001/users/purchasing-books/${userInfo.id}`)
+                        // console.log(libro.cartQuantity)
+                        // console.log(libro.price)
+                        axios({
+                            method: 'put',
+                            url: `http://localhost:3001/users/${userInfo._id}/${libro._id}`
+                        })
+                      })
 
 
 
@@ -57,7 +65,7 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
 
                         //aca iria el put de esos libros
                         //tambien iria el put para reducir el slado 
-                    })
+                    
                     // console.log('entro')
                     // axios.put(`http://localhost:3001/books/${del}/${id}`)
                     

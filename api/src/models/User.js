@@ -52,14 +52,16 @@ const userSchema = new Schema(
         ref: "Book",
       },
     ],
-    log_Google:
-    {
+    log_Google: {
       type: Boolean,
       default: false,
     },
-    localStorageToken:
-    {
+    localStorageToken:  {
       type: String
+    },
+    available_money: {
+      type: Number,
+      default: 500,
     }
   },
   {

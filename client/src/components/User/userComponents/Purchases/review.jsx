@@ -17,7 +17,7 @@ const  colors ={
 }
 
 
-function Review({editOff, estado, reloading}){
+function Review({editOff, libros, reloading}){
 
     //console.log(estado.selling_books)
     const [review, setReview] = useState(false);
@@ -80,7 +80,7 @@ function Review({editOff, estado, reloading}){
                 <div>
                 <Formik
                         initialValues={{
-                            book:'pepito',
+                            book:'',
                             score: rating, 
                             comment:'',
                         }}
@@ -105,20 +105,11 @@ function Review({editOff, estado, reloading}){
                             return errors;
                         }}
                         onSubmit={(values, {resetForm})=>{
-                            // let filtrado = books.find(b => b.name === values.name)
-                            // console.log(filtrado._id)
+                            let filtrado = books.find(b => b.name === values.name)
+                            console.log(filtrado._id)
                             
-                            // axios({
-                            //     method: 'put',
-                            //     url: `http://localhost:3001/books/${filtrado._id}`,
-                            //     data: {
-                            //         price : values.price,
-                            //         stock: values.stock                   
-                            //     }
-                            // })
-                            // axios.put(`http://localhost:3001/books/${filtrado._id}` , values)
                             console.log(values.score=rating)
-                            console.log(values.score)
+                            console.log(values.name)
                             if(values.score === null){
                                 swal({
                                     title:'Fail',
@@ -139,8 +130,18 @@ function Review({editOff, estado, reloading}){
                                     button:'OK'
                                   }).then(res => {
                                     if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                                        axios({
+                                        method: 'put',
+                                        url: `http://localhost:3001/books/${filtrado._id}/${id}`,
+                                        data: {
+                                            score : values.score,
+                                            comment: values.comment                   
+                                        }
+                                    })
+                                    
+                                        navigate('/')
                                         
-                                        navigate('/user/sales')
+                                        
                                     }
                                   })
                             }
@@ -151,7 +152,7 @@ function Review({editOff, estado, reloading}){
                             // editOff()
                             // setSend(true)
                             
-                            console.log(values)
+                            
                         }}
                     >
                         {( {errors} )=>(
@@ -166,16 +167,14 @@ function Review({editOff, estado, reloading}){
                                 name="name"
                                 >
                                 <option value='BookName' selected> Book Name </option>  
-                            {      
-                                ejemplo.map(genre=>{
-                                    
-                                    return (
-                                        <option value={genre.bookName}>{genre.bookName}</option>
-                                        )
-                                    })
+                                {
+                                    libros.map((arreglo) => {
+                                        return arreglo.map((book, i) =>(
+                                            <option value={book.name}>{book.name}</option>
+                                        ))
+                                    })                
                                 }
                                 </Field>
-
                                 <ErrorMessage name="name" component={()=>(
                                     <div className={style.error}>{errors.name}</div>
                                 )} />
