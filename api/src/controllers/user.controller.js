@@ -2,6 +2,8 @@ const User = require("../models/User.js");
 const Book = require("../models/Book.js");
 const bcrypt = require("bcrypt");
 const { getByName } = require("../lib/user.controller.helper.js");
+const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcrypt")
 
 
 const getUsers = async (req, res) => {
@@ -31,26 +33,49 @@ const getUserByID = async (req, res) => {
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
 
+// const postUser = async (req, res) => {
+//   try {
+//     const user = req.body;
+//     //const {name,email,password,admin,image,description,country}=req.body;
+//     const nuevoUsuario = new User(
+//       user
+//       /*name:name,
+//       email:email,
+//       password:password,
+//       admin:admin,
+//       image:image,
+//       description:description,
+//       country:country,*/
+//     );
+//     await nuevoUsuario.save();
+//     return res
+//       .status(201)
+//       .json({ status: "usuario registrado y guardado en la base de datos." });
+//   } catch (error) {
+//     return res.status(500).json({ error: error });
+//   }
+
 const postUserGoogle = async (req, res) => {
+  const { email, password, image, name } = req.body;
   try {
-    //const user = req.body;
-    const {email,password}=req.body;
     const nuevoUsuario = new User({
-      //user
-      email:email,
+
+      email: email,
       password: password,
-      //admin:admin,
-      //image:image,
-      //description:description,
-      //country:country,
-      log_Google:true
-  });
+      image: image,
+      name: name,
+
+      log_Google: true
+    });
     await nuevoUsuario.save();
-    return res
-      .status(201)
-      .json({ status: "usuario registrado mediante Google y guardado en la base de datos." });
+    const user = await User.findOne({ email });
+    const token = jwt.sign({ id: user._id, email, password, image, name }, process.env.JWT_ACC_ACTIVATE);
+
+
+    res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
   } catch (error) {
-     return res.status(500).json({ status:"El usuario desde Google ya se registró en la base de datos." });
+    return res.status(500).json({ error: error });
+
   }
 };
 
@@ -61,20 +86,22 @@ const putUser = async (req, res) => {
   let actualCliente;
   password
     ? (actualCliente = {
-        name: name,
-        email: email,
-        password: await bcrypt.hash(password, 10),
-        image: image,
-        description: description,
-        country: country,
-      })
+      name: name,
+      email: email,
+      password: await bcrypt.hash(password, 10),
+      admin: admin,
+      image: image,
+      description: description,
+      country: country,
+    })
     : (actualCliente = {
-        name: name,
-        email: email,
-        image: image,
-        description: description,
-        country: country,
-      });
+      name: name,
+      email: email,
+      admin: admin,
+      image: image,
+      description: description,
+      country: country,
+    });
   await User.findByIdAndUpdate(idUser, actualCliente);
   res.status(200).json({
     status: "Usuario actualizado.",
@@ -94,8 +121,12 @@ const becomeAdmin = async (req, res) => {
 
 const putUserBook = async (req, res) => {
   const { idBook, idUser } = req.params;
+
+  const BookPurch = await Book.findById(idBook);
+   
   const sellingBooksUpdate = await User.findByIdAndUpdate(idUser, {
-    $push: { purchased_books: idBook },
+    // $push: { purchased_books: BookPurch.id },
+    $push: { purchased_books: BookPurch._id },
   });
 
   const bookUpdated = await Book.findByIdAndUpdate(idBook, {
@@ -106,6 +137,8 @@ const putUserBook = async (req, res) => {
     status: sellingBooksUpdate,
     statusBook: bookUpdated,
   });
+
+
   // en POSTMAN PUT:
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
@@ -133,6 +166,7 @@ const deleteUser = async (req, res) => {
 const purchasedBooks=async(req,res)=>{
   const {idUser}=req.params;
   const {cartQuantity}=req.body;
+
   vair= await cartQuantity.map(e=>{
     return {
       idLibro:e._id,

@@ -58,7 +58,7 @@ const getBookById = async (req, res) => {
   const { id } = req.params;
   try {
     const book = await Book.findById(id).populate(
-      "sellers",
+      "seller",
       "-_id -__v -selling_books -wish_list -purchased_books"
     );
     return res.status(200).json({ book: book });

@@ -89,16 +89,7 @@ const login = async (req, res) => {
   if (await User.findOne({ email }) === null) return res.status(400).json({ error: "Email no registrado" })
 
   const user = await User.findOne({ email });
-  console.log(user);
-  console.log(user.log_Google)
-
-  // if (user.log_Google === true) {
-  //   if (password == user.password) {
-  //     const token = jwt.sign({ id: user._id, email: user.email, admin: user.admin }, process.env.JWT_ACC_ACTIVATE)
-  //     // console.log(token)
-  //     res.status(200).json({ auth: "Usuario logueado mediante Google Login", user, token });
-
-
+  
   if (user.log_Google === true) {
     if (password == user.password) {
       const token = jwt.sign({ _id: User._id }, process.env.RESET_PASSWORD_KEY, {
