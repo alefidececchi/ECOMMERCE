@@ -15,77 +15,6 @@ import {
 
 const Register = () => {
 
-    //  var google=""
-    // const google = window.google;
-
-
-    // useEffect(() => {
-    //     google.accounts.id.initialize({
-    //         client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
-    //         callback: handleCallbackResponse
-    //     });
-
-    //     google.accounts.id.renderButton(
-    //         document.getElementById('signInDiv'),
-    //         { theme: "outline", size: "large" }
-    //     );
-
-    //     google.accounts.id.prompt();
-
-
-    // }, []);
-
-
-    // useEffect(() => {
-    //     google.accounts.id.initialize({
-    //         client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
-    //         callback: handleCallbackResponse
-    //     });
-
-    //     google.accounts.id.renderButton(
-    //         document.getElementById('signInDiv'),
-    //         { theme: "outline", size: "large" }
-    //     );
-
-    //     google.accounts.id.prompt();
-
-
-    // }, []);
-
-    const [user, setUser] = useState({});
-    //  console.log(user)
-
-    // function handleCallbackResponse(response) {
-    //     //  console.log("Encoded JWT ID token: " + response.credential);
-    //      //token response.credential
-    //     var userObject = jwt_decode(response.credential);
-    //     //  console.log(userObject);
-    //     setUser(userObject);
-    //     axios({
-    //         method: 'post',
-    //         url: 'http://localhost:3001/users/registerGoogle',
-    //         data: {
-    //             email: userObject.email,
-    //             password: userObject.sub,
-    //         },
-    //     });
-
-    //     document.getElementById("signInDiv").hidden = true;
-    // }
-
-    // function handleSignOut(event) {
-    //     setUser({});
-    //     document.getElementById("signInDiv").hidden = false;
-    // }
-
-
-   
-    // If we have no user: sign in button
-    // If we have a user: show the log out button
-
-
-
-
 
     const [send, setSend] = useState(false);
 
@@ -205,24 +134,11 @@ const Register = () => {
                                     <button type="submit">  Create </button>
                                     {send && <p>User added succecsfully</p>}
                                 </div>
-
-
-
-
-                              
-                              
                             </Form>
                         )}
                     </Formik>
                 </section>
             </div>
-
-
-
-
-
-
-
 
         </div>
     );

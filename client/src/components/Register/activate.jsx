@@ -38,7 +38,7 @@ const Activate = (props) => {
         });
     }, [])
 
-    console.log(token)
+    // console.log(token)
 
     return (
         <div className={s.container}>
