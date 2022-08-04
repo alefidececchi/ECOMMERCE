@@ -50,6 +50,10 @@ const bookSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    buyer:{
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     reviews: [
       {
         id_user: {
