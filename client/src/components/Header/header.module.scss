@@ -3,7 +3,7 @@
 @import '../../assets/sass/variables.scss';
 
 header {
-  width: 100vw;
+  // width: 100vw;
   background-color: $gris1;
   // margin-top: toRem(20);
   display: flex;
@@ -22,7 +22,7 @@ header {
 
   .filtersContainer {
     padding-bottom: toRem(30);
-    width: 100vw;
+    // width: 100vw;
 
     ul {
       list-style: none;
