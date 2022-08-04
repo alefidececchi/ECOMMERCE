@@ -11,6 +11,7 @@ const {
   getByName,
   getByGenre,
   getByAuthor,
+  getByOffers
 } = require("../lib/book.controller.helper.js");
 
 const getBooks = async (req, res) => {
@@ -35,7 +36,7 @@ const getBooks = async (req, res) => {
   const { limit, page } = req.query;
 
   try {
-    let books = await Book.find({ deleted: false });
+    let books = await Book.find({stock:{$ne:0}},{ deleted: false });
     if (sort) books = sortNames({ books, sort });
     if (price) books = sortPrices({ books, price });
     if (released) books = sortReleased({ books, released });
@@ -89,7 +90,7 @@ const postBook = async (req, res) => {
   const { idUser } = req.params;
   if (!idUser) {
     try {
-      const bookAdded = await Book.create(book);
+      await Book.create(book);
       // return res.status(201).json({ bookCreated: bookCreated });
       return res.status(201).json({ bookAdded: "book added" });
     } catch (error) {
@@ -118,36 +119,29 @@ const postBook = async (req, res) => {
   }
 };
 
+const putCommentBook = async (req, res) => {
+  const { idBook, idUser } = req.params
+  const { comment, score } = req.body
+
+  try {
+    await Book.findByIdAndUpdate(idBook, {
+      $push: { reviews: { comment, score, id_user: idUser } }
+    })
+    res.status(202).json({ mesagge: 'Thanks for your review' })
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+}
+
 const putBook = async (req, res) => {
   const { idBook } = req.params;
-  const { idUser } = req.params;
-  const book = req.body;
-  if (!idUser) {
+  const book = req.body
     try {
       const bookUpdated = await Book.updateOne({ _id: idBook }, { $set: book });
-      return res.status(201).json({ bookUpdated: bookUpdated });
+      res.status(201).json({ bookUpdated: bookUpdated });
     } catch (error) {
-      return res.status(500).json({ error: error });
+      res.status(500).json({ error: error });
     }
-  } else {
-    try {
-      const bookUpdated = await Book.findByIdAndUpdate(
-        idBook,
-        { $push: { sellers: idUser } },
-        { new: true, useFindAndModify: false }
-      );
-      const userUpdated = await User.findByIdAndUpdate(
-        idUser,
-        { $push: { selling_books: idBook } },
-        { new: true, useFindAndModify: false }
-      );
-      return res
-        .status(201)
-        .json({ bookUpdated: bookUpdated, userUpdated: userUpdated });
-    } catch (error) {
-      return res.status(500).json({ error: error });
-    }
-  }
 };
 
 const deleteBook = async (req, res) => {
@@ -182,11 +176,24 @@ const deleteBook = async (req, res) => {
   }
 };
 
+const getBooksinOffers = async (req, res) => {
+  try {
+    let books = await Book.find({ deleted: false });
+    prueba = await getByOffers({ books })
+    console.log(prueba)
+    return res.status(200).json({ prueba });
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+}
+
 module.exports = {
   getBooks,
   getGenresBook,
   postBook,
   getBookById,
+  putCommentBook,
   putBook,
   deleteBook,
+  getBooksinOffers
 };
