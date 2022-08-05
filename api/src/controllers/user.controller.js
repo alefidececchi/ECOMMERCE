@@ -56,7 +56,7 @@ const postUserGoogle = async (req, res) => {
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, admin, image, description, country } =
+  const { name, email, password, admin, image, description, country, balance } =
     req.body;
   let actualCliente;
   password
@@ -76,6 +76,7 @@ const putUser = async (req, res) => {
         image: image,
         description: description,
         country: country,
+        available_money: balance
       });
   await User.findByIdAndUpdate(idUser, actualCliente);
   res.status(200).json({

@@ -23,7 +23,7 @@ const router = express.Router()
               images: [item.image],
               description: item.desc,
               metadata: {
-                id: item.id,
+                id: item.userId,
               },
             },
             unit_amount: item.price * 100,

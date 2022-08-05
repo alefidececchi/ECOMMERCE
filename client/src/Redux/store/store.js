@@ -6,6 +6,8 @@ import authReducer from '../slices/authSlice';
 import wishListReducer from '../slices/wishListSlice';
 import userReducer from '../slices/userSlice';
 import tokenReducer from '../slices/tokenSlice';
+import giftCardReducer from '../slices/giftCardSlice';
+import dealsReducer from '../slices/dealsSlice';
 
 
 const store = configureStore({
@@ -17,6 +19,8 @@ const store = configureStore({
     wishList: wishListReducer,
     users: userReducer,
     token: tokenReducer,
+    giftCard: giftCardReducer,
+    deals: dealsReducer
   }
 })
 store.dispatch(getTotals())

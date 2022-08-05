@@ -1,16 +1,20 @@
+import s from "./giftCard.module.scss";
+import React from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { url } from "../../Redux/slices/api";
 import { toast } from "react-toastify";
 
-const PayButton = ({ cartItems }) => {
-  const user = useSelector((state) => state.auth);
+const Checkout = ({ cartItems }) => {
+  const { token } = useSelector((state) => state.auth);
+  const user = JSON.parse(window.localStorage.getItem("usuario"));
 
   const handleCheckout = () => {
-    console.log(cartItems);
-    if (user.token) {
+    // console.log(cartItems);
+    if (token) {
+      console.log(user._id);
       axios
-        .post(`${url}/stripe/create-checkout-session`, {
+        .post(`${url}/stripe/create-checkout-giftCardsession`, {
           cartItems,
           userId: user._id,
         })
@@ -26,10 +30,10 @@ const PayButton = ({ cartItems }) => {
   };
 
   return (
-    <div>
-      <button onClick={() => handleCheckout()}>Check out</button>
+    <div className={s.checkButton}>
+      <button onClick={handleCheckout}>Checkout</button>
     </div>
   );
 };
 
-export default PayButton;
+export default Checkout;
