@@ -1,7 +1,10 @@
 import axios from 'axios'
+
 import {useDispatch, useSelector} from 'react-redux'
+
 import { url } from '../../Redux/slices/api'
 import { toast } from 'react-toastify'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import swal from 'sweetalert'
 import { clearCart } from "../../Redux/slices/shoping.slice";
@@ -9,6 +12,7 @@ import { clearCart } from "../../Redux/slices/shoping.slice";
 
 const PayButton = ({cartItems, userInfo, cartInfo}) =>{
 
+    let navigate = useNavigate()
     const user = useSelector((state) => state.auth)
     const[saldo, setSaldo] = useState(500)
     const dispatch= useDispatch()
@@ -16,7 +20,7 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
 
 
     const handleCheckout = () => {
-
+       
         if(userInfo.available_money > cartInfo.cartTotalAmount){
             swal({
                 title:'Balance',
@@ -77,16 +81,13 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
                 }
             }).catch((err) => console.log(err.message))}
             else{
-                toast.error(`First you must be login`, {position: "top-center"})
+                navigate('/login')
+                // toast.error(`First you must be login`, {position: "top-center"})
             }
         }
-
-
-
-
     }
 
-    return(
+    return (
         <div>
             <button onClick={() => handleCheckout()}>Check out</button>
         </div>

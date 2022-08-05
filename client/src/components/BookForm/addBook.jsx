@@ -72,7 +72,10 @@ function AddBook(){
                     initialValues={{
                         name:"", 
                         authors:"",
-                        image: '', 
+
+                
+                        image:"", 
+
                         price:'', 
                         stock:'',
                         released:'', 
@@ -92,11 +95,11 @@ function AddBook(){
 
                         //validacion nombre del author   
                         if(!values.authors){
+
                             errors.authors = 'Please write the author name'
                         }else if(values.authors.length < 4 || values.name.length > 40){
                             errors.authors = 'Author name must have between 4 or 20 characters'
                         }
-
                         //validacion año publicacion
                         if(!values.released){
                             errors.released = 'Please write the released year of the book'
@@ -200,7 +203,7 @@ function AddBook(){
                             )} />
                         </div>
                         <div>
-                            <label htmlFor="name">Author: </label>
+                            <label htmlFor="name">author: </label>
                             <Field
                             type='text'
                             id="authors"
