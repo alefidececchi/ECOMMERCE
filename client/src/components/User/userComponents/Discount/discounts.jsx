@@ -53,8 +53,8 @@ function Discounts(){
                 i = {i}
                 bookName={book.name}
                 image={book.image}
-                price={book.price}
-                offer = {book.PriceWithDiscount}
+                price={book.price}k
+                offer = {book.priceWithDiscount}
                 estado = {books}
                 reload = {reloading}
                 />
@@ -62,7 +62,7 @@ function Discounts(){
         </tbody>
 
     )
-    console.log(prueba)
+    //console.log(prueba)
 
     useEffect( () => {
 
@@ -88,7 +88,7 @@ function Discounts(){
             {prueba ?
             <>
             {
-                books.length>0?(                <div className={s.containerPur}>
+                prueba.selling_books.length > 0?(                <div className={s.containerPur}>
                 <table className={s.table}>
                     <caption className={s.table_cap}>APPLY DISCOUNTS</caption>
                     <thead className={s.table_head}>
@@ -105,13 +105,13 @@ function Discounts(){
                 </div>):
                 <div className={s.vacio}>
                     <div>
-                     <h1>Not purchases  yet</h1>
+                     <h1>Not posted books  yet</h1>
                     </div>
                     <div>
-                        <h1>Buy now!!!</h1>
+                        <h1>Go post now!!!</h1>
                     </div>
                     <div>
-                        <Link to={'/'}>
+                        <Link to={'/user/newBook'}>
                             <button >Sell</button> 
                         </Link>
                     </div>

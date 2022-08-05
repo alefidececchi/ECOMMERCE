@@ -88,16 +88,14 @@ const putUser = async (req, res) => {
     ? (actualCliente = {
       name: name,
       email: email,
-      password: await bcrypt.hash(password, 10),
-      admin: admin,
+      password: await bcrypt.hash(password, 10),   
       image: image,
       description: description,
       country: country,
     })
     : (actualCliente = {
       name: name,
-      email: email,
-      admin: admin,
+      email: email,    
       image: image,
       description: description,
       country: country,

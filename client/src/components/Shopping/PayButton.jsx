@@ -1,16 +1,17 @@
 import axios from 'axios'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { url } from '../../Redux/slices/api'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import swal from 'sweetalert'
+import { clearCart } from "../../Redux/slices/shoping.slice";
 
 
 const PayButton = ({cartItems, userInfo, cartInfo}) =>{
 
     const user = useSelector((state) => state.auth)
     const[saldo, setSaldo] = useState(500)
-    
+    const dispatch= useDispatch()
 
 
 
@@ -39,42 +40,14 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
                     })
                     cartItems.map(libro => {
                         console.log('//////////////////////////////')
-                        // console.log(`http://localhost:3001/users/purchasing-books/${userInfo.id}`)
-                        // console.log(libro.cartQuantity)
-                        // console.log(libro.price)
+        
                         axios({
                             method: 'put',
                             url: `http://localhost:3001/users/${userInfo._id}/${libro._id}`
                         })
                       })
-
-
-
-                        // axios({
-                        //     method: 'put',
-                        //     url: `http://localhost:3001/users/purchasing-books/${userInfo.id}/${libro._id}`,
-                        //     data: {
-                        //         gastoPorLibro: (libro.price*libro.cartQuantity)*-1
-                        //         cantidadLibro: libro.cartQuantity 
-                                                    
-                        //     }
-                        // })
-
-
-
-
-                        //aca iria el put de esos libros
-                        //tambien iria el put para reducir el slado 
-                    
-                    // console.log('entro')
-                    // axios.put(`http://localhost:3001/books/${del}/${id}`)
-                    
-                    // .then(reloading())
-                    // dispatch(fetchAllBooks())
-                    // console.log('entro')
-                   
-                    // //setBooks(filtrado)
-                    // swal({text: 'Post  deleted successfully', icon: 'success'})
+                    dispatch(clearCart())  
+                      
                   
                 }else{
                     console.log(user.token)

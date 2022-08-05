@@ -74,9 +74,9 @@ function SideBar(){
                 <li>
                     <Link to='/user/myWishList'>My WhishList</Link>
                 </li>
-                <li className={s.lista}>
+                {/* <li className={s.lista}>
                     <Link to="/user/myGiftCards">My GiftCards </Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to="/user/sales" > Sales </Link>
                 </li>

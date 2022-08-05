@@ -9,6 +9,20 @@ import {
     fetchBooksGenres, fetchAllBooks
   } from "../../Redux/thunks/booksThunks";
 import jwt_decode from "jwt-decode"
+import example from '../../assets/imgs/example.jpg'
+import { BallTriangle } from "react-loader-spinner";
+
+
+export const data = [
+    {
+        Component: BallTriangle,
+        props: {
+            color: "#B881FF",
+        },
+        name: "Ball Triangle",
+    },
+  ];
+
 
 function AddBook(){
 
@@ -23,6 +37,7 @@ function AddBook(){
     console.log(info)
     let id = info.id
 
+    let imgC =''
     useEffect(() => {
         if (genres.length === 0) {
             dispatcher(fetchBooksGenres());
@@ -31,16 +46,33 @@ function AddBook(){
 
       }, [dispatcher, genres]);
 
+    // const onInputchange = (files) => {
+    //     console.log(files)
+    //     console.log(files[0])
+    //   const formData = new FormData()
+    //   formData.append("file", files[0])
+    //   formData.append("upload_preset", "u2eqih7r")
+    //   axios.post("https://api.cloudinary.com/v1_1/dbikbhgwc/image/upload", formData)
+    //   .then((response) => {
+    //     console.log(response)
+    //     console.log(response.data.url)
+    //     imgC = response.data.url
+
+        
+    //   }) 
+    // }
+    // console.log(imgC)
 
     return (
         <div className={style.container}>
+            { genres ?  
         <div className={style.formulario}>
             <section>
                 <Formik 
                     initialValues={{
                         name:"", 
-                        author:"",
-                        image:"", 
+                        authors:"",
+                        image: '', 
                         price:'', 
                         stock:'',
                         released:'', 
@@ -59,10 +91,10 @@ function AddBook(){
                         }
 
                         //validacion nombre del author   
-                        if(!values.author){
-                            errors.author = 'Please write the author name'
-                        }else if(values.author.length < 4 || values.name.length > 40){
-                            errors.author = 'Author name must have between 4 or 20 characters'
+                        if(!values.authors){
+                            errors.authors = 'Please write the author name'
+                        }else if(values.authors.length < 4 || values.name.length > 40){
+                            errors.authors = 'Author name must have between 4 or 20 characters'
                         }
 
                         //validacion año publicacion
@@ -88,15 +120,9 @@ function AddBook(){
 
                         //validacion imagen
                         if(!values.image){
-                            errors.image = 'Please enter the book image link'
+                            errors.image = 'Please enter the book image'
                         }
-                        else if (
-                            !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#()?&//=]*)/.test(
-                                values.image //como agregar imagenes delcomputador restringiendo formatos jgp png jpeg
-                            )
-                          ) {
-                            errors.image = "Please insert a valid URL";
-                          }
+                    
                         //validacion precio  
                         if(!values.price){
                             errors.price = 'Please write the book price'
@@ -124,6 +150,12 @@ function AddBook(){
                     }}
                     onSubmit={(values, {resetForm})=>{
                         console.log(values)
+                        console.log(values.file)
+                        
+                        
+                        // console.log(imgC)
+                        // console.log(values.file)
+
                         if(values.used === 'true'){
                             values.used = true
                         }else if(values.used === 'false'){
@@ -152,7 +184,7 @@ function AddBook(){
          
                     }}
                 >
-                    {( {errors} )=>(
+                    {( {errors , setFieldValue, values} )=>(
                         <Form className={style.form}> 
                         <h2>Post new book</h2>
                         <div>
@@ -171,12 +203,12 @@ function AddBook(){
                             <label htmlFor="name">Author: </label>
                             <Field
                             type='text'
-                            id="author"
+                            id="authors"
                             placeholder="Type a name..."
-                            name="author"
+                            name="authors"
                             />
-                            <ErrorMessage name="author" component={()=>(
-                                <div className={style.error}>{errors.author}</div>
+                            <ErrorMessage name="authors" component={()=>(
+                                <div className={style.error}>{errors.authors}</div>
                             )} />
                         </div>
                         <div>
@@ -209,15 +241,40 @@ function AddBook(){
                         </div>
                         <div>
                             <label htmlFor="img">Image: </label>
-                            <Field
-                                type="text"
-                                id="img"
-                                placeholder="https://image-url-png"
+                           
+                        
+                                <>
+                                <img src={values.image}  
+                                onerror="this.src='../../assets/imgs/example.jpg';" className={style.portada}></img>
+                                <Field
+                                type="file"
+                                id="image"
+                                value =""
                                 name="image"
+                                // onChange ={(event) => setFieldValue("file", event.target.files[0])}
+                                onChange ={(event) => {
+                                    const formData = new FormData()
+                                    // console.log(event)
+                                    // console.log(event.target.files[0])
+                                    formData.append("file", event.target.files[0])
+                                    formData.append("upload_preset", "u2eqih7r")
+                                    //console.log(formData)
+                                    axios.post("https://api.cloudinary.com/v1_1/dbikbhgwc/image/upload", formData)
+                                    .then((response) => {
+                                    setFieldValue("image", response.data.url)
+                                    // console.log(response)
+                                    // console.log(response.data.url)
+                                    }) 
+                                     
+                                }}
                             />
                             <ErrorMessage name="image" component={()=>(
                                 <div className={style.error}>{errors.image}</div>
                             )} />
+                            </>
+                                
+                
+
                         </div>
                         <div>
                             <label htmlFor="prc">Price: </label>
@@ -288,7 +345,16 @@ function AddBook(){
                     )}
                 </Formik>
             </section>
-        </div>
+        </div>:
+        <div>
+              {data.map((loader, index) => (
+                  <div className={style.loading} data-tip={loader.name}>
+                      <loader.Component {...loader.props} />
+                  </div>
+              ))}
+        
+          </div>
+          }
         </div>
         
     )

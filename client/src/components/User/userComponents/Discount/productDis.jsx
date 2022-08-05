@@ -9,7 +9,7 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
 
     const [disc, setDisc] = useState(offer)
     
-    
+    //console.log(estado)
     // function reloading(){
     
     //     if (reload){
@@ -24,11 +24,11 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
     function applyDisc(cambio) {
         let filtrado = estado.find(b => b.name === bookName)
         console.log(filtrado)
-        console.log(filtrado._id)
-        console.log(bookName)
-        console.log(price)
-        console.log(offer)
-        console.log(cambio.target.value)
+        // console.log(filtrado._id)
+        // console.log(bookName)
+        // console.log(price)
+        // console.log(offer)
+        // console.log(cambio.target.value)
         
 
         if(cambio.target.value === 'dis'){
@@ -58,7 +58,8 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
             url: `http://localhost:3001/books/${filtrado._id}`,
             data: {
                 
-                PriceWithDiscount: newPrice,
+                
+                priceWithDiscount: newPrice,
                 inOffer: true                  
             }
         })
