@@ -71,7 +71,7 @@ const payment = async (req, res) => {
     cancel_url: `${process.env.CLIENT_URL}/shopping`,
   });
 
-  res.send({ url: session.url });
+  res.status(200).send({ url: session.url });
 }
 
 // //create Order DB
