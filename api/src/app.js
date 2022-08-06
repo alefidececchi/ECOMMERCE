@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 app.use('/', routes);
 
-const isAuthenticated = (req, res, next) => {
+/*const isAuthenticated = (req, res, next) => {
   let { userID } = req.cookies;
   // me fijo tengo un usuario con dicho ID
   // si no me vino por req.cookies, no me va a encontrar ningun usuario igak
@@ -151,7 +151,7 @@ app.post('/logout', (req, res) => {
   console.log('Hice post a /logout');
   res.clearCookie('userID');
   res.redirect('/');
-})
+})*/
 
 
 /*app.listen(3000, (err) => {

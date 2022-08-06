@@ -67,7 +67,7 @@ function PostedBooks(){
           // })
           
           // dispatch(fetchUserById(id))
-          // dispatch(fetchAllBooks())
+          dispatch(fetchAllBooks())
           setReload(false)
           axios.get(`http://localhost:3001/users/${id}`)
           .then((response)=>{

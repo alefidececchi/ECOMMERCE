@@ -2,11 +2,13 @@ const { Schema, model } = require('mongoose')
 
 const orderSchema = new Schema({
     userId: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
         required: true
     },
-    stripeId: { type: String },
+    customerId: {
+        type: String
+    },
+    paymentIntentId: { type: String },
     products: [
         {
             id: {
