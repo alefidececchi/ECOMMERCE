@@ -82,28 +82,32 @@ const postUserGoogle = async (req, res) => {
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, image, description, country } =
+  const { name, email, password, image, description, country, money } =
     req.body;
+
+  const user = await User.findById(idUser)
+
   let actualCliente;
   password
     ? (actualCliente = {
       name: name,
       email: email,
       password: await bcrypt.hash(password, 10),
-      admin: admin,
       image: image,
       description: description,
-      country: country,
+      country: country,    
+      available_money: user.available_money + money
     })
     : (actualCliente = {
       name: name,
       email: email,
-      admin: admin,
       image: image,
       description: description,
-      country: country,
+      country: country,     
+      available_money: user.available_money + money
     });
-  await User.findByIdAndUpdate(idUser, actualCliente);
+
+  await user.updateOne(actualCliente)
   res.status(200).json({
     status: "Usuario actualizado.",
   });
