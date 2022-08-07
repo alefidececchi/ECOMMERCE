@@ -1,7 +1,8 @@
 import s from "./giftCard.module.scss";
 import React from "react";
-import cardImage from "./giftCard.PNG";
 import Checkout from "./checkout";
+import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
 import { BsFillXCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillGift } from "react-icons/ai";
@@ -14,20 +15,23 @@ import {
 } from "../../Redux/slices/giftCardSlice";
 
 const Cards = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { giftCards } = useSelector((state) => state.giftCard);
   const { cartTotalAmount } = useSelector((state) => state.giftCard);
-  const user = JSON.parse(window.localStorage.getItem("usuario"));
+  const token  = useSelector((state) => state.token);
+  let user = JSON.parse(window.localStorage.getItem("usuario"));
 
   let templateCard = {
-    id: user._id,
-    image: "https://d2j6dbq0eux0bg.cloudfront.net/default-store/giftcards/gift_card_003_1500px.jpg",
+    id: user ? user._id : 10,
+    image:
+      "https://d2j6dbq0eux0bg.cloudfront.net/default-store/giftcards/gift_card_003_1500px.jpg",
     cardName: "",
     name: "Gift Card",
     price: 0,
     desc: "Give this card to a friend to buy the books he wants.",
     cartQuantity: 1,
-    userId: user._id,
+    userId: user ? user._id : 10,
   };
 
   const handleResQuantity = (props) => {
@@ -41,20 +45,40 @@ const Cards = () => {
   };
 
   const handleBuy = (values) => {
-    dispatch(
-      addGiftCard({
-        ...templateCard,
-        cardName: values.name,
-        price: values.price,
+    if (token) {
+      dispatch(
+        addGiftCard({
+          ...templateCard,
+          cardName: values.name,
+          price: values.price,
+        })
+      );
+      dispatch(getTotalItems());
+    } else {
+      Swal.fire({
+        title: "Sorry!",
+        text: "To do this you need to log in.",
+        icon: "info",
+        showConfirmButton: true,
+        confirmButtonText: 'Login',
+        confirmButtonColor: '#3f37c9',
+        showCancelButton: 'true',
+        cancelButtonText: 'Cancel',
+        cancelButtonColor: '#ef233c'
+      }).then((response) => {
+        if(response.isConfirmed) {
+          navigate('/login');
+        }
       })
-    );
-    dispatch(getTotalItems());
+    }
   };
 
   const handleRemove = (payload) => {
     dispatch(removeGiftCards(payload));
     dispatch(getTotalItems());
   };
+
+  
 
   return (
     <div>
@@ -177,7 +201,7 @@ const Cards = () => {
             <h2>Total:</h2>
             <span>$ {cartTotalAmount}</span>
           </div>
-          <Checkout cartItems={giftCards}/>
+          <Checkout cartItems={giftCards} />
         </div>
       ) : null}
     </div>

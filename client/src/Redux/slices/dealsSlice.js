@@ -9,7 +9,7 @@ const dealsSlice = createSlice({
   initialState,
   reducers: {
     getBooks(state, action) {
-
+      state.books = action.payload
     }
   }
 })

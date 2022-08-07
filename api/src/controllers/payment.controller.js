@@ -44,15 +44,6 @@ const payment = async (req, res) => {
           fixed_amount: {
             amount: 0,
             currency: "usd",
-            product_data: {
-              name: item.name,
-              images: [item.image],
-              description: item.desc,
-              metadata: {
-                id: item.userId,
-              },
-            },
-            unit_amount: item.price * 100,
           },
           display_name: "Free shipping",
           // Delivers between 5-7 business days

@@ -1,0 +1,87 @@
+@import "../../assets/sass/functions.scss";
+@import "../../assets/sass/mixins.scss";
+@import "../../assets/sass/variables.scss";
+
+.mainContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // background-color: gray;
+  h1{
+    margin-top: toRem(105);
+    font-weight: bold;
+    font-size: toRem(40);
+    text-align: center;
+  }
+  figure{
+    background-color: $gris2;
+    border-radius: toRem(5);
+    width: 80vw;
+    padding: toRem(20);
+    margin: toRem(20) auto;
+    display: flex;
+    justify-content: space-around;
+    row-gap: toRem(30);
+    flex-wrap: wrap;
+    .card{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: darkslateblue;
+      background-color: $gris1;
+      border: 1px solid $gris3;
+      padding: toRem(10) toRem(5);
+      border-radius: toRem(10);
+      width: toRem(245);
+      img{
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+        height: toRem(250);
+        box-shadow: 1px 1px 1px $gris3;
+        // background-color: crimson;
+      }
+      h2{
+        text-align: center;
+        margin: toRem(5);
+        font-size: toRem(25);
+        color: $gris5;
+      }
+      .pricesContainer{
+        // background-color: lightblue;
+        margin: toRem(15);
+        display: flex;
+        justify-content: center;
+        column-gap: toRem(15);
+        span{
+          font-size: toRem(20);
+          font-weight: bolder;
+          color: $gris4;
+        }
+        .normalPrice{
+          color: #ef233c;
+        }
+      }
+      .iconContainer{
+        background-color: $gris2;
+        padding: toRem(5);
+        border-radius: toRem(10);
+        margin: toRem(15);
+        display: flex;
+        justify-content: center;
+        column-gap: toRem(15);
+        .icon{
+          // background-color: $gris2;
+          border-radius: toRem(5);
+          color: $secundario;
+          font-size: toRem(30);
+          &:hover{
+            cursor: pointer;
+            color: $primario;
+          }
+        }
+      }
+    }
+
+  }
+}

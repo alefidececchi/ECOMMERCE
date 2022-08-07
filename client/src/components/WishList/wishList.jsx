@@ -45,7 +45,7 @@ const WishList = () => {
         {wishListStorage.length ? (
           wishListStorage.map((book) => (
             <figure key={book._id}>
-              <img src={book.image} />
+              <img src={book.image} alt={book.name} />
               <h3>{book.name}</h3>
               <span>${book.price}</span>
               <button onClick={() => handleCart(book)}>
