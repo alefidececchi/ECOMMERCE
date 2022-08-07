@@ -30,6 +30,7 @@ import ActivateAccount from './components/Register/activate-account';
 import ResetPassword from './components/Register/reset-password';
 
 import CheckoutSuccess from './components/Shopping/CheckoutSuccess';
+import Summary from './components/Admin/Summary';
 
 
 function App() {
@@ -43,7 +44,9 @@ function App() {
         <Route path='shopping' element={< Shopping />} />
         <Route path='checkout-success' element={< CheckoutSuccess />}/>
         <Route path='/user' element={< ProtectedRoute><User /> </ProtectedRoute>} />
-        
+
+        <Route path="summary" element={<Summary />} />
+
         <Route path='/user/sales' element={< PostedBooks />}/>
         <Route path='/user/myGiftCards' element={< MyGiftCards />}/> 
         <Route path='/user/myWishList' element={< MyWishList />}/>

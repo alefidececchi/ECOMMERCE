@@ -6,12 +6,18 @@ const {
   putUser,
   putUserBook,
   deleteUser,
-  putUserWishList
+  putUserWishList,
+  getStats
 } = require("../controllers/user.controller.js");
+
+const { isAdmin } = require("../middlewares/auth.middleware")
 
 const router = express.Router();
 
 router.get("/", getUsers);
+
+router.get("/stats", getStats)
+//router.get("/stats", isAdmin, getStats)
 
 router.get("/:idUser", getUserByID);
 
@@ -25,6 +31,7 @@ router.put("/:idUser/:idBook", putUserBook);
 router.put("/add/:idUser/:idBook", putUserWishList)
 
 router.delete("/:idUser", deleteUser);
+
 
 
 
