@@ -21,7 +21,7 @@ header {
   // }
 
   .filtersContainer {
-    padding-bottom: toRem(30);
+    padding-bottom: toRem(10);
     // width: 100vw;
 
     ul {
@@ -79,6 +79,7 @@ header {
   }
 
   .toFilter {
+    padding-top: toRem(10);
     padding-bottom: toRem(20);
     @include tabletMax() {
       display: flex;

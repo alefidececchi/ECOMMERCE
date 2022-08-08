@@ -55,6 +55,38 @@ const getUserByID = async (req, res) => {
 //     return res.status(500).json({ error: error });
 //   }
 
+// const login = async (req, res) => {
+//   const { email, password } = req.body
+
+//   if (await User.findOne({ email }) === null) return res.status(400).json({ error: "Email no registrado" })
+
+//   const user = await User.findOne({ email });
+
+//   if (user.log_Google === true) {
+//     if (password == user.password) {
+//       const token = jwt.sign({ _id: User._id }, process.env.RESET_PASSWORD_KEY, {
+//         expiresIn: "20m",
+//       });
+//       await User.findOneAndUpdate(
+//         { email },
+//         { localStorageToken: token }
+//       )
+//       console.log("el token es :", token)
+//       return res.status(200).json({ auth: "Usuario logueado mediante Google Login", user, token });
+
+//     } else {
+//       return res.status(400).json({ auth: "Contraseña incorrecta", user })
+//     }
+//   } else {
+//     const compare = await bcrypt.compare(password, user.password)
+//     console.log("🚀 ~ file: auth.controller.js ~ line 78 ~ login ~ compare", compare)
+//     if (!compare) return res.status(400).json({ error: "Contraseña invalida" })
+//     const token = jwt.sign({ id: user._id, name: user.name, email: user.email, admin: user.admin }, process.env.JWT_ACC_ACTIVATE);
+
+//     res.status(200).json({ auth: "Usuario logueado tradicionalmente", token, email: user.email })
+//   }
+// }
+
 const postUserGoogle = async (req, res) => {
   const { email, password, image, name } = req.body;
   try {
@@ -74,7 +106,12 @@ const postUserGoogle = async (req, res) => {
 
     res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
   } catch (error) {
-    return res.status(500).json({ error: error });
+
+    const user = await User.findOne({ email });
+
+    const token = jwt.sign({ id: user._id, email, password, image, name }, process.env.JWT_ACC_ACTIVATE);
+    res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
+    // return res.status(500).json({ error: error });
 
   }
 };
@@ -107,13 +144,13 @@ const putUser = async (req, res) => {
 };
 
 const becomeAdmin = async (req, res) => {
-  const {idUser} = req.body
+  const { idUser } = req.body
   try {
     const user = await User.findById(idUser)
-    user.admin ? await user.updateOne({admin: false}) : await user.updateOne({admin: true})
-    res.status(200).json({status: "Usuario actualizado."})
-  } catch (error){
-    res.status(400).json({error: error})
+    user.admin ? await user.updateOne({ admin: false }) : await user.updateOne({ admin: true })
+    res.status(200).json({ status: "Usuario actualizado." })
+  } catch (error) {
+    res.status(400).json({ error: error })
   }
 }
 
@@ -121,7 +158,7 @@ const putUserBook = async (req, res) => {
   const { idBook, idUser } = req.params;
 
   const BookPurch = await Book.findById(idBook);
-   
+
   const sellingBooksUpdate = await User.findByIdAndUpdate(idUser, {
     // $push: { purchased_books: BookPurch.id },
     $push: { purchased_books: BookPurch._id },
@@ -161,44 +198,45 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const purchasedBooks=async(req,res)=>{
-  const {idUser}=req.params;
-  const {cartQuantity}=req.body;
+const purchasedBooks = async (req, res) => {
+  const { idUser } = req.params;
+  const { cartQuantity } = req.body;
 
-  vair= await cartQuantity.map(e=>{
+  vair = await cartQuantity.map(e => {
     return {
-      idLibro:e._id,
-      cantidadLibro:e.cartQuantity,
-      gastoPorLibro:e.price
-    }});
+      idLibro: e._id,
+      cantidadLibro: e.cartQuantity,
+      gastoPorLibro: e.price
+    }
+  });
 
-await vair.map(async (e)=>{
-    const usuar= await User.findById(idUser)
-    usuar.available_money?
-   await usuar.updateOne({$inc:{available_money:-(e.gastoPorLibro*e.cantidadLibro)}}):console.log('hola');
-    const lib= await Book.findById(e.idLibro)
-    lib.stock>0?
-   await lib.updateOne({$inc:{stock:-(e.cantidadLibro)}}):
-   console.log(`ya no hay stock de ${e.idLibro} para realizar la compra`);
-}
-)
-res.status(200).json({status:"todo bien"})
+  await vair.map(async (e) => {
+    const usuar = await User.findById(idUser)
+    usuar.available_money ?
+      await usuar.updateOne({ $inc: { available_money: -(e.gastoPorLibro * e.cantidadLibro) } }) : console.log('hola');
+    const lib = await Book.findById(e.idLibro)
+    lib.stock > 0 ?
+      await lib.updateOne({ $inc: { stock: -(e.cantidadLibro) } }) :
+      console.log(`ya no hay stock de ${e.idLibro} para realizar la compra`);
+  }
+  )
+  res.status(200).json({ status: "todo bien" })
 
 
   //for await of 
-    /*try {
-      const usuar= await User.findById(idUser)
-      usuar.available_money?
-     usuar.updateOne({$inc:{available_money:+e.gastoPorLibro}}):console.log('hola');
-      const lib= Book.findById(e.idLibro)
-      lib.stock>0?
-     lib.updateOne({$inc:{stock:-e.cantidadLibro}}):console.log('chau');
-      console.log('llegue hasta aqui')
-      res.status(200).json({status:"todo bien"})
-    
-    } catch (error){
-      res.status(400).json({error:error})
-    }*/
+  /*try {
+    const usuar= await User.findById(idUser)
+    usuar.available_money?
+   usuar.updateOne({$inc:{available_money:+e.gastoPorLibro}}):console.log('hola');
+    const lib= Book.findById(e.idLibro)
+    lib.stock>0?
+   lib.updateOne({$inc:{stock:-e.cantidadLibro}}):console.log('chau');
+    console.log('llegue hasta aqui')
+    res.status(200).json({status:"todo bien"})
+  
+  } catch (error){
+    res.status(400).json({error:error})
+  }*/
 
 
 

@@ -10,10 +10,15 @@ const NavBar = () => {
         <Outlet />
       </section>
       <nav className={style.container}>
+
+        <Link to={"/"} >
+          <img src={require("../NavBar/Merged.png")} alt=""
+            height="40px" className={style.logo} />
+        </Link>
         <ul>
-          <li>
-            <Link to={"/"}>libritos.com</Link>
-          </li>
+
+
+
           <li>
             <Link to={"/"}>Home</Link>
           </li>
