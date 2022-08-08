@@ -52,19 +52,34 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
         }
         console.log(newPrice)
 
+        if(price > newPrice){
+            axios({
+                method: 'put',
+                url: `http://localhost:3001/books/${filtrado._id}`,
+                data: {
+                    
+                    
+                    priceWithDiscount: newPrice,
+                    inOffer: true                  
+                }
+            })
+            .then(reload())
+            setDisc(newPrice)
+        }else{
+            axios({
+                method: 'put',
+                url: `http://localhost:3001/books/${filtrado._id}`,
+                data: {
+                    
+                    
+                    priceWithDiscount: newPrice,
+                    inOffer: false                  
+                }
+            })
+            .then(reload())
+            setDisc(newPrice)
+        }
 
-        axios({
-            method: 'put',
-            url: `http://localhost:3001/books/${filtrado._id}`,
-            data: {
-                
-                
-                priceWithDiscount: newPrice,
-                inOffer: true                  
-            }
-        })
-        .then(reload())
-        setDisc(newPrice)
 
     }
 

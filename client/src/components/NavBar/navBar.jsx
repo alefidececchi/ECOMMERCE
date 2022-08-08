@@ -12,7 +12,7 @@ const NavBar = () => {
       <nav className={style.container}>
 
         <Link to={"/"} >
-          <img src={require("../NavBar/Merged.png")} alt=""
+          <img src={require("./Merged.png")} alt=""
             height="40px" className={style.logo} />
         </Link>
         <ul>
