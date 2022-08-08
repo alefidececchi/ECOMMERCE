@@ -95,7 +95,7 @@ const putUser = async (req, res) => {
       password: await bcrypt.hash(password, 10),
       image: image,
       description: description,
-      country: country,    
+      country: country,
       available_money: user.available_money + money
     })
     : (actualCliente = {
@@ -103,7 +103,7 @@ const putUser = async (req, res) => {
       email: email,
       image: image,
       description: description,
-      country: country,     
+      country: country,
       available_money: user.available_money + money
     });
 
@@ -114,13 +114,13 @@ const putUser = async (req, res) => {
 };
 
 const becomeAdmin = async (req, res) => {
-  const {idUser} = req.body
+  const { idUser } = req.body
   try {
     const user = await User.findById(idUser)
-    user.admin ? await user.updateOne({admin: false}) : await user.updateOne({admin: true})
-    res.status(200).json({status: "Usuario actualizado."})
-  } catch (error){
-    res.status(400).json({error: error})
+    user.admin ? await user.updateOne({ admin: false }) : await user.updateOne({ admin: true })
+    res.status(200).json({ status: "Usuario actualizado." })
+  } catch (error) {
+    res.status(400).json({ error: error })
   }
 }
 
@@ -128,7 +128,7 @@ const putUserBook = async (req, res) => {
   const { idBook, idUser } = req.params;
 
   const BookPurch = await Book.findById(idBook);
-   
+
   const sellingBooksUpdate = await User.findByIdAndUpdate(idUser, {
     // $push: { purchased_books: BookPurch.id },
     $push: { purchased_books: BookPurch._id },
@@ -149,9 +149,11 @@ const putUserBook = async (req, res) => {
 };
 
 const putUserWishList = async (req, res) => {
-  const { idBook, idUser } = req.params;
+  const { idUser } = req.params;
+  const { wishList } = req.body
+
   await User.findByIdAndUpdate(idUser, {
-    $push: { wish_list: idBook },
+    $push: { wish_list: wishList },
   });
   res.status(200).json({
     status: "Libro agregado a wish list",
@@ -168,44 +170,45 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const purchasedBooks=async(req,res)=>{
-  const {idUser}=req.params;
-  const {cartQuantity}=req.body;
+const purchasedBooks = async (req, res) => {
+  const { idUser } = req.params;
+  const { cartQuantity } = req.body;
 
-  vair= await cartQuantity.map(e=>{
+  vair = await cartQuantity.map(e => {
     return {
-      idLibro:e._id,
-      cantidadLibro:e.cartQuantity,
-      gastoPorLibro:e.price
-    }});
+      idLibro: e._id,
+      cantidadLibro: e.cartQuantity,
+      gastoPorLibro: e.price
+    }
+  });
 
-await vair.map(async (e)=>{
-    const usuar= await User.findById(idUser)
-    usuar.available_money?
-   await usuar.updateOne({$inc:{available_money:-(e.gastoPorLibro*e.cantidadLibro)}}):console.log('hola');
-    const lib= await Book.findById(e.idLibro)
-    lib.stock>0?
-   await lib.updateOne({$inc:{stock:-(e.cantidadLibro)}}):
-   console.log(`ya no hay stock de ${e.idLibro} para realizar la compra`);
-}
-)
-res.status(200).json({status:"todo bien"})
+  await vair.map(async (e) => {
+    const usuar = await User.findById(idUser)
+    usuar.available_money ?
+      await usuar.updateOne({ $inc: { available_money: -(e.gastoPorLibro * e.cantidadLibro) } }) : console.log('hola');
+    const lib = await Book.findById(e.idLibro)
+    lib.stock > 0 ?
+      await lib.updateOne({ $inc: { stock: -(e.cantidadLibro) } }) :
+      console.log(`ya no hay stock de ${e.idLibro} para realizar la compra`);
+  }
+  )
+  res.status(200).json({ status: "todo bien" })
 
 
   //for await of 
-    /*try {
-      const usuar= await User.findById(idUser)
-      usuar.available_money?
-     usuar.updateOne({$inc:{available_money:+e.gastoPorLibro}}):console.log('hola');
-      const lib= Book.findById(e.idLibro)
-      lib.stock>0?
-     lib.updateOne({$inc:{stock:-e.cantidadLibro}}):console.log('chau');
-      console.log('llegue hasta aqui')
-      res.status(200).json({status:"todo bien"})
-    
-    } catch (error){
-      res.status(400).json({error:error})
-    }*/
+  /*try {
+    const usuar= await User.findById(idUser)
+    usuar.available_money?
+   usuar.updateOne({$inc:{available_money:+e.gastoPorLibro}}):console.log('hola');
+    const lib= Book.findById(e.idLibro)
+    lib.stock>0?
+   lib.updateOne({$inc:{stock:-e.cantidadLibro}}):console.log('chau');
+    console.log('llegue hasta aqui')
+    res.status(200).json({status:"todo bien"})
+  
+  } catch (error){
+    res.status(400).json({error:error})
+  }*/
 
 
 
