@@ -1,0 +1,191 @@
+@import '../../../../assets/sass/functions.scss';
+@import '../../../../assets/sass/mixins.scss';
+@import '../../../../assets/sass/variables.scss';
+
+.container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+   
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    //max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.containerWish{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    flex-direction: column; 
+    flex-wrap: wrap;
+    grid-gap: 2em; 
+    box-sizing: border-box;
+    border: 1px solid #B881FF;
+    border-radius: 10px;
+}
+
+.containerSide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    padding: 3.52em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    flex-direction: column; 
+    flex-wrap: wrap;
+    grid-gap: 2em; 
+    box-sizing: border-box;
+  
+}
+
+// @media only screen and (max-width: 1024px) {
+//     .main{
+//         margin-top: toRem(-220);
+//         .container {
+//             padding: 0;
+//             font-size: 14px;
+//             max-height: 300px;
+//             border-bottom: 1px solid gray;
+//             display: flex;
+//             flex-direction: row;
+            
+            
+//           }
+//     }
+
+//   }
+//   @media only screen and (max-width: 768px) {
+//     .main{
+//         margin-top: toRem(-445);
+//         .container {
+//             font-size: 14px;
+//             max-height: 300px;
+//             border-bottom: 1px solid gray;
+//             display: flex;
+            
+//           }
+//     }
+//   }
+//   @media only screen and (max-width: 570px) {
+//     .main{
+//         margin-top: toRem(-480);
+//         .container {
+//             font-size: 12px;
+//             max-height: 220px;
+//             border-bottom: 1px solid gray;
+//             display: flex;
+            
+//           }
+//     }
+//   }
+//   @media only screen and (max-width: 375px) {
+//     .main{
+//         margin-top: toRem(-480);
+//         .container {
+//             width: 8em;
+//             font-size: 12px;
+//             max-height: 250px;
+//             border-bottom: 1px solid gray;
+//             display: flex;
+            
+//           }
+//     }
+//   }
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100vh;
+    // position: relative;
+  
+    h1 {
+      font-size: toRem(40);
+      text-align: center;
+      @include tabletMax() {
+        margin-top: toRem(150);
+      }
+    }
+  
+    .wishContainer {
+      width: 80vw;
+      margin: toRem(120) auto;
+      // background-color: $gris2;
+      text-align: center;
+      border-radius: toRem(5);
+      padding: toRem(20);
+  
+      figure {
+        display: flex;
+        width: 80%;
+        margin: toRem(10) auto;
+        padding: toRem(5) toRem(16);
+        background-color: $gris1;
+        border: toRem(1) solid $gris2;
+        border-radius: toRem(10);
+        justify-content: space-around;
+        align-items: center;
+  
+        @include tabletMax() {
+          flex-direction: column;
+        }
+  
+        img {
+          width: toRem(140);
+          height: toRem(160);
+          border-radius: toRem(5);
+        }
+  
+        h3 {
+          width: 40%;
+          font-size: toRem(20);
+          @include tabletMax() {
+            width: 80%;
+          }
+        }
+  
+        span {
+          font-weight: bolder;
+          font-size: toRem(20);
+          width: 10%;
+          color: $negro;
+        }
+  
+        button {
+          border: none;
+          background-color: transparent;
+          color: $primario;
+  
+          .icon {
+            width: toRem(30);
+            height: toRem(30);
+            &:hover {
+              color: $secundario;
+            }
+          }
+        }
+      }
+    }
+  
+    // .footerContainer {
+    //   border-top: 1px solid $gris2;
+    //   // position: absolute;
+    //   // bottom: 0;
+    //   width: 100vw;
+    // }
+  }
+  

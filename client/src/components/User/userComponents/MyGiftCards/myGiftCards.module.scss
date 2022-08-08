@@ -1,0 +1,236 @@
+@import '../../../../assets/sass/functions.scss';
+@import '../../../../assets/sass/mixins.scss';
+@import '../../../../assets/sass/variables.scss';
+
+.container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+   
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    //max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.container2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+   
+    padding: 0px;
+    height: 100%;
+    width: 50em;
+    //max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+   
+}
+
+.containerGift{
+    position: relative;
+    margin: 1em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    flex-direction: row; 
+    
+    grid-gap: 2em; 
+    box-sizing: border-box;
+    background-color: rgba(149, 53, 187, 0.153);
+
+     
+    img{
+        margin-top: 5px;
+        justify-content: center;
+        object-fit: cover;
+        width: 500px;
+        
+    }
+}
+.containerCard{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    flex-direction: column; 
+    flex-wrap: wrap;
+    grid-gap: 2em; 
+    box-sizing: border-box;
+ 
+}
+.text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    width: 100%;
+    flex-direction: row; 
+    flex-wrap: wrap;
+    grid-gap: 2em; 
+    box-sizing: border-box;
+    border-bottom: 1px solid #B881FF;
+
+}
+.nocards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    width: 100%;
+    flex-direction: column; 
+    flex-wrap: wrap;
+    grid-gap: 2em; 
+    box-sizing: border-box;
+    border-bottom: 1px solid #B881FF;
+}
+.button{
+    
+    
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    background: $secundario;
+    border: 1px solid #B881FF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+    border-radius: 10px;
+    cursor: pointer;
+} 
+
+.containerSide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    padding: 3.52em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    flex-direction: column; 
+    flex-wrap: wrap;
+    grid-gap: 2em; 
+    box-sizing: border-box;
+  
+}
+@media only screen and (max-width: 1582px) {
+    //   margin-top: toRem(-255)
+
+    .containerGift{
+    
+        img{
+            margin-top: 5px;
+            justify-content: center;
+            object-fit: cover;
+            width: 300px;
+            
+        }
+    }
+
+  }
+  @media only screen and (max-width: 1192px) {
+   
+    .container2{
+        //margin-top: toRem(-130);
+        
+   
+
+        .containerGift{
+           
+            
+            img{
+                margin-top: 5px;
+                justify-content: center;
+                object-fit: cover;
+                width: 200px;
+                
+            }
+        }
+    }
+  }
+
+  @media only screen and (max-width: 873px) {
+    .container2{
+        margin-top: toRem(130);
+        
+        flex-wrap: wrap;
+
+        .containerGift{
+            width: 17.5em;
+            flex-wrap: wrap;
+            img{
+                margin-top: 5px;
+                justify-content: center;
+                object-fit: cover;
+                width: 200px;
+                
+            }
+        }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .container2{
+        margin-top: toRem(300);
+        
+        
+        .containerGift{
+           
+            
+            img{
+                margin-top: 5px;
+                justify-content: center;
+                object-fit: cover;
+                width: 200px;
+                
+            }
+        }
+    }
+    .containerSide{
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        padding: 3.52em;
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        flex-direction: column; 
+        flex-wrap: wrap;
+        grid-gap: 2em; 
+        box-sizing: border-box;
+      
+    }
+  }
+//   @media only screen and (max-width: 375px) {
+//     .main{
+//         margin-top: toRem(-100);
+//         .container {
+//             width: 8em;
+//             font-size: 12px;
+//             max-height: 250px;
+//             border-bottom: 1px solid gray;
+//             display: flex;
+            
+//           }
+//     }
+//   }

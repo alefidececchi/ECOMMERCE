@@ -1,0 +1,108 @@
+@import "../../assets/sass/functions.scss";
+@import "../../assets/sass/mixins.scss";
+@import "../../assets/sass/variables.scss";
+
+.container {
+    font-family: "Quicksand", sans-serif;
+    margin: 100px;
+    // max-width: 1200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    //  align-self: center;
+    //      justify-content: center;
+
+    h3 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 3rem;
+        font-weight: bolder;
+        color: #000000;
+    }
+    h4 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    button {
+        padding: 0.3125em;
+        // box-sizing: border-box;
+        width: 339px;
+        height: 59px;
+        background-color: #b881ff;
+        border: transparent;
+        // box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 10px;
+        
+    }
+
+    button:hover {
+        transition-duration: 0.5s;
+        border: 1px solid #b881ff;
+        background: #ffffff;
+        color: #b881ff;
+    }
+   
+   
+    .formulario {
+        // h3 {
+        //     margin-bottom: 3rem;
+        //     font-weight: bolder;
+        //     color: #000000;
+        // }
+     
+
+        .error {
+            color: #e92b2d;
+            // font-weight: 600px;
+            font-size: 12px;
+        }
+
+        label {
+            display: block;
+            font-weight: bolder;
+            font-size: 14px;
+            margin-bottom: 0.3125em;
+            color: #000000;
+            font-family: "Quicksand", sans-serif;
+        }
+        div {
+            margin-bottom: 1rem;
+            margin-top: 3rem;
+        }
+
+        input,
+        textarea {
+            font-family: "Quicksand", sans-serif;
+            width: 339px;
+            height: 42px;
+            // resize: none;
+            border-radius: 10px;
+            border: transparent;
+            font-size: 14px;
+            padding: 0.625em;
+            margin-bottom: 0.3125em;
+            color: #797979;
+            background-color: #f7f7f7;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid #b881ff;
+        }
+        input[type="radio"] {
+            width: auto;
+        }
+    }
+    // .form{
+    //     display: flex;
+    //     flex-direction: column;
+    // 	align-items: center;
+    // 	justify-content: center;
+}

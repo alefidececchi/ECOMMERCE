@@ -5,7 +5,9 @@ const initialState = {
   booksDetail: {},
   genres: [],
   filterObject: {},
-  filterEmpty: false
+  filterEmpty: false,
+  bookById:[],
+  searchEmpty: false,
 };
 
 const bookSlice = createSlice({
@@ -16,9 +18,26 @@ const bookSlice = createSlice({
       state.books = action.payload;
       state.booksCopy = action.payload;
     },
-    searchBook(state, action) {
-      state.books = action.payload;
+    getBookById(state, action) {
+      
+      state.bookById = action.payload;
     },
+    searchBook(state, action) {
+      if (action.payload.length === 0) {
+        state.searchEmpty = true;
+        state.books = action.payload;
+      } else {
+        state.searchEmpty = false;
+        state.books = action.payload;
+      }
+    },
+    resetSearch(state, action) {
+      state.books = state.booksCopy;
+      state.searchEmpty = false;
+      // state.filterObject = {}
+    },
+
+
     getDetail(state, action) {
       state.booksDetail = action.payload;
     },
@@ -29,7 +48,7 @@ const bookSlice = createSlice({
       state.genres = action.payload;
     },
     getFilters(state, action) {
-      if(action.payload.length === 0) {
+      if (action.payload.length === 0) {
         state.filterEmpty = true;
         state.books = action.payload;
       } else {
@@ -38,14 +57,14 @@ const bookSlice = createSlice({
       }
     },
     saveFilterObject(state, action) {
-      state.filterObject[action.payload.key] = action.payload.value; 
+      state.filterObject[action.payload.key] = action.payload.value;
     },
     resetFilters(state, action) {
       state.books = state.booksCopy;
       state.filterEmpty = false;
       state.filterObject = {}
     },
-    resetObjectFilter(state,action) {
+    resetObjectFilter(state, action) {
       state.filterObject = {};
     }
   },
@@ -60,7 +79,9 @@ export const {
   getFilters,
   resetFilters,
   resetObjectFilter,
-  saveFilterObject
+  saveFilterObject,
+  getBookById,
+  resetSearch,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;

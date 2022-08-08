@@ -1,0 +1,277 @@
+
+@import '../../../../assets/sass/functions.scss';
+@import '../../../../assets/sass/mixins.scss';
+@import '../../../../assets/sass/variables.scss';
+
+.container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+   
+    padding: 0px;
+  
+    //max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+   
+}
+
+.books{
+    padding: 3px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-gap: 2em; 
+    justify-content: space-between;
+    border-bottom: 1px solid #B881FF;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 10px;
+}
+
+.containerSide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    padding: 3.52em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    flex-direction: column; 
+    flex-wrap: wrap;
+    grid-gap: 2em; 
+    box-sizing: border-box;
+  
+}
+.btncentro{
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    button{
+        width: 80px;
+        padding: 5px;
+        box-sizing: border-box;
+        background:$secundario;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+}
+
+.containerBooks{
+
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    
+    align-items: center;
+    display: flex;
+    grid-gap: 2em; 
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(149, 53, 187, 0.153);
+    padding: 15px;
+    border-radius: 10px;
+    
+ 
+    img{
+        margin-top: 5px;
+        justify-content: center;
+        object-fit: cover;
+        width: 100px;
+        
+    }
+    h1{
+        color: $gris4;
+        font-size: 30px;
+    }
+    h3{
+        color: $gris4;
+        font-size: 25px;
+    }
+
+    button{
+        
+        box-sizing: border-box;
+        background:$secundario;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 5px;
+    }
+}
+
+.botones{
+    flex: 1 1 auto;
+}
+.imagen{
+    flex: 1 1 auto;
+}
+.text{
+    flex: 1 1 auto;
+}
+
+
+@media only screen and (max-width: 1275px) {
+
+    .containerBooks{
+        margin-left: toRem(300);
+
+    }
+  }
+  @media only screen and (max-width: 1082px) {
+
+    .containerBooks{
+        margin-left: toRem(250);
+        
+        img{
+            margin-top: 5px;
+            justify-content: center;
+            object-fit: cover;
+            width: 100px;
+            
+        }
+        h1{
+            color: $gris4;
+            font-size: 20px;
+        }
+        h3{
+            color: $gris4;
+            font-size: 15px;
+        }
+    
+        button{
+            padding: 5px;
+            box-sizing: border-box;
+            background:$secundario;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+  }
+
+  @media only screen and (max-width: 894px) {
+
+    .containerBooks{
+        margin-left: toRem(150);
+        
+        img{
+            margin-top: 5px;
+            justify-content: center;
+            object-fit: cover;
+            width: 100px;
+            
+        }
+        h1{
+            color: $gris4;
+            font-size: 20px;
+        }
+        h3{
+            color: $gris4;
+            font-size: 15px;
+        }
+    
+        button{
+            padding: 5px;
+            box-sizing: border-box;
+            background:$secundario;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+
+    .containerBooks{
+        margin-left: toRem(150);
+        margin-top: toRem(300);
+        
+        img{
+            margin-top: 5px;
+            justify-content: center;
+            object-fit: cover;
+            width: 100px;
+            
+        }
+        h1{
+            color: $gris4;
+            font-size: 20px;
+        }
+        h3{
+            color: $gris4;
+            font-size: 15px;
+        }
+    
+        button{
+            padding: 5px;
+            box-sizing: border-box;
+            background:$secundario;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+  }
+
+  @media only screen and (max-width: 520px) {
+
+    .containerBooks{
+        margin-left: toRem(150);
+        margin-top: toRem(450);
+        
+        img{
+            margin-top: 5px;
+            justify-content: center;
+            object-fit: cover;
+            width: 100px;
+            
+        }
+        h1{
+            color: $gris4;
+            font-size: 15px;
+        }
+        h3{
+            color: $gris4;
+            font-size: 10px;
+        }
+    
+        button{
+            padding: 5px;
+            box-sizing: border-box;
+            background:$secundario;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+  }
+
+  @media only screen and (max-width: 320px) {
+    .containerBooks{
+        margin-top: toRem(500);
+        margin-left: toRem(100);
+        
+  
+      
+    }
+
+  }

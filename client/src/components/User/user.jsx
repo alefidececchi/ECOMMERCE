@@ -1,170 +1,260 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import style from './user.module.scss'
-import {BsCameraFill} from "react-icons/bs";
+import { BsCameraFill } from "react-icons/bs";
 import { useState } from 'react';
-import EditBook from '../EditBooks/editBook';
+
 import userLogo from '../../assets/imgs/user.png'
-import portada from '../../assets/imgs/hp.jpg'
-import portada2 from '../../assets/imgs/LOTR.jpg'
+
 import EditProfile from '../EditProfile/editProfile';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2'
+import SideBar from './sideBar';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchUserById
+} from "../../Redux/thunks/usersThunks";
+import { useEffect } from 'react';
+import jwt_decode from "jwt-decode"
+import axios from 'axios';
+import Footer from '../Footer/footer';
+import { BallTriangle } from "react-loader-spinner";
+
+
+
+export const data = [
+  {
+      Component: BallTriangle,
+      props: {
+          color: "#B881FF",
+      },
+      name: "Ball Triangle",
+  },
+];
 
 const User = () => {
+
   const[image, setImage] = useState(userLogo)
-  const[editMode, setEditMode] = useState(false)
   const[editProfile, setEditProfile] = useState(false)
-  let[books, setBooks] = useState([{    bookName:"Harry Potter", image:portada, price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:portada2, price: 40.50, amount: 10, state:'Nuevesito prro'}])
-
-  //let books = false
-  //  let books = [{bookName:"Harry Popote",
-  //   image:"No disponible :V",
-  //   price: 40.50,
-  //   amount: 15,
-  //   state:'Nuevesito prro'},
-  //    {bookName:"Harry Popote 2",
-  //   image:"No disponible :V",
-  //   price: 40.50,
-  //   amount: 15,
-  //   state:'Nuevesito prro'}
-  //  ]
-
-  function deleteBook(del){
-    console.log(del)
-    let filtrado = books.filter(b => b.bookName !== del.bookName)
-    console.log(filtrado)
-    swal({
-      title:'Delete?',
-      text:'Do you want to delete your post?',
-      icon:'warning',
-      buttons:['No', 'Yes'] 
-    }).then(res => {
-      if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-        if(filtrado){
-          setBooks(books = filtrado)
-          swal({text: 'Post  deleted successfully', icon: 'success'})
-        }
-      }
-    })
-
+  const[reload, setReload] = useState(false)
+  const { userById } = useSelector((state) => state.users);
+  
+  const { email } = useSelector((state) => state.token);
+  const dispatch = useDispatch()
+  let correo = window.localStorage.email
+  let filtrado = []
+  let otro
+  let info = jwt_decode(window.localStorage.token);
+  //console.log(info)
+  let id = info.id
+  console.log(id)
+  console.log(userById)
+  let estado = userById
+  
+  let navigate = useNavigate()
+  const handleClick = () => {
+    navigate("/")
+    window.location.reload()
+    localStorage.clear()
     
-    // axios.delete('http://localhost:3001/api/activities/delete/'+del)
-    // .then(()=>{
-    //     history.push('/countries')
-    // })
-    //}
 
   }
+  
+  useEffect(() => {
+  
+      dispatch(fetchUserById(id));
+      setReload(false)
+      
+    
+}, [reload]);
 
 
-  function onInputchange(e){
-    console.log( e.target.value)
-    let url = URL.createObjectURL(e.target.files[0]);
-    console.log(url)
-    setImage(url)
+  const onInputchange = (files) => {
+    // console.log(files.target.value)
+    // let url = URL.createObjectURL(e.target.files[0]);
+    // console.log(url)
+    // setImage(url)
+
+    const formData = new FormData()
+    formData.append("file", files[0])
+    formData.append("upload_preset", "u2eqih7r")
+    axios.post("https://api.cloudinary.com/v1_1/dbikbhgwc/image/upload", formData)
+    .then((response) => {
+      console.log(response)
+      console.log(response.data.url)
+      axios({
+        method: 'put',
+        url: `http://localhost:3001/users/${id}`,
+        data: {
+            image : response.data.url,
+        
+        }
+     })
+     .then(reloading())  
+    }) 
   }
 
   function editProfileOn(){
+  
     setEditProfile(true)
   }
 
-  function editOn(){
-    setEditMode(true)
-  }
-
-  const editOff = () =>{
-    setEditMode(false)
-  }
   const editProdileOff = () =>{
     setEditProfile(false)
   }
 
+  function reloading(){
+    
+    if (reload){
+
+        return setReload(false)
+    }else{
+      return setReload(true)
+    }
+}
+
+
+//  function userInfo(){
+//   console.log(correo)
+//   console.log(users)
+//   console.log(typeof(correo))
+//   if(users.length > 0){
+//     otro = users.filter(u => console.log(`"${u.email}"`))
+//     filtrado = users.filter(u => `"${u.email}"` === correo )
+//     console.log(filtrado)
+//     return filtrado
+//   }
+//  }
+const  changePassword = async () =>{
+  const { value: formValues } = await Swal.fire({
+      title: 'Change PassWord?',
+      html:
+        '<input type ="password" id="swal-input1" class="swal2-input">' +
+        '<input type ="password" id="swal-input2" class="swal2-input">',
+      focusConfirm: false,
+      preConfirm: () => {
+          if(document.getElementById('swal-input1').value !== document.getElementById('swal-input2').value){
+              return 'the password must be the same'
+          }else  if(document.getElementById('swal-input1').value.length === 0 || document.getElementById('swal-input2').value.length === 0 ){
+            return 'Please write the new password'
+          }else{
+              axios.put(`http://localhost:3001/users/${id}`,  {password: document.getElementById('swal-input1').value})
+              return 'Password changed successfully'
+
+          }
+      }
+    })
+    
+    if (formValues) {
+      Swal.fire(JSON.stringify(formValues))
+    }
+}
+
   return (
-    <div className={style.container}>
-      <div className={style.containerProfile}>
-        <img src={image} className={style.userPhoto} alt='userProfile'></img>
-        <div className={style.addFile}>
-            <BsCameraFill className={style.icon}/>
-            <input type='file' name='userimage' onChange={onInputchange}/>
-        </div>
-        <div>
 
-          {/* aca va la edicion */}
-            <div>
-              {editProfile?(
-                  <div>
-                    <EditProfile editProdileOff={editProdileOff}/>
-                  </div>
-                ):
-                <div className={style.info}>
-                  <div>
-                    <h2>Personal Info</h2>
-                  </div>
-                  <div>
-                    <h4>Name: User Name</h4>
-                  </div>
-                  <div>
-                    <h4>E-mail: correo@correo.com</h4>
-                  </div>
-                  <div>
-                    <h4>Pasword: xxxxxxx</h4>
-                  </div>
-                  <div>
-                    <button onClick={editProfileOn} className={style.button1}>Edit</button>
-                  </div>
-                </div>
-              }
-            </div>
-          {/* hasta aca */}
-          <div>
-            {
-              editMode?(
-                <div>
-                  <EditBook editOff={editOff}/>
-                </div>
-              ):
-              books.length > 0 ?
-              books.map((book , i) =>
-                  <div key={i} className={style.containerBooks}>
-                    <div>
-                      <img src={book.image} alt='bookImage'></img>
-                    </div>
-                    <div>
-                      <h1> {book.bookName}</h1>
-                      <h3> Price:${book.price} USD</h3>
-                    </div>
-                    <div>
-                      <button className={style.button} onClick={editOn}>Edit</button>
-                    </div>
-                    <div>
-                      <button className={style.button} onClick={()=>deleteBook(book)}>Delete</button>
-                    </div>
-                  </div>
-
-                ):
-                <div className={style.books}>
-                  <div>
-                    <h2>Books for sale?</h2>
-                  </div>
-                </div>
-
-            }
-            <div className={style.info}>
-              <Link to={'/user/newBook'}>
-                <button className={style.button2}>Sell</button>
-              </Link>
-            </div>
+    <div>
  
-          </div>
-            {/* <Link to={'/user/newBook'}>
-              <button className={style.button2}>Sell</button>
-            </Link> */}
-        </div>
+    <div className={style.container}>
+      
+      <div className={style.containerSide}>
+        <SideBar userById = {userById}/>
       </div>
-    </div>
+     
+      
+      <div className={style.containerProfile}>
+          
+            <div>
+              <h2>Account Details</h2>
+            </div>
+            { userById.image? 
+              userById.image === "default_image" ?
+              <img src={image} className={style.userPhoto} alt={'imagen'} ></img>:
+              <img src={userById.image} className={style.userPhoto} alt={userLogo} ></img>      :
+              <div>
+              {data.map((loader, index) => (
+                  <div className={style.loading} data-tip={loader.name}>
+                      <loader.Component {...loader.props} />
+                  </div>
+              ))}
+        
+          </div>
+            }
+            <div className={style.addFile}>
+                <BsCameraFill className={style.icon}/>
+                <input type='file' name='userimage' onChange={(event) =>  onInputchange(event.target.files)}/>
+            </div>
+            
 
+              {/* aca va la edicion */}
+                
+                  {editProfile?(
+                      <div className={style.info}>
+                        <EditProfile 
+                        reloading ={reloading}
+                        editProdileOff={editProdileOff}
+                        />
+                      </div>
+                    ): 
+                      // users.length > 0 ?
+                      
+                    
+                    <div className={style.info}>
+                      <div>
+                        <h4>Name:</h4>
+                      </div>
+                      <div className={style.name}>
+                        <h4>{userById.name}</h4>
+                      </div>
+                      
+                        <div>
+                          <h4>E-mail:</h4>
+                        </div>
+                        <div className={style.name}>
+                          <h4>{userById.email}</h4>
+                        </div>
+                        {/* <div>
+                          <h4>Pasword:</h4>
+                        </div>
+                        <div className={style.name}>
+                          <h4>xxxxxxx</h4>
+                        </div>
+                      
+                      <div className={style.info}>
+                        <div>
+                          <h4>Address:</h4>
+                        </div>
+                        <div className={style.name}>
+                          <h4>Calle Falsa 123</h4>
+                        </div>
+                      </div> */}
+                    
+                      <div className={style.btnedit}>
+                        <button onClick={editProfileOn} >Edit</button>
+                      </div>
+                      <div >
+                          <button onClick={changePassword} className={style.botonpass}>Change Password?</button>
+                      </div>
+                      <div className={style.info}>
+
+                    </div>
+                    </div>
+                  }
+                
+         
+          
+            {/* hasta aca */}
+ 
+              {/* <Link to={'/user/newBook'}>
+                <button className={style.button2}>Sell</button>
+              </Link> */}
+      
+      </div>
+
+             
+
+    </div>
+    {/* <Footer /> */}
+    </div>
   );
 }
 
 export default User;
-

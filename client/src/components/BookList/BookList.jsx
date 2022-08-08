@@ -58,12 +58,12 @@ const BookList = ({ books }) => {
 
                 {currentBooks?.length === 0 && (
                     <div>
-                        {/* {data.map((loader, index) => (
+                        {data.map((loader, index) => (
                             <div className={s.loading} data-tip={loader.name}>
                                 <loader.Component {...loader.props} />
                             </div>
-                        ))} */}
-                       
+                        ))}
+
                     </div>
                 )}
 
@@ -72,7 +72,7 @@ const BookList = ({ books }) => {
                     // <Link to={"/home/" + elm.id}>  
 
 
-                    return <Card id={book._id}  name={book.name} price={book.price} image={book.image} key={book.name} book={book}/>
+                    return <Card id={book._id} name={book.name} price={book.price} image={book.image} key={book.name} book={book} />
                     // </Link>
 
                 })}
