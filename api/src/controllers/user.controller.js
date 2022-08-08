@@ -82,10 +82,12 @@ const postUserGoogle = async (req, res) => {
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, image, description, country, money } =
-    req.body;
+  const { name, email, password, image, description, country } = req.body;
+  let { money } = req.body
 
   const user = await User.findById(idUser)
+
+  !money ? money = 0 : money = money
 
   let actualCliente;
   password
