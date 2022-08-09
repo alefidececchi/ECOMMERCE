@@ -1,0 +1,80 @@
+[
+    {
+        "name": "Plaza San Miguel - Lima",
+        "lat":"-12.077339",
+        "lng":"-77.082965",
+        "key":"1"
+    },
+    {
+        "name": "Jockey Plaza - Lima",
+        "lat":"-12.086202",
+        "lng":"-76.979862",
+        "key":"2"
+    },
+    {
+        "name": "Real Plaza Salaverry - Lima",
+        "lat":"-12.089887091062497",
+        "lng":"-77.05314588886405",
+        "key":"3"
+    },
+    {
+        "name": "Viva Envigado - Antioquia",
+        "lat":"6.176227",
+        "lng":"-75.591599",
+        "key":"4"
+    },
+    {
+        "name": "Centro Comercial Sambil - Caracas",
+        "lat":"10.488960981927132",
+        "lng":"-66.85464025537344",
+        "key":"5"
+    },
+    {
+        "name":"Centro Comercial El Lider - Caracas",
+        "lat":"10.48590183351183",
+        "lng":"-66.8209792955847",
+        "key":"6"
+    },
+    {
+        "name":"CCCT - Caracas",
+        "lat":"10.484534650282203",
+        "lng":"-66.85423282518563",
+        "key":"7"
+    },
+    {
+        "name":"Centro Comercial Paseo Villa del Río - Bogotá",
+        "lat":"4.598474611902147",
+        "lng":"-74.15322536997705",
+        "key":"8"
+    },
+    {
+        "name":"Centro Comercial Gran Estación - Bogotá",
+        "lat":"4.647521943012019",
+        "lng":"-74.10194104805014",
+        "key":"9"
+    },
+    {
+        "name":"Centro Comercial Centro Mayor - Bogotá",
+        "lat":"4.5934235985855105",
+        "lng":"-74.12387040644084",
+        "key":"10"
+    },
+    {
+        "name":"Real Plaza Cusco - Cusco",
+        "lat":"-13.523359289871339",
+        "lng":"-71.95046278723852",
+        "key":"11"
+    },{
+        "name":"Alto Rosario Shopping - Rosario",
+        "lat":"-32.926839978214296",
+        "lng":"-60.667792956561684",
+        "key":"12"
+    },
+    {
+        "name":"Portal Santiago Shopping - Santiago del Estero",
+        "lat":"-27.77763562712385",
+        "lng":"-64.25710917780815",
+        "key":"13"
+    }
+
+]
