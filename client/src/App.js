@@ -23,7 +23,7 @@ import Activate from "./components/Register/activate"
 import Forgot from "./components/Register/forgot"
 import Reset from "./components/Register/reset"
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
-
+import ContactUs from './components/Contact/contactUs';
 import { ToastContainer } from 'react-toastify'
 
 import ActivateAccount from './components/Register/activate-account';
@@ -38,7 +38,7 @@ function App() {
     <div className="App">
     <ToastContainer />
      <Routes>
-      <Route path='/' element={< NavBar />}>
+      <Route path='/' element={< NavBar />}>  
         <Route path="/" element={< Home />} />
         <Route path='shopping' element={< Shopping />} />
         <Route path='checkout-success' element={< CheckoutSuccess />}/>
@@ -51,9 +51,10 @@ function App() {
         <Route path='/user/discounts' element={< Discounts />}/>
         <Route path='/user/payment' element={< Payment />}/>
         <Route path='user/newBook' element={< AddBook />} />
+        <Route path='contact' element={< ContactUs />} />
         <Route path='wish' element={< WishList />} />
         <Route path='gift' element={< GiftCard />} />
-      </Route>
+    </Route>  
         <Route path='register' element={< Register />} />
         <Route path='activate' element={< ActivateAccount />} />
         <Route path='activate-account/:token' element={< Activate />} />

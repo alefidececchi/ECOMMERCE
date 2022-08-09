@@ -19,6 +19,9 @@ const Footer = () => {
                 <Link className={s.Links} to={"/"}>
                     <a>License</a>
                 </Link>
+                <Link className={s.Links} to={"/contact"}>
+                    <a>Contact</a>
+                </Link>
 
             </div>
             <div className={s.LogosContainer}>

@@ -4,21 +4,16 @@ import portada from '../../../../assets/imgs/hp.jpg'
 import portada2 from '../../../../assets/imgs/LOTR.jpg'
 import s from './discounts.module.scss'
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllBooks } from '../../../../Redux/thunks/booksThunks';
 
 function ProductDis({i, bookName, image, price, offer, estado, reload}){
 
+   
     const [disc, setDisc] = useState(offer)
     
-    //console.log(estado)
-    // function reloading(){
-    
-    //     if (reload){
-    
-    //         return setReload(false)
-    //     }else{
-    //       return setReload(true)
-    //     }
-    // }
+    const dispatch = useDispatch()
+
     let newPrice = 0
 
     function applyDisc(cambio) {
@@ -65,25 +60,29 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
             })
             .then(reload())
             setDisc(newPrice)
+          
+            
         }else{
             axios({
                 method: 'put',
                 url: `http://localhost:3001/books/${filtrado._id}`,
                 data: {
                     
-                    
                     priceWithDiscount: newPrice,
                     inOffer: false                  
                 }
             })
             .then(reload())
+           
             setDisc(newPrice)
+           
+            
         }
 
 
     }
 
-
+    
     return(
         
             <tr className={s.table_row}>

@@ -29,7 +29,7 @@
     align-items: center;
     grid-gap: 2em; 
     justify-content: space-between;
-    border-bottom: 1px solid #B881FF;
+    //border-bottom: 1px solid #B881FF;
     flex-wrap: wrap;
     width: 600px;
     margin: 0 auto;
@@ -115,7 +115,7 @@
     &_cell{
         font-size: 20px;
         letter-spacing: 3px;
-        border-bottom: 1px solid $secundario;
+        border-top: 1px solid $secundario;
         color: $gris4;
         
     }

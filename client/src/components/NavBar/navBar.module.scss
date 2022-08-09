@@ -20,6 +20,16 @@
         list-style: none;
     }
 
+    .saldo{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid #B881FF;
+        padding: 5px;
+        border-radius: 10px;
+        gap: 8px;
+    }
+
     ul {
         width: 100vw;
         display: flex;

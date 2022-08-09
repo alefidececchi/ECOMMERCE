@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { BallTriangle } from "react-loader-spinner";
 import { fetchAllBooks } from '../../../../Redux/thunks/booksThunks';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const data = [
     {
@@ -24,7 +24,7 @@ export const data = [
   ];
 
 function Discounts(){
-
+    const dispatch = useDispatch()
     let info = jwt_decode(window.localStorage.token);
     //console.log(userById.selling_books)
     let id = info.id
@@ -36,9 +36,10 @@ function Discounts(){
     function reloading(){
     console.log('entro')
         if (reload){
-    
+            dispatch(fetchAllBooks())
             return setReload(false)
         }else{
+            dispatch(fetchAllBooks())
           return setReload(true)
         }
     }

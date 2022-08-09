@@ -54,19 +54,29 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
                       
                   
                 }else{
-                    console.log(user.token)
-                    if(user.token){
-                    axios.post(`${url}/stripe/create-checkout-session`, {
-                        cartItems,
-                        userId: user._id
-                    }).then((res) =>{
-                        if(res.data.url){
-                            window.location.href = res.data.url
+                    swal({
+                        title:'Payment',
+                        text:'Go to payment platform?',
+                        icon:'warning',
+                        buttons:['Cancel', 'Yes'] 
+                    }).then(res =>{
+
+                        if(res){
+                            console.log(user.token)
+                            if(user.token){
+                            axios.post(`${url}/stripe/create-checkout-session`, {
+                                cartItems,
+                                userId: user._id
+                            }).then((res) =>{
+                                if(res.data.url){
+                                    window.location.href = res.data.url
+                                }
+                            }).catch((err) => console.log(err.message))}
+                            else{
+                                toast.error(`First you must be login`, {position: "top-center"})
+                            }
                         }
-                    }).catch((err) => console.log(err.message))}
-                    else{
-                        toast.error(`First you must be login`, {position: "top-center"})
-                    }
+                    })
                 }
               })
         }else{
@@ -86,6 +96,9 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
             }
         }
     }
+
+
+
 
     return (
         <div>

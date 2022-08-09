@@ -65,7 +65,7 @@ function Review({editOff, libros, reloading}){
                         <FaStar
                         key={index}
                       
-                        color ={(hoverValue || rating) >= index ? '#9d4edd' : "#FFFFFF"}
+                        color ={(hoverValue || rating) >= index ? '#EFB810' : "#FFFFFF"}
                         onClick={() => setRating(index)}
                         onMouseEnter={() => setHoverValue(index) }
                         onMouseLeave={() => setHoverValue(null)}
