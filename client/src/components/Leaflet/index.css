@@ -8,6 +8,7 @@
 
 
 .double{
+	margin-top: 70px;
 	display: flex;
 	justify-content: center;
 }
@@ -25,7 +26,7 @@
 	transform: translate(-69%, 0%);
 }
 .rows {
-	margin-bottom: 5rem;
+	/* margin-bottom: 5rem; */
 	display: flex;
 	flex-direction: column;
 	
