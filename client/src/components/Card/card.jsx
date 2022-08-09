@@ -5,7 +5,9 @@ import BookDetail from "../BookDetail/bookDetail";
 import { addToCart } from "../../Redux/slices/shoping.slice";
 import { getWishList } from "../../Redux/slices/wishListSlice";
 
-const Card = ({ name, price, image, id, book, priceWithDiscount, offer }) => {
+const Card = ({ name, price, image, id, book, priceWithDiscount, offer}) => {
+
+  console.log(priceWithDiscount)
   const dispatch = useDispatch();
 
   // esto es para deplegar el detlle de la tarjeta
@@ -37,7 +39,8 @@ const Card = ({ name, price, image, id, book, priceWithDiscount, offer }) => {
           <i class="fas fa-heart"></i>
         </button>
         {
-        offer === true?
+         offer === true ?
+         
         price > priceWithDiscount ?
           <button className={s.discount} >
             {Math.round(100 - (100 / (price / priceWithDiscount)))} %
@@ -56,7 +59,11 @@ const Card = ({ name, price, image, id, book, priceWithDiscount, offer }) => {
       />
       <div className={s.cart}>
         <div className={s.info}>
-          <h3>$ {price}</h3>
+        {
+          priceWithDiscount === 0 ?
+           <h3>$ {price}</h3>:
+           <h3>$ {priceWithDiscount}</h3>
+        }
           <h4>{name}</h4>
         </div>
         <figure onClick={() => handleAddToCart(book)} className={s.info2}>

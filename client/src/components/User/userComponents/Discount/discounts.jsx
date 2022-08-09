@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode"
 import portada from '../../../../assets/imgs/hp.jpg'
 import portada2 from '../../../../assets/imgs/LOTR.jpg'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { BallTriangle } from "react-loader-spinner";
@@ -23,7 +23,10 @@ export const data = [
     },
   ];
 
+  
 function Discounts(){
+
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     let info = jwt_decode(window.localStorage.token);
     //console.log(userById.selling_books)
@@ -37,10 +40,13 @@ function Discounts(){
     console.log('entro')
         if (reload){
             dispatch(fetchAllBooks())
-            return setReload(false)
+            
+            window.location.reload()
+            
         }else{
             dispatch(fetchAllBooks())
-          return setReload(true)
+        
+            window.location.reload()
         }
     }
 
@@ -66,14 +72,14 @@ function Discounts(){
     //console.log(prueba)
 
     useEffect( () => {
-
+        dispatch(fetchAllBooks())
           setReload(false)
           axios.get(`http://localhost:3001/users/${id}`)
           .then((response)=>{
             
             setPrueba(response.data.userrrs)
           })       
-      
+          
           
           
           //llenarState()

@@ -8,7 +8,7 @@
     // display: flex;
     // align-items: center;
     // justify-content: center;
-
+	width: 100vw;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
@@ -16,16 +16,12 @@
 	
 }
 .section{
-	// display: flex;
-	// flex-direction: column;
-	// justify-content: flex-end;
-	// align-items: center;
-	// min-height: 100vh;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	align-items: center;
-	width: 60vw;
+
 	margin: 0 auto;
 }
 
@@ -33,28 +29,23 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	
-	//margin: 50em auto;
+	width: 300px;
 
-	// margin:  8em 40em auto;
-	//top: 2em;
-	//padding: 2em;
 	margin: 0 auto;
 	margin-bottom: 3.5em;
-    // width: 35%;
-    // margin: 8em auto;
-    // padding: 60px 0;
-    //max-width: 75em;
+
     
 	
 	background: #fff;
 	border-radius: 0.3125em;
 	box-sizing: border-box;
-	box-shadow: rgba(0, 0, 0, 1) 0px 1px 4px;
-	border: 1px solid #B881FF;
-	span{
+	
+	
+	p{
+		width: 300px;
 		font-size: 15px;
 		color: #e92b2d;
+
 	}
 
 	  @include tabletMax() {
@@ -72,11 +63,7 @@
 		font-size: 2em;
 	  }
 
-	.error {
-		color: #e92b2d;
-		font-weight: 600px;
-		font-size: 12px;
-	}
+
 
 	label {
 		display: block;
@@ -106,8 +93,6 @@
 	}
 	
 	input,textarea {
-	
-		
 	width: 100%;
 	resize: none;
 	border-radius: 5px;

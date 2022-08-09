@@ -6,6 +6,7 @@ import s from './discounts.module.scss'
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllBooks } from '../../../../Redux/thunks/booksThunks';
+import { useNavigate } from 'react-router-dom';
 
 function ProductDis({i, bookName, image, price, offer, estado, reload}){
 
@@ -16,11 +17,12 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
 
     let newPrice = 0
 
+    const navigate  = useNavigate()
     function applyDisc(cambio) {
         let filtrado = estado.find(b => b.name === bookName)
-        console.log(filtrado)
+        //console.log(filtrado)
         // console.log(filtrado._id)
-        // console.log(bookName)
+        //console.log(estado)
         // console.log(price)
         // console.log(offer)
         // console.log(cambio.target.value)
@@ -30,9 +32,9 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
             newPrice= price
         }else  if(cambio.target.value === '15'){
              newPrice = price - ((price * 15 )/ 100)
-            console.log(price)
+            //console.log(price)
         }else if(cambio.target.value === '25'){
-            console.log(price)
+            //console.log(price)
             newPrice = price - ((price * 25 )/ 100)    
         }
         else if(cambio.target.value === '50'){
@@ -60,6 +62,7 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
             })
             .then(reload())
             setDisc(newPrice)
+            
           
             
         }else{
@@ -73,9 +76,9 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
                 }
             })
             .then(reload())
-           
+            
             setDisc(newPrice)
-           
+            
             
         }
 

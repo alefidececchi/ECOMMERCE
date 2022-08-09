@@ -59,7 +59,7 @@ function ContactUs(){
     
         if (!input.comment) {
             errorObject.comment = "The comment field is empty";
-          } else if (!/^[a-zA-Z ]*$/.test(input.comment) || input.comment.length < 3) {
+          } else if (/^[a-zA-Z ]*$/.test(input.comment) || input.comment.length < 3) {
             errorObject.comment =
               "Your comment must contain letters and more than 3 characters";
             console.log(errorObject);
@@ -89,21 +89,21 @@ function ContactUs(){
               <div className={style.formulario}>
 
                     <form action="https://formsubmit.co/24db36c4b7b8664f19823cadcfbceab3" method="POST">
-                        <h2>CONTACT US</h2>
+                        <h4>CONTACT US</h4>
                         <div>
                             <label htmlFor="name">Name: </label>
                             <input type="text" name="name" onChange={handleInputChange} placeholder="Type your name..." required/>
-                            {errors ? <span>{errors.name}</span> : null}
+                            {errors ? <p >{errors.name}</p> : null}
                         </div>
                         <div>
                             <label htmlFor="name">Your Email: </label>
                             <input type="email" name="email" onChange={handleInputChange} placeholder="email@example.com" required/>
-                            {errors ? <span>{errors.email}</span> : null}
+                            {errors ? <p >{errors.email}</p> : null}
                         </div>
                         <div>
                             <label htmlFor="name">Description: </label>
                             <textarea name="comment" onChange={handleInputChange}/>
-                            {errors ? <span>{errors.comment}</span> : null}
+                            {errors ? <p> {errors.comment}</p> : null}
                         </div>
                         <input type="hidden" name="_next" value='http://localhost:3000' required/>
                         <input type="hidden" name="_captcha" value='false' required/>
@@ -125,110 +125,3 @@ function ContactUs(){
 
 export default ContactUs;
 
-
-  // // //     <Formik 
-            // // //         initialValues={{
-            // // //             email:"", 
-            // // //             authors:"",
-            // // //             description:''
-            // // //         }}
-            // // //         validate={(values) =>{
-            // // //             let errors ={};
-            // // //             //validacion nombre del libro   
-            // // //             if(!values.email){
-            // // //                 errors.email = 'Please write the book name'
-            // // //             }
-            // // //             // else if(values.email.length < 4 || values.email.length > 40){
-            // // //             //     errors.email = 'Book name must have between 4 or 20 characters'
-            // // //             // }
-
-            // // //             //validacion nombre del author   
-            // // //             if(!values.authors){
-
-            // // //                 errors.authors = 'Please write the author name'
-            // // //             }
-            // // //             // else if(values.authors.length < 4 || values.name.length > 40){
-            // // //             //     errors.authors = 'Author name must have between 4 or 20 characters'
-            // // //             // }
-            // // //             //validacion description
-            // // //             if(!values.description){
-            // // //                 errors.description = 'Please write a  description of the book'
-            // // //             }else if(values.description.length > 350){
-            // // //                 errors.description = 'Description must have 250 characters'
-            // // //             }
-            // // //             return errors;
-            // // //         }}
-            // // //         onSubmit={(values, {resetForm})=>{
-            // // //             console.log(values)
-
-            // // //             // resetForm();
-                        
-            // // //             axios.post("https://formsubmit.co/24db36c4b7b8664f19823cadcfbceab3", values)
-            // // //             // swal({
-            // // //             //     title:'Congratulation',
-            // // //             //     text:'Book published successfully',
-            // // //             //     icon:'success',
-            // // //             //     button:'OK'
-            // // //             //   }).then(res => {
-            // // //             //     if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-            // // //             //       dispatcher(fetchAllBooks());
-            // // //             //       navigate('/user')
-            // // //             //     }
-            // // //             //   })
-
-            // // //             resetForm();
-            // // //             // // setSend(true)
-            // // //             // // setTimeout(() => setSend(false), 3000)
-            // // //             // console.log(values)
-
-                        
-         
-            // // //         }}
-            // // //     >
-            // // //         {( {errors , setFieldValue, values } )=>(
-            // // //             <Form action="https://formsubmit.co/24db36c4b7b8664f19823cadcfbceab3" method="POST" className={style.form}> 
-            // // //             <h2>CONTACT US</h2>
-            // // //             <div>
-            // // //                 <label htmlFor="name">Your Email: </label>
-            // // //                 <Field
-            // // //                 type='email'
-            // // //                 id="nameBook"
-            // // //                 placeholder="email@example.com"
-            // // //                 name="email"
-            // // //                 />
-            // // //                 <ErrorMessage name="email" component={()=>(
-            // // //                     <div className={style.error}>{errors.email}</div>
-            // // //                 )} />
-            // // //             </div>
-            // // //             <div>
-            // // //                 <label htmlFor="name">Suject: </label>
-            // // //                 <Field
-            // // //                 type='text'
-            // // //                 id="authors"
-            // // //                 placeholder="Type a name..."
-            // // //                 name="authors"
-            // // //                 />
-            // // //                 <ErrorMessage name="authors" component={()=>(
-            // // //                     <div className={style.error}>{errors.authors}</div>
-            // // //                 )} />
-            // // //             </div>
-            // // //             <div>
-            // // //                 <label htmlFor="amt">Description: </label>
-            // // //                 <Field
-            // // //                     as='textarea'
-            // // //                     id="amt"
-            // // //                     placeholder=""
-            // // //                     name="description"
-            // // //                 />
-            // // //                 <ErrorMessage name="description" component={()=>(
-            // // //                     <div className={style.error}>{errors.description}</div>
-            // // //                 )} />
-            
-            // // //             </div>
-            // // //             <div>
-            // // //                 <button type="submit">  Create </button>
-            // // //                 {send && <p>Product added succecsfully</p>}
-            // // //             </div>  
-            // // //         </Form>
-            // // //         )}
-            // // //     </Formik>
