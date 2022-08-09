@@ -23,14 +23,14 @@ const Pagination = ({ booksPerPage, books, changePage, currentPage }) => {
   return (
     <div>
       <ul>
-        <li><span onClick={handlePrevious}>Prev</span></li>
+        <li><span onClick={handlePrevious}><i class="fas fa-chevron-left"></i></span></li>
         {pages &&
           pages.map(page =>
           (page === currentPage
             ? (<li><button>{page}</button></li>)
             : (<li><button onClick={() => changePage(page)}>{page}</button></li>))
           )}
-        <li><span onClick={handleNext}>Next</span></li>
+        <li><span onClick={handleNext}><i class="fas fa-chevron-right"></i></span></li>
       </ul>
     </div>
   );

@@ -37,7 +37,7 @@ const BookDetail = (props, { book }) => {
         score = reviews.length == 0 ? null : reviews.length == 1 ? reviews[0].score : (reviews[0].score + reviews[1].score) / 2
 
     }
-    console.log(comment)
+    // console.log(comment)
 
 
 

@@ -1,6 +1,7 @@
 @import "../../assets/sass/functions.scss";
 @import "../../assets/sass/mixins.scss";
 @import "../../assets/sass/variables.scss";
+// .darkmode-layer, .darkmode-toggle { z-index: 500; }
 
 .container {
     width: 100vw;
@@ -10,7 +11,7 @@
     position: fixed;
     top: 0;
     // margin-top: 0;
-    // z-index: 999;
+    //  z-index: 1;
 
     .logo {
         display: flex;
@@ -42,7 +43,7 @@
                 font-size: toRem(16);
                 color: $gris3;
                 padding: toRem(5) toRem(5);
-                border: toRem(2) solid #f7f7f7;
+                border: toRem(2) solid transparent;
                 &:hover {
                     border: toRem(2) solid $secundario;
                     color: $secundario;
@@ -58,4 +59,7 @@
             }
         }
     }
+}
+:global(.darkmode--activated) .container {
+    background-color: black;
 }

@@ -24,6 +24,7 @@
         transform: translate(-50%, -50%);
         z-index: 999;
     }
+
     .BookDetail {
         // margin-top: 7rem;
         background-color: #ffffff;
@@ -102,9 +103,18 @@
                     color: #ffffff;
                 }
             }
+            button:hover {
+                transition-duration: 0.5s;
+                border:1px solid #b881ff;
+                background: #ffffff;
+                color: #b881ff;
+                h3{
+                    color: #b881ff;
+                }
+            }
             .info2 {
                 display: flex;
-                
+
                 h4 {
                     margin: 0px 25px 5px 0px;
                 }
@@ -124,5 +134,11 @@
 
         top: 50%;
         left: 50%;
+    }
+}
+:global(.darkmode--activated) .BookDetail {
+    background-color: black;
+    h3 {
+        color: #ffffff;
     }
 }
