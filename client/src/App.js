@@ -31,6 +31,16 @@ import ResetPassword from './components/Register/reset-password';
 
 import CheckoutSuccess from './components/Shopping/CheckoutSuccess';
 import Summary from './components/Admin/Summary';
+import Dashboard from './components/Admin/Dashboard';
+import CreateProduct from './components/Admin/CreateProduct';
+import Products from './components/Admin/Products';
+import ProductsList from './components/Admin/list/ProdutsList';
+import Orders from './components/Admin/Orders';
+import Users from './components/Admin/Users';
+import LibroDetalle from './components/Admin/LibroDetalle';
+import UsuarioDetalle from './components/Admin/UsuarioDetalle';
+import OrdenDetalle from './components/Admin/OrdenDetalle';
+import BookDetail from './components/BookDetail/bookDetail'
 
 
 function App() {
@@ -45,7 +55,21 @@ function App() {
         <Route path='checkout-success' element={< CheckoutSuccess />}/>
         <Route path='/user' element={< ProtectedRoute><User /> </ProtectedRoute>} />
 
-        <Route path="summary" element={<Summary />} />
+        <Route path="/admin" element={<Dashboard />}>
+          <Route path="summary" element={<Summary />} />
+          <Route path="orders" element={<Orders />}/>
+          <Route path="users" element={<Users />} />
+
+          <Route path="book/:id" element={<LibroDetalle />}/>
+          <Route path="user/:id" element={<UsuarioDetalle />}/>
+          <Route path="order/:id" element={<OrdenDetalle />}/>
+
+          <Route path="products" element={<Products />}>
+            
+            <Route path='create-product' element={<CreateProduct />} />
+          </Route>
+          <Route path="products-list" element={<ProductsList />} />
+        </Route>
 
         <Route path='/user/sales' element={< PostedBooks />}/>
         <Route path='/user/myGiftCards' element={< MyGiftCards />}/> 

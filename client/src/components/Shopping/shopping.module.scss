@@ -4,6 +4,7 @@
 
 .cartContainer{
     padding: 2rem 4rem;
+    margin-top: 60px;
 }
 
 .cartContainer h2{
@@ -179,6 +180,30 @@
 }
 
 
+@media (max-width: 665px) {
+    
+    .cartContainer {
+      padding: 2rem;
+      margin-top: 230px;
+    }
+    .cartContainer .titles {
+      display: none;
+    }
+    .cartItem,
+    .cartContainer .titles {
+      grid-template-columns: 1fr;
+      row-gap: 1rem;
+    }
+    .cartItem .cartProductTotalPrice {
+      justify-self: left;
+    }
+    .cartSummary {
+      flex-direction: column;
+    }
+    .cartSummary .clearCart {
+      margin-bottom: 2rem;
+    }
+  }
 
 
 

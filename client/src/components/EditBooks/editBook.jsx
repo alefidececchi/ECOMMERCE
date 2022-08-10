@@ -65,6 +65,7 @@ function EditBook({editOff, estado, reloading}){
                             return errors;
                         }}
                         onSubmit={(values, {resetForm})=>{
+                            console.log('hola')
                             let filtrado = books.find(b => b.name === values.name)
                             console.log(filtrado._id)
                             

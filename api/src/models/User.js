@@ -21,7 +21,7 @@ const userSchema = new Schema(
       default: ""
     },
     admin: {
-      types: Boolean,
+      type: Boolean,
       default: false,
     },
     image: {
@@ -52,12 +52,17 @@ const userSchema = new Schema(
         ref: "Book",
       },
     ],
-    log_Google:
-    {
+    log_Google: {
       type: Boolean,
       default: false,
     },
-    
+    localStorageToken:  {
+      type: String
+    },
+    available_money: {
+      type: Number,
+      default: 500,
+    }
   },
   {
     timestamps: true,

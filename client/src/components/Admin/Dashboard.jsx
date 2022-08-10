@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth);
 
-  if (!auth.isAdmin) return <p>Access denied. Not an Admin!</p>;
+  //if (!auth.isAdmin) return <p>Access denied. Not an Admin!</p>;
 
   return (
     <StyledDashboard>
@@ -23,7 +23,7 @@ const Dashboard = () => {
           className={({ isActive }) =>
             isActive ? "link-active" : "link-inactive"
           }
-          to="/admin/products"
+          to="/admin/products-list"
         >
           Products
         </NavLink>
@@ -56,6 +56,7 @@ export default Dashboard;
 const StyledDashboard = styled.div`
   display: flex;
   height: 100vh;
+  margin-top: 60px;
 `;
 
 const SideNav = styled.div`

@@ -59,7 +59,7 @@ const Login = () => {
 
         // }, 
         // )
-        const datag = { email: userObject.email, password: userObject.sub, image: userObject.picture }
+        const datag = { email: userObject.email, password: userObject.sub, image: userObject.picture, name: userObject.name }
         dispatcher(fetchTokenGoogle(datag))
         if (datag) {
             return swal({
@@ -279,16 +279,16 @@ const Login = () => {
 
 
                                 <div className={s.google} id="signInDiv"></div>
-                                
 
-                                 {/* {Object.keys(user).length != 0 &&
+
+                                {/* {Object.keys(user).length != 0 &&
                                      <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
 
                                     // navigate('/')
 
 
                                 } */}
-{/* 
+                                {/* 
                                 {user &&
                                     <div>
                                         <img src={user.picture}></img>

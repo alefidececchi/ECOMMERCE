@@ -57,17 +57,21 @@ const getUserByID = async (req, res) => {
 //   }
 
 const postUserGoogle = async (req, res) => {
-  const { email, password, image } = req.body;
+  const { email, password, image, name } = req.body;
   try {
     const nuevoUsuario = new User({
+
       email: email,
       password: password,
       image: image,
+      name: name,
 
       log_Google: true
     });
-    const token = jwt.sign({ email, password, image }, process.env.JWT_ACC_ACTIVATE);
     await nuevoUsuario.save();
+    const user = await User.findOne({ email });
+    const token = jwt.sign({ id: user._id, email, password, image, name }, process.env.JWT_ACC_ACTIVATE);
+
 
     res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
   } catch (error) {
@@ -78,7 +82,7 @@ const postUserGoogle = async (req, res) => {
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, admin, image, description, country } =
+  const { name, email, password, image, description, country } =
     req.body;
   let actualCliente;
   password
@@ -105,20 +109,37 @@ const putUser = async (req, res) => {
   });
 };
 
+const becomeAdmin = async (req, res) => {
+  const {idUser} = req.body
+  try {
+    const user = await User.findById(idUser)
+    user.admin ? await user.updateOne({admin: false}) : await user.updateOne({admin: true})
+    res.status(200).json({status: "Usuario actualizado."})
+  } catch (error){
+    res.status(400).json({error: error})
+  }
+}
+
 const putUserBook = async (req, res) => {
   const { idBook, idUser } = req.params;
+
+  const BookPurch = await Book.findById(idBook);
+   
   const sellingBooksUpdate = await User.findByIdAndUpdate(idUser, {
-    $push: { selling_books: idBook },
+    // $push: { purchased_books: BookPurch.id },
+    $push: { purchased_books: BookPurch._id },
   });
 
   const bookUpdated = await Book.findByIdAndUpdate(idBook, {
-    $push: { sellers: idUser },
+    $push: { buyer: idUser },
   });
 
   res.status(200).json({
     status: sellingBooksUpdate,
     statusBook: bookUpdated,
   });
+
+
   // en POSTMAN PUT:
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
@@ -143,6 +164,64 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const purchasedBooks=async(req,res)=>{
+  const {idUser}=req.params;
+  const {cartQuantity}=req.body;
+
+  vair= await cartQuantity.map(e=>{
+    return {
+      idLibro:e._id,
+      cantidadLibro:e.cartQuantity,
+      gastoPorLibro:e.price
+    }});
+
+await vair.map(async (e)=>{
+    const usuar= await User.findById(idUser)
+    usuar.available_money?
+   await usuar.updateOne({$inc:{available_money:-(e.gastoPorLibro*e.cantidadLibro)}}):console.log('hola');
+    const lib= await Book.findById(e.idLibro)
+    lib.stock>0?
+   await lib.updateOne({$inc:{stock:-(e.cantidadLibro)}}):
+   console.log(`ya no hay stock de ${e.idLibro} para realizar la compra`);
+}
+)
+res.status(200).json({status:"todo bien"})
+
+
+  //for await of 
+    /*try {
+      const usuar= await User.findById(idUser)
+      usuar.available_money?
+     usuar.updateOne({$inc:{available_money:+e.gastoPorLibro}}):console.log('hola');
+      const lib= Book.findById(e.idLibro)
+      lib.stock>0?
+     lib.updateOne({$inc:{stock:-e.cantidadLibro}}):console.log('chau');
+      console.log('llegue hasta aqui')
+      res.status(200).json({status:"todo bien"})
+    
+    } catch (error){
+      res.status(400).json({error:error})
+    }*/
+
+
+
+
+  //const {gastoPorLibro,cantidadLibro} = req.body;
+  // el gastoPorLibro debe recibirse como numero negativo desde el Front
+  // si recibieramos una GIFT CARD, el gasto por Libro deberia recibirse en numero positivo
+  /*try {
+    const usuar= await User.findById(idUser)
+    usuar.available_money?
+    await usuar.updateOne({$inc:{available_money:+gastoPorLibro}}):console.log('hola');
+    const lib= await Book.findById(idBook)
+    lib.stock>0?
+    await lib.updateOne({$inc:{stock:-cantidadLibro}}):console.log('chau');
+    res.status(200).json({status:"todo bien"})
+  
+  } catch (error){
+    res.status(400).json({error:error})
+  }*/
+}
 
 
 const getStats = async (req, res) =>{
@@ -175,6 +254,7 @@ const getStats = async (req, res) =>{
   }
 }
 
+
 module.exports = {
   getUsers,
   getUserByID,
@@ -183,5 +263,7 @@ module.exports = {
   putUserBook,
   deleteUser,
   putUserWishList,
+  becomeAdmin,
+  purchasedBooks,
   getStats
 };

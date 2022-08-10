@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import s from './register.module.scss'
 import swal from 'sweetalert'
 import axios from 'axios'
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import {
     fetchAllBooks

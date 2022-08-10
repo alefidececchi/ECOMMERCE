@@ -4,6 +4,9 @@ import { FaUsers, FaChartBar, FaClipboard } from 'react-icons/fa'
 import Widget from './summary-components/Widget'
 import axios from "axios"
 import { setHeaders, url } from "../../Redux/slices/api"
+import Chart from './summary-components/Chart'
+import Transactions from './summary-components/Transactions'
+import AllTimeData from './summary-components/AllTimeData'
 
 const Summary = () =>{
 
@@ -11,6 +14,11 @@ const Summary = () =>{
 
     const [users, setUsers] = useState([])
     const [usersPerc, setUsersPerc] = useState(0)
+    const [orders, setOrders] = useState([])
+    const [ordersPerc, setOrdersPerc] = useState([0])
+    const [income, setIncome] = useState([])
+    const [incomePerc, setIncomePerc] = useState([0])
+
 
     
 
@@ -32,9 +40,57 @@ const Summary = () =>{
 
                 res.data.sort(compare)
 
-                console.log("stats", res.data)
                 setUsers(res.data)
                 setUsersPerc(((res.data[0].total - res.data[1].total) / res.data[1].total) * 100)
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+
+        fetchData()
+    }, [])
+
+    useEffect(() => {
+        async function fetchData(){
+            try {
+                const res = await axios.get(`http://localhost:3001/orders/stats`, setHeaders())
+
+                res.data.sort(compare)
+
+                setOrders(res.data)
+                
+
+                if(res.data.length > 1){ 
+                setOrdersPerc(((res.data[0].total - res.data[1].total) / res.data[1].total) * 100)
+                }else{
+                setOrdersPerc(0)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+
+        fetchData()
+    }, [])
+
+
+    useEffect(() => {
+        async function fetchData(){
+            try {
+                const res = await axios.get(`http://localhost:3001/orders/income/stats`, setHeaders())
+
+                res.data.sort(compare)
+
+                setIncome(res.data)
+                
+
+                if(res.data.length > 1){ 
+                setIncomePerc(((res.data[0].total - res.data[1].total) / res.data[1].total) * 100)
+                }else{
+                setIncomePerc(0)
+                }
             } catch (error) {
                 console.log(error)
             }
@@ -56,21 +112,21 @@ const Summary = () =>{
         },
         {
             icon: <FaClipboard />,
-            digits: 70,
+            digits: orders[0]?.total,
             isMoney: false,
             title: 'Orders',
             color: "rgb(38, 198, 249)",
             bgColor:  "rgba(38, 198, 249, 0.12)", 
-            percentage: 20
+            percentage: ordersPerc
         },
         {
             icon: <FaChartBar />,
-            digits: 5000,
+            digits: income[0]?.total ? income[0]?.total / 100 : "",
             isMoney: true,
             title: 'Earnings',
             color: "rgb(253, 181, 40)",
             bgColor:  "rgba(253, 181, 40, 0.12)", 
-            percentage: -60
+            percentage: incomePerc
         }
     ]
 
@@ -86,8 +142,12 @@ const Summary = () =>{
                   {data?.map((data, index) => <Widget key={index} data={data}/>)}
                 </WidgetWrapper>
               </Overview>
+              <Chart />
           </MainStats>
-          <SideStats></SideStats>
+          <SideStats>
+            <Transactions />
+            {/* <AllTimeData /> */}
+          </SideStats>
         </StyledSummary>
     )
 }
@@ -112,7 +172,7 @@ const Title = styled.div`
 `;
 
 const Overview = styled.div`
-    background: rgb(48, 51, 78);
+    background: rgb(40, 5, 78);
     color: rgba(234, 234, 255, 087);
     width: 100%;
     padding: 1.5rem;

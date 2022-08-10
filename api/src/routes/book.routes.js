@@ -2,8 +2,10 @@ const express = require("express");
 const {
   getBooks,
   postBook,
+  getBooksinOffers,
   getBookById,
   getGenresBook,
+  putCommentBook,
   putBook,
   deleteBook,
 } = require("../controllers/book.controller.js");
@@ -22,7 +24,8 @@ router.get("/",getBooks);
 
 // router.get("/",[verifyToken],getBooks);
 
-
+//(GET)- /books/offers
+router.get('/offers',getBooksinOffers);
 //(GET)-/books/:id
 router.get("/:id", getBookById);
 
@@ -38,7 +41,7 @@ router.post("/:idUser", postBook);
 router.put("/:idBook/", putBook);
 
 //(PUT)-books/:id/:id
-router.put("/:idBook/:idUser", putBook);
+router.put("/:idBook/:idUser", putCommentBook);
 
 //(DELETE)-books/:id
 router.delete("/:idBook", deleteBook);

@@ -69,7 +69,6 @@ const activateAccount = (req, res) => {
   }
 };
 
-
 // const login = async (req, res) => {
 //     const {email, password} = req.body
 
@@ -84,7 +83,6 @@ const activateAccount = (req, res) => {
 
 //     res.status(200).json({auth: "Usuario logueado", user})
 // }
-
 const login = async (req, res) => {
   const { email, password } = req.body
 

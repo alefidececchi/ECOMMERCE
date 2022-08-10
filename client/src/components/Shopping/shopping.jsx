@@ -6,16 +6,24 @@ import styles from './shopping.module.scss'
 import Footer from '../Footer/footer';
 import { addToCart, clearCart, decreaseCart, getTotals, removeFromCart } from '../../Redux/slices/shoping.slice';
 import PayButton from './PayButton';
+import jwt_decode from "jwt-decode"
+import { fetchUserById } from '../../Redux/thunks/usersThunks';
 
 const Shopping = () =>{
 
   const cart = useSelector((state) => state.shoppingCart)
   const dispatch = useDispatch()
+  let info = jwt_decode(window.localStorage.token);
+  const { userById } = useSelector((state) => state.users);
+
+
 
 
   useEffect(() =>{
     dispatch(getTotals())
+    dispatch(fetchUserById(info.id));
   }, [cart])
+
 
 
   const handleRemoveFromCart = (cartItem) =>{
@@ -38,8 +46,7 @@ const Shopping = () =>{
     <div>
 
     <NavBar />
-    <br />
-    <br />
+    
     <div className={styles.cartContainer}>
     
       <h2>Shopping cart</h2>
@@ -100,7 +107,7 @@ const Shopping = () =>{
                 <span className={styles.amount}>${cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <PayButton cartItems={cart.cartItems}/>
+              <PayButton cartItems={cart.cartItems} userInfo={userById} cartInfo={cart}/>
               <div className={styles.continueShopping}>
                 <Link to="/">
                 <svg

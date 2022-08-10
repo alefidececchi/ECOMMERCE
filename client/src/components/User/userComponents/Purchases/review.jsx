@@ -17,7 +17,7 @@ const  colors ={
 }
 
 
-function Review({editOff, estado, reloading}){
+function Review({editOff, libros, reloading}){
 
     //console.log(estado.selling_books)
     const [review, setReview] = useState(false);
@@ -32,7 +32,7 @@ function Review({editOff, estado, reloading}){
     const {genres}  = useSelector((state) => state.genres);
     const { books } = useSelector((state) => state.books);
     const dispatcher = useDispatch()
-
+    let[ejemplo, setEjemplo] = useState([{ bookName:"Harry Potter", image:'default', price: 40.50, amount: 15, state:'Nuevesito prro'}, {    bookName:"El Señor de los Anillos", image:'default', price: 40.50, amount: 10, state:'Nuevesito prro'}])
     let info = jwt_decode(window.localStorage.token); 
     let id = info.id
 
@@ -81,7 +81,7 @@ function Review({editOff, estado, reloading}){
                 <Formik
                         initialValues={{
                             book:'',
-                            score:rating, 
+                            score: rating, 
                             comment:'',
                         }}
                         validate={(values) =>{
@@ -93,49 +93,66 @@ function Review({editOff, estado, reloading}){
                                 errors.name = 'Please select the book name'
                             }
                             //validacion estrellas  
-                            if(!values.star === 0){
-                                errors.name = 'Please select the book name'
-                            }else if(values.name === 'BookName'){
-                                errors.name = 'Please select the book name'
+                            if(!values.star === null){
+                                errors.star = 'Please select the book name'
                             }
                             //validacion comentario                                
-                            if(!values.description){
-                                errors.description = 'Please write a  description of the book'
-                            }else if(values.description.length > 350){
-                                errors.description = 'Description must have 250 characters'
+                            if(!values.comment){
+                                errors.comment = 'Please write a  description of the book'
+                            }else if(values.comment.length > 350){
+                                errors.comment = 'Description must have 250 characters'
                             }            
                             return errors;
                         }}
                         onSubmit={(values, {resetForm})=>{
-                            // let filtrado = books.find(b => b.name === values.name)
-                            // console.log(filtrado._id)
+                            let filtrado = books.find(b => b.name === values.name)
+                            console.log(filtrado._id)
                             
-                            // axios({
-                            //     method: 'put',
-                            //     url: `http://localhost:3001/books/${filtrado._id}`,
-                            //     data: {
-                            //         price : values.price,
-                            //         stock: values.stock                   
-                            //     }
-                            // })
-                            // axios.put(`http://localhost:3001/books/${filtrado._id}` , values)
-                            swal({
-                                title:'Congratulation',
-                                text:'Book updated successfully',
-                                icon:'success',
-                                button:'OK'
-                              }).then(res => {
-                                if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                            console.log(values.score=rating)
+                            console.log(values.name)
+                            if(values.score === null){
+                                swal({
+                                    title:'Fail',
+                                    text:'Select a score',
+                                    icon:'error',
+                                    button:'OK'
+                                  }).then(res => {
+                                    if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                                        
+                                        
+                                    }
+                                  })
+                            }else{
+                                swal({
+                                    title:'Congratulation',
+                                    text:'Book updated successfully',
+                                    icon:'success',
+                                    button:'OK'
+                                  }).then(res => {
+                                    if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                                        axios({
+                                        method: 'put',
+                                        url: `http://localhost:3001/books/${filtrado._id}/${id}`,
+                                        data: {
+                                            score : values.score,
+                                            comment: values.comment                   
+                                        }
+                                    })
                                     
-                                    navigate('/user/sales')
-                                }
-                              })
+                                        navigate('/')
+                                        
+                                        
+                                    }
+                                  })
+                            }
+                            console.log(values)
+        
                             // resetForm();
                             // reloading()
                             // editOff()
                             // setSend(true)
                             
-                            console.log(values)
+                            
                         }}
                     >
                         {( {errors} )=>(
@@ -150,30 +167,28 @@ function Review({editOff, estado, reloading}){
                                 name="name"
                                 >
                                 <option value='BookName' selected> Book Name </option>  
-                            {/* {      
-                                estado.selling_books.map(genre=>{
-                                    
-                                    return (
-                                        <option value={genre.name}>{genre.name}</option>
-                                        )
-                                    })
-                                } */}
+                                {
+                                    libros.map((arreglo) => {
+                                        return arreglo.map((book, i) =>(
+                                            <option key={i} value={book.name}>{book.name}</option>
+                                        ))
+                                    })                
+                                }
                                 </Field>
-
                                 <ErrorMessage name="name" component={()=>(
                                     <div className={style.error}>{errors.name}</div>
                                 )} />
                             </div>
                             <div>
-                            <label htmlFor="amt">Description: </label>
+                            <label htmlFor="amt">Comment: </label>
                             <Field
                                 as='textarea'
                                 id="amt"
                                 placeholder=""
-                                name="description"
+                                name="comment"
                             />
-                            <ErrorMessage name="description" component={()=>(
-                                <div className={style.error}>{errors.description}</div>
+                            <ErrorMessage name="comment" component={()=>(
+                                <div className={style.error}>{errors.comment}</div>
                             )} />
             
                         </div>

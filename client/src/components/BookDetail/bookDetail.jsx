@@ -93,7 +93,7 @@ const BookDetail = (props, { book }) => {
                                         </div>
 
 
-                                        <h5>{booksDetail.description}</h5>
+                                        <h4>{booksDetail.description}</h4>
 
                                         <figure onClick={handleClick} >
                                             <button>

@@ -7,26 +7,31 @@ const {
   putUserBook,
   deleteUser,
   putUserWishList,
-  getStats
+  getStats,
+  purchasedBooks,
+  becomeAdmin
 } = require("../controllers/user.controller.js");
 
-const { isAdmin } = require("../middlewares/auth.middleware")
+const { isAdmin, verifyToken } = require("../middlewares/auth.middleware")
 
 const router = express.Router();
 
 router.get("/", getUsers);
 
-router.get("/stats", getStats)
-//router.get("/stats", isAdmin, getStats)
+router.get("/stats", [verifyToken, isAdmin], getStats)
+
 
 router.get("/:idUser", getUserByID);
 
 router.post("/registerGoogle", postUserGoogle);
 
+router.put("/admin", becomeAdmin)
+
+router.put('/purchasing-books/:idUser',purchasedBooks);
+
 router.put("/:idUser", putUser);
 
 router.put("/:idUser/:idBook", putUserBook);
-
 
 router.put("/add/:idUser/:idBook", putUserWishList)
 

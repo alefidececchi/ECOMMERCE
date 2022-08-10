@@ -28,6 +28,7 @@ const orderSchema = new Schema({
         type: String,
         required: true
     },
+    delivery_status: { type: String, default: "pending" },
 },
     {
         timestamps: true,
