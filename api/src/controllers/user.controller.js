@@ -22,10 +22,10 @@ const getUsers = async (req, res) => {
 const getUserByID = async (req, res) => {
   const { idUser } = req.params;
   try {
-    const userrrsId = await User.findById(idUser).populate(
-      "selling_books",
-      "-__v -sellers"
-    )
+    const userrrsId = await User.findById(idUser)
+      .populate("selling_books")
+      .populate("purchased_books")
+      .populate("wish_list")
     return res.status(200).json({ userrrs: userrrsId });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -154,11 +154,9 @@ const putUserWishList = async (req, res) => {
   const { idUser } = req.params;
   const { wishList } = req.body
 
-  await User.findByIdAndUpdate(idUser, {
-    $push: { wish_list: wishList },
-  });
+  await User.findByIdAndUpdate(idUser, { wish_list: wishList });
   res.status(200).json({
-    status: "Libro agregado a wish list",
+    status: "wishList updated",
   });
 };
 
@@ -176,7 +174,7 @@ const purchasedBooks = async (req, res) => {
   const { idUser } = req.params;
   const { cartQuantity } = req.body;
 
-  vair = await cartQuantity.map(e => {
+  let vair = cartQuantity.map(e => {
     return {
       idLibro: e._id,
       cantidadLibro: e.cartQuantity,
