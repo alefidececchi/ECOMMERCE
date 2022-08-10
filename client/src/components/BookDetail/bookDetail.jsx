@@ -56,6 +56,7 @@ const BookDetail = (props, { book }) => {
   };
 
   const handleWishList = (book) => {
+    console.log(book);
     dispatch(getWishList(book));
   };
 
@@ -70,7 +71,7 @@ const BookDetail = (props, { book }) => {
           ) : (
             <div className={s.BookDetail}>
               <div>
-                <button className={s.fav} onClick={() => handleWishList(book)}>
+                <button className={s.fav} onClick={() => handleWishList(booksDetail)}>
                   <i class="fas fa-heart"></i>
                 </button>
                 <button className={s.Close} onClick={handleClose}>
