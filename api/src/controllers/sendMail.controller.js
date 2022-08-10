@@ -989,7 +989,34 @@ const sendMailForgot = (token, email) => {
   });
 };
 
+const GiftCardNotification = (email,giftcard,name) => {
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "samirjose675",
+      pass: "zgimctzowdiuaozx",
+    },
+  });
+
+  var mailOptions = {
+    from: "samirjose675@gmail.com",
+    to: `${email}`,
+    subject: "Enviado desde libritos.com",
+    text:`Acabas de recibir una GiftCard con un valor de $${giftcard} de parte de ${name}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else {
+      console.log("Email enviado.");
+      res.status(200).json(req.body);
+    }
+  });
+};
+
 module.exports = {
   sendMailActivate,
   sendMailForgot,
+  GiftCardNotification
 };

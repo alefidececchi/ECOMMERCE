@@ -1,5 +1,5 @@
 import s from "./giftCard.module.scss";
-import React from "react";
+import React, { useEffect } from "react";
 import Checkout from "./checkout";
 import Swal from "sweetalert2";
 import { useNavigate } from 'react-router-dom';
@@ -78,7 +78,6 @@ const Cards = () => {
     dispatch(getTotalItems());
   };
 
-  
 
   return (
     <div>

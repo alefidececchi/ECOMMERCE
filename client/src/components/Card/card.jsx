@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, } from "react";
 import { useDispatch } from "react-redux";
 import s from "./card.module.scss";
 import BookDetail from "../BookDetail/bookDetail";
@@ -7,6 +7,7 @@ import { getWishList } from "../../Redux/slices/wishListSlice";
 
 const Card = ({ name, price, image, id, book }) => {
   const dispatch = useDispatch();
+
 
   // esto es para deplegar el detlle de la tarjeta
   const [toggle, setToggle] = useState(false);
@@ -26,9 +27,10 @@ const Card = ({ name, price, image, id, book }) => {
   };
 
   const handleWishList = (book) => {
-    dispatch(getWishList(book))
+    dispatch(getWishList(book));
   }
 
+    
 
   return (
     <div className={s.containerCard}>

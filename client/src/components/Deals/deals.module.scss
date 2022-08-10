@@ -13,6 +13,12 @@
     font-size: toRem(40);
     text-align: center;
   }
+  .loading{
+    width: 30vw;
+    margin: toRem(60) auto;
+    display: flex;
+    justify-content: center;
+  }
   figure{
     background-color: $gris2;
     border-radius: toRem(5);

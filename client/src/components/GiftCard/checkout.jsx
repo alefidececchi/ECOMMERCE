@@ -7,16 +7,17 @@ import { toast } from "react-toastify";
 
 const Checkout = ({ cartItems }) => {
   const { token } = useSelector((state) => state.auth);
+  
   const user = JSON.parse(window.localStorage.getItem("usuario"));
 
-  const handleCheckout = () => {
+  const handleCheckout = (userProps) => {
     // console.log(cartItems);
     if (token) {
-      console.log(user._id);
+      // console.log(user._id);
       axios
         .post(`${url}/stripe/create-checkout-giftCardsession`, {
           cartItems,
-          userId: user._id,
+          userId: userProps._id,
         })
         .then((res) => {
           if (res.data.url) {
@@ -31,7 +32,7 @@ const Checkout = ({ cartItems }) => {
 
   return (
     <div className={s.checkButton}>
-      <button onClick={handleCheckout}>Checkout</button>
+      <button onClick={() => handleCheckout(user)}>Checkout</button>
     </div>
   );
 };
