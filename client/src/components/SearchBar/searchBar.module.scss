@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     font-family: "Quicksand", sans-serif;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 
     padding: toRem(30);
 
@@ -27,6 +27,7 @@
         height: 42px;
     }
     .close {
+        padding: 0px 5px 0px 10px;;
         font-size: medium;
         font-weight: bolder;
         background-color: #f7f7f7;
@@ -41,10 +42,7 @@
         height: 42px;
     }
     .close:hover {
-        
         color: #797979;
-      
-       
     }
 
     .button:hover {

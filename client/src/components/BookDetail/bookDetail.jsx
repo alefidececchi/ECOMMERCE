@@ -25,8 +25,20 @@ const BookDetail = (props, { book }) => {
 
 
     var { booksDetail } = useSelector((state) => state.books)
-    // console.log(booksDetail.name)
-    // console.log(props)
+    // console.log(booksDetail.reviews)
+
+
+    let comment, score
+    var reviews = booksDetail.reviews
+
+    if (reviews) {
+        comment = reviews.length == 0 ? null : reviews.length == 1 ? reviews[0].comment :
+            reviews[0].comment + ", " + reviews[1].comment
+        score = reviews.length == 0 ? null : reviews.length == 1 ? reviews[0].score : (reviews[0].score + reviews[1].score) / 2
+
+    }
+    // console.log(comment)
+
 
 
     const [close, setClose] = useState(false);
@@ -69,11 +81,13 @@ const BookDetail = (props, { book }) => {
                     ) :
                         <div className={s.BookDetail}>
 
-                            <button className={s.fav} onClick={() => handleWishList(book)}>
-                                <i class="fas fa-heart"></i>
-                            </button>
+
 
                             <div>
+
+                                <button className={s.fav} onClick={() => handleWishList(book)}>
+                                    <i class="fas fa-heart"></i>
+                                </button>
                                 <button className={s.Close} onClick={handleClose} >
                                     <i class="fas fa-times fa-lg"></i>
                                 </button>
@@ -93,14 +107,26 @@ const BookDetail = (props, { book }) => {
                                         </div>
 
 
-                                        <h5>{booksDetail.description}</h5>
+                                        <h4>{booksDetail.description}</h4>
+
+                                        {comment !== null ?
+                                            <div>
+                                                <h4>Score: {score}</h4>
+                                                <h4>Comment: {comment}</h4>
+                                            </div>
+                                            : null
+
+                                        }
+
 
                                         <figure onClick={handleClick} >
                                             <button>
                                                 <i class="fas fa-cart-plus fa-lg"></i>  <h3>Add to cart</h3>
                                             </button>
                                         </figure>
-                                    </div> </div></div>
+                                    </div>
+                                </div>
+                            </div>
 
 
                         </div>} </div>

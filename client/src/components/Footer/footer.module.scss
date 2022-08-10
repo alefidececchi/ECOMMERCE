@@ -1,6 +1,32 @@
 .Footer {
     background-color: #f7f7f7;
-
+    a {
+        text-decoration: none;
+        
+    }
+    button {
+        
+        // text-decoration: none !important ;
+        color: #ffffff;
+        border: #b881ff;
+        background-color: #b881ff;
+        border-radius: 10px;
+        width: 90px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h3 {
+            margin: 10px;
+            color: #ffffff;
+        }
+    }
+    button:hover {
+        transition-duration: 0.5s;
+        border: 1px solid #b881ff;
+        background: #ffffff;
+        color: #b881ff;
+    }
     .Legal {
         display: flex;
         align-items: center;
@@ -17,11 +43,11 @@
     @media only screen and (min-width: 768px) {
         .Legal {
             h4 {
-                margin: 1rem 2rem 2rem 2rem;
+                margin: 1rem 2rem 1.5rem 2rem;
             }
 
             a {
-                margin: 1rem 2rem 2rem 2rem;
+                margin: 1rem 2rem 1.5rem 2rem;
             }
         }
     }

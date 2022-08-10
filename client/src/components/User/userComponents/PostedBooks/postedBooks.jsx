@@ -67,7 +67,7 @@ function PostedBooks(){
           // })
           
           // dispatch(fetchUserById(id))
-          // dispatch(fetchAllBooks())
+          dispatch(fetchAllBooks())
           setReload(false)
           axios.get(`http://localhost:3001/users/${id}`)
           .then((response)=>{
@@ -171,12 +171,17 @@ function PostedBooks(){
                     </div>
 
                   ):
-                  <div > {/* <div className={style.books}> */}
+                  
                     
-                    <div >
-                      <h2>Books for sale?</h2>
-                    </div>
-                  </div>}
+                  <div className={s.vacio}>
+                  <div>
+                   <h1>Not posted  books  yet</h1>
+                  </div>
+                  <div>
+                      <h1>Sell now!!!</h1>
+                  </div>
+              </div>
+                  }
                 </div>
               }
               <div className={s.btncentro}> {/* <div className={style.info}> */}

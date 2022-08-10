@@ -72,7 +72,10 @@ const BookList = ({ books }) => {
                     // <Link to={"/home/" + elm.id}>  
 
 
-                    return <Card id={book._id} name={book.name} price={book.price} image={book.image} key={book.name} book={book} />
+
+
+                    return <Card id={book._id} name={book.name} price={book.price} priceWithDiscount={book.priceWithDiscount}image={book.image} offer={book.inOffer} key={book._id} book={book} />
+
                     // </Link>
 
                 })}
