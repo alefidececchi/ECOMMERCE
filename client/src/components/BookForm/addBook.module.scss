@@ -114,6 +114,11 @@
 	.select{
 		width: 100%;
 	}
+	.portada{
+		justify-content: center;
+        object-fit: cover;
+        width: 100px;
+	}
 	
 	@media (max-width: 576){ //medidas paceluco
 		position: absolute;

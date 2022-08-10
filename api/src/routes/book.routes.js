@@ -38,11 +38,13 @@ router.post("/", postBook);
 //(POST)-/books/:idUser (CREATE AND RELATIONSHIP)
 router.post("/:idUser", postBook);
 
+//(PUT)-books/:id/:id
+router.put("/:idBook/:idUser", putCommentBook);
+
 //(PUT)-books/:id
 router.put("/:idBook/", putBook);
 
-//(PUT)-books/:id/:id
-router.put("/:idBook/:idUser", putCommentBook);
+
 
 //(DELETE)-books/:id
 router.delete("/:idBook", deleteBook);

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserById } from "../../Redux/thunks/usersThunks";
 import s from "./home.module.scss";
+import { fetchUserById } from "../../Redux/thunks/usersThunks";
 import Header from "../Header/header";
 import Slider from "../Slider/Slider.jsx";
 import NavBar from "../NavBar/navBar";
@@ -12,7 +12,6 @@ import "react-loader-spinner";
 import {
   fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
-
 
 
 const Home = () => {
@@ -27,7 +26,6 @@ const Home = () => {
       let inforNormalized = JSON.parse(info);
       dispatch(fetchUserById(inforNormalized.id))
     }
-    
   }, [dispatch, books]);
 
   useEffect(() => {
@@ -35,7 +33,6 @@ const Home = () => {
       dispatch(fetchAllBooks());
     }
   }, [dispatch]);
-
 
   return (
     <div className={s.mainContainer}>

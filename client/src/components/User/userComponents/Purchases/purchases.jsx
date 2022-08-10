@@ -102,13 +102,12 @@ function Purchases(){
                 </div>
             ):
 
-                books.length>0?(                
+            libros.length>0?(                
                 <div className={s.containerPur}>
                 <table className={s.table}>
-                    <caption className={s.table_cap}>PURCHASES<div><button onClick={editOn}>Reviews</button></div></caption>
+                    <caption className={s.table_cap}>PURCHASES<div><button className={s.reviewb} onClick={editOn}>Reviews</button></div></caption>
                     <thead className={s.table_head}>
                         <tr className={s.table_row}>
-                            <th className={s.table_heading} scope='col'>#</th>
                             <th className={s.table_heading} scope='col'>Book</th>
                             <th className={s.table_heading} scope='col'>Name</th>
                             <th className={s.table_heading} scope='col'>Precio</th>
@@ -127,7 +126,7 @@ function Purchases(){
                     </div>
                     <div>
                         <Link to={'/'}>
-                            <button >Sell</button> 
+                            <button >BUY</button> 
                         </Link>
                     </div>
                 </div>

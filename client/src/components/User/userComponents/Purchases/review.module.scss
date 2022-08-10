@@ -6,17 +6,40 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     
-    
-
+    width: 50vw;
+    height: 50vh;
     border: 1px solid #B881FF;
     border-radius: 10px;
     padding: 1em;
+    color: white;
+    
+    p{
+        font-size: 60px;
+
+    }
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+.body{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
 }
 .star{
+
     
+        display: flex;
+        align-items: center;
         cursor: pointer;
-        font-size: 2.6em;
+        font-size: 3em;
         color: grey;
         transition: color  0.5s;
         &.in-rate{
@@ -30,19 +53,25 @@
 
 }
 
+
 .form{
+    font-size: 40px;
     display: flex;
     flex-direction: column;
-    input{
+    align-items: center;
+    justify-content: center;
+    select{
         border-radius: 5px;
         border: 2px solid #e2e2e2;
-        width: 100%;
-
+        width: 50%;
+       
         position: relative;
         
     }
     textarea{
         resize: none;
+        width: 100%;
+        height: 100px;
     }
 
     input:focus {
@@ -55,13 +84,19 @@
         
     }
     .buttonSave{
-        position: relative;
-        left: 5em;
+        padding: 10px;
+        background:$secundario;
+        font-size: 20px;
+        border-radius: 10px;
+        cursor: pointer;
 
     }
     .buttonCancel{
-        position: relative;
-        left: 8em;
+        padding: 10px;
+        background:$secundario;
+        font-size: 20px;
+        border-radius: 10px;
+        cursor: pointer;
     }
     .state{
         display: inline-flex;

@@ -23,14 +23,30 @@ const BookDetail = (props, { book }) => {
   }, [dispatch]);
 
   var { booksDetail } = useSelector((state) => state.books);
-  // console.log(booksDetail.name)
-  // console.log(props)
+
+  let comment, score;
+  var reviews = booksDetail.reviews;
+
+  if (reviews) {
+    comment =
+      reviews.length == 0
+        ? null
+        : reviews.length == 1
+        ? reviews[0].comment
+        : reviews[0].comment + ", " + reviews[1].comment;
+    score =
+      reviews.length == 0
+        ? null
+        : reviews.length == 1
+        ? reviews[0].score
+        : (reviews[0].score + reviews[1].score) / 2;
+  }
 
   const [close, setClose] = useState(false);
 
   const handleClose = () => {
     setClose(!close);
-    console.log("close");
+    // console.log("close")
   };
 
   const [cart, setCart] = useState([]);
@@ -39,8 +55,8 @@ const BookDetail = (props, { book }) => {
     setCart(["hola me agregaron al estado cart"]);
   };
 
-  const handleWishList = (bookDetail) => {
-    dispatch(getWishList(bookDetail));
+  const handleWishList = (book) => {
+    dispatch(getWishList(book));
   };
 
   return (
@@ -53,23 +69,35 @@ const BookDetail = (props, { book }) => {
             </div>
           ) : (
             <div className={s.BookDetail}>
-              <button className={s.fav} onClick={() => handleWishList(booksDetail)}>
-                <i class="fas fa-heart"></i>
-              </button>
-
               <div>
+                <button className={s.fav} onClick={() => handleWishList(book)}>
+                  <i class="fas fa-heart"></i>
+                </button>
                 <button className={s.Close} onClick={handleClose}>
                   <i class="fas fa-times fa-lg"></i>
                 </button>
-                <img
-                  src={booksDetail.image}
-                  alt="book"
-                  width="400px"
-                  height="400px"
-                />
+                {booksDetail.inOffer === true ? (
+                  booksDetail.price > booksDetail.priceWithDiscount ? (
+                    <button className={s.discount}>
+                      {Math.round(
+                        100 -
+                          100 /
+                            (booksDetail.price / booksDetail.priceWithDiscount)
+                      )}{" "}
+                      %
+                    </button>
+                  ) : null
+                ) : null}
+
+                {/* <img src={booksDetail.image} alt="book" width="400px" height="400px" /> */}
+                <img src={booksDetail.image} alt="book" />
                 <div className={s.cart}>
                   <div className={s.info}>
-                    <h3>$ {booksDetail.price}</h3>
+                    {booksDetail.priceWithDiscount === 0 ? (
+                      <h3>$ {booksDetail.price}</h3>
+                    ) : (
+                      <h3>$ {booksDetail.priceWithDiscount}</h3>
+                    )}
 
                     <h4>{booksDetail.name}</h4>
                     <div className={s.info2}>
@@ -80,20 +108,25 @@ const BookDetail = (props, { book }) => {
                       <h4>Language: {booksDetail.language}</h4>
                       <h4>Genres: {booksDetail.genres}</h4>
                     </div>
+                    <h4>{booksDetail.description}</h4>
 
-                    <h5>{booksDetail.description}</h5>
-
+                    {comment !== null ? (
+                      <div>
+                        <h4>Score: {score}</h4>
+                        <h4>Comment: {comment}</h4>
+                      </div>
+                    ) : null}
                     <figure onClick={handleClick}>
                       <button>
                         <i class="fas fa-cart-plus fa-lg"></i>{" "}
                         <h3>Add to cart</h3>
                       </button>
                     </figure>
-                  </div>{" "}
+                  </div>
                 </div>
               </div>
             </div>
-          )}{" "}
+          )}
         </div>
       )}
     </div>

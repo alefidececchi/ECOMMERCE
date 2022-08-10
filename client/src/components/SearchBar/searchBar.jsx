@@ -13,7 +13,6 @@ import {
 import s from "./searchBar.module.scss"
 
 
-
 export default function SearchBar() {
 
     const dispatch = useDispatch()
@@ -29,7 +28,6 @@ export default function SearchBar() {
         }).then(res => {
             if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                 dispatch(resetSearch())
-
             }
         })
 
@@ -42,17 +40,18 @@ export default function SearchBar() {
     }
     function handleSubmit(e) {
 
-        if (name.length === 0) { return  swal({
-            title: "Sorry!",
-            text: "Book name is required",
-            icon: 'error',
-            button: 'OK'
-        }).then(res => {
-            if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-                dispatch(resetSearch())
-
-            }
-        }) }
+        if (name.length === 0) {
+            return swal({
+                title: "Sorry!",
+                text: "Book name is required",
+                icon: 'error',
+                button: 'OK'
+            }).then(res => {
+                if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
+                    dispatch(resetSearch())
+                }
+            })
+        }
         else {
             e.preventDefault()
             dispatch(fetchBookByName(name))
@@ -62,7 +61,6 @@ export default function SearchBar() {
         setName("");
         dispatch(fetchAllBooks())
     }
-
 
     return (
         <div className={s.bar}>

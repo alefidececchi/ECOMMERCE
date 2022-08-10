@@ -34,27 +34,7 @@ const getUserByID = async (req, res) => {
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
 
-// const postUser = async (req, res) => {
-//   try {
-//     const user = req.body;
-//     //const {name,email,password,admin,image,description,country}=req.body;
-//     const nuevoUsuario = new User(
-//       user
-//       /*name:name,
-//       email:email,
-//       password:password,
-//       admin:admin,
-//       image:image,
-//       description:description,
-//       country:country,*/
-//     );
-//     await nuevoUsuario.save();
-//     return res
-//       .status(201)
-//       .json({ status: "usuario registrado y guardado en la base de datos." });
-//   } catch (error) {
-//     return res.status(500).json({ error: error });
-//   }
+
 
 const postUserGoogle = async (req, res) => {
   const { email, password, image, name } = req.body;
@@ -75,7 +55,12 @@ const postUserGoogle = async (req, res) => {
 
     res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
   } catch (error) {
-    return res.status(500).json({ error: error });
+
+    const user = await User.findOne({ email });
+
+    const token = jwt.sign({ id: user._id, email, password, image, name }, process.env.JWT_ACC_ACTIVATE);
+    res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
+    // return res.status(500).json({ error: error });
 
   }
 };
@@ -89,16 +74,14 @@ const putUser = async (req, res) => {
     ? (actualCliente = {
       name: name,
       email: email,
-      password: await bcrypt.hash(password, 10),
-      admin: admin,
+      password: await bcrypt.hash(password, 10),   
       image: image,
       description: description,
       country: country,
     })
     : (actualCliente = {
       name: name,
-      email: email,
-      admin: admin,
+      email: email,    
       image: image,
       description: description,
       country: country,
@@ -110,13 +93,13 @@ const putUser = async (req, res) => {
 };
 
 const becomeAdmin = async (req, res) => {
-  const {idUser} = req.body
+  const { idUser } = req.body
   try {
     const user = await User.findById(idUser)
-    user.admin ? await user.updateOne({admin: false}) : await user.updateOne({admin: true})
-    res.status(200).json({status: "Usuario actualizado."})
-  } catch (error){
-    res.status(400).json({error: error})
+    user.admin ? await user.updateOne({ admin: false }) : await user.updateOne({ admin: true })
+    res.status(200).json({ status: "Usuario actualizado." })
+  } catch (error) {
+    res.status(400).json({ error: error })
   }
 }
 
@@ -124,7 +107,7 @@ const putUserBook = async (req, res) => {
   const { idBook, idUser } = req.params;
 
   const BookPurch = await Book.findById(idBook);
-   
+
   const sellingBooksUpdate = await User.findByIdAndUpdate(idUser, {
     // $push: { purchased_books: BookPurch.id },
     $push: { purchased_books: BookPurch._id },
