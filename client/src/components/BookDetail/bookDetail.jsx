@@ -56,6 +56,7 @@ const BookDetail = (props, { book }) => {
   };
 
   const handleWishList = (book) => {
+    console.log(book);
     dispatch(getWishList(book));
   };
 
