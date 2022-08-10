@@ -3,7 +3,6 @@ import React from 'react';
 const Pagination = ({ booksPerPage, books, changePage, currentPage }) => {
   const pages = [];
 
-
   const handlePrevious = () => {
     if (currentPage > 1) {
       changePage(currentPage - 1)
@@ -15,7 +14,6 @@ const Pagination = ({ booksPerPage, books, changePage, currentPage }) => {
       changePage(currentPage + 1)
     }
   }
-
 
   for (let i = 0; i < Math.ceil(books.length / booksPerPage); i++) {
     pages.push(i + 1);

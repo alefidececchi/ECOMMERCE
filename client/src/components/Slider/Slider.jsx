@@ -13,7 +13,6 @@ export default class Responsive extends Component {
             autoplay: true,
             autoplaySpeed: 5000,
             pauseOnHover: true,
-      
             responsive: [
                 {
                     breakpoint: 1024,
@@ -21,7 +20,6 @@ export default class Responsive extends Component {
                         slidesToShow: 1,
                         slidesToScroll: 1,
                         infinite: true,
-
                     }
                 },
                 {
@@ -41,33 +39,25 @@ export default class Responsive extends Component {
                     }
                 }
             ]
-
-
         };
-        // console.log(window.screen.width)
-        // console.log(settings.responsive[1].breakpoint)
+
         return (
             <div className={s.Container}>
                 <Slider {...settings}>
                     <div >
                         <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
-
-                    </div>
-
-                    <div>
-                        <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
-
                     </div>
                     <div>
                         <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
-
                     </div>
                     <div>
                         <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
-
                     </div>
-
-                </Slider></div>
+                    <div>
+                        <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
+                    </div>
+                </Slider>
+            </div>
         );
     }
 }

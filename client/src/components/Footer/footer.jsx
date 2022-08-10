@@ -6,10 +6,7 @@ const Footer = () => {
     return (
 
         <footer className={s.Footer}>
-
-        
             <div className={s.Legal}>
-
                 <h4>Legal</h4>
                 <Link className={s.Links} to={"/"}>
                     <a >Privacy</a>
@@ -23,8 +20,6 @@ const Footer = () => {
 
             </div>
             <div className={s.LogosContainer}>
-
-
                 <Link className={s.Logos} to={"/"}>
                     <i class="fab fa-linkedin fa-2x"></i>
                 </Link>
@@ -45,8 +40,6 @@ const Footer = () => {
                 </Link>
             </div>
             <h4 className={s.LastLine}> © 2022 E-Commerce, Click&Read.com. All rights reserved.</h4>
-
-
         </footer>
 
     );

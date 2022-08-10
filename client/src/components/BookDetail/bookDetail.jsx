@@ -25,8 +25,6 @@ const BookDetail = (props, { book }) => {
 
 
     var { booksDetail } = useSelector((state) => state.books)
-    // console.log(booksDetail.reviews)
-
 
     let comment, score
     var reviews = booksDetail.reviews
@@ -37,15 +35,12 @@ const BookDetail = (props, { book }) => {
         score = reviews.length == 0 ? null : reviews.length == 1 ? reviews[0].score : (reviews[0].score + reviews[1].score) / 2
 
     }
-    // console.log(comment)
-
-
 
     const [close, setClose] = useState(false);
 
     const handleClose = () => {
         setClose(!close);
-        console.log("close")
+        // console.log("close")
     }
 
 
@@ -60,19 +55,10 @@ const BookDetail = (props, { book }) => {
     }
 
 
-
-
     return (
-
-
-
         <div>
-
-
             {!close &&
-
                 <div className={s.shadow}>
-
                     {loading ? (
                         <div className={s.loading}>
                             <i class="fas fa-spinner fa-spin fa-3x "></i>
@@ -80,21 +66,32 @@ const BookDetail = (props, { book }) => {
                         </div>
                     ) :
                         <div className={s.BookDetail}>
-
-
-
                             <div>
-
                                 <button className={s.fav} onClick={() => handleWishList(book)}>
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <button className={s.Close} onClick={handleClose} >
                                     <i class="fas fa-times fa-lg"></i>
                                 </button>
-                                <img src={booksDetail.image} alt="book" width="400px" height="400px" />
+                                {
+                                    booksDetail.inOffer === true ?
+
+                                        booksDetail.price > booksDetail.priceWithDiscount ?
+                                            <button className={s.discount} >
+                                                {Math.round(100 - (100 / (booksDetail.price / booksDetail.priceWithDiscount)))} %
+                                            </button> : null
+                                        : null
+                                }
+
+                                {/* <img src={booksDetail.image} alt="book" width="400px" height="400px" /> */}
+                                <img src={booksDetail.image} alt="book"  />
                                 <div className={s.cart} >
                                     <div className={s.info}>
-                                        <h3>$ {booksDetail.price}</h3>
+
+                                        {booksDetail.priceWithDiscount === 0 ?
+                                            <h3>$ {booksDetail.price}</h3> :
+                                            <h3>$ {booksDetail.priceWithDiscount}</h3>
+                                        }
 
                                         <h4 >{booksDetail.name}</h4>
                                         <div className={s.info2}>
@@ -105,8 +102,6 @@ const BookDetail = (props, { book }) => {
                                             <h4 >Language: {booksDetail.language}</h4>
                                             <h4 >Genres: {booksDetail.genres}</h4>
                                         </div>
-
-
                                         <h4>{booksDetail.description}</h4>
 
                                         {comment !== null ?
@@ -115,10 +110,7 @@ const BookDetail = (props, { book }) => {
                                                 <h4>Comment: {comment}</h4>
                                             </div>
                                             : null
-
                                         }
-
-
                                         <figure onClick={handleClick} >
                                             <button>
                                                 <i class="fas fa-cart-plus fa-lg"></i>  <h3>Add to cart</h3>
@@ -127,14 +119,10 @@ const BookDetail = (props, { book }) => {
                                     </div>
                                 </div>
                             </div>
-
-
-                        </div>} </div>
-
+                        </div>}
+                </div>
             }
         </div>
-
-
     );
 }
 

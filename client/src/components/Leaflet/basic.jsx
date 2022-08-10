@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import NavBar from "../NavBar/navBar";
 import Footer from "../Footer/footer";
 import { MapContainer, TileLayer, Marker, Popup, FeatureGroup } from "react-leaflet";
 import { EditControl } from 'react-leaflet-draw';
@@ -18,7 +17,6 @@ const markerIcon = new L.Icon({
     popupAnchor: [0, -46]
 });
 
-//console.log(stores);
 const Leaflet = () => {
     const [center, setCenter] = useState({ lat: -13.360486, lng: -70.661781 });
     const [mapLayers, setMapLayers] = useState([]);
@@ -39,7 +37,6 @@ const Leaflet = () => {
     };
     const _onCreate = (e) => {
         console.log(e);
-
         const { layerType, layer } = e;
         if (layerType === "polygon") {
             const { _leaflet_id } = layer;
@@ -58,14 +55,10 @@ const Leaflet = () => {
     }
     return (
         <div className="container">
-
             <div className="double" >
-
                 <div className="rows">
                     <div className="ubicacionesHTML">
                         <h3>Physical Stores </h3>
-
-
                     </div>
                     <div >
                         {stores.map((f) => <div className="ubicaciones" > <h4>{f.name}</h4></div>)}
@@ -79,7 +72,6 @@ const Leaflet = () => {
                     </div>
 
                 </div>
-
                 <MapContainer center={center} zoom={ZOOM_LEVEL} ref={mapRef}>
                     <TileLayer url={osm.maptiler.url} attribution={osm.maptiler.attribution}></TileLayer>
                     {stores.map((store) =>
@@ -87,7 +79,6 @@ const Leaflet = () => {
                             <Popup><b>{store.name}</b></Popup>
                         </Marker>
                     )}
-
                     {location.loaded && !location.error && (
                         <Marker icon={markerIcon}
                             position={[
@@ -109,8 +100,6 @@ const Leaflet = () => {
                         </EditControl>
                     </FeatureGroup>
                 </MapContainer>
-
-
             </div>
             <Footer />
         </div>
