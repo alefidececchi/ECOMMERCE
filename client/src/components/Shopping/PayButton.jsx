@@ -64,7 +64,7 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
                         if(res){
                             console.log(user.token)
                             if(user.token){
-                            axios.post(`${url}/stripe/create-checkout-session`, {
+                            axios.post(`${url}/api/stripe/create-checkout-session`, {
                                 cartItems,
                                 userId: user._id
                             }).then((res) =>{
@@ -82,7 +82,7 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
         }else{
             console.log(user.token)
             if(user.token){
-            axios.post(`${url}/stripe/create-checkout-session`, {
+            axios.post(`${url}/api/stripe/create-checkout-session`, {
                 cartItems,
                 userId: user._id
             }).then((res) =>{
