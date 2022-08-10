@@ -69,7 +69,7 @@ function PostedBooks(){
           // dispatch(fetchUserById(id))
           dispatch(fetchAllBooks())
           setReload(false)
-          axios.get(`http://localhost:3001/users/${id}`)
+          axios.get(`/users/${id}`)
           .then((response)=>{
             //console.log(response)
             setBooks(response.data.userrrs)
@@ -97,8 +97,8 @@ function PostedBooks(){
           if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
             if(filtrado){
               console.log('entro')
-              axios.delete(`http://localhost:3001/books/${del}/${id}`)
-              axios.delete(`http://localhost:3001/books/${del}`)
+              axios.delete(`/books/${del}/${id}`)
+              axios.delete(`/books/${del}`)
               .then(reloading())
               dispatch(fetchAllBooks())
               console.log('entro')

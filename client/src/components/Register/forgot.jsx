@@ -54,7 +54,7 @@ const Forgot = () => {
                             console.log(values)
 
                             resetForm();
-                            axios.put('http://localhost:3001/auth/forgot-password', values)
+                            axios.put('/auth/forgot-password', values)
                             swal({
                                 title: '',
                                 text: 'Please check your inbox ',

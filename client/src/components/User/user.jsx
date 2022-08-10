@@ -83,7 +83,7 @@ const User = () => {
       console.log(response.data.url)
       axios({
         method: 'put',
-        url: `http://localhost:3001/users/${id}`,
+        url: `/users/${id}`,
         data: {
             image : response.data.url,
         
@@ -137,7 +137,7 @@ const  changePassword = async () =>{
           }else  if(document.getElementById('swal-input1').value.length === 0 || document.getElementById('swal-input2').value.length === 0 ){
             return 'Please write the new password'
           }else{
-              axios.put(`http://localhost:3001/users/${id}`,  {password: document.getElementById('swal-input1').value})
+              axios.put(`/users/${id}`,  {password: document.getElementById('swal-input1').value})
               return 'Password changed successfully'
 
           }

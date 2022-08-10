@@ -51,7 +51,7 @@ const Login = () => {
         setUser(userObject);
         // axios({
         //     method: 'post',
-        //     url: 'http://localhost:3001/users/registerGoogle',
+        //     url: '/users/registerGoogle',
         //     data: {
         //         email: userObject.email,
         //         password: userObject.sub,
@@ -178,7 +178,7 @@ const Login = () => {
 
                             try {
 
-                                const data = await axios.post('http://localhost:3001/auth/login', values)
+                                const data = await axios.post('/auth/login', values)
 
                                 dispatcher(fetchToken(values))
                                 // const token = data.data.token
@@ -219,7 +219,7 @@ const Login = () => {
                             }
                         }
 
-                            //     axios.post('http://localhost:3001/auth/login', values)
+                            //     axios.post('/auth/login', values)
 
                             //     .then(res=>{console.log(res)})
 

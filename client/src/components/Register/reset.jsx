@@ -30,7 +30,7 @@ const Reset = (props) => {
 
     //     axios({
     //         method: 'put',
-    //         url: 'http://localhost:3001/auth/forgot-password',
+    //         url: '/auth/forgot-password',
     //         data: {
     //            resetLink: token
     //         },
@@ -68,7 +68,7 @@ const Reset = (props) => {
                             console.log(values)
 
                             resetForm();
-                            axios.put('http://localhost:3001/auth/reset-password', values)
+                            axios.put('/auth/reset-password', values)
                             swal({
                                 title: 'Congratulation',
                                 text: 'Password changed successfully',

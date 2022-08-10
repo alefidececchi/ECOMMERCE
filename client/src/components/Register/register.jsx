@@ -67,7 +67,7 @@ const Register = () => {
                             console.log(values)
 
                             resetForm();
-                            axios.post('http://localhost:3001/auth/register', values)
+                            axios.post('/auth/register', values)
                             swal({
                                 title: 'Congratulation',
                                 text: 'Please check your inbox to activate your account',

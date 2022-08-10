@@ -89,7 +89,7 @@ function EditProfile({editProdileOff, reloading}){
                                 
                                 axios({
                                     method: 'put',
-                                    url: `http://localhost:3001/users/${id}`,
+                                    url: `/users/${id}`,
                                     data: {
                                         name : values.name,
                                         email : values.email,

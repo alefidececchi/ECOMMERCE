@@ -31,7 +31,7 @@ const Activate = (props) => {
        
         axios({
             method: 'post',
-            url: 'http://localhost:3001/auth/activate-account',
+            url: '/auth/activate-account',
             data: {
                 token: token
             },

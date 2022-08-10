@@ -35,7 +35,7 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
                     console.log(userInfo._id)
                     axios({
                         method: 'put',
-                        url: `http://localhost:3001/users/purchasing-books/${userInfo._id}`,
+                        url: `/users/purchasing-books/${userInfo._id}`,
                         data: {
 
                             cartQuantity: cartItems
@@ -47,7 +47,7 @@ const PayButton = ({cartItems, userInfo, cartInfo}) =>{
         
                         axios({
                             method: 'put',
-                            url: `http://localhost:3001/users/${userInfo._id}/${libro._id}`
+                            url: `/users/${userInfo._id}/${libro._id}`
                         })
                       })
                     dispatch(clearCart())  
@@ -113,7 +113,7 @@ export default PayButton
 
 // axios({
 //     method: 'put',
-//     url: `http://localhost:3001/users/purchasing-books/${idUsuario}/${idLibro}`,
+//     url: `/users/purchasing-books/${idUsuario}/${idLibro}`,
 //     data: {
 //         gastoPorLibro: precio*cantidad
 //         cantidadLibro: 2 

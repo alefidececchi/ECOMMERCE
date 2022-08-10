@@ -30,7 +30,7 @@ import ActivateAccount from './components/Register/activate-account';
 import ResetPassword from './components/Register/reset-password';
 
 import CheckoutSuccess from './components/Shopping/CheckoutSuccess';
-import Leaflet from './components/Leaflet/basic';
+// import Leaflet from './components/Leaflet/basic';
 
 // import Darkmode from 'darkmode-js';
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import shining from '../../assets/shining.jpg'
+// import shining from '../../assets/shining.jpg'
 import { toast } from "react-toastify";
 
 export const initialState = {

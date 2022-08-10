@@ -71,7 +71,7 @@ function EditBook({editOff, estado, reloading}){
                             
                             axios({
                                 method: 'put',
-                                url: `http://localhost:3001/books/${filtrado._id}`,
+                                url: `/books/${filtrado._id}`,
                                 data: {
                                     price : values.price,
                                     stock: values.stock                   

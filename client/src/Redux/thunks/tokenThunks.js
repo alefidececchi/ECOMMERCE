@@ -11,8 +11,8 @@ const fetchToken = (values) => (dispatch) => {
     axios
         // api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        .post("http://localhost:3001/auth/login", values)
-        // .post('http://localhost:3001/users/registerGoogle')
+        .post("/auth/login", values)
+        // .post('/users/registerGoogle')
 
 
         .then((response) => {
@@ -27,8 +27,8 @@ const fetchTokenGoogle = (values) => (dispatch) => {
     axios
         // api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        .post('http://localhost:3001/users/registerGoogle', values)
-        // .post('http://localhost:3001/users/registerGoogle')
+        .post('/users/registerGoogle', values)
+        // .post('/users/registerGoogle')
 
 
         .then((response) => {
