@@ -20,9 +20,19 @@ const orderSchema = new Schema({
             subtotal_price: { type: Number },
         }
     ],
-    total_price: { type: Number, required: true },
-    payment_status: { type: String, required: true },
-}, { timestamps: true, }
+    total_price: {
+        type: Number,
+        required: true
+    },
+    payment_status: {
+        type: String,
+        required: true
+    },
+    delivery_status: { type: String, default: "pending" },
+},
+    {
+        timestamps: true,
+    }
 )
 
 module.exports = model("Order", orderSchema)

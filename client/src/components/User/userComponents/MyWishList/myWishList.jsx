@@ -38,7 +38,7 @@ function MyWishList(){
     const wishListStorage = JSON.parse(window.localStorage.getItem('wishList'));
   
     useEffect(() => {
-      if(wishList.length === 0){
+      if(wishListStorage){
         dispatch(loadWishList(wishListStorage))
       }
       
@@ -51,7 +51,7 @@ function MyWishList(){
   
         <section className={s.wishContainer}>
         <h1>My Wishlist</h1>
-          {wishListStorage.length ? (
+          {wishList.length > 0 ? (
             wishListStorage.map((book) => (
               <figure key={book._id}>
                 <img src={book.image} />

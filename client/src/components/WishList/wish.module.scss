@@ -5,7 +5,7 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   min-height: 100vh;
   // position: relative;
 
@@ -57,8 +57,12 @@
       span {
         font-weight: bolder;
         font-size: toRem(20);
-        width: 10%;
+        width: 12%;
         color: $negro;
+      }
+
+      .offerPrice {
+        color: red;
       }
 
       button {

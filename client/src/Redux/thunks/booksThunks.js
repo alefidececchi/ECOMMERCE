@@ -2,25 +2,25 @@ import axios from "axios";
 import { getBooks, searchBook, getDetail , getBookById} from "../slices/bookSlice";
 import { getGenres } from "../slices/genreSlice";
 
-// const fetchAllBooks = () => (dispatch) => {
-//   axios
-//     .get("/books")
-//     .then((response) => {
-//       dispatch(getBooks(response.data.books));
-//     })
-//     .catch((error) => console.log(error));
-// };
-
-
 const fetchAllBooks = () => (dispatch) => {
-  let config ={headers:{authorization:localStorage.getItem("token")}}
   axios
-    .get("/books",config)
+    .get("/books")
     .then((response) => {
       dispatch(getBooks(response.data.books));
     })
     .catch((error) => console.log(error));
 };
+
+
+// const fetchAllBooks = () => (dispatch) => {
+//   let config ={headers:{authorization:localStorage.getItem("token")}}
+//   axios
+//     .get("/books",config)
+//     .then((response) => {
+//       dispatch(getBooks(response.data.books));
+//     })
+//     .catch((error) => console.log(error));
+// };
 
 const fetchBooksById = (id) => (dispatch) => {
   axios
@@ -54,5 +54,15 @@ const fetchBooksGenres = () => (dispatch) => {
     })
     .catch((error) => console.log(error));
 };
+
+// const deleteFetchBook = (id) => (dispatch) => {
+//   let config ={headers:{authorization:localStorage.getItem("token")}}
+//   axios
+//     .delete("/books", config)
+//     .then((response) => {
+//       dispatch(deleteBook(response.data.books));
+//     })
+//     .catch((error) => console.log(error));
+// };
 
 export { fetchAllBooks, fetchBookByName, fetchBooksDetail, fetchBooksGenres , fetchBooksById};

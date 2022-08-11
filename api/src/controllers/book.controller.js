@@ -36,7 +36,9 @@ const getBooks = async (req, res) => {
   const { limit, page } = req.query;
 
   try {
-    let books = await Book.find({stock:{$ne:0}},{ deleted: false });
+    let books = await Book.find({$and:[
+      {stock:{$gte:1}},
+      { deleted: false }]});
     if (sort) books = sortNames({ books, sort });
     if (price) books = sortPrices({ books, price });
     if (released) books = sortReleased({ books, released });
@@ -48,6 +50,7 @@ const getBooks = async (req, res) => {
     if (author) books = getByAuthor({ books, author });
 
     // return res.status(200).json(paginate({ limit, page, books }));
+    console.log
     return res.status(200).json({ books });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -134,8 +137,11 @@ const putCommentBook = async (req, res) => {
 }
 
 const putBook = async (req, res) => {
+
   const { idBook } = req.params;
   const book = req.body
+  console.log(idBook)
+  console.log(book)
     try {
       const bookUpdated = await Book.updateOne({ _id: idBook }, { $set: book });
       res.status(201).json({ bookUpdated: bookUpdated });

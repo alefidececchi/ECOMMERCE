@@ -2,14 +2,13 @@
 @import "../../assets/sass/mixins.scss";
 @import "../../assets/sass/variables.scss";
 
-
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   min-height: 100vh;
 
-  h1{
+  h1 {
     text-align: center;
     font-size: toRem(40);
     margin-top: toRem(100);
@@ -18,14 +17,14 @@
     }
   }
 
-  section{
+  section {
     width: 90vw;
     margin: toRem(70) auto;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 
-    .cardContainer{
+    .cardContainer {
       width: 370px;
       margin: toRem(16);
       border-radius: toRem(10);
@@ -33,10 +32,9 @@
       justify-content: space-around;
       padding: toRem(20) toRem(10);
       background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      &:hover{
+      &:hover {
         box-shadow: 2px 2px 10px $gris3;
       }
-      
 
       .icon {
         color: $gris1;
@@ -44,33 +42,183 @@
         height: 150px;
       }
 
-      .infoContainer{
+      .infoContainer {
         width: 40%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
 
-        span{
+        span {
           font-size: toRem(30);
           color: white;
         }
 
-        h3{
+        h3 {
           color: white;
         }
 
-        button{
+        button {
           width: 70%;
           font-size: toRem(16);
           padding: toRem(5);
           border: none;
           color: $gris1;
           background-color: #6f2dbd;
-          &:hover{
+          border-radius: toRem(10);
+          &:hover {
+            cursor: pointer;
             background-color: #6247aa;
             border: 1px solid $gris1;
           }
+        }
+      }
+    }
+  }
+
+  .checkout {
+    width: 80vw;
+    background-color: $gris1;
+    margin: 0 auto;
+    border-radius: toRem(5);
+
+    .titles {
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+      background-color: darkslateblue;
+      padding: toRem(5);
+      li {
+        width: 25%;
+        text-align: center;
+        color: white;
+      }
+    }
+
+    .cardContainer {
+      display: flex;
+      width: 100%;
+      // background-color: tomato;
+      picture {
+        // background-color: #6247aa;
+        width: 5%;
+        margin: auto 0;
+        padding: 0 toRem(5);
+        img {
+          width: 100%;
+        }
+      }
+
+      .cardDescription {
+        // background-color: lightgreen;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        h3 {
+          text-align: center;
+          padding-top: toRem(5);
+        }
+        p {
+          text-align: justify;
+          padding: 0 toRem(3);
+          padding-bottom: toRem(5);
+        }
+      }
+
+      .price {
+        width: 25%;
+        // background-color: lightblue;
+        text-align: center;
+        margin: auto 0;
+        font-size: toRem(20);
+      }
+
+      .counter {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        column-gap: toRem(10);
+        align-items: center;
+        button {
+          width: toRem(25);
+          height: toRem(25);
+          font-size: toRem(20);
+          padding: 0 toRem(5);
+          color: white;
+          background-color: darkslateblue;
+          border-radius: toRem(5);
+          border: none;
+          &:hover {
+            cursor: pointer;
+            background-color: #6247aa;
+          }
+        }
+        span {
+          font-size: toRem(20);
+          padding: 0 toRem(5);
+        }
+      }
+      .subtotal {
+        width: 20%;
+        // background-color: lightblue;
+        font-size: toRem(20);
+        text-align: center;
+        margin: auto 0;
+      }
+      .removeCard {
+        width: 5%;
+        // background-color: gray;
+        color: darkslateblue;
+        text-align: center;
+        margin: auto 0;
+        font-size: toRem(25);
+        &:hover {
+          cursor: pointer;
+          color: #6247aa;
+        }
+      }
+    }
+  }
+
+  .total {
+    width: 80vw;
+    background-color: darkslateblue;
+    margin: 0 auto;
+    margin-bottom: toRem(60);
+    padding-bottom: toRem(20);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .sum {
+      width: 25%;
+      // background-color: lightgreen;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      h2 {
+        font-size: toRem(30);
+        color: white;
+        font-weight: bold;
+      }
+      span {
+        font-size: toRem(25);
+        color: white;
+      }
+    }
+    .checkButton {
+      width: 20%;
+      height: toRem(60);
+      // background-color: blue;
+      
+      button {
+        margin: toRem(15) auto;
+        padding: toRem(5) toRem(5);
+        font-size: toRem(20);
+        border: none;
+        border-radius: toRem(5);
+        &:hover {
+          cursor: pointer;
+          border: 1px solid $gris1;
         }
       }
     }

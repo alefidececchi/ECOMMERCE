@@ -1,8 +1,10 @@
 const User = require("../models/User.js");
 const Book = require("../models/Book.js");
 const bcrypt = require("bcrypt");
-
+const {GiftCardNotification} = require("./sendMail.controller");
 const { getByName, getByEmail } = require("../lib/user.controller.helper.js");
+const jwt = require("jsonwebtoken");
+const moment = require("moment")
 
 
 const getUsers = async (req, res) => {
@@ -34,27 +36,7 @@ const getUserByID = async (req, res) => {
   // http://localhost:3000/users/acavaelidObtenidodesdeMongoDB
 };
 
-// const postUser = async (req, res) => {
-//   try {
-//     const user = req.body;
-//     //const {name,email,password,admin,image,description,country}=req.body;
-//     const nuevoUsuario = new User(
-//       user
-//       /*name:name,
-//       email:email,
-//       password:password,
-//       admin:admin,
-//       image:image,
-//       description:description,
-//       country:country,*/
-//     );
-//     await nuevoUsuario.save();
-//     return res
-//       .status(201)
-//       .json({ status: "usuario registrado y guardado en la base de datos." });
-//   } catch (error) {
-//     return res.status(500).json({ error: error });
-//   }
+
 
 const postUserGoogle = async (req, res) => {
   const { email, password, image, name } = req.body;
@@ -75,7 +57,12 @@ const postUserGoogle = async (req, res) => {
 
     res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
   } catch (error) {
-    return res.status(500).json({ error: error });
+
+    const user = await User.findOne({ email });
+
+    const token = jwt.sign({ id: user._id, email, password, image, name }, process.env.JWT_ACC_ACTIVATE);
+    res.status(201).json({ status: "usuario registrado mediante Google y guardado en la base de datos.", token });
+    // return res.status(500).json({ error: error });
 
   }
 };
@@ -94,7 +81,7 @@ const putUser = async (req, res) => {
     ? (actualCliente = {
       name: name,
       email: email,
-      password: await bcrypt.hash(password, 10),
+      password: await bcrypt.hash(password, 10),   
       image: image,
       description: description,
       country: country,
@@ -102,7 +89,7 @@ const putUser = async (req, res) => {
     })
     : (actualCliente = {
       name: name,
-      email: email,
+      email: email,    
       image: image,
       description: description,
       country: country,
@@ -170,9 +157,18 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const purchasedBooks = async (req, res) => {
-  const { idUser } = req.params;
-  const { cartQuantity } = req.body;
+const purchasedBooks=async(req,res)=>{
+  const {idUser}=req.params;
+  const {cartQuantity,GiftCard,name}=req.body;
+  if (GiftCard){
+    console.log(`Se recibe una giftcard de ${GiftCard}`);
+    const usuar= await User.findById(idUser)
+    await usuar.updateOne({$inc:{available_money:GiftCard}})
+    //await console.log(usuar.email);
+    GiftCardNotification(usuar.email,GiftCard,name)
+
+    res.status(200).json("La GiftCard ha sido activada")
+  } else {
 
   let vair = cartQuantity.map(e => {
     return {
@@ -182,17 +178,20 @@ const purchasedBooks = async (req, res) => {
     }
   });
 
-  await vair.map(async (e) => {
-    const usuar = await User.findById(idUser)
-    usuar.available_money ?
-      await usuar.updateOne({ $inc: { available_money: -(e.gastoPorLibro * e.cantidadLibro) } }) : console.log('hola');
-    const lib = await Book.findById(e.idLibro)
-    lib.stock > 0 ?
-      await lib.updateOne({ $inc: { stock: -(e.cantidadLibro) } }) :
-      console.log(`ya no hay stock de ${e.idLibro} para realizar la compra`);
-  }
-  )
-  res.status(200).json({ status: "todo bien" })
+await vair.map(async (e)=>{
+    const usuar= await User.findById(idUser)
+    usuar.available_money?
+   await usuar.updateOne({$inc:{available_money:-(e.gastoPorLibro*e.cantidadLibro)}}):console.log('hola');
+    const lib= await Book.findById(e.idLibro)
+    lib.stock>0?
+   await lib.updateOne({$inc:{stock:-(e.cantidadLibro)}}):
+   console.log(`ya no hay stock de ${e.idLibro} para realizar la compra`);
+   await User.findByIdAndUpdate(idUser, {
+    $push: { purchased_books: e.idLibro },
+  });
+}
+)
+res.status(200).json({status:"todo bien"})
 
 
   //for await of 
@@ -229,6 +228,40 @@ const purchasedBooks = async (req, res) => {
     res.status(400).json({error:error})
   }*/
 }
+}
+
+
+const getStats = async (req, res) =>{
+  const previousMonth = moment()
+  .month(moment().month() - 1)
+  .set("date", 1)
+  .format("YYYY-MM-DD HH:mm:ss")
+
+  try {
+    const users = await User.aggregate([
+      {
+        $match: {createdAt : {$gte: new Date(previousMonth)}}
+      },
+      {
+        $project:{
+          month: {$month: "$createdAt"}
+        }
+      },
+      {
+        $group:{
+          _id: "$month",
+          total: {$sum: 1}
+        }
+      }
+    ])
+
+    res.status(200).send(users)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+
 module.exports = {
   getUsers,
   getUserByID,
@@ -238,5 +271,6 @@ module.exports = {
   deleteUser,
   putUserWishList,
   becomeAdmin,
-  purchasedBooks
-};
+  purchasedBooks,
+  getStats
+}
