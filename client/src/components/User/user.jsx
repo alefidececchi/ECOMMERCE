@@ -89,7 +89,7 @@ const User = () => {
 
           }
         })
-          .then(reloading())
+        window.location.reload()
       })
   }
 

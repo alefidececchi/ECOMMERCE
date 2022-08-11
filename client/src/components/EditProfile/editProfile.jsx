@@ -84,8 +84,7 @@ function EditProfile({ editProdileOff, reloading }) {
                             buttons: ['Cancel', 'Confirm']
                         }).then(res => {
                             if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-                                editProdileOff()
-                                reloading()
+
 
                                 axios({
                                     method: 'put',
@@ -93,15 +92,12 @@ function EditProfile({ editProdileOff, reloading }) {
                                     data: {
                                         name: values.name,
                                         email: values.email,
-
-
-
-
                                     }
+
                                 })
                                 //dispatch(fetchUserById(id))
-
-
+                                editProdileOff()
+                                reloading()
                                 //navigate("/user", { replace: true })
 
                             }

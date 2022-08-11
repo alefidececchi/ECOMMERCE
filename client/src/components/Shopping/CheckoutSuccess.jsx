@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom'
 import jwt_decode from "jwt-decode"
 import { clearCart, getTotals } from "../../Redux/slices/shoping.slice";
 // import Footer from "../Footer/footer";
@@ -10,7 +11,7 @@ import styled from 'styled-components'
 const CheckoutSuccess = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.shoppingCart)
-
+  const navigate = useNavigate()
   // let info = jwt_decode(window.localStorage.token); 
   // let id = info.id
   // console.log(cart)
@@ -43,6 +44,7 @@ const CheckoutSuccess = () => {
       })
     })
     dispatch(clearCart());
+    navigate(`/`);
   }
 
   return (
