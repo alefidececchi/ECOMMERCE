@@ -89,8 +89,8 @@ const ProductList = () =>{
 
     const handleDelete = (id) => {
         
-        //axios.delete(`http://localhost:3001/books/${del}/${id}`)
-        axios.delete(`http://localhost:3001/books/${id}`)
+        //axios.delete(`/books/${del}/${id}`)
+        axios.delete(`/books/${id}`)
         .then(dispatch(fetchAllBooks()))
         
     }

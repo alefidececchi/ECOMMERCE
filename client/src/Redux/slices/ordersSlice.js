@@ -9,7 +9,7 @@ const initialState = {
 
 export const ordersFetch = createAsyncThunk("orders/ordersFetch", async () => {
     try {
-        const response = await axios.get(`http://localhost:3001/orders`, setHeaders());
+        const response = await axios.get(`/orders`, setHeaders());
 
         return response.data;
         
@@ -34,7 +34,7 @@ export const ordersEdit = createAsyncThunk(
 
         try {
             const response = await axios.put(
-                `http://localhost:3001/orders/${values.id}`,
+                `/orders/${values.id}`,
                 newOrder,
                 setHeaders()
             );

@@ -36,7 +36,7 @@ const Summary = () =>{
     useEffect(() => {
         async function fetchData(){
             try {
-                const res = await axios.get(`http://localhost:3001/users/stats`, setHeaders())
+                const res = await axios.get(`/users/stats`, setHeaders())
 
                 res.data.sort(compare)
 
@@ -54,7 +54,7 @@ const Summary = () =>{
     useEffect(() => {
         async function fetchData(){
             try {
-                const res = await axios.get(`http://localhost:3001/orders/stats`, setHeaders())
+                const res = await axios.get(`/orders/stats`, setHeaders())
 
                 res.data.sort(compare)
 
@@ -79,7 +79,7 @@ const Summary = () =>{
     useEffect(() => {
         async function fetchData(){
             try {
-                const res = await axios.get(`http://localhost:3001/orders/income/stats`, setHeaders())
+                const res = await axios.get(`/orders/income/stats`, setHeaders())
 
                 res.data.sort(compare)
 

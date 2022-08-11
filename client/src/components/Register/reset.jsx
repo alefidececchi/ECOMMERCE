@@ -45,7 +45,7 @@ const Reset = (props) => {
                             // console.log(values)
 
                             resetForm();
-                            axios.put('http://localhost:3001/auth/reset-password', values)
+                            axios.put('/auth/reset-password', values)
                             swal({
                                 title: 'Congratulation',
                                 text: 'Password changed successfully',

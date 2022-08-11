@@ -129,7 +129,7 @@ function Review({editOff, libros, reloading}){
                                     if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                                         axios({
                                         method: 'put',
-                                        url: `http://localhost:3001/books/${filtrado._id}/${id}`,
+                                        url: `/books/${filtrado._id}/${id}`,
                                         data: {
                                             score : values.score,
                                             comment: values.comment                   

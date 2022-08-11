@@ -87,8 +87,8 @@ const UsersList = () =>{
 
     const handleDelete = (id) => {
         
-        //axios.delete(`http://localhost:3001/books/${del}/${id}`)
-        axios.delete(`http://localhost:3001/users/${id}`)
+        //axios.delete(`/books/${del}/${id}`)
+        axios.delete(`/users/${id}`)
         .then(dispatch(fetchAllUsers()))
         window.location.reload()
     }

@@ -165,7 +165,7 @@ function AddBook(){
                             values.used = false
                         }
                         resetForm();
-                        axios.post(`http://localhost:3001/books/${id}`, values)
+                        axios.post(`/books/${id}`, values)
                         swal({
                             title:'Congratulation',
                             text:'Book published successfully',

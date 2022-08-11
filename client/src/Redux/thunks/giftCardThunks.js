@@ -8,7 +8,7 @@ const fetchUserByEmail = (email) => (dispatch) => {
 }
 
 const fetchSendCard = (props) => (dispatch) => {
-  axios.put(`http://localhost:3001/users/purchasing-books/${props.id}`, props).catch(error => console.log(error));
+  axios.put(`/users/purchasing-books/${props.id}`, props).catch(error => console.log(error));
 }
 
 export {fetchUserByEmail, fetchSendCard}

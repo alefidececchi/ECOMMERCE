@@ -14,7 +14,7 @@ const Transactions = () => {
             setIsLoading(true)
 
             try {
-                const res = await axios.get(`http://localhost:3001/orders/?new=true`, setHeaders())
+                const res = await axios.get(`/orders/?new=true`, setHeaders())
 
                 setOrders(res.data)
 

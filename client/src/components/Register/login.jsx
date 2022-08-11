@@ -111,7 +111,7 @@ const Login = () => {
                         onSubmit={async (values, { resetForm }) => {
 
                             try {
-                                const data = await axios.post('http://localhost:3001/auth/login', values)
+                                const data = await axios.post('/auth/login', values)
                                 dispatcher(fetchToken(values))
 
                                 if (data) {
