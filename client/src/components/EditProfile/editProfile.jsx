@@ -11,7 +11,7 @@ import {
 } from "../../Redux/thunks/usersThunks";
 // import { BallTriangle } from "react-loader-spinner";
 
-function EditProfile({ editProdileOff, reloading, data }) {
+function EditProfile({ editProdileOff, reloading, data, infoUser }) {
 
     const { userById } = useSelector((state) => state.users);
     const [send, setSend] = useState(false);
@@ -40,8 +40,8 @@ function EditProfile({ editProdileOff, reloading, data }) {
             <div className={style.mainContainer}>
                 <Formik
                     initialValues={{
-                        name: userById.name,
-                        email: userById.email,
+                        name: infoUser.name,
+                        email: infoUser.email,
 
 
                     }}

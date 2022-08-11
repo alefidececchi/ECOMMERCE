@@ -91,7 +91,7 @@ const User = () => {
 
           }
         })
-        window.location.reload()
+        reloading()
       })
   }
 
@@ -197,6 +197,7 @@ const User = () => {
                 reloading={reloading}
                 editProdileOff={editProdileOff}
                 data={setUserData}
+                infoUser={userData}
               />
             </div>
           ) :
