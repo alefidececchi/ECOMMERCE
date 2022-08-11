@@ -8,5 +8,4 @@ const fetchAllDeals = () => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
-
 export { fetchAllDeals }
