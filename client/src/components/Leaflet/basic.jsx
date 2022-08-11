@@ -8,7 +8,7 @@ import stores from "./stores.json";
 //import "leaflet/dist/leaflet.css";
 import useGeoLocation from "./useGeoLocation";
 import "./index.css";
-import "leaflet-draw/dist/leaflet.draw.css"
+// import "leaflet-draw/dist/leaflet.draw.css"
 
 const markerIcon = new L.Icon({
     iconUrl: require("./resources/images/marker.png"),
