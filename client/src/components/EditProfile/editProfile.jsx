@@ -11,7 +11,7 @@ import {
 } from "../../Redux/thunks/usersThunks";
 // import { BallTriangle } from "react-loader-spinner";
 
-function EditProfile({ editProdileOff, reloading }) {
+function EditProfile({ editProdileOff, reloading, data }) {
 
     const { userById } = useSelector((state) => state.users);
     const [send, setSend] = useState(false);
@@ -95,7 +95,12 @@ function EditProfile({ editProdileOff, reloading }) {
                                     }
 
                                 })
-                                navigate(`/user`)
+                                    .then(data({
+                                        name: values.name,
+                                        email: values.email,
+                                    }))
+                                    .catch(e => console.log(e))
+                                // navigate(`/user`)
                                 //dispatch(fetchUserById(id))
                                 //navigate("/user", { replace: true })
 

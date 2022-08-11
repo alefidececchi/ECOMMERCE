@@ -49,7 +49,7 @@ const User = () => {
   // console.log(id)
   // console.log(userById)
   let estado = userById
-
+  const [userData, setUserData] = useState({ name: userById.name, email: userById.email })
   let navigate = useNavigate()
   const handleClick = () => {
     navigate("/")
@@ -61,13 +61,13 @@ const User = () => {
 
   useEffect(() => {
 
-    setTimeout(() => {
-      dispatch(fetchUserById(id));
-    }, 3000)
+    // setTimeout(() => {
+    dispatch(fetchUserById(id));
+    // }, 3000)
     setReload(false)
 
 
-  }, [reload]);
+  }, [reload, userData]);
 
 
   const onInputchange = (files) => {
@@ -97,22 +97,22 @@ const User = () => {
 
   function editProfileOn() {
 
-    // dispatch(fetchUserById(id));
+    dispatch(fetchUserById(id));
     setEditProfile(true)
   }
 
   const editProdileOff = () => {
-    // dispatch(fetchUserById(id));
+    dispatch(fetchUserById(id));
     setEditProfile(false)
   }
 
   function reloading() {
 
     if (reload) {
-      // dispatch(fetchUserById(id));
+      dispatch(fetchUserById(id));
       return setReload(false)
     } else {
-      // dispatch(fetchUserById(id));
+      dispatch(fetchUserById(id));
       return setReload(true)
     }
   }
@@ -196,6 +196,7 @@ const User = () => {
               <EditProfile
                 reloading={reloading}
                 editProdileOff={editProdileOff}
+                data={setUserData}
               />
             </div>
           ) :
@@ -207,14 +208,14 @@ const User = () => {
                 <h4>Name:</h4>
               </div>
               <div className={style.name}>
-                <h4>{userById.name}</h4>
+                <h4>{userData.name}</h4>
               </div>
 
               <div>
                 <h4>E-mail:</h4>
               </div>
               <div className={style.name}>
-                <h4>{userById.email}</h4>
+                <h4>{userData.email}</h4>
               </div>
               {/* <div>
                           <h4>Pasword:</h4>

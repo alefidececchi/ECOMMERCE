@@ -54,7 +54,7 @@ export default class Responsive extends Component {
                         <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./Slider3.jpeg")} alt="book slider" />
                     </div>              
                     <div>
-                        <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./4.jpeg")} alt="book slider" />
+                        <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./Slider4.jpeg")} alt="book slider" />
                     </div>
                 </Slider>
             </div>
