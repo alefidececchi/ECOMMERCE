@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import jwt_decode from "jwt-decode"
 import { clearCart, getTotals } from "../../Redux/slices/shoping.slice";
 // import Footer from "../Footer/footer";
-// import s from './shopping.module.scss'
+import s from './shopping.module.scss'
 import styled from 'styled-components'
 
 const CheckoutSuccess = () => {
@@ -54,7 +54,7 @@ const CheckoutSuccess = () => {
         In case of any inqueries contact the support at{" "}
         <strong>clickandreadecommerce@gmail.com</strong>
       </p>
-      <button onClick={next} >Continue</button>
+      <button className={s.continue} onClick={next} >Continue</button>
     </Container>
   );
 };

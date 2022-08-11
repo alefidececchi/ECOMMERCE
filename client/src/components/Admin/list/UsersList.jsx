@@ -90,6 +90,7 @@ const UsersList = () =>{
         //axios.delete(`/books/${del}/${id}`)
         axios.delete(`/users/${id}`)
         .then(dispatch(fetchAllUsers()))
+        .catch(err => console.log(err))
         window.location.reload()
     }
 
