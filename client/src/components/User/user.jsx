@@ -61,7 +61,9 @@ const User = () => {
 
   useEffect(() => {
 
-    dispatch(fetchUserById(id));
+    setTimeout(() => {
+      dispatch(fetchUserById(id));
+    }, 3000)
     setReload(false)
 
 
