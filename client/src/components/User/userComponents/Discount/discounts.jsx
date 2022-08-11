@@ -6,12 +6,12 @@ import jwt_decode from "jwt-decode"
 import portada from '../../../../assets/imgs/hp.jpg'
 import portada2 from '../../../../assets/imgs/LOTR.jpg'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { BallTriangle } from "react-loader-spinner";
 import { fetchAllBooks } from '../../../../Redux/thunks/booksThunks';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const data = [
     {
@@ -23,8 +23,11 @@ export const data = [
     },
   ];
 
+  
 function Discounts(){
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     let info = jwt_decode(window.localStorage.token);
     //console.log(userById.selling_books)
     let id = info.id
@@ -36,10 +39,14 @@ function Discounts(){
     function reloading(){
     console.log('entro')
         if (reload){
-    
-            return setReload(false)
+            dispatch(fetchAllBooks())
+            setReload(false)
+            // window.location.reload()
+            
         }else{
-          return setReload(true)
+            dispatch(fetchAllBooks())
+            setReload(true)
+            //window.location.reload()
         }
     }
 
@@ -53,8 +60,8 @@ function Discounts(){
                 i = {i}
                 bookName={book.name}
                 image={book.image}
-                price={book.price}
-                offer = {book.PriceWithDiscount}
+                price={book.price}k
+                offer = {book.priceWithDiscount}
                 estado = {books}
                 reload = {reloading}
                 />
@@ -62,22 +69,22 @@ function Discounts(){
         </tbody>
 
     )
-    console.log(prueba)
+    //console.log(prueba)
 
     useEffect( () => {
-
+        dispatch(fetchAllBooks())
           setReload(false)
-          axios.get(`http://localhost:3001/users/${id}`)
+          axios.get(`/users/${id}`)
           .then((response)=>{
             
             setPrueba(response.data.userrrs)
           })       
-      
+          
           
           
           //llenarState()
       
-    }, []);
+    }, [reload]);
 
     return(
         <div className={s.container}>
@@ -88,7 +95,7 @@ function Discounts(){
             {prueba ?
             <>
             {
-                books.length>0?(                <div className={s.containerPur}>
+                prueba.selling_books.length > 0?(                <div className={s.containerPur}>
                 <table className={s.table}>
                     <caption className={s.table_cap}>APPLY DISCOUNTS</caption>
                     <thead className={s.table_head}>
@@ -105,13 +112,13 @@ function Discounts(){
                 </div>):
                 <div className={s.vacio}>
                     <div>
-                     <h1>Not purchases  yet</h1>
+                     <h1>Not posted books  yet</h1>
                     </div>
                     <div>
-                        <h1>Buy now!!!</h1>
+                        <h1>Go post now!!!</h1>
                     </div>
                     <div>
-                        <Link to={'/'}>
+                        <Link to={'/user/newBook'}>
                             <button >Sell</button> 
                         </Link>
                     </div>

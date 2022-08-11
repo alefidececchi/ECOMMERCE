@@ -9,9 +9,6 @@ import {
     fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
 
-
-
-
 const Forgot = () => {
 
     const [send, setSend] = useState(false);
@@ -20,23 +17,13 @@ const Forgot = () => {
 
     let navigate = useNavigate()
 
-    console.log(send)
-    console.log(Field)
-
     return (
         <div className={s.container}>
-
-
-            
             <div className={s.formulario}>
                 <section>
                     <Formik
                         initialValues={{
-
                             email: "",
-
-
-
                         }}
                         validate={(values) => {
                             let errors = {};
@@ -54,7 +41,7 @@ const Forgot = () => {
                             console.log(values)
 
                             resetForm();
-                            axios.put('http://localhost:3001/auth/forgot-password', values)
+                            axios.put('/auth/forgot-password', values)
                             swal({
                                 title: '',
                                 text: 'Please check your inbox ',
@@ -66,17 +53,11 @@ const Forgot = () => {
                                     navigate('/reset-password')
                                 }
                             })
-
                             resetForm();
-                            // setSend(true)
-                            // setTimeout(() => setSend(false), 3000)
                             console.log(values)
-
-
-
                         }}
                     >
-                        
+
                         {({ errors }) => (
                             <Form className={s.form}>
 
@@ -96,23 +77,13 @@ const Forgot = () => {
                                         <div className={s.error}>{errors.email}</div>
                                     )} />
                                 </div>
-
-
-
-
-
-
                                 <div>
                                     <button type="submit">  Submit </button>
                                     {send && <p>User added succecsfully</p>}
-
-
                                 </div>
 
                                 <Link to={"/login"}>
-
                                     <a > Back to log in </a>
-
                                 </Link>
 
                             </Form>
@@ -121,8 +92,6 @@ const Forgot = () => {
                 </section>
             </div>
         </div>
-
-
     );
 };
 

@@ -4,40 +4,37 @@ import portada from '../../../../assets/imgs/hp.jpg'
 import portada2 from '../../../../assets/imgs/LOTR.jpg'
 import s from './discounts.module.scss'
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllBooks } from '../../../../Redux/thunks/booksThunks';
+import { useNavigate } from 'react-router-dom';
 
 function ProductDis({i, bookName, image, price, offer, estado, reload}){
 
+   
     const [disc, setDisc] = useState(offer)
     
-    
-    // function reloading(){
-    
-    //     if (reload){
-    
-    //         return setReload(false)
-    //     }else{
-    //       return setReload(true)
-    //     }
-    // }
+    const dispatch = useDispatch()
+
     let newPrice = 0
 
+    const navigate  = useNavigate()
     function applyDisc(cambio) {
         let filtrado = estado.find(b => b.name === bookName)
-        console.log(filtrado)
-        console.log(filtrado._id)
-        console.log(bookName)
-        console.log(price)
-        console.log(offer)
-        console.log(cambio.target.value)
+        //console.log(filtrado)
+        // console.log(filtrado._id)
+        //console.log(estado)
+        // console.log(price)
+        // console.log(offer)
+        // console.log(cambio.target.value)
         
 
         if(cambio.target.value === 'dis'){
             newPrice= price
         }else  if(cambio.target.value === '15'){
              newPrice = price - ((price * 15 )/ 100)
-            console.log(price)
+            //console.log(price)
         }else if(cambio.target.value === '25'){
-            console.log(price)
+            //console.log(price)
             newPrice = price - ((price * 25 )/ 100)    
         }
         else if(cambio.target.value === '50'){
@@ -52,22 +49,43 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
         }
         console.log(newPrice)
 
+        if(price > newPrice){
+            axios({
+                method: 'put',
+                url: `/books/${filtrado._id}`,
+                data: {
+                    
+                    
+                    priceWithDiscount: newPrice,
+                    inOffer: true                  
+                }
+            })
+            .then(reload())
+            setDisc(newPrice)
+            
+          
+            
+        }else{
+            axios({
+                method: 'put',
+                url: `/books/${filtrado._id}`,
+                data: {
+                    
+                    priceWithDiscount: newPrice,
+                    inOffer: false                  
+                }
+            })
+            .then(reload())
+            
+            setDisc(newPrice)
+            
+            
+        }
 
-        axios({
-            method: 'put',
-            url: `http://localhost:3001/books/${filtrado._id}`,
-            data: {
-                
-                PriceWithDiscount: newPrice,
-                inOffer: true                  
-            }
-        })
-        .then(reload())
-        setDisc(newPrice)
 
     }
 
-
+    
     return(
         
             <tr className={s.table_row}>

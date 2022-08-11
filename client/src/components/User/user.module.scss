@@ -63,7 +63,6 @@
 }
 
 .containerProfile{
-
     display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -78,7 +77,7 @@
 
     @include tabletMax() {
 		margin-top: toRem(430);
-		width: 90%;
+		width: 90vw;
         .containerBooks{
             width: 90%;
             h1{ 

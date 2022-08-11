@@ -4,13 +4,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import s from './register.module.scss'
 import swal from 'sweetalert'
 import axios from 'axios'
-import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import {
     fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
-
-
 
 
 const Register = () => {
@@ -22,15 +19,8 @@ const Register = () => {
 
     let navigate = useNavigate()
 
-    // console.log(send)
-    // console.log(Field)
-
     return (
         <div className={s.container}>
-
-
-
-
             <div className={s.formulario}>
                 <section>
                     <Formik
@@ -38,8 +28,6 @@ const Register = () => {
                             name: "",
                             email: "",
                             password: "",
-
-
                         }}
                         validate={(values) => {
                             let errors = {};
@@ -67,7 +55,7 @@ const Register = () => {
                             console.log(values)
 
                             resetForm();
-                            axios.post('http://localhost:3001/auth/register', values)
+                            axios.post('/auth/register', values)
                             swal({
                                 title: 'Congratulation',
                                 text: 'Please check your inbox to activate your account',
@@ -79,14 +67,7 @@ const Register = () => {
                                     navigate('/activate')
                                 }
                             })
-
                             resetForm();
-                            // setSend(true)
-                            // setTimeout(() => setSend(false), 3000)
-                            // console.log(values)
-
-
-
                         }}
                     >
                         {({ errors }) => (

@@ -64,11 +64,8 @@ function Review({editOff, libros, reloading}){
                     return(
                         <FaStar
                         key={index}
-                        className={
-                        + ((index <= rating) ? 'in-rate' : '')
-                        + ((index <= hoverValue) ? 'in-hover' : '')
-                        }
-                        color ={(hoverValue || rating) >= index ? '#9d4edd' : "#797979"}
+                      
+                        color ={(hoverValue || rating) >= index ? '#EFB810' : "#FFFFFF"}
                         onClick={() => setRating(index)}
                         onMouseEnter={() => setHoverValue(index) }
                         onMouseLeave={() => setHoverValue(null)}
@@ -132,7 +129,7 @@ function Review({editOff, libros, reloading}){
                                     if(res){//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
                                         axios({
                                         method: 'put',
-                                        url: `http://localhost:3001/books/${filtrado._id}/${id}`,
+                                        url: `/books/${filtrado._id}/${id}`,
                                         data: {
                                             score : values.score,
                                             comment: values.comment                   
@@ -157,7 +154,7 @@ function Review({editOff, libros, reloading}){
                     >
                         {( {errors} )=>(
                             <Form className={style.form}> 
-                            <h2>Post new book</h2>
+                    
                             <div>
                                 <label htmlFor="name">Book Name: </label>
                                 <Field

@@ -22,7 +22,6 @@ const Login = () => {
 
     const google = window.google;
 
-
     useEffect(() => {
         google.accounts.id.initialize({
             client_id: '7254200664-eqfkintn8s5ltn1i8c12finsmbkgkj6i.apps.googleusercontent.com',
@@ -35,30 +34,13 @@ const Login = () => {
         );
 
         google.accounts.id.prompt();
-
-
     }, []);
 
     const [user, setUser] = useState({});
-    //  console.log(user)
 
     function handleCallbackResponse(response) {
-        //  console.log("Encoded JWT ID token: " + response.credential);
-        //token response.credential
-        //  console.log(response)
         var userObject = jwt_decode(response.credential);
-        // console.log(userObject);
         setUser(userObject);
-        // axios({
-        //     method: 'post',
-        //     url: 'http://localhost:3001/users/registerGoogle',
-        //     data: {
-        //         email: userObject.email,
-        //         password: userObject.sub,
-        //     },
-
-        // }, 
-        // )
         const datag = { email: userObject.email, password: userObject.sub, image: userObject.picture, name: userObject.name }
         dispatcher(fetchTokenGoogle(datag))
         if (datag) {
@@ -76,23 +58,6 @@ const Login = () => {
                     }
                 })
         }
-
-
-
-        // .then(res => {
-        //     if (res) {//la condicional solo lleva la respuyesta ya que el segundo boton retorna un True por eso se posiciono el yes a la izquierda
-        //         dispatcher(fetchAllBooks());
-        //         navigate('/')
-        //         window.location.reload()
-        //     }
-        // })
-        // .then((response) => {
-        //     // console.log(response);
-        // }, (error) => {
-        //     console.log(error);
-        // });
-
-
         document.getElementById("signInDiv").hidden = true;
     }
 
@@ -104,56 +69,26 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.users);
-
-    // const { token } = useSelector((state) => state.token);
-
-    // console.log(token)
-
-
     useEffect(() => {
         if (users.length === 0) {
             dispatch(fetchAllUsers());
         }
     }, [dispatch, users]);
 
-    // console.log(users)
-
-
-
-
     const [send, setSend] = useState(false);
 
     const dispatcher = useDispatch()
 
     let navigate = useNavigate()
-
-    // console.log(send)
-    // console.log(Field)
-
     return (
         <div className={s.container}>
-
-            {/* <div id="signInDiv"></div>
-
-            {Object.keys(user).length != 0 &&
-                <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
-            }
-            {user &&
-                <div>
-                    <img src={user.picture}></img>
-                    <h3>{user.name}</h3>
-                </div>} */}
-
 
             <div className={s.formulario}>
                 <section>
                     <Formik
                         initialValues={{
-
                             email: "",
                             password: "",
-
-
                         }}
                         validate={(values) => {
                             let errors = {};
@@ -174,15 +109,10 @@ const Login = () => {
                             return errors;
                         }}
                         onSubmit={async (values, { resetForm }) => {
-                            // console.log(values)
 
                             try {
-
-                                const data = await axios.post('http://localhost:3001/auth/login', values)
-
+                                const data = await axios.post('/auth/login', values)
                                 dispatcher(fetchToken(values))
-                                // const token = data.data.token
-                                // console.log(token)
 
                                 if (data) {
                                     return swal({
@@ -200,8 +130,6 @@ const Login = () => {
                                         })
                                 }
                             } catch (err) {
-
-
                                 resetForm();
                                 return swal({
                                     title: 'Error',
@@ -219,16 +147,7 @@ const Login = () => {
                             }
                         }
 
-                            //     axios.post('http://localhost:3001/auth/login', values)
-
-                            //     .then(res=>{console.log(res)})
-
                         }
-
-
-
-
-
                     >
                         {({ errors }) => (
                             <Form className={s.form}>
@@ -258,11 +177,6 @@ const Login = () => {
                                         <div className={s.error}>{errors.password}</div>
                                     )} />
                                 </div>
-
-
-
-
-
                                 <div>
                                     <button type="submit">Login </button>
                                     {send && <p>User added succecsfully</p>}
@@ -277,24 +191,7 @@ const Login = () => {
                                     </Link>
                                 </div>
 
-
                                 <div className={s.google} id="signInDiv"></div>
-
-
-                                {/* {Object.keys(user).length != 0 &&
-                                     <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
-
-                                    // navigate('/')
-
-
-                                } */}
-                                {/* 
-                                {user &&
-                                    <div>
-                                        <img src={user.picture}></img>
-                                        <h3>{user.name}</h3>
-
-                                    </div>}  */}
 
                             </Form>
                         )}
@@ -302,7 +199,6 @@ const Login = () => {
                 </section>
             </div>
         </div >
-
 
     );
 };

@@ -9,9 +9,6 @@ import {
     fetchAllBooks
 } from "../../Redux/thunks/booksThunks";
 
-
-
-
 const Reset = (props) => {
 
     const [send, setSend] = useState(false);
@@ -20,27 +17,7 @@ const Reset = (props) => {
 
     let navigate = useNavigate()
 
-    // console.log(send)
-    // console.log(Field)
-
     const { token } = useParams()
-
-
-    // useEffect(() => {
-
-    //     axios({
-    //         method: 'put',
-    //         url: 'http://localhost:3001/auth/forgot-password',
-    //         data: {
-    //            resetLink: token
-    //         },
-    //     });
-    // }, [])
-
-    // console.log(token)
-
-
-
 
     return (
         <div className={s.container}>
@@ -65,10 +42,10 @@ const Reset = (props) => {
                             return errors;
                         }}
                         onSubmit={(values, { resetForm }) => {
-                            console.log(values)
+                            // console.log(values)
 
                             resetForm();
-                            axios.put('http://localhost:3001/auth/reset-password', values)
+                            axios.put('/auth/reset-password', values)
                             swal({
                                 title: 'Congratulation',
                                 text: 'Password changed successfully',
@@ -82,11 +59,6 @@ const Reset = (props) => {
                             })
 
                             resetForm();
-                            // setSend(true)
-                            // setTimeout(() => setSend(false), 3000)
-                            console.log(values)
-
-
 
                         }}
                     >
@@ -96,8 +68,6 @@ const Reset = (props) => {
 
                                 <h4>You have 20 minutes to complete the </h4>
                                 <h4>  password change</h4>
-
-
                                 <div>
                                     <label htmlFor="newPass">New password: </label>
                                     <Field
@@ -115,19 +85,6 @@ const Reset = (props) => {
                                     <button type="submit">Change</button>
                                     {send && <p>User added succecsfully</p>}
                                 </div>
-
-
-
-                                {/*                                 
-                                <div>
-                                    <Link to={"/login" }>
-
-                                        <button type="submit">  login</button>
-
-                                    </Link>
-
-                                    {send && <p>User added succecsfully</p>}
-                                </div> */}
                             </Form>
                         )}
                     </Formik>
