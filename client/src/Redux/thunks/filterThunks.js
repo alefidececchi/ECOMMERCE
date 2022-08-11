@@ -11,7 +11,7 @@ const fetchGenres = () => (dispatch) => {
 
 const fetchFilteredBooks = (filters) => (dispatch) => {
   axios
-    // .get('http://localhost:3001/books?genre=autobiography')
+    // .get('/books?genre=autobiography')
     .get(
       `/books?genre=${filters.genre ? filters.genre : ''}&status=${filters.status}&released=${filters.released ? filters.released : ''}&sort=${filters.sort ? filters.sort : ''}&price=${filters.price ? filters.price : ''}&language=${filters.language ? filters.language : ''}`
     )

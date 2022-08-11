@@ -18,12 +18,12 @@ const CheckoutSuccess = () => {
     dispatch(getTotals());
     cart.cartItems.map(libro => {
         console.log('//////////////////////////////')
-        // console.log(`http://localhost:3001/users/purchasing-books/${userInfo.id}`)
+        // console.log(`/users/purchasing-books/${userInfo.id}`)
         // console.log(libro.cartQuantity)
         // console.log(libro.price)
         axios({
             method: 'put',
-            url: `http://localhost:3001/users/${id}/${libro._id}`
+            url: `/users/${id}/${libro._id}`
         })
       })
       dispatch(clearCart());

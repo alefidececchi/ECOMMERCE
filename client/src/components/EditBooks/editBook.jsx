@@ -71,13 +71,13 @@ function EditBook({editOff, estado, reloading}){
                             
                             axios({
                                 method: 'put',
-                                url: `http://localhost:3001/books/${filtrado._id}`,
+                                url: `/books/${filtrado._id}`,
                                 data: {
                                     price : values.price,
                                     stock: values.stock                   
                                 }
                             })
-                            // axios.put(`http://localhost:3001/books/${filtrado._id}` , values)
+                            // axios.put(`/books/${filtrado._id}` , values)
                             swal({
                                 title:'Congratulation',
                                 text:'Book updated successfully',

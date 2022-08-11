@@ -52,7 +52,7 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
         if(price > newPrice){
             axios({
                 method: 'put',
-                url: `http://localhost:3001/books/${filtrado._id}`,
+                url: `/books/${filtrado._id}`,
                 data: {
                     
                     
@@ -68,7 +68,7 @@ function ProductDis({i, bookName, image, price, offer, estado, reload}){
         }else{
             axios({
                 method: 'put',
-                url: `http://localhost:3001/books/${filtrado._id}`,
+                url: `/books/${filtrado._id}`,
                 data: {
                     
                     priceWithDiscount: newPrice,

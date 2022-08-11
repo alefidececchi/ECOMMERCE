@@ -20,7 +20,7 @@ const initialState = {
 //   async (id) => {
 //     try {
 //       const response = await axios.delete(
-//         `http://localhost:3001/books/${id}`,
+//         `/books/${id}`,
 //         setHeaders()
 //       );
 //       return response.data

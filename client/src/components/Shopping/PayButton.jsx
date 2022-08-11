@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { url } from "../../Redux/slices/api";
+// import { url } from "../../Redux/slices/api";
 import { toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -31,7 +31,7 @@ const PayButton = ({ cartItems, userInfo, cartInfo }) => {
           console.log(userInfo._id);
           axios({
             method: "put",
-            url: `http://localhost:3001/users/purchasing-books/${userInfo._id}`,
+            url: `/users/purchasing-books/${userInfo._id}`,
             data: {
               cartQuantity: cartItems,
             },
@@ -41,7 +41,7 @@ const PayButton = ({ cartItems, userInfo, cartInfo }) => {
 
             axios({
               method: "put",
-              url: `http://localhost:3001/users/${userInfo._id}/${libro._id}`,
+              url: `/users/${userInfo._id}/${libro._id}`,
             });
           });
           dispatch(clearCart());
@@ -56,7 +56,7 @@ const PayButton = ({ cartItems, userInfo, cartInfo }) => {
               console.log(user.token);
               if (user.token) {
                 axios
-                  .post(`${url}/stripe/create-checkout-session`, {
+                  .post(`/api/stripe/create-checkout-session`, {
                     cartItems,
                     userId: user._id,
                   })
@@ -79,7 +79,7 @@ const PayButton = ({ cartItems, userInfo, cartInfo }) => {
       console.log(user.token);
       if (user.token) {
         axios
-          .post(`${url}/stripe/create-checkout-session`, {
+          .post(`/api/stripe/create-checkout-session`, {
             cartItems,
             userId: user._id,
           })
@@ -107,7 +107,7 @@ export default PayButton;
 
 // axios({
 //     method: 'put',
-//     url: `http://localhost:3001/users/purchasing-books/${idUsuario}/${idLibro}`,
+//     url: `/users/purchasing-books/${idUsuario}/${idLibro}`,
 //     data: {
 //         gastoPorLibro: precio*cantidad
 //         cantidadLibro: 2
