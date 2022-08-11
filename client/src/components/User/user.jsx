@@ -95,22 +95,22 @@ const User = () => {
 
   function editProfileOn() {
 
-    dispatch(fetchUserById(id));
+    // dispatch(fetchUserById(id));
     setEditProfile(true)
   }
 
   const editProdileOff = () => {
-    dispatch(fetchUserById(id));
+    // dispatch(fetchUserById(id));
     setEditProfile(false)
   }
 
   function reloading() {
 
     if (reload) {
-      dispatch(fetchUserById(id));
+      // dispatch(fetchUserById(id));
       return setReload(false)
     } else {
-      dispatch(fetchUserById(id));
+      // dispatch(fetchUserById(id));
       return setReload(true)
     }
   }

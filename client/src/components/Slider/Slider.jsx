@@ -48,13 +48,13 @@ export default class Responsive extends Component {
                         <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
                     </div>
                     <div>
-                        <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
+                        <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./Slider2.jpeg")} alt="book slider" />
                     </div>
                     <div>
                         <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
                     </div>
                     <div>
-                        <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./142573-OTFJDG-584.jpeg")} alt="book slider" />
+                        <img className={s.img1} src={window.screen.width < 400 ? require("./phone.jpeg") : window.screen.width > 400 && window.screen.width < 768 ? require("./tablet.jpeg") : require("./Slider2.jpeg")} alt="book slider" />
                     </div>
                 </Slider>
             </div>

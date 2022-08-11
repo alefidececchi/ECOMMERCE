@@ -95,14 +95,14 @@ function EditProfile({ editProdileOff, reloading }) {
                                     }
 
                                 })
+                                navigate(`/user`)
                                 //dispatch(fetchUserById(id))
-                                editProdileOff()
-                                reloading()
                                 //navigate("/user", { replace: true })
 
                             }
                         })
-
+                        editProdileOff()
+                        reloading()
                         resetForm();
                         setSend(true)
 
