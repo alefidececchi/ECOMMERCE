@@ -16,14 +16,7 @@ const CheckoutSuccess = () => {
   console.log(cart)
   useEffect(() => {
     dispatch(getTotals());
-  
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(getTotals());
-  // }, [cart, dispatch]);
-  function next(){
-      cart.cartItems.map(libro => {
+    cart.cartItems.map(libro => {
         console.log('//////////////////////////////')
         // console.log(`http://localhost:3001/users/purchasing-books/${userInfo.id}`)
         // console.log(libro.cartQuantity)
@@ -34,6 +27,13 @@ const CheckoutSuccess = () => {
         })
       })
       dispatch(clearCart());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(getTotals());
+  // }, [cart, dispatch]);
+  function next(){
+    
   }
 
   return (

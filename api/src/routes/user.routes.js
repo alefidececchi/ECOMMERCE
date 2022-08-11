@@ -27,13 +27,14 @@ router.post("/registerGoogle", postUserGoogle);
 
 router.put("/admin", becomeAdmin)
 
-router.put('/purchasing-books/:idUser',purchasedBooks);
+router.put('/purchasing-books/:idUser', purchasedBooks);
 
-router.put("/:idUser", putUser);
+router.put("/updatewishlist/:idUser", putUserWishList)
 
 router.put("/:idUser/:idBook", putUserBook);
 
 router.put("/update/wishlist/:idUser", putUserWishList)
+router.put("/:idUser", putUser);
 
 router.delete("/:idUser", deleteUser);
 

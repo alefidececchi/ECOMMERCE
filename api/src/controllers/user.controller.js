@@ -69,8 +69,13 @@ const postUserGoogle = async (req, res) => {
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, image, description, country } =
-    req.body;
+  const { name, email, password, image, description, country } = req.body;
+  let { money } = req.body
+
+  const user = await User.findById(idUser)
+
+  !money ? money = 0 : money = money
+
   let actualCliente;
   password
     ? (actualCliente = {
@@ -80,6 +85,7 @@ const putUser = async (req, res) => {
       image: image,
       description: description,
       country: country,
+      available_money: user.available_money + money
     })
     : (actualCliente = {
       name: name,
@@ -87,8 +93,10 @@ const putUser = async (req, res) => {
       image: image,
       description: description,
       country: country,
+      available_money: user.available_money + money
     });
-  await User.findByIdAndUpdate(idUser, actualCliente);
+
+  await user.updateOne(actualCliente)
   res.status(200).json({
     status: "Usuario actualizado.",
   });
@@ -162,12 +170,13 @@ const purchasedBooks=async(req,res)=>{
     res.status(200).json("La GiftCard ha sido activada")
   } else {
 
-  vair= await cartQuantity.map(e=>{
+  let vair = cartQuantity.map(e => {
     return {
-      idLibro:e._id,
-      cantidadLibro:e.cartQuantity,
-      gastoPorLibro:e.price
-    }});
+      idLibro: e._id,
+      cantidadLibro: e.cartQuantity,
+      gastoPorLibro: e.price
+    }
+  });
 
 await vair.map(async (e)=>{
     const usuar= await User.findById(idUser)
@@ -186,19 +195,19 @@ res.status(200).json({status:"todo bien"})
 
 
   //for await of 
-    /*try {
-      const usuar= await User.findById(idUser)
-      usuar.available_money?
-     usuar.updateOne({$inc:{available_money:+e.gastoPorLibro}}):console.log('hola');
-      const lib= Book.findById(e.idLibro)
-      lib.stock>0?
-     lib.updateOne({$inc:{stock:-e.cantidadLibro}}):console.log('chau');
-      console.log('llegue hasta aqui')
-      res.status(200).json({status:"todo bien"})
-    
-    } catch (error){
-      res.status(400).json({error:error})
-    }*/
+  /*try {
+    const usuar= await User.findById(idUser)
+    usuar.available_money?
+   usuar.updateOne({$inc:{available_money:+e.gastoPorLibro}}):console.log('hola');
+    const lib= Book.findById(e.idLibro)
+    lib.stock>0?
+   lib.updateOne({$inc:{stock:-e.cantidadLibro}}):console.log('chau');
+    console.log('llegue hasta aqui')
+    res.status(200).json({status:"todo bien"})
+  
+  } catch (error){
+    res.status(400).json({error:error})
+  }*/
 
 
 
