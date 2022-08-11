@@ -1,9 +1,19 @@
 import styled from "styled-components";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth);
+
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate("/")
+    window.location.reload()
+    localStorage.clear()
+    
+
+  }
 
   //if (!auth.isAdmin) return <p>Access denied. Not an Admin!</p>;
 
@@ -43,6 +53,9 @@ const Dashboard = () => {
         >
           Users
         </NavLink>
+        <div>
+              <Link to={'/'} onClick={handleClick}>Logout</Link>
+        </div>
       </SideNav>
       <Content>
         <Outlet />

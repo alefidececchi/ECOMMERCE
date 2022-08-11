@@ -77,6 +77,7 @@ const bookSchema = new Schema(
     },
     stock: {
       type: Number,
+      min: 1,
       required: true
     },
     deleted: {

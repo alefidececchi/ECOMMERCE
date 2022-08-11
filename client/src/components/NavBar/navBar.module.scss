@@ -1,6 +1,7 @@
 @import "../../assets/sass/functions.scss";
 @import "../../assets/sass/mixins.scss";
 @import "../../assets/sass/variables.scss";
+// .darkmode-layer, .darkmode-toggle { z-index: 500; }
 
 .container {
     width: 100vw;
@@ -10,31 +11,54 @@
     position: fixed;
     top: 0;
     // margin-top: 0;
-    // z-index: 999;
+    //  z-index: 1;
+
+    .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: toRem(15) toRem(0) toRem(15) toRem(40);
+        list-style: none;
+    }
+
+    .saldo{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid #B881FF;
+        padding: 5px;
+        border-radius: 10px;
+        gap: 8px;
+    }
 
     ul {
         width: 100vw;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: toRem(20) toRem(20);
+        margin: toRem(20) toRem(0);
         list-style: none;
 
         @include tablet() {
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
+            .container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
         }
 
         li {
-            margin: toRem(5);
+            // margin: toRem(5);
 
             a {
                 text-decoration: none;
                 font-size: toRem(16);
                 color: $gris3;
                 padding: toRem(5) toRem(5);
-                border: toRem(2) solid #F7F7F7;
+                border: toRem(2) solid transparent;
                 &:hover {
                     border: toRem(2) solid $secundario;
                     color: $secundario;
@@ -50,4 +74,7 @@
             }
         }
     }
+}
+:global(.darkmode--activated) .container {
+    background-color: black;
 }

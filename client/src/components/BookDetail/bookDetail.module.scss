@@ -24,10 +24,11 @@
         transform: translate(-50%, -50%);
         z-index: 999;
     }
+
     .BookDetail {
         // margin-top: 7rem;
         background-color: #ffffff;
-        width: 400px;
+
         height: auto;
 
         border-radius: 10px 10px 10px 10px;
@@ -51,19 +52,6 @@
 
             margin: 10px;
         }
-        .fav {
-            font-size: medium;
-            position: absolute;
-            left: 350px;
-            top: 10px;
-            color: #c7c7c7;
-            border: #c7c7c7;
-            background-color: #ffffff;
-            border-radius: 30px;
-            width: 40px;
-            height: 40px;
-            // margin: 10px;
-        }
 
         h3 {
             font-weight: bold;
@@ -78,6 +66,8 @@
         }
         img {
             border-radius: 10px 10px 10px 10px;
+            // width: 400px;
+            // height: 400px;
         }
 
         .info {
@@ -102,11 +92,20 @@
                     color: #ffffff;
                 }
             }
+            button:hover {
+                transition-duration: 0.5s;
+                border: 1px solid #b881ff;
+                background: #ffffff;
+                color: #b881ff;
+                h3 {
+                    color: #b881ff;
+                }
+            }
             .info2 {
                 display: flex;
-                
+
                 h4 {
-                    margin: 0px 25px 5px 0px;
+                    margin: 0px 25px 15px 0px;
                 }
             }
         }
@@ -115,14 +114,82 @@
 @media only screen and (min-width: 768px) {
     .BookDetail {
         position: fixed;
+        width: 400px;
+        height: auto;
+        img {
+            width: 400px;
+            height: 400px;
+        }
+        .fav {
+            font-size: medium;
+            position: absolute;
+            left: 350px;
+            top: 10px;
+            color: #c7c7c7;
+            border: #c7c7c7;
+            background-color: #ffffff;
+            border-radius: 30px;
+            width: 40px;
+            height: 40px;
+            // margin: 10px;
+        }
+        .discount {
+            font-weight: bolder;
+            font-size: medium;
+            position: absolute;
+            left: 320px;
+            top: 360px;
+            color: #ffffff;
+            border: #ffffff;
+            background-color: #b881ff;
+            border-radius: 30px;
+            width: 70px;
+            height: 30px;
+            // margin: 10px;
+        }
     }
 }
 @media only screen and (max-width: 768px) {
     .BookDetail {
         position: fixed;
-        padding-top: 30px;
-
-        top: 50%;
-        left: 50%;
+        width: 350px;
+        height: auto;
+        img {
+            width: 350px;
+            height: 350px;
+        }
+        .fav {
+            font-size: medium;
+            position: absolute;
+            left: 300px;
+            top: 10px;
+            color: #c7c7c7;
+            border: #c7c7c7;
+            background-color: #ffffff;
+            border-radius: 30px;
+            width: 40px;
+            height: 40px;
+            // margin: 10px;
+        }
+        .discount {
+            font-weight: bolder;
+            font-size: medium;
+            position: absolute;
+            left: 270px;
+            top: 310px;
+            color: #ffffff;
+            border: #ffffff;
+            background-color: #b881ff;
+            border-radius: 30px;
+            width: 70px;
+            height: 30px;
+            // margin: 10px;
+        }
+    }
+}
+:global(.darkmode--activated) .BookDetail {
+    background-color: black;
+    h3 {
+        color: #ffffff;
     }
 }

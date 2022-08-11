@@ -22,12 +22,25 @@
 }
 
 .containerPur{
-    
+    position: absolute;
+    padding: 3px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-gap: 2em; 
+    justify-content: space-between;
+    //border-bottom: 1px solid #B881FF;
+    flex-wrap: wrap;
     width: 600px;
-    height: 100vh;
-    padding-left: 10px;
-    //margin: 0 auto;
-    padding-top: 150px;
+    margin: 0 auto;
+    margin-top: 1em;
+    box-sizing: border-box;
+
+    // width: 600px;
+    // height: 100vh;
+    // padding-left: 10px;
+    // //margin: 0 auto;
+    // padding-top: 150px;
     font-size: 40px;
     
 }
@@ -57,9 +70,12 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-size: 20px;
+    
     div{
         margin-top: 80px;
+        h1{
+            font-size: 2rem;
+        }
     }
     button{
         width: 80px;
@@ -99,9 +115,9 @@
     &_cell{
         font-size: 20px;
         letter-spacing: 3px;
-        border-bottom: 1px solid $secundario;
+        border-top: 1px solid $secundario;
         color: $gris4;
-        width: 100%;
+        
     }
 }
 @media only screen and (max-width: 1024px) {

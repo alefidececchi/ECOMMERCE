@@ -42,7 +42,7 @@ function EditProfile({editProdileOff, reloading}){
                     initialValues={{
                         name: userById.name, 
                         email: userById.email,
-                        password: "12345"
+                       
                         
                     }}
                     validate={(values) =>{
@@ -93,7 +93,9 @@ function EditProfile({editProdileOff, reloading}){
                                     data: {
                                         name : values.name,
                                         email : values.email,
-                                        password: values.password
+                                      
+                                       
+                                        
                         
                                     }
                                 })

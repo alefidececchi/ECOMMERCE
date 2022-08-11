@@ -13,13 +13,14 @@
 .form{
     display: flex;
     flex-direction: column;
+    font-size: 30px;
     input{
         border-radius: 5px;
         border: 2px solid #e2e2e2;
         width: 100%;
-
+        height: 50px;
         position: relative;
-        
+        font-size: 30px;
     }
     textarea{
         resize: none;
@@ -28,6 +29,7 @@
     input:focus {
         outline: none;
         border: 2px solid #B881FF;
+
         }
 
     label{

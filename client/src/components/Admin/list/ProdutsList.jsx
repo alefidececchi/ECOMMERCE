@@ -36,6 +36,7 @@ const ProductList = () =>{
     useEffect(() => {
         if (books.length === 0 && !filterEmpty) {
           dispatch(fetchAllBooks());
+          window.location.reload()
         }
 
         setReload(false)

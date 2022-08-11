@@ -46,8 +46,8 @@ const User = () => {
   let info = jwt_decode(window.localStorage.token);
   //console.log(info)
   let id = info.id
-  console.log(id)
-  console.log(userById)
+  // console.log(id)
+  // console.log(userById)
   let estado = userById
   
   let navigate = useNavigate()
