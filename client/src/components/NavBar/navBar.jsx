@@ -43,51 +43,51 @@ const NavBar = () => {
               height="40px" className={style.logo} />
           </Link>
         </div>
-        
-          <ul>
-            <li>
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li>
-              <Link to={"/deals"}>Today's Deals</Link>
-            </li>
-            <li>
-              <Link to={"/gift"}>Gift Card</Link>
-            </li>
-            <li>
-              <Link to={"/wish"}>WishList</Link>
-            </li>
-            <li>
-              {
-                window.localStorage.token ?
-                  <div className={style.saldo}>
-                    <BsCash className={style.icon} />
-                    <p>$ {userById.available_money}</p>
-                  </div> :
-                  <div className={style.saldo}>
-                    <BsCash className={style.icon} />
-                    <p>$ 0</p>
-                  </div>
-              }
 
-            </li>
-            <li>
-              <Link to={"/shopping"}>
-                <BsFillCartFill className={style.icon} />
+        <ul>
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
+          <li>
+            <Link to={"/deals"}>Today's Deals</Link>
+          </li>
+          <li>
+            <Link to={"/gift"}>Gift Card</Link>
+          </li>
+          <li>
+            <Link to={"/wish"}>WishList</Link>
+          </li>
+          <li>
+            {
+              window.localStorage.token ?
+                <div className={style.saldo}>
+                  <BsCash className={style.icon} />
+                  <p>$ {userById.available_money}</p>
+                </div> :
+                <div className={style.saldo}>
+                  <BsCash className={style.icon} />
+                  <p>$ 0</p>
+                </div>
+            }
+
+          </li>
+          <li>
+            <Link to={"/shopping"}>
+              <BsFillCartFill className={style.icon} />
+            </Link>
+          </li>
+          <li>
+            {userById.admin === true ?
+              <Link to={"/admin/summary"}>
+                <BsFillPersonLinesFill className={style.icon} />
+              </Link> :
+              <Link to={"/user"}>
+                <BsFillPersonLinesFill className={style.icon} />
               </Link>
-            </li>
-            <li>
-              {userById.admin === false ?
-                <Link to={"/user"}>
-                  <BsFillPersonLinesFill className={style.icon} />
-                </Link> :
-                <Link to={"/admin/summary"}>
-                  <BsFillPersonLinesFill className={style.icon} />
-                </Link>
-              }
-            </li>
-          </ul>
-        
+            }
+          </li>
+        </ul>
+
       </nav>
     </div>
   );

@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {Formik, Form,  Field, ErrorMessage} from 'formik'
+// import { useDispatch, useSelector } from "react-redux";
+// import {Formik, Form,  Field, ErrorMessage} from 'formik'
 import style from './contactUs.module.scss'
-import swal from 'sweetalert'
-import axios from 'axios'
-import {useNavigate} from "react-router-dom";
-import {
-    fetchBooksGenres, fetchAllBooks
-  } from "../../Redux/thunks/booksThunks";
-import jwt_decode from "jwt-decode"
-import example from '../../assets/imgs/example.jpg'
-import { BallTriangle } from "react-loader-spinner";
+// import swal from 'sweetalert'
+// import axios from 'axios'
+// import {useNavigate} from "react-router-dom";
+// import {
+//     fetchBooksGenres, fetchAllBooks
+//   } from "../../Redux/thunks/booksThunks";
+// import jwt_decode from "jwt-decode"
+// import example from '../../assets/imgs/example.jpg'
+// import { BallTriangle } from "react-loader-spinner";
 import Footer from "../Footer/footer";
 
 
 function ContactUs(){
 
 
-    let info = jwt_decode(window.localStorage.token); 
-    console.log(info)
-    let id = info.id
+    // let info = jwt_decode(window.localStorage.token); 
+    // console.log(info)
+    // let id = info.id
 
    
 

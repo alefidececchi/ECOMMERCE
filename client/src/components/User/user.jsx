@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import style from './user.module.scss'
 import { BsCameraFill } from "react-icons/bs";
 import { useState } from 'react';
@@ -16,7 +16,7 @@ import {
 import { useEffect } from 'react';
 import jwt_decode from "jwt-decode"
 import axios from 'axios';
-import Footer from '../Footer/footer';
+// import Footer from '../Footer/footer';
 import { BallTriangle } from "react-loader-spinner";
 
 

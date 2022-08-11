@@ -2,7 +2,7 @@ import s from "./giftCard.module.scss";
 import React from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { url } from "../../Redux/slices/api";
+// import { url } from "../../Redux/slices/api";
 import { toast } from "react-toastify";
 
 const Checkout = ({ cartItems }) => {
@@ -15,7 +15,7 @@ const Checkout = ({ cartItems }) => {
     if (token) {
       // console.log(user._id);
       axios
-        .post(`${url}/stripe/create-checkout-giftCardsession`, {
+        .post(`/api/stripe/create-checkout-giftCardsession`, {
           cartItems,
           userId: userProps._id,
         })

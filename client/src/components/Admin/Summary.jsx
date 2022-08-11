@@ -6,7 +6,7 @@ import axios from "axios"
 import { setHeaders, url } from "../../Redux/slices/api"
 import Chart from './summary-components/Chart'
 import Transactions from './summary-components/Transactions'
-import AllTimeData from './summary-components/AllTimeData'
+// import AllTimeData from './summary-components/AllTimeData'
 
 const Summary = () =>{
 
