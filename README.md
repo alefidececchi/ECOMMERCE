@@ -1,17 +1,71 @@
-# ECOMMERCE
+![LOGO](./client/src/assets/README/LOGO.jpeg "logo")
 
-HOME
+# CLICK & READ 📚
 
-![image](https://user-images.githubusercontent.com/99628341/178769421-5e880b26-dcd0-4ec2-8a66-0bda96b58f35.png)
+## Descripción 📄
 
-PRODUCT_DETAIL
+CLICK AND READ es un e-commerce de libros, donde cada usuario tendra la posibilidad tanto de comprar como vender libros ya sean nuevos o usados.
 
-![image](https://user-images.githubusercontent.com/99628341/178769571-eb35d9f4-4bc7-463d-a556-ada15f978091.png)
+---
 
-SHOPPING_CART
+## Tecnologías implementadas 💻
 
-![image](https://user-images.githubusercontent.com/99628341/178769902-c582c0c0-351c-473a-bcd4-b26178828587.png)
+- HTML-CSS
+- SASS
+- JavaScript
+- React
+- Redux Toolkit
+- Node
+- Express
+- Mongo - Mongoose
 
-MY_ORDER
+---
 
-![image](https://user-images.githubusercontent.com/99628341/178769779-7c27fd33-3a70-4bb1-b034-196d30c7e142.png)
+## Funcionalidades ✔
+
+- Crear una cuenta mediante correo tradicional o acceso mediante cuenta de Google.
+- Notificación por e-mail para verificar cuenta y recuperación de contraseña.
+- Ver libros en venta, ver detalle de libros y buscar libros por nombre.
+- Ordenar y filtrar libros mediante distintos criterios.
+- Poner libros en venta, poder editar, precio cantidad e incluso añadir un descuento.
+- Poder agregar libros a una lista de deseos y carrito de compras.
+- Pasarela de pagos.
+- Posibilidad de comprar una tarjeta de regalo y darsela a otro ususario el cuál recibe una notificación por e-mail.
+- Editar información personal (nombre, correo), ver compras, añadir puntuación y comentarios a los libros.
+- Panel de administrador para ver estadisticas del comercio, eliminar libros en venta, censurar usuarios y cambiar estado de los pedidos.
+- Mapa con la ubicación de las tiendas físicas.
+
+---
+
+## Previews 📷
+
+<br/>
+
+<img src='./client/src/assets/README/LOGIN.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/HOME.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/HOME1.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/DETAIL.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/LOCATION.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/GIFTCARDS.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/WISHLIST.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/CART.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/PROFILE.PNG' alt="landingPage" width="45%" height="45%" /
+>
+<img src='./client/src/assets/README/ADMIN.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/STRIPE.PNG' alt="landingPage" width="45%" height="45%" />
+<img src='./client/src/assets/README/EMAIL.PNG' alt="landingPage" width="45%" height="45%" />
+
+---
+## Deploy 
+
+https://ecommerce-lac-nu.vercel.app/
+
+---
+## Contribuidores 🧩
+
+* [Felipe Bravo](https://github.com/Felipebravo-96)
+* [Daniela Camargo](https://github.com/Danicp19)
+* [Danny Hermoso](https://github.com/dannyhermoso)
+* [Diego Carcausto](https://github.com/krqui)
+* [Alejandro Fidececchi](https://github.com/alefidececchi)
+* [Samir Antonio José](https://github.com/mihue14)

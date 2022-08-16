@@ -15,7 +15,7 @@ const Checkout = ({ cartItems }) => {
     if (token) {
       // console.log(user._id);
       axios
-        .post(`${url}/stripe/create-checkout-giftCardsession`, {
+        .post(`api/stripe/create-checkout-giftCardsession`, {
           cartItems,
           userId: userProps._id,
         })

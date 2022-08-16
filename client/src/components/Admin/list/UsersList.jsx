@@ -3,7 +3,8 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchAllBooks } from '../../../Redux/thunks/booksThunks'
+import { fetchAllBooks } from '../../../Redux/thunks/booksThunks';
+import { fetchDeleteUser } from '../../../Redux/thunks/usersThunks'
 import { useNavigate } from 'react-router-dom'
 // import { booksDelete } from '../../../Redux/slices/bookSlice'
 import axios from 'axios'
@@ -86,11 +87,12 @@ const UsersList = () =>{
     ]
 
     const handleDelete = (id) => {
-        
+        dispatch(fetchDeleteUser(id))
         //axios.delete(`/books/${del}/${id}`)
-        axios.delete(`/users/${id}`)
-        .then(dispatch(fetchAllUsers()))
-        window.location.reload()
+        // axios.delete(`/users/${id}`)
+        // .then(dispatch(fetchAllUsers()))
+        // .catch(error => console.log(error))
+        // window.location.reload()
     }
 
     return (
