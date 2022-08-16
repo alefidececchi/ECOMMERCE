@@ -5,7 +5,7 @@ import {
   fetchAllBooks,
 } from "../../Redux/thunks/booksThunks";
 import { clearDetail } from "../../Redux/slices/bookSlice";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { getWishList } from "../../Redux/slices/wishListSlice";
 import s from "./bookDetail.module.scss";
 import { addToCart } from "../../Redux/slices/shoping.slice";

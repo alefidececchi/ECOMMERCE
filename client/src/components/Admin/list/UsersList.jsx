@@ -89,9 +89,9 @@ const UsersList = () =>{
     const handleDelete = (id) => {
         dispatch(fetchDeleteUser(id))
         //axios.delete(`/books/${del}/${id}`)
-        // axios.delete(`/users/${id}`)
-        // .then(dispatch(fetchAllUsers()))
-        // .catch(error => console.log(error))
+        axios.delete(`/users/${id}`)
+        .then(dispatch(fetchAllUsers()))
+        .catch(err => console.log(err))
         // window.location.reload()
     }
 

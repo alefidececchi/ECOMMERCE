@@ -2,68 +2,83 @@
 @import '../../assets/sass/mixins.scss';
 @import '../../assets/sass/variables.scss';
 
-.cartContainer{
-  
+.cartContainer {
+
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.container{
-    margin:2rem;
+
+.continue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    font-size: 20px;
+    background-color: #b881ff;
+    margin-top: 15px;
+    border-radius: 10px;
 }
-.cartContainer h2{
+
+.container {
+    margin: 2rem;
+}
+
+.cartContainer h2 {
     font-weight: 400;
     font-size: 30px;
     text-align: center;
 }
 
-.cartContainer .titles{
+.cartContainer .titles {
     margin: 2rem 0 1rem 0;
 }
 
-.cartContainer .titles h3{
+.cartContainer .titles h3 {
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
 }
 
-.cartItem, .cartContainer .titles{
+.cartItem,
+.cartContainer .titles {
     display: grid;
     align-items: center;
     grid-template-columns: 3fr 1fr 1fr 1fr;
     column-gap: 0.5rem;
 }
 
-.cartItem{
+.cartItem {
     border-top: 1px solid rgb(187, 187, 187);
     padding: 1rem 0;
 }
 
-.cartContainer .titles .productTitle{
+.cartContainer .titles .productTitle {
     padding-left: 0.5rem;
 }
 
-.cartContainer .titles .total{
+.cartContainer .titles .total {
     padding-right: 0.5rem;
     justify-self: rigth;
 }
 
-.cartItem .cartProduct{
+.cartItem .cartProduct {
     display: flex;
 }
 
-.cartItem .cartProduct img{
+.cartItem .cartProduct img {
     width: 100px;
     max-width: 100%;
     margin-right: 1rem;
 }
 
-.cartItem .cartProduct h3{
+.cartItem .cartProduct h3 {
     font-weight: 400;
 }
 
-.cartItem .cartProduct button{
+.cartItem .cartProduct button {
     border: none;
     outline: none;
     margin-top: 0.7rem;
@@ -72,11 +87,11 @@
     color: gray;
 }
 
-.cartItem .cartProduct button:hover{
+.cartItem .cartProduct button:hover {
     color: black;
 }
 
-.cartProductQuantity{
+.cartProductQuantity {
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -86,7 +101,7 @@
     border-radius: 5px;
 }
 
-.cartProductQuantityButton{
+.cartProductQuantityButton {
     border: none;
     outline: none;
     background: none;
@@ -94,17 +109,17 @@
     cursor: pointer;
 }
 
-.cartProductQuantity .count{
+.cartProductQuantity .count {
     padding: 0.7rem 0;
 }
 
-.cartProductTotalPrice{
+.cartProductTotalPrice {
     justify-self: right;
     padding-right: 0.5rem;
     font-weight: 700;
 }
 
-.cartSummary{
+.cartSummary {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -112,7 +127,7 @@
     padding-top: 2rem;
 }
 
-.cartSummary .clearCart{
+.cartSummary .clearCart {
     width: 130px;
     max-width: 100%;
     height: 40px;
@@ -126,28 +141,28 @@
     cursor: pointer;
 }
 
-.cartCheckout{
+.cartCheckout {
     width: 270px;
     max-width: 100%;
 }
 
-.cartCheckout .subTotal{
+.cartCheckout .subTotal {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
 }
 
-.cartCheckout .subTotal .amount{
+.cartCheckout .subTotal .amount {
     font-weight: 700;
 }
 
-.cartCheckout p{
+.cartCheckout p {
     font-size: 14px;
     font-weight: 200;
     margin: 0.5rem 0;
 }
 
-.cartCheckout button{
+.cartCheckout button {
     width: 100%;
     height: 40px;
     border-radius: 5px;
@@ -160,22 +175,25 @@
     letter-spacing: 1.15px;
 }
 
-.continueShopping, .startShopping{
+.continueShopping,
+.startShopping {
     margin-top: 1rem;
 }
 
-.continueShopping a, .startShopping a{
+.continueShopping a,
+.startShopping a {
     color: gray;
     text-decoration: none;
     display: flex;
     align-items: center;
 }
 
-.continueShopping a span, .startShopping a span{
+.continueShopping a span,
+.startShopping a span {
     margin-left: 0.5rem;
 }
 
-.cartEmpty{
+.cartEmpty {
     font-size: 20px;
     margin-top: 2rem;
     color: rgb(84, 84, 84);
@@ -186,29 +204,34 @@
 
 
 @media (max-width: 665px) {
-    
+
     .cartContainer {
-      padding: 2rem;
-      margin-top: 230px;
+        padding: 2rem;
+        margin-top: 230px;
     }
+
     .cartContainer .titles {
-      display: none;
+        display: none;
     }
+
     .cartItem,
     .cartContainer .titles {
-      grid-template-columns: 1fr;
-      row-gap: 1rem;
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
     }
+
     .cartItem .cartProductTotalPrice {
-      justify-self: left;
+        justify-self: left;
     }
+
     .cartSummary {
-      flex-direction: column;
+        flex-direction: column;
     }
+
     .cartSummary .clearCart {
-      margin-bottom: 2rem;
+        margin-bottom: 2rem;
     }
-  }
+}
 
 
 

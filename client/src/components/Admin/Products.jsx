@@ -1,4 +1,4 @@
-import ProductList from "./list/ProdutsList"
+// import ProductList from "./list/ProdutsList"
 
 const Products = () =>{
     return(
