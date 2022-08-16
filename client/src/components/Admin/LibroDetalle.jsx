@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { setHeaders } from '../../Redux/slices/api';
-import axios from 'axios';
+// import { setHeaders } from '../../Redux/slices/api';
+// import axios from 'axios';
 import { fetchBooksDetail } from '../../Redux/thunks/booksThunks';
 
 const LibroDetalle = () => {

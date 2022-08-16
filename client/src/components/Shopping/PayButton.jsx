@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // import { url } from "../../Redux/slices/api";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import swal from "sweetalert";
 import { clearCart } from "../../Redux/slices/shoping.slice";

@@ -49,7 +49,14 @@ function App() {
         <Route path="/" element={<NavBar />}>
           <Route path="/" element={<Home />} />
           <Route path="deals" element={<Deals />}/>
-          <Route path="shopping" element={<Shopping />} />
+          <Route
+            path="shopping"
+            element={
+              <ProtectedRoute>
+                <Shopping />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route path="checkout-success" element={<CheckoutSuccess />} />
           <Route
             path="/user"

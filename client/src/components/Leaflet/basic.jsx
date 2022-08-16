@@ -2,15 +2,15 @@ import React, { useRef, useState } from "react";
 import Footer from "../Footer/footer";
 import { MapContainer, TileLayer, Marker, Popup, FeatureGroup } from "react-leaflet";
 import { EditControl } from 'react-leaflet-draw';
-import L from "leaflet";
+// import L from "leaflet";
 import osm from "./osm-providers";
 import stores from "./stores.json";
-//import "leaflet/dist/leaflet.css";
+// import "leaflet/dist/leaflet.css";
 import useGeoLocation from "./useGeoLocation";
 import "./index.css";
-import "leaflet-draw/dist/leaflet.draw.css"
+// import "leaflet-draw/dist/leaflet.draw.css"
 
-const markerIcon = new L.Icon({
+const markerIcon = new window.L.Icon({
     iconUrl: require("./resources/images/marker.png"),
     iconSize: [35, 45],
     iconAnchor: [17, 46], //[left/right, top/bottom]

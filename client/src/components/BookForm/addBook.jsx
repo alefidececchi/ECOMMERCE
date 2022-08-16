@@ -9,7 +9,7 @@ import {
     fetchBooksGenres, fetchAllBooks
   } from "../../Redux/thunks/booksThunks";
 import jwt_decode from "jwt-decode"
-import example from '../../assets/imgs/example.jpg'
+// import example from '../../assets/imgs/example.jpg'
 import { BallTriangle } from "react-loader-spinner";
 
 

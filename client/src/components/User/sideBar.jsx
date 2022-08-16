@@ -1,7 +1,7 @@
 import s from './sideBar.module.scss'
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import{BsCardChecklist , BsFillGiftFill} from 'react-icons/bs'
+// import{BsCardChecklist , BsFillGiftFill} from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux';
 import userLogo from '../../assets/imgs/user.png'
 import { useState } from 'react';
