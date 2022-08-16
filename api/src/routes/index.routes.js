@@ -13,5 +13,12 @@ router.use("/books", BookRouter);
 router.use("/auth", AuthRouter);
 router.use("/api/stripe", PaymentRouter)
 router.use("/orders", OrderRouter);
+router.use("*/*", (req, res) => {
+    try {
+        res.status(404).send(`The page doesn't exists`)
+    } catch (error) {
+        res.status(404).send(`The page doesn't exists`)
+    }
+})
 
 module.exports = router;

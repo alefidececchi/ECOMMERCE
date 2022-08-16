@@ -63,6 +63,10 @@ const userSchema = new Schema(
       type: Number,
       min: 0,
       default: 500,
+    },
+    deleted: {
+      type: Boolean,
+      default: false
     }
   },
   {
